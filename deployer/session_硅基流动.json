@@ -1,0 +1,126 @@
+{
+  "_project": "硅基流动",
+  "_comment": "Session 所属项目：硅基流动（来自 config.fxiaoke.project_name）",
+  "cookies": [
+    {
+      "name": "guid",
+      "value": "b7404171-fc23-1d43-460f-219d05133488",
+      "domain": ".fxiaoke.com",
+      "path": "/",
+      "expires": 1804665037,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "mirrorId",
+      "value": "0000",
+      "domain": ".fxiaoke.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "originRefer",
+      "value": "",
+      "domain": ".fxiaoke.com",
+      "path": "/",
+      "expires": 1773994384,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "EPXId",
+      "value": "74b510a6ecad4bd0a49a000986f845e3",
+      "domain": ".fxiaoke.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "LoginId",
+      "value": "LOGIN_ID_de9f5090-e355-4054-b786-afbe865f7813",
+      "domain": ".fxiaoke.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "fsRoutes",
+      "value": "\"yOc58pUAlMe6Q0Re5IWjxGaR4hyoMCI8LbBKp+xzkSc=\"",
+      "domain": ".fxiaoke.com",
+      "path": "/",
+      "expires": 1805444029.442978,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "fs_token",
+      "value": "P3HXEJWtDJ0jPJSsD2qqOpKrBM8qDp4jE3anDZXbPJLYC39Z",
+      "domain": ".fxiaoke.com",
+      "path": "/",
+      "expires": 1808468029.44259,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "FSAuthX",
+      "value": "0G60x1ayXW60001u6TzDrJve6PkjmPJSTDawNAJjOtlxIsMKgWT3xEwdSa1LltXvUKef70pRDIRhCiy5xMbniBMy8lQzGgTViDWEKNq2s1yI82jDDjd2rjBz499zFzA1ISzhVByMlAiThIy1Lc8aszX7A21JVynTCtdEz9JJbdw8jEPGSsDR4oGCVlHRxMS4FJbuyO1gTI32vz7cknGLOEbp9sFrYNFq6RGu0Ng6r8OZJLao6YcF0KtIXGD40",
+      "domain": "www.fxiaoke.com",
+      "path": "/",
+      "expires": 1808468029.442814,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "FSAuthXC",
+      "value": "0G60x1ayXW60001u6TzDrJve6PkjmPJSTDawNAJjOtlxIsMKgWT3xEwdSa1LltXvUKef70pRDIRhCiy5xMbniBMy8lQzGgTViDWEKNq2s1yI82jDDjd2rjBz499zFzA1ISzhVByMlAiThIy1Lc8aszX7A21JVynTCtdEz9JJbdw8jEPGSsDR4oGCVlHRxMS4FJbuyO1gTI32vz7cknGLOEbp9sFrYNFq6RGu0Ng6r8OZJLao6YcF0KtIXGD40",
+      "domain": ".fxiaoke.com",
+      "path": "/",
+      "expires": 1808468029.4429,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "lang",
+      "value": "zh-CN",
+      "domain": "www.fxiaoke.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "identityCheckType",
+      "value": "0",
+      "domain": "www.fxiaoke.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "JSESSIONID",
+      "value": "0DE018F122D50DE0F8C7EDBF676E96E1",
+      "domain": "www.fxiaoke.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    }
+  ]
+}

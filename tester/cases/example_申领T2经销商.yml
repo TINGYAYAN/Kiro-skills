@@ -1,0 +1,65 @@
+# 测试用例示例：申领T2经销商
+# 修改字段名/值以匹配你的真实环境
+
+function: 申领T2经销商
+description: 验证根据T2公司名称查找经销商并更新申请结果
+
+# 前置：创建测试用的 T2经销商 记录
+setup:
+  - id: dealer
+    action: create
+    object: t2_dealer__c
+    data:
+      name: "__TEST_T2经销商_AUTO__"
+
+# 触发：创建 T1及T2业务关系 记录，触发工作流函数
+trigger:
+  - id: relationship
+    action: create
+    object: t1_t2_business_relationship__c
+    data:
+      t2_company_name__c: "__TEST_T2经销商_AUTO__"
+
+# 等待函数执行完成后的断言
+assertions:
+  - description: 申请结果应为"申请成功"
+    object: t1_t2_business_relationship__c
+    record_ref: "trigger.relationship"   # 引用 trigger 阶段创建的记录
+    field: application_result__c
+    operator: eq
+    expected: option_application_successful__c
+
+  - description: T2经销商字段应已关联
+    object: t1_t2_business_relationship__c
+    record_ref: "trigger.relationship"
+    field: T2_dealer__c
+    operator: not_null
+
+# 后置清理
+teardown:
+  - action: delete
+    object: t1_t2_business_relationship__c
+    record_ref: "trigger.relationship"
+  - action: delete
+    object: t2_dealer__c
+    record_ref: "setup.dealer"
+
+# 未找到场景
+extra_cases:
+  - name: 未找到T2经销商时申请结果为未查找到
+    trigger:
+      - id: relationship2
+        action: create
+        object: t1_t2_business_relationship__c
+        data:
+          t2_company_name__c: "__NOT_EXIST_DEALER__"
+    assertions:
+      - object: t1_t2_business_relationship__c
+        record_ref: "trigger.relationship2"
+        field: application_result__c
+        operator: eq
+        expected: option_no_data_found__c
+    teardown:
+      - action: delete
+        object: t1_t2_business_relationship__c
+        record_ref: "trigger.relationship2"

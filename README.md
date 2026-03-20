@@ -1,1 +1,177 @@
-# Kiro-skills
+# APL 自动化流水线
+
+根据业务需求自动生成 APL 函数代码，通过 **Playwright 浏览器自动化** 部署到纷享销客，并用 OpenAPI 驱动自动化测试。
+
+> 📋 **能力总览**：技能清单、技术架构、报错机制、数据闭环、提效场景、与对话式生成的差异、Playwright 核心作用 → 见 [OVERVIEW.md](OVERVIEW.md)
+
+## 快速开始
+
+### 1. 安装依赖
+
+```bash
+cd _tools
+pip install -r requirements.txt
+playwright install chromium
+```
+
+### 2. 配置
+
+复制并填写配置文件：
+
+```bash
+cp config.yml config.local.yml
+# 编辑 config.local.yml，填入纷享账号、OpenAPI 凭证、LLM API Key
+# 配置 fxiaoke.project_name（如「硅基流动」）后，字段缓存将按项目分目录存放，便于多项目复用
+# 配置 rag.enabled: true 启用 RAG 语义检索（需 OPENAI_API_KEY，用于 embedding）
+```
+
+也可通过环境变量设置敏感信息：
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-xxx   # 或 OPENAI_API_KEY
+export FX_USERNAME=your_account
+export FX_PASSWORD=your_password
+```
+
+### 3. 准备需求文件
+
+创建 `req.yml`（参考下方格式）：
+
+```yaml
+requirement: |
+  根据当前记录的<客户名称>字段，到【客户】对象查找匹配的客户，
+  找到则将客户ID写入<关联客户>字段，并更新<状态>为"已匹配"；
+  未找到则更新<状态>为"未找到"。
+object_api: your_object__c
+object_label: 你的对象名
+function_type: 流程函数          # 支持：流程函数|UI函数|自定义控制器|计划任务|按钮|范围规则|同步前函数|同步后函数|校验函数|自增编号|导入|关联对象范围规则|强制通知|促销|金蝶云星空|数据集成。英文别名：flow, range_rule, button, ui, controller 等
+namespace: 流程                  # 可选，不填则根据 function_type 自动推断。可选值：流程、UI事件、自定义控制器、计划任务、按钮、校验函数等
+code_name: 【流程】根据名称关联客户   # 格式：【命名空间】+ 简短概括
+output_dir: 你的客户目录         # 相对于 test拨号/ 目录
+output_file: 根据名称关联客户    # 不含扩展名
+```
+
+### 4. 运行
+
+```bash
+# 仅生成代码（生成后在对应目录查看）
+python pipeline.py --req req.yml --step generate
+
+# 生成 + 自动部署到纷享（新建函数：不搜索，直接新建）
+python pipeline.py --req req.yml --step deploy
+
+# 需求变更/修改：按 API 名搜索后编辑，在现有函数基础上修改（需提供 func_api_name）
+python pipeline.py --req req.yml --step deploy --update --func-api-name Proc_XXX__c
+# 或在 req.yml 中写 func_api_name: Proc_XXX__c 后：python pipeline.py --req req.yml --step deploy --update
+
+# 完整流水线（生成 + 部署 + 测试）
+python pipeline.py --req req.yml --case tester/cases/your_case.yml --step all
+
+# 仅测试已部署的函数
+python pipeline.py --case tester/cases/your_case.yml --step test
+```
+
+**部署模式说明**：
+- **新建函数**（默认）：函数需求时直接新建，不搜索。
+- **更新函数**（`--update`）：需求变更/需求修改时，必须提供 `func_api_name`，按 API 名搜索 → 点编辑 → 在现有函数基础上修改。
+
+## skill目录结构
+
+```
+_tools/
+├── .fields_cache/           # 字段缓存（按项目分目录，如 硅基流动/tenant__c.yml）
+├── .rag_index/              # RAG 向量索引（gitignore，首次生成或新增 APL 后自动构建）
+├── pipeline.py              # 主入口
+├── config.yml               # 配置模板（不含敏感信息）
+├── config.local.yml         # 本地配置（gitignore，填入真实凭证）
+├── utils.py                 # 公共工具
+├── generator/
+│   ├── generate.py          # APL 代码生成器
+│   ├── prompt.py            # LLM prompt 构建（含 few-shot）
+│   └── examples/            # few-shot 示例
+├── rag/                     # RAG 语义检索（可复用于生成器等）
+│   ├── retriever.py         # 通用向量检索器（ChromaDB）
+│   ├── apl_examples.py      # APL 示例检索
+│   └── rebuild_index.py     # 重建索引（新增 APL 后执行 python -m rag.rebuild_index）
+├── deployer/
+│   ├── deploy.py            # Playwright 浏览器部署
+│   ├── selectors.py         # 纷享销客页面 CSS 选择器
+│   └── screenshots/         # 部署截图（自动生成，gitignore）
+├── tester/
+│   ├── openapi_client.py    # 纷享 OpenAPI 封装
+│   ├── test_runner.py       # 测试执行器
+│   ├── cases/               # YAML 格式测试用例
+│   │   └── example_申领T2经销商.yml
+│   └── reports/             # 测试报告（自动生成，gitignore）
+└── templates/
+    └── header.j2            # APL 文件头部注释模板
+```
+
+## 测试用例格式
+
+```yaml
+function: 函数名称
+description: 测试描述
+
+setup:            # 测试前创建的数据
+  - id: record1
+    action: create
+    object: some_object__c
+    data:
+      field1: "value1"
+
+trigger:          # 触发函数执行的操作
+  - id: main_record
+    action: create
+    object: bound_object__c
+    data:
+      ref_field: "value1"
+
+assertions:       # 验证结果
+  - description: 字段应更新为期望值
+    object: bound_object__c
+    record_ref: "trigger.main_record"
+    field: result_field__c
+    operator: eq          # eq | not_null | null | contains | not_eq
+    expected: expected_value
+
+teardown:         # 清理测试数据（倒序执行）
+  - action: delete
+    object: bound_object__c
+    record_ref: "trigger.main_record"
+  - action: delete
+    object: some_object__c
+    record_ref: "setup.record1"
+```
+
+## 飞书记录（可选）
+
+部署成功后，可将函数信息自动追加到飞书表格，便于团队统一查看。
+
+### 方式一：电子表格（推荐，更简单）
+
+1. 在飞书中新建「电子表格」
+2. 第一行填写表头：**函数名** | **描述** | **绑定对象** | **系统API名**
+3. 从 URL 获取 `spreadsheet_token`：`https://xxx.feishu.cn/sheets/XXXXX` → 其中 `XXXXX` 即为 token
+4. 在 `config.local.yml` 的 `feishu` 下填写 `spreadsheet_token`
+
+### 方式二：多维表格
+
+1. 在飞书中创建多维表格，新建数据表，表头包含列：**函数名**、**描述**、**绑定对象**、**系统API名**
+2. 从 URL 获取 `app_token` 和 `table_id`：`https://xxx.feishu.cn/base/APP_TOKEN?table=TABLE_ID`
+3. 在 `config.local.yml` 的 `feishu` 下填写 `bitable_app_token`、`bitable_table_id`
+
+未配置或配置不完整时，流水线会静默跳过飞书记录步骤。
+
+## 流水线不工作？
+
+优先看 [TROUBLESHOOTING.md](TROUBLESHOOTING.md) 开头的「流水线整体不工作」：
+- **生成无反应/超时** → 检查 `config.local.yml` 的 LLM 配置（模型、代理、timeout）
+- **批量无待执行** → 飞书表格需新增行，函数名留空
+- **req.yml 示例** → 见 `req.yml`，建议补全 code_name、output_dir、output_file
+
+## 注意事项
+
+- **部署器 selectors**：纷享销客 UI 升级后，如果部署失败请检查 `deployer/selectors.py` 中的选择器，可通过 `PWDEBUG=1 python deployer/deploy.py ...` 打开 Playwright Inspector 重新录制。
+- **测试等待时间**：函数执行需要时间，可在 `config.yml` 的 `tester.trigger_wait_seconds` 调整等待秒数。
+- **LLM 生成质量**：生成后建议人工检查字段名是否与实际对象匹配，首次使用时可先 `--step generate` 检查代码再部署。

@@ -1,0 +1,37 @@
+feishu:
+  app_id: cli_a90ae5a42cb89bb3
+  app_secret: MUF4Ehe0dgufgdkME7a0lhYO4OUd6kh4
+  bitable_app_token: X4SzbtbsFa5Ik0soVi4csWCUngd
+  bitable_table_id: tbl0O4GjyWAv1MTD
+  spreadsheet_token: ''
+  notify_open_id: ou_7eeada837f0e80a3175acd3dfd0a9629
+fxiaoke:
+  project_name: 硅基流动
+  base_url: https://www.fxiaoke.com
+  function_path: /XV/UI/manage#crmmanage/=/module-myfunction
+  login_path: /XV/UI/login
+  password: ""
+  username: ''
+generator:
+  default_author: 纷享实施人员
+  num_examples: 6
+  output_dir: .
+llm:
+  api_key: sk-nj6smjvDqtOPnlkLsv2BAGfRCEt0tKoyHph3Mwxh0r86EUyx
+  base_url: http://1.95.142.151:3000/v1
+  max_tokens: 4096
+  model: claude-sonnet-4-5-20250929
+  provider: openai
+  temperature: 0.1
+  timeout: 120
+openapi:
+  app_id: FSAID_1323066
+  app_secret: c56004e331444dbdaa0b32dfec4db1e9
+  permanent_code: A2A70742D2E865359FDCBB01399A86E1
+  current_open_user_id: '1000'
+  base_url: https://open.fxiaoke.com
+  corp_id: FSCID_A3B624A9F03888CA0F431A823D02AD2D
+tester:
+  poll_interval_seconds: 2
+  poll_max_retries: 10
+  trigger_wait_seconds: 5

@@ -1,0 +1,40 @@
+
+==================================================
+步骤 1/3  生成 APL 代码
+==================================================
+[生成器] 函数类型: 流程函数，绑定对象: tenant__c
+[生成器] 加载 6 个 few-shot 示例
+[生成器] 调用 openai (claude-sonnet-4-5-20250929)...
+[生成器] 已输出: /Users/yanye/code/test拨号/【工作流】租户新建时关联客户
+
+==================================================
+步骤 2/3  部署到纷享销客
+==================================================
+  [部署器] 已加载保存的 Session
+[部署器] 导航到函数管理页: https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction
+[部署器] 部署失败: Page.goto: Target page, context or browser has been closed
+Call log:
+  - navigating to "https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction", waiting until "domcontentloaded"
+
+Traceback (most recent call last):
+  File "/Users/yanye/code/test拨号/_tools/pipeline.py", line 207, in <module>
+    main()
+  File "/Users/yanye/code/test拨号/_tools/pipeline.py", line 180, in main
+    ok = step_deploy(apl_file, func_name, args, cfg, req=req)
+  File "/Users/yanye/code/test拨号/_tools/pipeline.py", line 98, in step_deploy
+    return deploy(apl_file, func_name, cfg, headless=headless, update=update,
+  File "/Users/yanye/code/test拨号/_tools/deployer/deploy.py", line 1625, in deploy
+    screenshot(page, "error")
+  File "/Users/yanye/code/test拨号/_tools/deployer/deploy.py", line 43, in screenshot
+    page.screenshot(path=str(path))
+  File "/Users/yanye/Library/Python/3.9/lib/python/site-packages/playwright/sync_api/_generated.py", line 9785, in screenshot
+    self._sync(
+  File "/Users/yanye/Library/Python/3.9/lib/python/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+  File "/Users/yanye/Library/Python/3.9/lib/python/site-packages/playwright/_impl/_page.py", line 795, in screenshot
+    encoded_binary = await self._channel.send("screenshot", params)
+  File "/Users/yanye/Library/Python/3.9/lib/python/site-packages/playwright/_impl/_connection.py", line 61, in send
+    return await self._connection.wrap_api_call(
+  File "/Users/yanye/Library/Python/3.9/lib/python/site-packages/playwright/_impl/_connection.py", line 528, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TargetClosedError: Page.screenshot: Target page, context or browser has been closed

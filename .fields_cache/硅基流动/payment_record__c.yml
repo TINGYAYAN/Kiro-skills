@@ -1,0 +1,15 @@
+fields:
+- api: payment_record__c
+  label: CRM对象API集成对象API
+- api: transfer_amount__c
+  label: 打款金额
+- api: store_name__c
+  label: 客户名称
+- api: date__c
+  label: 日期
+- api: abstract__c
+  label: 摘要
+- api: name
+  label: 流水号
+- api: _id
+  label: ID

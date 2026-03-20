@@ -1,0 +1,74 @@
+# APL 自动化流水线配置
+# 复制此文件为 config.local.yml 并填入真实值，config.local.yml 已在 .gitignore 中
+
+fxiaoke:
+  # 项目名称（在纷享系统后台可见，如「硅基流动」），字段缓存将按项目分目录存放
+  project_name: "硅基流动"
+  # 纷享销客登录地址，格式: https://xxx.fxiaoke.com
+  base_url: "https://www.fxiaoke.com"
+  # 登录页面路径
+  login_path: "/XV/UI/login"
+  # 登录账号（手机号或邮箱）
+  username: "your_account"
+  # 登录密码（也可通过 keyring 存储，留空则运行时从 keyring 读取）
+  password: ""
+  # 函数管理页面路径（相对于 base_url）；不同租户可能不同，登录后复制地址栏路径
+  function_path: "/XV/UI/manage#crmmanage/=/module-myfunction"
+
+openapi:
+  # 企业标识（纷享销客开放平台 appId）
+  app_id: "YOUR_APP_ID"
+  # 应用密钥
+  app_secret: "YOUR_APP_SECRET"
+  # 企业 ID（corpId）
+  corp_id: "YOUR_CORP_ID"
+  # OpenAPI 基础地址
+  base_url: "https://open.fxiaoke.com"
+
+llm:
+  # 使用的 LLM 提供商: openai | anthropic | manual
+  provider: "anthropic"
+  # 对应 provider 的 API Key（也可通过环境变量 OPENAI_API_KEY / ANTHROPIC_API_KEY 设置）
+  api_key: ""
+  # 使用的模型
+  model: "claude-3-5-sonnet-20241022"
+  # 生成温度（0.0~1.0，建议 0.1 保持稳定输出）
+  temperature: 0.1
+  # 最大 token 数
+  max_tokens: 4096
+  # API 请求超时（秒），超时后报错而非一直等待
+  timeout: 120
+
+rag:
+  # 是否启用 RAG 语义检索（否则使用规则+关键词的 load_examples）
+  enabled: false
+  # embedding 模型（与 llm 共用 api_key，可单独配置 base_url）
+  embedding_model: "text-embedding-3-small"
+
+generator:
+  # few-shot 示例数量（RAG 启用时为语义检索 top-k，否则为规则排序 top-n）
+  num_examples: 3
+  # 生成文件默认输出目录（相对于项目根目录 test拨号/）
+  output_dir: "."
+  # 默认作者名
+  default_author: "纷享实施人员"
+
+tester:
+  # 触发函数后等待执行的时间（秒）
+  trigger_wait_seconds: 5
+  # 轮询断言的最大次数
+  poll_max_retries: 10
+  # 轮询间隔（秒）
+  poll_interval_seconds: 2
+
+# 飞书记录（部署成功后追加到表格，可选）
+feishu:
+  # 飞书应用 app_id、app_secret（与 OpenClaw 飞书机器人可共用）
+  app_id: ""
+  app_secret: ""
+  # 电子表格（推荐）：在飞书新建电子表格，第一行填 函数名|描述|绑定对象|系统API名
+  # 从 URL 获取：https://xxx.feishu.cn/sheets/XXXXX → spreadsheet_token=XXXXX
+  spreadsheet_token: ""
+  # 多维表格：在飞书创建多维表格，表头同上，从 URL 获取 app_token 和 table_id
+  bitable_app_token: ""
+  bitable_table_id: ""

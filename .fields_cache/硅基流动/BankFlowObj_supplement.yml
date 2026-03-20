@@ -1,0 +1,8 @@
+# 银行流水对象 payment_record__c 字段补充
+add_fields:
+  - api: date__c
+    label: 日期
+  - api: transfer_amount__c
+    label: 打款金额
+  - api: store_name__c
+    label: 关联客户

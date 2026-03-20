@@ -1,0 +1,4 @@
+# 补充抓取时可能遗漏的字段，格式：add_fields 或 fields
+add_fields:
+  - api: life_status
+    label: 生命状态

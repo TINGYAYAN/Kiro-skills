@@ -1,0 +1,18 @@
+==============================
+APL 批量生成启动
+时间: 2026-03-11 23:39:26
+==============================
+[批量] 找到 2 条待执行记录
+[部署器] 打开登录页: https://www.fxiaoke.com/XV/UI/login
+Traceback (most recent call last):
+  File "/Users/yanye/code/test拨号/_tools/batch_runner.py", line 328, in <module>
+    main()
+  File "/Users/yanye/code/test拨号/_tools/batch_runner.py", line 323, in main
+    results = run_batch(cfg, dry_run=args.dry_run, regenerate=args.regenerate)
+  File "/Users/yanye/code/test拨号/_tools/batch_runner.py", line 288, in run_batch
+    return run_batch_inprocess(cfg, dry_run=dry_run, regenerate=regenerate)
+  File "/Users/yanye/code/test拨号/_tools/batch_runner.py", line 196, in run_batch_inprocess
+    login(page, cfg)
+  File "/Users/yanye/code/test拨号/_tools/deployer/deploy.py", line 73, in login
+    tab_loc = _try_selector(page, [sel.LOGIN_ACCOUNT_TAB] + getattr(sel, "LOGIN_ACCOUNT_TAB_ALT", []), timeout=8000)
+TypeError: _try_selector() got an unexpected keyword argument 'timeout'

@@ -1,0 +1,8 @@
+config.local.yml
+deployer/screenshots/
+.rag_index/
+deployer/session*.json
+tester/reports/
+__pycache__/
+*.pyc
+.env

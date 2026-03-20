@@ -1,0 +1,8 @@
+# 补充抓取时可能遗漏的字段；若 API 名与实际不符，请到平台对象管理中确认后修改
+add_fields:
+  - api: recent_month_receipt__c
+    label: 近一个月回款
+  - api: recent_quarter_receipt__c
+    label: 近一个季度回款
+  - api: quarterly_repayment__c
+    label: 近一个季度回款

@@ -1,7 +1,5 @@
-bind_object: 银行流水
-function_type: scheduled_task
 object_api: payment_record__c
 object_label: 银行流水
-requirement: 创建计划任务函数。查询银行流水对象日期据当前日期1个月内的全部数据，汇总打款金额，将汇总金额更新到客户对象上的近一个季度回款字段上。银行流水对象APIname：payment_record__c，银行流水的日期字段
-  API 名：date__c，银行流水的打款金额字段 API 名：transfer_amount__c，银行流水关联客户的字段 API 名：store_name__c，客户的近一个季度回款字段
-  API 名：quarterly_repayment__c
+related_object: AccountObj
+requirement: 计划任务，查询银行流水对象日期在当前日期1个月内的全部数据，汇总打款金额，将汇总金额更新到客户对象的近一个季度回款字段上
+trigger_type: scheduled_task

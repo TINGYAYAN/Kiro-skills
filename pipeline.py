@@ -66,7 +66,7 @@ def step_generate(args, cfg, fields_map: dict = None) -> str:
     if fields_map is None:
         try:
             from fetcher.fetch_fields import fetch_fields_for_req
-            fields_map = fetch_fields_for_req(req, cfg, force_refresh=False)
+            fields_map = fetch_fields_for_req(req, cfg, force_refresh=True)
             if fields_map:
                 total = sum(len(v) for v in fields_map.values())
                 print(f"[pipeline] 已从缓存加载字段信息：{len(fields_map)} 个对象，{total} 个字段")
@@ -77,7 +77,9 @@ def step_generate(args, cfg, fields_map: dict = None) -> str:
     print("\n" + "="*50)
     print("步骤 1/3  生成 APL 代码")
     print("="*50)
-    out_path = generate(req, cfg, fields_map=fields_map or {})
+    out_path = generate(
+        req, cfg, fields_map=fields_map or {}, req_file_path=args.req
+    )
     return str(out_path)
 
 
@@ -87,6 +89,9 @@ def step_deploy(apl_file: str, func_name: str, args, cfg, req: dict = None) -> b
 
     headless = getattr(args, "headless", False)
     update   = getattr(args, "update", False)
+    from utils import sync_function_type_from_trigger_type, infer_function_type_into_req_if_missing
+    sync_function_type_from_trigger_type(req or {})
+    infer_function_type_into_req_if_missing(req or {})
     namespace = resolve_namespace(req or {})
     object_label = (req or {}).get("object_label", "")
     # 用 requirement 第一行作为描述，不超过100字
@@ -135,7 +140,10 @@ def main():
     )
     parser.add_argument("--force-fetch", dest="force_fetch", action="store_true",
                         help="强制刷新字段缓存（配合 --step fetch 使用）")
+    parser.add_argument("--no-refresh", dest="no_refresh", action="store_true",
+                        help="跳过实时拉取，使用本地字段缓存")
     parser.add_argument("--req", help="需求 YAML 文件路径（generate 步骤必填）")
+    parser.add_argument("--project", "-p", help="项目名；指定时默认用 sharedev_pull/{项目}/req.yml 作为 --req")
     parser.add_argument("--file", help="已有 APL 文件路径（跳过 generate 步骤时使用）")
     parser.add_argument("--func-name", dest="func_name", help="纷享销客中的函数名称（deploy 步骤）")
     parser.add_argument("--case", help="测试用例 YAML 文件路径（test 步骤）")
@@ -153,6 +161,15 @@ def main():
 
     cfg = load_config(args.config)
     step = args.step
+
+    # 若指定了 --project 且（未指定 --req 或 --req 为 req.yml），用 sharedev_pull/{项目}/req.yml
+    req_path = getattr(args, "req", None)
+    if getattr(args, "project", None):
+        proj_req = Path(__file__).parent / "sharedev_pull" / args.project.strip() / "req.yml"
+        if (not req_path or Path(req_path).name == "req.yml") and proj_req.exists():
+            args.req = str(proj_req)
+            req_path = args.req
+            print(f"[pipeline] 使用项目 req: {proj_req}")
 
     apl_file = getattr(args, "file", None)
     success = True
@@ -188,7 +205,8 @@ def main():
             if step in ("deploy", "all") and req:
                 try:
                     from fetcher.fetch_fields import fetch_fields_for_req
-                    fields_map_for_gen = fetch_fields_for_req(req, cfg, force_refresh=False)
+                    force = not getattr(args, "no_refresh", False)
+                    fields_map_for_gen = fetch_fields_for_req(req, cfg, force_refresh=force)
                     if fields_map_for_gen:
                         total = sum(len(v) for v in fields_map_for_gen.values())
                         print(f"[pipeline] 预拉取字段：{len(fields_map_for_gen)} 个对象、{total} 个字段")

@@ -8,10 +8,12 @@
 多维表格列说明：
   - 描述      ← 用户填写需求（批量模式的输入）
   - 绑定对象  ← 用户填写对象名称，如"客户"、"AccountObj"
+  - 函数类型 / trigger_type / 触发类型 ← 可选；与 req 一致（如 scheduled_task → 计划任务）
   - 函数名    ← 自动填入（部署成功后）
   - 系统API名 ← 自动填入
   - 状态      ← 自动填入（待执行 / ✅成功 / ❌失败）
   - 执行时间  ← 自动填入
+  - 执行反馈  ← 自动填入（成功摘要 / 失败原因全文，便于排查）
 """
 from __future__ import annotations
 
@@ -24,6 +26,8 @@ FIELD_OBJECT = "绑定对象"
 FIELD_API_NAME = "系统API名"
 FIELD_STATUS = "状态"
 FIELD_EXEC_TIME = "执行时间"
+FIELD_FEEDBACK = "执行反馈"
+FIELD_TRIGGER_TYPE = "trigger_type"
 
 STATUS_PENDING = "⏳待执行"
 STATUS_RUNNING = "🔄执行中"
@@ -177,10 +181,16 @@ def list_bitable_pending_records(cfg: dict) -> list[dict]:
             # status 为空 或 STATUS_PENDING 才捡起；已成功/失败/执行中一律跳过
             status_is_new = status in ("", STATUS_PENDING)
             if desc and not func_name and status_is_new:
+                trig = (
+                    (f.get(FIELD_TRIGGER_TYPE) or f.get("触发类型") or "").strip()
+                )
                 records.append({
                     "record_id": item["record_id"],
                     FIELD_DESC: desc,
                     FIELD_OBJECT: (f.get(FIELD_OBJECT) or "").strip(),
+                    "函数类型": (f.get("函数类型") or "").strip(),
+                    "trigger_type": trig,
+                    "项目": (f.get("项目") or f.get("project") or "").strip(),
                 })
 
         if not data.get("data", {}).get("has_more"):
@@ -256,7 +266,7 @@ def clear_bitable_for_regenerate(cfg: dict) -> int:
     table_id = feishu["bitable_table_id"]
 
     _ensure_table_fields(token, app_token, table_id,
-                         extra=[FIELD_STATUS, FIELD_EXEC_TIME])
+                         extra=[FIELD_STATUS, FIELD_EXEC_TIME, FIELD_FEEDBACK])
 
     for rec in records:
         fields = {
@@ -264,6 +274,7 @@ def clear_bitable_for_regenerate(cfg: dict) -> int:
             FIELD_API_NAME: "",
             FIELD_STATUS: STATUS_PENDING,
             FIELD_EXEC_TIME: datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
+            FIELD_FEEDBACK: "",
         }
         _update_bitable_record(token, app_token, table_id, rec["record_id"], fields)
 
@@ -271,8 +282,9 @@ def clear_bitable_for_regenerate(cfg: dict) -> int:
 
 
 def mark_bitable_record(cfg: dict, record_id: str, status: str,
-                        func_name: str = "", api_name: str = "", error: str = "") -> None:
-    """更新多维表格中指定记录的状态、函数名、系统API名。"""
+                        func_name: str = "", api_name: str = "", error: str = "",
+                        feedback: str = "") -> None:
+    """更新多维表格中指定记录的状态、函数名、系统API名、执行反馈。"""
     import datetime
 
     feishu = cfg.get("feishu") or {}
@@ -280,9 +292,8 @@ def mark_bitable_record(cfg: dict, record_id: str, status: str,
     app_token = feishu["bitable_app_token"]
     table_id = feishu["bitable_table_id"]
 
-    # 确保状态和时间列存在
     _ensure_table_fields(token, app_token, table_id,
-                         extra=[FIELD_STATUS, FIELD_EXEC_TIME])
+                         extra=[FIELD_STATUS, FIELD_EXEC_TIME, FIELD_FEEDBACK])
 
     fields: dict = {FIELD_STATUS: status}
     fields[FIELD_EXEC_TIME] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
@@ -291,7 +302,10 @@ def mark_bitable_record(cfg: dict, record_id: str, status: str,
     if api_name:
         fields[FIELD_API_NAME] = api_name
     if error:
-        fields[FIELD_STATUS] = f"{STATUS_FAIL}：{error[:80]}"
+        fields[FIELD_STATUS] = STATUS_FAIL
+        fields[FIELD_FEEDBACK] = error[:2000]
+    elif feedback:
+        fields[FIELD_FEEDBACK] = feedback[:2000]
 
     _update_bitable_record(token, app_token, table_id, record_id, fields)
 
@@ -444,19 +458,22 @@ def send_feishu_notify(text: str, cfg: dict) -> bool:
     feishu = cfg.get("feishu") or {}
     app_id = feishu.get("app_id")
     app_secret = feishu.get("app_secret")
+    chat_id = feishu.get("notify_chat_id")
     open_id = feishu.get("notify_open_id")
-    if not all([app_id, app_secret, open_id]):
+    receive_id = chat_id or open_id
+    receive_id_type = "chat_id" if chat_id else "open_id"
+    if not all([app_id, app_secret, receive_id]):
         return False
 
     try:
         token = _get_tenant_token(app_id, app_secret)
         payload = {
-            "receive_id": open_id,
+            "receive_id": receive_id,
             "msg_type": "text",
             "content": json.dumps({"text": text}, ensure_ascii=False),
         }
         req = urllib.request.Request(
-            f"{FEISHU_API}/im/v1/messages?receive_id_type=open_id",
+            f"{FEISHU_API}/im/v1/messages?receive_id_type={receive_id_type}",
             data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
             headers={
                 "Authorization": f"Bearer {token}",

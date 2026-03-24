@@ -34,7 +34,7 @@ def _ensure_memory_dir():
     MEMORY_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def _load_memory() -> dict:
+def _load_memory() :
     """加载记忆文件。"""
     _ensure_memory_dir()
     if not MEMORY_FILE.exists():
@@ -107,7 +107,7 @@ def _snippet_similar(a: str, b: str) -> bool:
     return overlap > 0.3
 
 
-def _compute_stats(entries: list) -> dict:
+def _compute_stats(entries: list) :
     """统计各类型出现次数。"""
     stats = {}
     for e in entries:
@@ -116,7 +116,7 @@ def _compute_stats(entries: list) -> dict:
     return stats
 
 
-def query_similar_fixes(error_text: str, limit: int = 3) -> list[dict]:
+def query_similar_fixes(error_text: str, limit: int = 3) -> list:
     """根据错误文本检索相似的历史修复。"""
     data = _load_memory()
     entries = data.get("entries", [])

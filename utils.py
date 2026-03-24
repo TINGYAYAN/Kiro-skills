@@ -21,6 +21,8 @@ OBJECT_LABEL_TO_API: dict[str, str] = {
     "订货单": "SalesOrderObj__c",
     "回款": "PaymentObj",
     "银行流水": "BankFlowObj",
+    "提货单": "DeliveryOrderObj",
+    "销售订单": "SalesOrderObj__c",
 }
 
 # 函数类型 → 命名空间 映射（新建函数时纷享下拉框的选项）
@@ -79,6 +81,9 @@ FUNCTION_TYPE_ALIASES = {
     "controller": "自定义控制器",
     "scheduled_task": "计划任务",
     "cron": "计划任务",
+    "schedule": "计划任务",
+    "scheduler": "计划任务",
+    "定时任务": "计划任务",
     "validation": "校验函数",
     "validate": "校验函数",
     "auto_number": "自增编号",
@@ -86,6 +91,39 @@ FUNCTION_TYPE_ALIASES = {
     "关联对象范围": "关联对象范围规则",
     "流程": "流程函数",
 }
+
+
+def sync_function_type_from_trigger_type(req: dict) -> None:
+    """若未写 function_type，用 trigger_type / triggerType（与部分 req 模板一致）补全。"""
+    ft_raw = req.get("function_type")
+    if ft_raw is not None and str(ft_raw).strip() != "":
+        return
+    tt = req.get("trigger_type")
+    if tt is None or str(tt).strip() == "":
+        tt = req.get("triggerType")
+    if tt is None or str(tt).strip() == "":
+        return
+    key = str(tt).strip().lower()
+    mapped = FUNCTION_TYPE_ALIASES.get(key, str(tt).strip())
+    req["function_type"] = mapped
+
+
+def infer_function_type_into_req_if_missing(req: dict) -> None:
+    """仅当未填写 function_type 时，从 requirement 推断计划任务等类型。"""
+    ft_raw = req.get("function_type")
+    if ft_raw is not None and str(ft_raw).strip() != "":
+        return
+    text = req.get("requirement") or ""
+    if not isinstance(text, str):
+        text = str(text)
+    if "不是计划任务" in text or "非计划任务" in text:
+        return
+    tl = text.lower()
+    if any(k in text for k in ("计划任务", "定时任务", "定时执行", "定时同步", "定时跑批")):
+        req["function_type"] = "计划任务"
+        return
+    if "scheduled_task" in tl or re.search(r"\bcron\b", tl):
+        req["function_type"] = "计划任务"
 
 
 def resolve_namespace(req: dict) -> str:

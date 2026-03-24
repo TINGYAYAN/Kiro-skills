@@ -4,6 +4,16 @@
 
 > 📋 **能力总览**：技能清单、技术架构、报错机制、数据闭环、提效场景、与对话式生成的差异、Playwright 核心作用 → 见 [OVERVIEW.md](OVERVIEW.md)
 
+## 他人电脑 / 协作怎么用（避免用你的配置）
+
+- **不要**把 `config.local.yml`、`.env`、session 截图等提交到 Git：它们已在 `_tools/.gitignore` 里忽略。
+- **可以**提交的是 **`config.yml`**（模板，用占位符）、代码、`req.yml`、流水线脚本等。
+- 同事克隆仓库后在本机执行：
+  1. `cd _tools && pip install -r requirements.txt`（部署还要 `playwright install chromium`）
+  2. `cp config.yml config.local.yml`，**只改自己的** `config.local.yml`：纷享 `base_url` / 账号 / `project_name`、OpenAPI、LLM Key、`function_path` 等。
+  3. 敏感信息也可用环境变量（见下文「配置」），同样不要写进聊天或提交仓库。
+- 每人租户不同：`fxiaoke.project_name`、`base_url`、`function_path`、OpenAPI 都要换成**对方环境**的；字段缓存目录是 `.fields_cache/<project_name>/`，互不冲突。
+
 ## 快速开始
 
 ### 1. 安装依赖
@@ -33,9 +43,46 @@ export FX_USERNAME=your_account
 export FX_PASSWORD=your_password
 ```
 
+### 可选：ShareDev 证书认证（免密码拉取对象/函数）
+
+若有纷享**开发者证书**，可免账号密码拉取租户对象列表和 APL 函数代码。任选一种配置：
+
+1. **cert.conf**：项目根目录创建，内容：
+   ```ini
+   [sharedev]
+   domain = https://www.fxiaoke.com
+   cert = 你的开发者证书内容
+   ```
+2. **config.local.yml**：在 `fxiaoke` 下添加 `sharedev_domain`、`sharedev_certificate`
+
+拉取命令：
+```bash
+python -m fetcher.sharedev_client --objects          # 对象列表
+python -m fetcher.sharedev_client --functions       # 函数列表
+python -m fetcher.sharedev_client --describe AccountObj  # 对象字段描述
+```
+
+### 代理登录（推荐，避免 Playwright 自动填表）
+
+**不再使用 Playwright 自动填账号密码**，改为每次调用 GetAdminAgentLoginToken 获取带 token 的登录 URL，跳转后完成登录，更稳定。
+
+```yaml
+# config.local.yml
+fxiaoke:
+  agent_login_employee_id: "1001"  # 要代理登录的员工 ID（必填）
+  project_name: "硅基流动"        # 用于 session 文件分项目存储
+```
+
+**流程**：
+1. 首次需有一次有效 session（见下方「手动登录」）→ 保存 cookies 到 `session_{project}.json`
+2. 后续部署 → 用 session 文件中的 cookies 调用 GetAdminAgentLoginToken → 拿到 token URL → Playwright 跳转 → 自动登录
+3. Session 过期时 → 手动登录一次 → 保存新 cookies → 后续再次走代理登录
+
+**手动登录（首次或 session 过期时）**：打开登录页后，在浏览器中手动输入账号密码、验证码等，程序检测到登录成功后自动继续。不依赖 Playwright 选择器，更稳定。
+
 ### 3. 准备需求文件
 
-创建 `req.yml`（参考下方格式）：
+创建 `req.yml`（参考下方格式）。**提交约定**见 [REQ_CONVENTION.md](REQ_CONVENTION.md)：建议明确提供 `function_type`、`object_label`，未提供时由 AI 推断。
 
 ```yaml
 requirement: |

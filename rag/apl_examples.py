@@ -8,7 +8,9 @@ import os
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
-EXAMPLES_DIR = Path(__file__).parent.parent / "generator" / "examples"
+_TOOLS_ROOT = Path(__file__).parent.parent
+EXAMPLES_DIR = _TOOLS_ROOT / "generator" / "examples"
+SHAREDEV_PULL_DIR = _TOOLS_ROOT / "sharedev_pull"
 CONTENT_STORE = Path(__file__).parent.parent / ".rag_index" / "apl_examples" / "content_store.json"
 
 _SKIP_DIRS = {".git", ".cursor", ".trae", "_tools", "node_modules", "__pycache__", "插件"}
@@ -31,6 +33,9 @@ def _is_apl_file(path: Path) -> bool:
 
 def _scan_apl_files() -> list[Path]:
     builtin = list(EXAMPLES_DIR.glob("*.apl")) if EXAMPLES_DIR.exists() else []
+    sharedev_files = []
+    if SHAREDEV_PULL_DIR.is_dir():
+        sharedev_files = [p for p in SHAREDEV_PULL_DIR.rglob("*.apl") if p.is_file()]
     project_files = []
     for root, dirs, files in os.walk(PROJECT_ROOT):
         root_path = Path(root)
@@ -40,8 +45,11 @@ def _scan_apl_files() -> list[Path]:
             if _is_apl_file(fpath):
                 project_files.append(fpath)
     builtin_names = {f.stem for f in builtin}
+    sharedev_files = [f for f in sharedev_files if f.stem not in builtin_names]
     project_files = [f for f in project_files if f.stem not in builtin_names]
-    return list(builtin) + project_files
+    known_res = {f.resolve() for f in builtin + sharedev_files}
+    project_files = [f for f in project_files if f.resolve() not in known_res]
+    return list(builtin) + sharedev_files + project_files
 
 
 def _load_content_store() -> dict:
@@ -94,8 +102,28 @@ def build_apl_index(cfg: dict) -> int:
     return len(documents)
 
 
-def retrieve_apl_examples(requirement: str, function_type: str, cfg: dict, num: int = 6) -> list[dict]:
-    """基于 RAG 语义检索 APL 示例。返回 [{"filename", "content"}, ...]"""
+def retrieve_apl_examples(
+    requirement: str,
+    function_type: str,
+    cfg: dict,
+    num: int = 6,
+    project_name: str | None = None,
+    req_path: str | Path | None = None,
+) -> list[dict]:
+    """先按项目分层取示例，再用 RAG 补足槽位。返回项含 tier_label。"""
+    from generator.prompt import load_examples
+
+    tiered = load_examples(
+        function_type,
+        num,
+        requirement,
+        project_name=project_name,
+        req_path=req_path,
+    )
+    seen_names = {e["filename"] for e in tiered}
+    if len(tiered) >= num:
+        return tiered[:num]
+
     from rag.retriever import RAGRetriever
 
     retriever = RAGRetriever("apl_examples", cfg)
@@ -104,30 +132,37 @@ def retrieve_apl_examples(requirement: str, function_type: str, cfg: dict, num: 
         build_apl_index(cfg)
 
     query = f"{function_type}\n{requirement}"
-    hits = retriever.search(query, k=num * 2)
+    hits = retriever.search(query, k=max(num * 3, 12))
     store = _load_content_store()
-    seen_dirs, selected = {}, []
+    merged = list(tiered)
+    seen_dirs: dict = {}
+
+    def _dir_key(path_str: str, filename: str) -> str:
+        return Path(path_str).parent.name if path_str else filename
+
     for h in hits:
+        if len(merged) >= num:
+            break
         doc_id = h.get("id", "unknown")
         info = store.get(doc_id, {})
         content = info.get("content", h.get("document", ""))
         filename = info.get("filename", doc_id)
-        path_str = info.get("path", "")
-        dir_key = Path(path_str).parent.name if path_str else filename
-        if seen_dirs.get(dir_key, 0) >= 2:
+        if filename in seen_names:
             continue
-        seen_dirs[dir_key] = seen_dirs.get(dir_key, 0) + 1
-        selected.append({"filename": filename, "content": content})
-        if len(selected) >= num:
-            break
-    if len(selected) < num:
-        for h in hits:
-            if len(selected) >= num:
-                break
-            doc_id = h.get("id", "unknown")
-            info = store.get(doc_id, {})
-            content = info.get("content", h.get("document", ""))
-            filename = info.get("filename", doc_id)
-            if not any(s["filename"] == filename for s in selected):
-                selected.append({"filename": filename, "content": content})
-    return selected[:num]
+        path_str = info.get("path", "") or ""
+        dk = _dir_key(path_str, filename)
+        if seen_dirs.get(dk, 0) >= 2:
+            continue
+        seen_dirs[dk] = seen_dirs.get(dk, 0) + 1
+        norm = path_str.replace("\\", "/")
+        label = "【语义检索】"
+        pn = (project_name or "").strip()
+        if pn and f"sharedev_pull/{pn}/" in norm:
+            label = "【当前项目·语义检索】"
+        merged.append({"filename": filename, "content": content, "tier_label": label})
+        seen_names.add(filename)
+
+    for e in merged:
+        e.setdefault("tier_label", "【语义检索】")
+
+    return merged[:num]

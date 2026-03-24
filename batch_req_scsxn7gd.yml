@@ -1,0 +1,10 @@
+requirement: |
+  创建流程函数
+  调用映射规则“map_22jex__c”，生成提货单。
+object_api: SalesOrderObj__c
+object_label: 销售订单
+function_type: 流程函数
+namespace: 流程
+code_name: 【流程】创建流程函数调用映射
+output_file: 【流程】创建流程函数调用映射
+author: 纷享实施人员

@@ -7,12 +7,14 @@
 多维表格使用说明：
   1. 在现有多维表格里填写新行：
      - 「描述」列填写需求文本（支持多行，粘贴到单元格里）
-     - 「绑定对象」列填写对象名称，如"客户"、"AccountObj"
-     - 「函数名」和「系统API名」留空（自动填入）
-  2. 发送飞书消息「批量生成」，机器人读取所有待执行行并逐一执行
+     - 「绑定对象」列填写对象名称，如"客户"、"提货单"、"AccountObj"
+     - 可选列：「函数类型」「trigger_type/触发类型」「项目」（写入 req，如 scheduled_task、朗润生物）
+     - 「函数名」和「系统API名」留空；执行后「状态」「执行时间」「执行反馈」自动更新
+  2. config.local.yml 中 feishu.bitable_app_token / bitable_table_id 指向该表（或与链接中 base、tbl 一致）
+  3. 命令行：python3 batch_runner.py（无需逐条人工确认）；或飞书机器人触发同等逻辑
 
 用法（命令行直接测试）：
-  python3 batch_runner.py [--dry-run] [--regenerate] [--headed]
+  python3 batch_runner.py [--dry-run] [--regenerate] [--headed] [--bitable-app-token ...] [--bitable-table-id ...]
 
   --dry-run     仅打印待执行记录，不实际执行 pipeline
   --regenerate  重新生成：先清空所有有描述行的函数名/状态，再批量执行
@@ -56,15 +58,27 @@ def _infer_object_api(label: str) -> tuple[str, str]:
     return (api, label)
 
 
-def _build_req_yml(desc: str, object_label: str) -> str:
+def _build_req_yml(
+    desc: str,
+    object_label: str,
+    function_type_hint: str = "",
+    trigger_type_hint: str = "",
+    project_hint: str = "",
+) -> str:
     """根据描述和对象标签生成 req.yml 内容。
     代码名称格式：【命名空间】+ 简短概括，如【流程】租户关联客户。"""
     object_api, object_label_clean = _infer_object_api(object_label)
 
-    # 推断函数类型和命名空间（按优先级匹配）
+    # 优先用表格里明确填写的函数类型
     func_type = "流程函数"
     namespace = "流程"
-    if any(kw in desc for kw in ["自定义控制器", "控制器接口", "call_controller", "接口"]):
+    if function_type_hint:
+        from utils import FUNCTION_TYPE_ALIASES, FUNCTION_TYPE_TO_NAMESPACE
+        ft = FUNCTION_TYPE_ALIASES.get(function_type_hint.strip().lower(), function_type_hint.strip())
+        ns = FUNCTION_TYPE_TO_NAMESPACE.get(ft, "流程")
+        func_type = ft
+        namespace = ns
+    elif any(kw in desc for kw in ["自定义控制器", "控制器接口", "call_controller", "接口"]):
         func_type = "自定义控制器"
         namespace = "自定义控制器"
     elif any(kw in desc for kw in ["范围规则", "范围规则函数", "关联字段", "介绍人"]):
@@ -109,6 +123,12 @@ def _build_req_yml(desc: str, object_label: str) -> str:
         f"output_file: {code_name}",
         "author: 纷享实施人员",
     ]
+    tt = (trigger_type_hint or "").strip()
+    if tt:
+        lines.append(f"trigger_type: {tt}")
+    pj = (project_hint or "").strip()
+    if pj:
+        lines.append(f"project: {pj}")
     return "\n".join(lines) + "\n"
 
 
@@ -156,7 +176,13 @@ def run_batch_inprocess(cfg: dict, dry_run: bool = False, regenerate: bool = Fal
     from playwright.sync_api import sync_playwright
     from generator.generate import generate
     from deployer.deploy import _deploy_in_page, load_func_meta
-    from deployer.deploy_login import login, navigate_to_function_list, load_cookies, save_cookies
+    from deployer.deploy_login import (
+        ensure_logged_in_via_agent_or_manual,
+        navigate_to_function_list,
+        dismiss_stale_apl_modals,
+        load_cookies,
+        save_cookies,
+    )
     from feishu_record import (
         list_bitable_pending_records, mark_bitable_record,
         clear_bitable_for_regenerate,
@@ -213,24 +239,28 @@ def run_batch_inprocess(cfg: dict, dry_run: bool = False, regenerate: bool = Fal
                     print("  [批量] 未检测到函数列表，Session 可能失效，重新登录...")
                     has_session = False
         if not has_session:
-            login(page, cfg)
+            if not ensure_logged_in_via_agent_or_manual(page, cfg):
+                raise RuntimeError("登录失败或超时，请重试。")
             save_cookies(context, cfg)
             navigate_to_function_list(page, cfg)
 
         for i, record in enumerate(pending, 1):
-            # 第 2 条起需先回到函数列表（上一条部署后可能停留在编辑器）
-            if i > 1:
-                navigate_to_function_list(page, cfg)
-                time.sleep(1)
+            dismiss_stale_apl_modals(page)
+            navigate_to_function_list(page, cfg)
+            time.sleep(1.2 if i > 1 else 0.8)
 
             record_id = record["record_id"]
             desc = record[FIELD_DESC]
             obj_label = record[FIELD_OBJECT]
+            func_type_hint = record.get("函数类型", "")
+            trigger_hint = (record.get("trigger_type") or "").strip()
+            project_hint = (record.get("项目") or record.get("project") or "").strip()
             tmp_path = None
 
             print(f"\n[批量] ── 第 {i}/{len(pending)} 条 ──")
             print(f"  描述: {desc[:60]}{'...' if len(desc) > 60 else ''}")
             print(f"  对象: {obj_label or '(未填写，将使用默认)'}")
+            print(f"  函数类型: {func_type_hint or '(自动推断)'}  trigger_type: {trigger_hint or '-'}  项目: {project_hint or '-'}")
 
             try:
                 mark_bitable_record(cfg, record_id, STATUS_RUNNING)
@@ -239,7 +269,13 @@ def run_batch_inprocess(cfg: dict, dry_run: bool = False, regenerate: bool = Fal
 
             try:
                 # ── 生成 APL 代码（无需浏览器）──
-                req_content = _build_req_yml(desc, obj_label)
+                req_content = _build_req_yml(
+                    desc,
+                    obj_label,
+                    function_type_hint=func_type_hint,
+                    trigger_type_hint=trigger_hint,
+                    project_hint=project_hint,
+                )
                 req_data = yaml.safe_load(req_content)
 
                 with tempfile.NamedTemporaryFile(
@@ -257,7 +293,9 @@ def run_batch_inprocess(cfg: dict, dry_run: bool = False, regenerate: bool = Fal
                 except Exception as e:
                     print(f"  [批量] 字段抓取跳过: {e}")
                     fields_map = {}
-                apl_file = str(generate(req_data, cfg, fields_map=fields_map))
+                apl_file = str(
+                    generate(req_data, cfg, fields_map=fields_map, req_file_path=tmp_path)
+                )
                 func_name = Path(apl_file).stem
 
                 # ── 部署（复用已有浏览器，回到函数列表即可）──
@@ -279,15 +317,21 @@ def run_batch_inprocess(cfg: dict, dry_run: bool = False, regenerate: bool = Fal
                 func_api_name = meta.get("func_api_name", "")
 
                 if ok:
-                    mark_bitable_record(cfg, record_id, STATUS_OK,
-                                        func_name=func_name, api_name=func_api_name)
+                    fb = f"已生成并部署。系统API: {func_api_name or '见纷享'}。本地文件: {apl_file}"
+                    mark_bitable_record(
+                        cfg, record_id, STATUS_OK,
+                        func_name=func_name, api_name=func_api_name, feedback=fb,
+                    )
                     print(f"  ✅ 成功: {func_name} ({func_api_name})")
                     results.append({
                         "record_id": record_id, "desc": desc[:40],
                         "success": True, "func_name": func_name, "api_name": func_api_name,
                     })
                 else:
-                    mark_bitable_record(cfg, record_id, STATUS_FAIL, error="部署步骤返回失败")
+                    mark_bitable_record(
+                        cfg, record_id, STATUS_FAIL,
+                        error="部署步骤返回失败（编译未通过或浏览器流程中断），请查看 _tools 终端完整日志",
+                    )
                     print(f"  ❌ 失败: 部署步骤返回 False")
                     results.append({
                         "record_id": record_id, "desc": desc[:40],
@@ -308,6 +352,10 @@ def run_batch_inprocess(cfg: dict, dry_run: bool = False, regenerate: bool = Fal
             finally:
                 if tmp_path:
                     Path(tmp_path).unlink(missing_ok=True)
+                try:
+                    dismiss_stale_apl_modals(page)
+                except Exception:
+                    pass
 
         save_cookies(context, cfg)
         browser.close()
@@ -351,9 +399,19 @@ def main():
     parser.add_argument("--headed", action="store_true",
                         help="显示浏览器窗口（默认无头模式，不弹窗）")
     parser.add_argument("--config", default=None, help="config 文件路径")
+    parser.add_argument("--bitable-app-token", dest="bitable_app_token", default=None,
+                        help="覆盖 config 中的多维表格 app_token")
+    parser.add_argument("--bitable-table-id", dest="bitable_table_id", default=None,
+                        help="覆盖 config 中的多维表格 table_id")
     args = parser.parse_args()
 
     cfg = load_config(args.config)
+    if args.bitable_app_token or args.bitable_table_id:
+        cfg.setdefault("feishu", {})
+        if args.bitable_app_token:
+            cfg["feishu"]["bitable_app_token"] = args.bitable_app_token.strip()
+        if args.bitable_table_id:
+            cfg["feishu"]["bitable_table_id"] = args.bitable_table_id.strip()
     results = run_batch(cfg, dry_run=args.dry_run, regenerate=args.regenerate, headed=args.headed)
     summary = print_summary(results)
 

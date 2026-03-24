@@ -19,7 +19,7 @@
 
 ## 二、OpenClaw / FxClaw 相关说明
 
-`_tools` 里包含 **FxClaw agent 的 prompt 配置**：`IDENTITY.md`、`INTRO.md`、`SOUL.md`、`AGENTS.md`、`CLAUDE.md` 等。这些是 agent 的行为定义，**可以分享**。
+`_tools` 里包含 **FxClaw agent 的 prompt 配置**：`IDENTITY.md`、`SOUL.md`、`AGENTS.md`、`CLAUDE.md` 等。这些是 agent 的行为定义，**可以分享**。
 
 **OpenClaw 本身**（飞书连接、LLM 配置）在 **每个人的 ~/.openclaw/openclaw.json**，不在 `_tools` 里。所以：
 - 发给别人的 `_tools` 里：只有 agent 的「身份」和「行为规则」
@@ -77,7 +77,6 @@ _tools/
 ├── deployer/
 ├── tester/
 ├── IDENTITY.md              # FxClaw 身份 ✓
-├── INTRO.md                 # 出场介绍 ✓
 ├── SOUL.md                  # 行为准则 ✓
 ├── AGENTS.md
 ├── CLAUDE.md

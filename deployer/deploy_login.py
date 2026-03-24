@@ -305,6 +305,54 @@ def _handle_sms_code(page):
     print("=" * 55)
 
 
+def wait_for_manual_login(page, cfg: dict, timeout_sec: int = 300) -> bool:
+    """
+    打开登录页，等待用户手动完成登录，检测到离开登录页后返回 True。
+    不使用 Playwright 自动填表，避免验证码、选择器不稳定等问题。
+    """
+    base_url = cfg["fxiaoke"]["base_url"].rstrip("/")
+    login_path = cfg["fxiaoke"].get("login_path", "/XV/UI/login")
+    login_url = base_url + login_path
+    print(f"[部署器] 打开登录页: {login_url}")
+    page.goto(login_url, wait_until="domcontentloaded", timeout=30000)
+    time.sleep(2)
+    print("\n" + "=" * 60)
+    print("  请在浏览器中手动完成登录（账号/密码/验证码等）")
+    print("  登录成功后本程序将自动继续，最长等待 {} 秒".format(timeout_sec))
+    print("=" * 60 + "\n")
+    import time as _time
+    start = _time.time()
+    while _time.time() - start < timeout_sec:
+        try:
+            if login_path not in page.url:
+                try:
+                    if not page.locator(':text("扫码登录"), :text("账号登录"), :text("动态验证码登录")').first.is_visible(timeout=500):
+                        print("  [部署器] 检测到登录成功")
+                        return True
+                except Exception:
+                    pass
+                print("  [部署器] 检测到登录成功")
+                return True
+        except Exception:
+            pass
+        _time.sleep(2)
+    return False
+
+
+def ensure_logged_in_via_agent_or_manual(page, cfg: dict) -> bool:
+    """
+    优先代理登录（调用 GetAdminAgentLoginToken 获取 token URL），失败则等待用户手动登录。
+    不使用 Playwright 自动填表。返回 True 表示已登录。
+    """
+    from deployer.agent_login import login_via_agent, get_session_cookies
+    agent_id = (cfg.get("fxiaoke") or {}).get("agent_login_employee_id", "").strip()
+    if agent_id:
+        cookies = get_session_cookies(cfg)
+        if cookies and login_via_agent(page, cfg, cookies):
+            return True
+    return wait_for_manual_login(page, cfg)
+
+
 def login(page, cfg: dict):
     from deployer import selectors as sel
     base_url = cfg["fxiaoke"]["base_url"].rstrip("/")
@@ -475,6 +523,101 @@ def login(page, cfg: dict):
             )
     screenshot(page, "01_login_success")
     print("[部署器] 登录成功")
+
+
+def dismiss_stale_apl_modals(page) -> None:
+    """关闭仍打开的 APL 弹层、Element 错误提示框、关闭确认，避免批量下一条被遮挡。"""
+    for _ in range(12):
+        acted = False
+        try:
+            msgbox = page.locator(
+                ".el-message-box__wrapper, .fx-message-box__wrapper, [aria-label='错误提示']"
+            ).first
+            if msgbox.is_visible(timeout=350):
+                for sel in (
+                    ".el-message-box__btns .el-button--primary",
+                    "button:has-text(\"确定\")",
+                    ".fx-message-box__wrapper button.el-button--primary",
+                    "button:has-text(\"我知道了\")",
+                ):
+                    try:
+                        page.locator(sel).first.click(timeout=1200)
+                        acted = True
+                        time.sleep(0.4)
+                        break
+                    except Exception:
+                        continue
+                if not acted:
+                    try:
+                        msgbox.press("Enter")
+                        time.sleep(0.3)
+                    except Exception:
+                        pass
+        except Exception:
+            pass
+        try:
+            for hint in ("关闭后设置的函数", "确认要关闭"):
+                box = page.locator(
+                    ".el-message-box__wrapper, .fx-message-box__wrapper"
+                ).filter(has_text=hint).first
+                if box.is_visible(timeout=400):
+                    for sel in (
+                        'button:has-text("确定")',
+                        ".el-message-box__btns .el-button--primary",
+                        'span:has-text("确定")',
+                        'button:has-text("确认")',
+                    ):
+                        try:
+                            box.locator(sel).first.click(timeout=1500)
+                            acted = True
+                            time.sleep(0.5)
+                            break
+                        except Exception:
+                            continue
+                    if acted:
+                        break
+        except Exception:
+            pass
+        try:
+            for hint in ("关闭后设置的函数", "确认要关闭"):
+                pdlg = page.locator(
+                    ".paas-func-dialog, .f-g-dialog.paas-func-dialog-height"
+                ).filter(has_text=hint).first
+                if pdlg.is_visible(timeout=400):
+                    for sel in (
+                        'button:has-text("确定")',
+                        ".el-button--primary",
+                        'span:has-text("确定")',
+                    ):
+                        try:
+                            pdlg.locator(sel).first.click(force=True, timeout=2000)
+                            acted = True
+                            time.sleep(0.5)
+                            break
+                        except Exception:
+                            continue
+                    if acted:
+                        break
+        except Exception:
+            pass
+        try:
+            dlg = page.locator(".paas-func-dialog, .f-g-dialog.paas-func-dialog-height").first
+            if dlg.is_visible(timeout=400):
+                try:
+                    dlg.locator(':text-is("取消")').last.click(force=True, timeout=2000)
+                    acted = True
+                    time.sleep(0.45)
+                except Exception:
+                    pass
+        except Exception:
+            pass
+        try:
+            page.keyboard.press("Escape")
+            time.sleep(0.12)
+        except Exception:
+            pass
+        if not acted:
+            break
 
 
 def navigate_to_function_list(page, cfg: dict):

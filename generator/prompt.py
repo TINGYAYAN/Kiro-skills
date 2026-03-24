@@ -5,11 +5,14 @@ import random
 from pathlib import Path
 
 EXAMPLES_DIR = Path(__file__).parent / "examples"
-# 项目根目录（test拨号/），向上两级
+_TOOLS_DIR = Path(__file__).parent.parent
+# 纷享拉取目录（APL 与 req 所在处，原全仓库扫描会跳过 _tools 导致永远采不到）
+SHAREDEV_PULL_DIR = _TOOLS_DIR / "sharedev_pull"
+# 工作区根（test拨号/）
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 
-# 不扫描的目录
-_SKIP_DIRS = {".git", ".cursor", ".trae", "_tools", "node_modules", "__pycache__", "插件"}
+# 全仓库扫描时跳过 _tools（避免扫到脚本/依赖）；sharedev_pull 由专门函数采集
+_SKIP_DIRS = {".git", ".cursor", ".trae", "_tools", "node_modules", "__pycache__", "插件", ".rag_index"}
 # 不扫描的文件扩展名
 _SKIP_EXTS = {".js", ".vue", ".md", ".json", ".yml", ".yaml", ".txt",
               ".png", ".jpg", ".zip", ".jar", ".DS_Store", ".py",
@@ -20,11 +23,50 @@ _APL_SIGNATURES = ["Fx.object.", "FQLAttribute", "QueryTemplate", "context.data"
                    "UIEvent", "syncArg", "log.error", "log.info", "Fx.global.",
                    "UpdateAttribute", "CreateAttribute", "SelectAttribute"]
 
-RULES = """
-你是纷享销客 PaaS 平台的全栈开发人员，负责用类 Groovy 语言（APL）编写自定义函数。
-参考开发文档：https://www.fxiaoke.com/mob/guide/apl_nc/dist/pages/func-apl/api/ObjectDataAPI/
+OFFICIAL_DOCS = """
+**官方文档（实现与 API 签名以文档为准，示例仅辅助）：**
+- 函数与语法总览：https://www.fxiaoke.com/mob/guide/apl/dist/pages/func-introduce/base/introduce/
+- API / context：https://www.fxiaoke.com/mob/guide/apl/dist/pages/func-apl/api/context/
+- 对象数据 API（新版写法）：https://www.fxiaoke.com/mob/guide/apl_nc/dist/pages/func-apl/api/ObjectDataAPI/
+"""
 
-### ⚠️ 重要：语法限制
+STRONG_CONSTRAINTS = """
+### 强约束（必须遵守，优先级高于任意参考示例中的习惯写法）
+
+1. **规范优先**：以下「语法限制」「平台限制」「正确 API 写法」与上述官方文档一致时，**必须按规范写**；参考示例若与规范冲突，**以规范和文档为准**。
+2. **示例优先级**（user 消息中会分层标注）：**【当前项目】** > **【内置规范样例】** > **【其他项目/历史代码】**。有【当前项目】时，**Fx.object.find/create/update、错误处理三元组、Attribute.builder 的用法优先与当前项目示例对齐**，但不得违反第 1 条中的禁用项与签名要求。
+3. **API 签名**：`find` 必须带 `SelectAttribute`；`create`/`update` 必须为 4 参数且含 `CreateAttribute`/`UpdateAttribute`；禁止文中列出的废弃 2/3 参数写法。
+4. **禁用语法**：禁止 Elvis `?:`、禁止 `? :` 三元、禁止 `?["key"]`；空值与分支一律用 `if`/`else`。
+5. **字段名**：仅使用提供的字段列表中的 API 名；列表没有的用 `TODO_` 占位并注释待确认，禁止用中文当 API 名。
+"""
+
+# 与常见「APL 质量门控」文档对齐的设计自检（注意：不采用该文档中带 Elvis/旧版 API 的示例代码）
+PLATFORM_AND_QUALITY = """
+### 平台上限与质量要点（生成时自检）
+
+| 项 | 建议 |
+|----|------|
+| Fx.object 调用 | 单函数约 ≤300 次；**禁止**在循环里大量逐条 create/update，应优先 **batchCreate / batchUpdate** 等批量能力（**完整签名以官方 ObjectDataAPI 为准**） |
+| Fx.http | 单函数约 ≤50 次 |
+| 执行时间 | 按钮约 20s、流程约 300s、计划任务约 600s；长逻辑须分批、限字段、控制单次数据量 |
+| 内存 | 约 256MB；大表须 `columns` + `limit` 或分页，避免一次加载全表 |
+
+- **闭包**：闭包内不要访问 `owner` / `this` / `delegate`；也**不要**用这三个名字做变量名。
+- **context**：常用 `context.tenantId`、`context.userId`、`context.data`、`context.details`、`context.dataList`、`context.objectIds`、`context.arg`（以函数类型与官方 context 文档为准）。
+- **安全**：必填入参先校验；日志勿输出密码、token、密钥；代码勿硬编码密钥。
+- **数据权限**：需要按数据权限过滤时，在 `SelectAttribute`（等）上按文档启用相应选项（如数据权限过滤）。
+- **用户可见失败**：`log.error` 后通常 `return`；若需向用户抛出可见错误，可按文档使用 `Fx.message.throwException(...)`。
+"""
+
+RULES = (
+    "你是纷享销客 PaaS 平台的全栈开发人员，负责用类 Groovy 语言（APL）编写自定义函数。\n"
+    + OFFICIAL_DOCS.strip()
+    + "\n\n"
+    + STRONG_CONSTRAINTS.strip()
+    + "\n\n"
+    + PLATFORM_AND_QUALITY.strip()
+    + "\n\n"
+    + """### ⚠️ 重要：语法限制
 纷享平台的 Groovy 编译器对某些语法支持不完整，**必须遵守以下规则**：
 1. **禁止使用 Elvis 运算符 `?:`**（会导致编译错误 "expecting ':'"）
 2. **禁止使用三元运算符 `? :`**（包括 `a ? b : c`，平台常报 "expecting ':', found 'if'"）
@@ -32,6 +74,7 @@ RULES = """
 4. 空值处理用 if 语句：`if (!x) x = ""`
 5. **禁止使用 `?["key"]` 安全下标访问**（会导致 "expecting ',', found '@'" 编译错误）
 6. Map 的安全属性访问必须用 `?._id`（点属性）或 `?.get("key")`（方法调用）
+7. **禁止使用 `for` 循环**（平台报 "ForStatements are not allowed"）。遍历一律用 `.each { item -> }` 或 `.each { k, v -> }`
 
 错误示例：
 ```
@@ -60,6 +103,7 @@ if (!id) {
 ### 平台限制与规范
 - 文件后缀 .apl，类 Groovy 语法，有纷享封装限制
 - **日期计算**：禁止使用 `java.util.Date` 和 `Calendar`（平台用 `com.fxiaoke.functions.time.Date` 不兼容）。用 Long 时间戳：`long oneMonthAgo = System.currentTimeMillis() - (30L * 24 * 60 * 60 * 1000)`，QueryOperator.GTE/LTE 传 Long
+- **日期范围查询**：同一字段的范围条件必须用 `QueryOperator.BETWEEN(start, end)`，禁止在同一 Map 里写两个相同 key（如 `"date__c": GTE(...), "date__c": LTE(...)`），后者会覆盖前者导致条件丢失
 - 上下文通过 `context` 获取，数据通过 `context.data.字段API名` 取值（点属性访问，不用下标）
 - 所有 API 调用返回三元组：`def (Boolean error, ResultType result, String errorMessage) = Fx.xxx()`
 - 出错时 `log.error(...)` 后直接 `return`，不嵌套过多 if-else
@@ -169,8 +213,9 @@ def (Boolean err, String val, String msg) = Fx.global.findByApiName("varApiName"
 \`\`\`
 // ----- 1. 取当前记录数据 -----
 String id = context.data["_id"] as String
-log.info("入参: id=" + (id ?: "空"))
-if (!id) { log.info("终止: ID为空"); return }
+if (!id) id = ""
+log.info("入参: id=" + id)
+if (!id) { log.error("终止: ID为空"); return }
 
 // ----- 2. 按条件查询 -----
 log.info("按xxx查询: " + id)
@@ -208,7 +253,8 @@ def (Boolean updateErr, Map updateResult, String updateMsg) = Fx.object.update(.
 if (updateErr) { log.error("更新失败：" + updateMsg) }  // updateMsg 被使用
 else { log.info("更新成功") }  // 确保 updateResult 无需用时逻辑仍完整
 ```
-""".strip()
+"""
+).strip()
 
 FUNCTION_TYPE_HINTS = {
     "流程函数": "绑定到对象的工作流/流程节点，通过 context.data 获取当前记录数据，无需 return。",
@@ -225,7 +271,10 @@ FUNCTION_TYPE_HINTS = {
     ),
     "按钮": "绑定到对象列表/详情的按钮，点击触发，通过 context 获取当前记录。",
     "按钮函数": "同按钮。",
-    "计划任务": "定时触发，无 context.data，需自行查询数据。",
+    "计划任务": (
+        "由平台**定时调度**触发，**没有**流程里的「当前单据」；**禁止**依赖 context.data 作为主数据来源，"
+        "应使用 Fx.object.find 等按条件查询后批量处理；无 return 或按文档返回。"
+    ),
     "校验函数": "在保存前校验，return 校验结果（通过/不通过及提示）。",
     "自增编号": "生成自增编号规则，return 编号字符串。",
     "导入": "数据导入时处理每条记录。",
@@ -304,12 +353,11 @@ def _score_relevance(content: str, filename: str, function_type: str,
     return score
 
 
-def _scan_project_apl_files() -> list:
-    """扫描整个项目，返回所有 APL 文件路径列表。"""
+def _scan_project_apl_files() :
+    """扫描工作区根目录下的 APL（不含 _tools；sharedev_pull 单独采集）。"""
     results = []
     for root, dirs, files in os.walk(PROJECT_ROOT):
         root_path = Path(root)
-        # 跳过无关目录
         dirs[:] = [d for d in dirs if d not in _SKIP_DIRS and not d.startswith(".")]
         for fname in files:
             fpath = root_path / fname
@@ -318,59 +366,148 @@ def _scan_project_apl_files() -> list:
     return results
 
 
-def load_examples(function_type: str, num: int = 6, requirement: str = "") -> list:
-    """从整个项目扫描 APL 文件，按相关性排序后返回 TOP-N 示例。"""
-    # 先加载 examples/ 目录（保证必有的高质量示例）
-    builtin = list(EXAMPLES_DIR.glob("*.apl"))
+def infer_project_name_from_req_path(req_path):
+    """从 `.../sharedev_pull/<项目名>/req.yml` 推断项目名。"""
+    if not req_path:
+        return None
+    try:
+        parts = Path(req_path).resolve().parts
+    except Exception:
+        return None
+    for i, part in enumerate(parts):
+        if part == "sharedev_pull" and i + 1 < len(parts):
+            return parts[i + 1]
+    return None
 
-    # 再扫描全项目
-    project_files = _scan_project_apl_files()
-    # 去重（examples/ 里的文件也会被扫描到，去掉）
-    builtin_names = {f.stem for f in builtin}
-    project_files = [f for f in project_files
-                     if f not in builtin and f.stem not in builtin_names]
 
-    all_files = builtin + project_files
+def _current_project_apl_paths(project_name) :
+    if not project_name or not str(project_name).strip():
+        return []
+    d = SHAREDEV_PULL_DIR / str(project_name).strip()
+    if not d.is_dir():
+        return []
+    return [p for p in d.rglob("*.apl") if p.is_file()]
 
-    # 读取内容并打分
+
+def _other_sharedev_apl_paths(exclude_project) :
+    out = []
+    if not SHAREDEV_PULL_DIR.is_dir():
+        return out
+    ex = (exclude_project or "").strip()
+    for sub in sorted(SHAREDEV_PULL_DIR.iterdir()):
+        if not sub.is_dir() or sub.name.startswith("."):
+            continue
+        if ex and sub.name == ex:
+            continue
+        out.extend(p for p in sub.rglob("*.apl") if p.is_file())
+    return out
+
+
+def _score_and_sort_files(files: list, function_type: str, requirement: str, bonus: int) :
     candidates = []
-    for f in all_files:
+    for f in files:
         try:
             content = f.read_text(encoding="utf-8")
-            # 过滤太短（< 100 字符）或太长（> 8000 字符）的文件
             if len(content) < 100 or len(content) > 8000:
                 continue
-            score = _score_relevance(content, f.stem, function_type, requirement)
+            score = _score_relevance(content, f.stem, function_type, requirement) + bonus
             candidates.append((score, f, content))
         except Exception:
             continue
-
-    # 按分数降序，分数相同随机打乱保持多样性
     random.shuffle(candidates)
     candidates.sort(key=lambda x: x[0], reverse=True)
+    return candidates
 
-    # 取 TOP-N，但每个目录（客户）最多取 2 个，保证多样性
+
+def _pick_tier(candidates: list, limit: int, per_dir_max: int, tier_label: str,
+               used_stems: set) :
     seen_dirs: dict = {}
-    selected = []
+    out = []
     for score, f, content in candidates:
-        dir_key = f.parent.name
-        if seen_dirs.get(dir_key, 0) >= 2:
+        if f.stem in used_stems:
             continue
-        seen_dirs[dir_key] = seen_dirs.get(dir_key, 0) + 1
-        selected.append({"filename": f.stem, "content": content})
-        if len(selected) >= num:
+        dk = f.parent.name
+        if seen_dirs.get(dk, 0) >= per_dir_max:
+            continue
+        seen_dirs[dk] = seen_dirs.get(dk, 0) + 1
+        used_stems.add(f.stem)
+        out.append({"filename": f.stem, "content": content, "tier_label": tier_label})
+        if len(out) >= limit:
             break
+    return out
 
-    # 如果数量不足，放宽目录限制补足
+
+def load_examples(
+    function_type: str,
+    num: int = 6,
+    requirement: str = "",
+    project_name = None,
+    req_path = None,
+) :
+    """分层选取 few-shot：当前项目 sharedev_pull → 内置 examples → 其他项目 sharedev_pull → 仓库其余 .apl。"""
+    proj = (project_name or "").strip() or None
+    if not proj:
+        proj = infer_project_name_from_req_path(req_path)
+
+    builtin = list(EXAMPLES_DIR.glob("*.apl"))
+    builtin_paths = {f.resolve() for f in builtin}
+
+    tier1_files = _current_project_apl_paths(proj)
+    tier1_files = [f for f in tier1_files if f.resolve() not in builtin_paths]
+
+    tier3_files = _other_sharedev_apl_paths(proj)
+    tier3_files = [f for f in tier3_files if f.resolve() not in builtin_paths]
+
+    known = builtin_paths | {f.resolve() for f in tier1_files} | {f.resolve() for f in tier3_files}
+    tier4_files = [f for f in _scan_project_apl_files() if f.resolve() not in known]
+
+    used_stems: set = set()
+    selected: list = []
+    remain = num
+
+    t1 = _score_and_sort_files(tier1_files, function_type, requirement, bonus=30)
+    if t1 and remain > 0:
+        cap1 = min(remain, max(2, (num * 2 + 2) // 3))
+        selected.extend(_pick_tier(t1, cap1, 8, "【当前项目】", used_stems))
+        remain = num - len(selected)
+
+    t2 = _score_and_sort_files(builtin, function_type, requirement, bonus=15)
+    if remain > 0 and t2:
+        cap2 = min(remain, max(1, min(2, num)))
+        selected.extend(_pick_tier(t2, cap2, 6, "【内置规范样例】", used_stems))
+        remain = num - len(selected)
+
+    t34 = _score_and_sort_files(tier3_files + tier4_files, function_type, requirement, bonus=0)
+    if remain > 0 and t34:
+        selected.extend(_pick_tier(t34, remain, 2, "【其他项目/历史代码】", used_stems))
+        remain = num - len(selected)
+
     if len(selected) < num:
-        existing_names = {e["filename"] for e in selected}
-        for score, f, content in candidates:
-            if f.stem not in existing_names:
-                selected.append({"filename": f.stem, "content": content})
-                if len(selected) >= num:
-                    break
+        merged = []
+        seen_path: set = set()
+        for pool in (t1, t2, t34):
+            for row in pool:
+                p = row[1].resolve()
+                if p not in seen_path:
+                    seen_path.add(p)
+                    merged.append(row)
+        merged.sort(key=lambda x: x[0], reverse=True)
+        for score, f, content in merged:
+            if len(selected) >= num:
+                break
+            if f.stem in used_stems:
+                continue
+            used_stems.add(f.stem)
+            selected.append({
+                "filename": f.stem,
+                "content": content,
+                "tier_label": "【其他项目/历史代码】",
+            })
 
-    return selected
+    for e in selected:
+        e.setdefault("tier_label", "【参考示例】")
+
+    return selected[:num]
 
 
 _SCOPE_RULE_EXTRA = """
@@ -417,12 +554,23 @@ return [:]
 - 若字段上下文未提供各选项的存储值，在代码顶部加：`// 待确认：以下选项值需在平台「对象管理-{绑定对象}-字段-{字段名}-选项」中查看真实存储值并替换`，用显示名作占位
 """
 
+_SCHEDULED_TASK_EXTRA = """
+### ⚠️ 计划任务函数（与流程函数严格区分，禁止混写）
+
+- **无当前记录**：不是流程节点函数，**没有**「流程上下文里的当前数据」；**禁止**把 `context.data` 当作必有的主对象行（除非文档明确计划任务下仍有某种 context，以文档为准；默认按**无 context.data** 写）。
+- **正确模式**：开头用 `log.info` 标记任务开始 → `Fx.object.find`（带 `SelectAttribute`）按时间/状态等拉取待处理列表 → 遍历或批量 API 处理 → 结束日志。
+- **禁止**：按「新建后/审批通过后」单条触发来写；不要写「取当前记录 `_id`」这类流程专属逻辑，除非需求明确是查库得到的一条。
+- **性能**：条数多时用批量接口、控制 `limit`/`columns`，遵守平台上限（见上文「平台上限与质量要点」）。
+"""
+
 
 def build_system_prompt(function_type: str) -> str:
     type_hint = FUNCTION_TYPE_HINTS.get(function_type, f"按需求实现，遵循平台 API 规范。")
     base = f"{RULES}\n\n### 当前函数类型\n{function_type}：{type_hint}"
     if function_type == "范围规则":
         base += _SCOPE_RULE_EXTRA
+    if function_type == "计划任务":
+        base += _SCHEDULED_TASK_EXTRA
     return base
 
 
@@ -439,7 +587,8 @@ def build_user_prompt(
         content = ex["content"]
         if len(content) > 3000:
             content = content[:3000] + "\n// ... (已截断)"
-        shots += f"\n\n--- 示例：{ex['filename']} ---\n```groovy\n{content}\n```"
+        tag = ex.get("tier_label") or "【参考示例】"
+        shots += f"\n\n--- {tag} 示例：{ex['filename']} ---\n```groovy\n{content}\n```"
 
     if fields_context:
         fields_section = f"\n{fields_context}\n"
@@ -452,6 +601,14 @@ def build_user_prompt(
             "\n## 对象字段 API 名\n"
             "（未提供真实字段信息，请根据需求和命名惯例合理推断。"
             "自定义字段用 __c 后缀，标准字段如 _id / name 不加后缀）\n"
+        )
+
+    type_guard = ""
+    if function_type == "计划任务":
+        type_guard = (
+            "\n⚠️ **类型硬约束**：必须生成 **计划任务** 代码（定时批处理）。"
+            "**禁止**写成流程函数：不要以 `context.data` 的当前单据为主逻辑入口；"
+            "应以 **FQL 查询** 得到数据集再处理。\n"
         )
 
     if function_type == "范围规则":
@@ -470,8 +627,16 @@ def build_user_prompt(
 - **必须**按逻辑步骤加分段注释（// ----- 1. 步骤简述 -----）并在关键节点打 log.info/log.error，且所有日志带 [业务] 前缀，便于根据运行日志排查测试
 - 遵循上述规范，变量命名清晰"""
 
-    return f"""请根据以下业务需求生成一个纷享销客 APL 函数。
+    if function_type == "计划任务":
+        output_requirements = """\
+- 只输出纯代码，不要任何 markdown 代码块标记（不要 ```groovy 等）
+- 不要包含文件头部注释（/**...*/），头部会单独生成
+- **必须**符合计划任务：主逻辑从 **查询** 开始，**不要**默认使用 context.data 作为单条当前记录入口
+- **必须**按逻辑步骤加分段注释与带 [业务] 前缀的 log.info/log.error
+- 遵循上述规范，变量命名清晰"""
 
+    return f"""请根据以下业务需求生成一个纷享销客 APL 函数。
+{type_guard}
 ## 业务需求
 {requirement}
 
@@ -480,7 +645,11 @@ def build_user_prompt(
 - 绑定对象 API 名：{object_api}
 - 绑定对象中文名：{object_label}
 {fields_section}
-## 参考示例（仅作风格参考，不要照搬字段名）{shots}
+## 参考示例（按优先级排序：当前项目 > 内置样例 > 其他/历史）
+
+**读示例顺序**：先完整阅读【当前项目】与【内置规范样例】中的 `Fx.object` / `FQLAttribute` / `*Attribute.builder` 写法，再视需要参考【其他项目/历史代码】。生成结果必须与系统 prompt 中的强约束及官方文档一致；示例中若有旧写法与强约束冲突，**以强约束为准**。
+
+仅作风格与调用方式参考，**禁止照搬字段 API 名**（字段必须来自上方字段表或 TODO 占位）。{shots}
 
 ## 输出要求
 {output_requirements}

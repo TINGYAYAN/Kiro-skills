@@ -96,7 +96,7 @@ def agent_find_datasource_dropdown(page_or_frame, cfg: dict) -> Optional[dict]:
         return {"found": False}
 
 
-def agent_read_datasource_options(page_or_frame, cfg: dict) -> list:
+def agent_read_datasource_options(page_or_frame, cfg: dict) :
     """截图后让 LLM 读取当前已展开的下拉选项列表。
     返回 ["选项1", "选项2", ...] 或空列表。
     """
@@ -225,7 +225,7 @@ def agent_select_datasource(page_or_frame, cfg: dict, option_idx: int = 0) -> st
     return ""
 
 
-def agent_open_datasource_dropdown(page_or_frame, cfg: dict) -> list:
+def agent_open_datasource_dropdown(page_or_frame, cfg: dict) :
     """找到数据源下拉 → 点开 → 返回选项列表（不选择）。"""
     loc = agent_find_datasource_dropdown(page_or_frame, cfg)
     if not loc or not loc.get("found"):

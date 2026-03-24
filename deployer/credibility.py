@@ -34,7 +34,7 @@ def _extract_field_apis_from_code(code: str) -> set[str]:
     return {a for a in apis if a not in skip and not a.endswith("Obj")}
 
 
-def check_credibility(apl_file: str, fields_map: dict, req: dict = None) -> dict:
+def check_credibility(apl_file: str, fields_map: dict, req: dict = None) :
     """校验代码中使用的字段是否在字段缓存中。
     返回 {credible: bool, used_known: list, used_unknown: list, summary: str}"""
     if not Path(apl_file).exists():

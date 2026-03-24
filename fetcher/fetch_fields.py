@@ -5,9 +5,8 @@
 缓存到本地 .fields_cache/ 目录，供代码生成器使用。
 
 缓存按项目分目录（config.fxiaoke.project_name）：
-  .fields_cache/硅基流动/tenant__c.yml
-  .fields_cache/硅基流动/AccountObj.yml
-未配置项目名时使用根目录 .fields_cache/*.yml（兼容旧结构）。
+  有项目名：sharedev_pull/硅基流动/.fields_cache/tenant__c.yml
+  未配置项目名：.fields_cache/*.yml（兼容旧结构）
 
 用法：
   # 抓取主对象字段（项目名从 config 读取）
@@ -31,13 +30,15 @@ import yaml
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from utils import load_config, infer_related_objects_from_requirement, OBJECT_LABEL_TO_API
 
-CACHE_DIR = Path(__file__).parent.parent / ".fields_cache"
+_TOOLS = Path(__file__).parent.parent
+CACHE_DIR = _TOOLS / ".fields_cache"
+PULL_DIR = _TOOLS / "sharedev_pull"
 
 
 def _get_project_cache_dir(project_name: str | None) -> Path:
-    """按项目分目录：.fields_cache/项目名/，未配置项目则用根目录。"""
+    """按项目分目录：有项目名时用 sharedev_pull/{项目}/.fields_cache/，否则用 .fields_cache/。"""
     if project_name and project_name.strip():
-        return CACHE_DIR / project_name.strip()
+        return PULL_DIR / project_name.strip() / ".fields_cache"
     return CACHE_DIR
 
 
@@ -64,11 +65,14 @@ def get_supplement_path(object_api: str, project_name: str | None = None) -> Pat
 
 def load_cache(object_api: str, project_name: str | None = None) -> list | None:
     """读取缓存，返回字段列表；未命中返回 None。
-    若配置了 project_name，先查项目目录，再回退到根目录。
+    若配置了 project_name，先查 sharedev_pull/{项目}/.fields_cache/，再查旧 .fields_cache/{项目}/。
     若存在 {object_api}_options.yml，将其中的选项合并到对应字段。
     若主缓存不存在但存在 _supplement.yml，则仅用 supplement 作为字段来源。"""
-    # 优先项目目录
     path = get_cache_path(object_api, project_name)
+    if not path.exists() and project_name and project_name.strip():
+        old_path = CACHE_DIR / project_name.strip() / f"{object_api}.yml"
+        if old_path.exists():
+            path = old_path
     if path.exists():
         data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
         fields = data.get("fields") or []
@@ -86,7 +90,8 @@ def load_cache(object_api: str, project_name: str | None = None) -> list | None:
         if not fields:
             supp_path = get_supplement_path(object_api, project_name)
             if not supp_path.exists() and project_name and project_name.strip():
-                supp_path = get_supplement_path(object_api, None)
+                old_supp = CACHE_DIR / project_name.strip() / f"{object_api}_supplement.yml"
+                supp_path = old_supp if old_supp.exists() else get_supplement_path(object_api, None)
             if supp_path.exists():
                 supp_data = yaml.safe_load(supp_path.read_text(encoding="utf-8")) or {}
                 add_list = supp_data.get("add_fields") or supp_data.get("fields") or []
@@ -99,7 +104,11 @@ def load_cache(object_api: str, project_name: str | None = None) -> list | None:
 
     opts_path = get_options_override_path(object_api, project_name)
     if not opts_path.exists() and project_name and project_name.strip():
-        opts_path = get_options_override_path(object_api, None)
+        old_opts = CACHE_DIR / project_name.strip() / f"{object_api}_options.yml"
+        if old_opts.exists():
+            opts_path = old_opts
+        else:
+            opts_path = get_options_override_path(object_api, None)
     if opts_path.exists():
         overrides = yaml.safe_load(opts_path.read_text(encoding="utf-8")) or {}
         api_to_opts = {k: v for k, v in overrides.items() if isinstance(v, list)}
@@ -114,7 +123,11 @@ def load_cache(object_api: str, project_name: str | None = None) -> list | None:
 
     supp_path = get_supplement_path(object_api, project_name)
     if not supp_path.exists() and project_name and project_name.strip():
-        supp_path = get_supplement_path(object_api, None)
+        old_supp = CACHE_DIR / project_name.strip() / f"{object_api}_supplement.yml"
+        if old_supp.exists():
+            supp_path = old_supp
+        else:
+            supp_path = get_supplement_path(object_api, None)
     if supp_path.exists():
         supp_data = yaml.safe_load(supp_path.read_text(encoding="utf-8")) or {}
         add_list = supp_data.get("add_fields") or supp_data.get("fields") or []
@@ -379,6 +392,30 @@ def _fill_temp_form(page, object_label: str, namespace: str, cfg: dict):
     time.sleep(0.2)
 
 
+def _dismiss_blocking_overlays(page) -> None:
+    """关闭可能挡住「新建APL函数」的全屏遮罩（如 ui-mask）。"""
+    try:
+        page.keyboard.press("Escape")
+        time.sleep(0.35)
+    except Exception:
+        pass
+    try:
+        page.evaluate("""
+            () => {
+                document.querySelectorAll('.ui-mask, .el-overlay-dialog, .v-modal').forEach(el => {
+                    try {
+                        el.style.display = 'none';
+                        el.style.pointerEvents = 'none';
+                        el.style.visibility = 'hidden';
+                    } catch (e) {}
+                });
+            }
+        """)
+    except Exception:
+        pass
+    time.sleep(0.2)
+
+
 # ── 在已有 page 中抓取（复用浏览器，供批量模式等）──────────────────────────────
 
 def _fetch_fields_in_page(page, object_label: str, namespace: str, cfg: dict) -> list:
@@ -386,8 +423,17 @@ def _fetch_fields_in_page(page, object_label: str, namespace: str, cfg: dict) ->
     fields = []
     try:
         print("  [字段抓取] 在已有页面中打开「新建APL函数」...")
+        try:
+            from deployer.deploy_login import dismiss_stale_apl_modals
+            dismiss_stale_apl_modals(page)
+        except Exception:
+            pass
         page.wait_for_selector(':text("新建APL函数")', timeout=15000)
-        page.locator(':text("新建APL函数")').first.click()
+        _dismiss_blocking_overlays(page)
+        try:
+            page.locator(':text("新建APL函数")').first.click(timeout=8000)
+        except Exception:
+            page.locator(':text("新建APL函数")').first.click(force=True, timeout=10000)
         page.wait_for_selector(':text("新建自定义APL函数")', timeout=10000)
         time.sleep(0.5)
 
@@ -465,12 +511,13 @@ def _browser_fetch(object_api: str, object_label: str, namespace: str, cfg: dict
         page.goto(target_url, wait_until="domcontentloaded", timeout=60000)
         time.sleep(3)
 
-        # 如果 session 过期，重新登录
-        login_path = cfg["fxiaoke"].get("login_path", "/login")
+        # 如果 session 过期，优先代理登录，否则等待手动登录
+        login_path = cfg["fxiaoke"].get("login_path", "/XV/UI/login")
         if login_path in page.url:
-            print("  [字段抓取] Session 过期，重新登录...")
-            from deployer.deploy import login
-            login(page, cfg)
+            print("  [字段抓取] Session 过期，重新登录（代理登录或手动登录）...")
+            from deployer.deploy_login import ensure_logged_in_via_agent_or_manual, save_cookies
+            if ensure_logged_in_via_agent_or_manual(page, cfg):
+                save_cookies(ctx, cfg)
             page.goto(target_url, wait_until="domcontentloaded", timeout=60000)
             time.sleep(3)
 
@@ -776,6 +823,49 @@ def _openapi_fetch_fields(object_api: str, cfg: dict) -> list:
     return []
 
 
+def _sharedev_fetch_fields(object_api: str, cfg: dict, project_name: str | None = None) -> list | None:
+    """通过 ShareDev 证书 API 拉取对象字段，返回 [{label, api}]。需配置开发者证书（cert.conf 或 sharedev_domain/sharedev_certificate）。
+    返回 None 表示未配置证书（调用方可据此提示用户）；返回 [] 表示 API 异常。"""
+    try:
+        from fetcher.sharedev_client import ShareDevClient, load_sharedev_config
+        _TOOLS = Path(__file__).parent.parent
+        domain, cert = load_sharedev_config(project_root=_TOOLS.parent, project_name=project_name)
+        client = ShareDevClient(domain, cert)
+        describe = client.get_object_describe(object_api)
+    except ValueError as e:
+        print(f"  [字段抓取] ShareDev 未配置: {e}")
+        return None  # 未配置证书，需提示用户
+    except Exception as e:
+        print(f"  [字段抓取] ShareDev 拉取失败: {e}")
+        return []
+
+    inner = describe.get("describe") if isinstance(describe.get("describe"), dict) else None
+    fields_raw = (inner or describe).get("fields") if (inner or describe) else {}
+    fields_raw = fields_raw or {}
+    if isinstance(fields_raw, list):
+        items = fields_raw
+    else:
+        items = list(fields_raw.values()) if isinstance(fields_raw, dict) else []
+    fields = []
+    for f in items:
+        if isinstance(f, dict):
+            api = f.get("api_name") or f.get("fieldName") or f.get("api") or ""
+            label = f.get("label") or f.get("fieldLabel") or f.get("name") or api
+        else:
+            continue
+        if not api:
+            continue
+        item = {"label": str(label), "api": str(api)}
+        opts = f.get("options") or f.get("picklistValues") or []
+        if opts:
+            item["options"] = [{"label": str(o.get("label", o.get("val", ""))), "value": str(o.get("val", o.get("value", "")))}
+                              for o in opts if isinstance(o, dict)]
+        fields.append(item)
+    if fields:
+        print(f"  [字段抓取] ShareDev 获取到 {len(fields)} 个字段（{object_api}）")
+    return fields
+
+
 # ── 公开接口 ──────────────────────────────────────────────────────────────────
 
 def _project_from_cfg(cfg: dict) -> str | None:
@@ -802,7 +892,15 @@ def fetch_fields(object_api: str, object_label: str, cfg: dict,
 
     print(f"  [字段抓取] 开始从平台抓取 {object_api}（{object_label}）的字段...")
 
-    # 首选：OpenAPI（不需要登录，速度快）
+    # 首选：ShareDev 证书（无需浏览器，最准确。需配置 cert.conf 或 sharedev_domain/sharedev_certificate）
+    sharedev_result = _sharedev_fetch_fields(object_api, cfg, proj)
+    if sharedev_result is not None and sharedev_result:
+        save_cache(object_api, sharedev_result, proj)
+        return sharedev_result
+    if sharedev_result is None:
+        print("  [字段抓取] 为获得准确字段，请配置 ShareDev 开发者证书（cert.conf 或 config 的 sharedev_domain/sharedev_certificate），否则将用浏览器/OpenAPI 抓取（可能不准确）")
+
+    # 备选：OpenAPI
     oa_cfg = cfg.get("openapi") or {}
     if oa_cfg.get("app_id") and oa_cfg.get("app_secret") and oa_cfg.get("permanent_code"):
         fields = _openapi_fetch_fields(object_api, cfg)
@@ -845,7 +943,7 @@ def fetch_fields_for_req(req: dict, cfg: dict, force_refresh: bool = False, page
     # 项目名：req.yml > config.fxiaoke.project_name
     proj = req.get("project") or _project_from_cfg(cfg) or None
     if proj:
-        print(f"  [字段抓取] 项目: {proj}（缓存目录: .fields_cache/{proj}/）")
+        print(f"  [字段抓取] 项目: {proj}（缓存目录: sharedev_pull/{proj}/.fields_cache/）")
 
     # 主对象
     obj_api = req.get("object_api", "")
@@ -880,8 +978,43 @@ def fetch_fields_for_req(req: dict, cfg: dict, force_refresh: bool = False, page
     return result
 
 
-def build_fields_context(fields_map: dict, req: dict) -> str:
-    """将字段映射转换为 LLM prompt 的上下文文本段。"""
+def _prioritize_fields_for_prompt(fields: list, requirement: str, max_n: int) -> tuple[list, bool]:
+    """字段过多时按与需求文本相关性截取，避免 LLM 请求体过大导致网关 500。"""
+    if not fields or len(fields) <= max_n:
+        return (fields, False)
+    req = requirement or ""
+    picked_ids: set[str] = set()
+    ordered: list = []
+    for f in fields:
+        api = (f.get("api") or "").strip()
+        if api in ("_id", "name", "owner", "create_time", "last_modified_time"):
+            if api not in picked_ids:
+                ordered.append(f)
+                picked_ids.add(api)
+    rest = [f for f in fields if (f.get("api") or "").strip() not in picked_ids]
+
+    def score(f):
+        s = 0
+        lab = f.get("label") or ""
+        api = f.get("api") or ""
+        if lab and len(lab) > 1 and lab in req:
+            s += 8
+        if api and api in req:
+            s += 4
+        for w in req.replace("，", " ").replace("。", " ").split():
+            if len(w) >= 2 and w in lab:
+                s += 2
+        return s
+
+    rest.sort(key=score, reverse=True)
+    need = max_n - len(ordered)
+    if need > 0:
+        ordered.extend(rest[:need])
+    return (ordered, True)
+
+
+def build_fields_context(fields_map: dict, req: dict, max_fields_per_object: int = 72) -> str:
+    """将字段映射转换为 LLM prompt 的上下文文本段。单对象默认最多 72 个字段，超出按需求关键词优先。"""
     if not fields_map:
         return ""
     sections = [
@@ -900,9 +1033,18 @@ def build_fields_context(fields_map: dict, req: dict) -> str:
         if obj_api not in obj_labels:
             obj_labels[obj_api] = reverse.get(obj_api, obj_api)
 
+    req_text = req.get("requirement") or ""
     for obj_api, fields in fields_map.items():
         label = obj_labels.get(obj_api, obj_api)
-        sections.append(fields_to_prompt_text(obj_api, label, fields))
+        trimmed, truncated = _prioritize_fields_for_prompt(
+            list(fields), str(req_text), max_fields_per_object
+        )
+        if truncated:
+            sections.append(
+                f"> **{label}（{obj_api}）** 共 {len(fields)} 个字段，以下仅列 {len(trimmed)} 个（与需求关键词优先匹配 + 常用主键字段）；"
+                "其余请到纷享对象管理核对。\n"
+            )
+        sections.append(fields_to_prompt_text(obj_api, label, trimmed))
         sections.append("")
 
     return "\n".join(sections)

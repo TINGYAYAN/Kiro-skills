@@ -129,15 +129,31 @@ def call_llm(system: str, user: str, cfg: dict) -> str:
         raise ValueError(f"不支持的 LLM provider: {provider}（可选: anthropic | openai | manual）")
 
 
-def generate(req: dict, cfg: dict, fields_map: dict = None) -> Path:
+def generate(
+    req: dict,
+    cfg: dict,
+    fields_map: dict = None,
+    req_file_path = None,
+) -> Path:
     requirement = req["requirement"]
     object_api = req["object_api"]
     object_label = req["object_label"]
+    from utils import (
+        FUNCTION_TYPE_ALIASES,
+        infer_function_type_into_req_if_missing,
+        sync_function_type_from_trigger_type,
+    )
+
+    sync_function_type_from_trigger_type(req)
+    infer_function_type_into_req_if_missing(req)
     function_type = req.get("function_type", "流程函数")
-    from utils import FUNCTION_TYPE_ALIASES
     ft_key = str(function_type).strip().lower()
     function_type = FUNCTION_TYPE_ALIASES.get(ft_key, function_type)
     req["function_type"] = function_type
+    if function_type == "计划任务":
+        ns0 = (req.get("namespace") or "").strip()
+        if ns0 in ("流程", "工作流"):
+            req["namespace"] = "计划任务"
     # 仅当用户未显式指定流程时，才根据需求文本推断范围规则（避免覆盖用户明确的流程函数）
     req_text = (requirement or "") if isinstance(requirement, str) else str(requirement or "")
     if "范围规则" in req_text and function_type not in ("流程函数", "流程", "flow"):
@@ -172,24 +188,55 @@ def generate(req: dict, cfg: dict, fields_map: dict = None) -> Path:
     output_dir = req.get("output_dir") or cfg["generator"].get("output_dir", ".")
     output_file = req.get("output_file") or code_name
 
+    from fetcher.fetch_fields import _project_from_cfg
+    from generator.prompt import infer_project_name_from_req_path
+
+    proj = (req.get("project") or req.get("project_name") or "").strip() or None
+    if not proj:
+        proj = _project_from_cfg(cfg)
+    if not proj and req_file_path:
+        proj = infer_project_name_from_req_path(req_file_path)
+
     num_examples = int(cfg["generator"].get("num_examples", 6))
     rag_enabled = (cfg.get("rag") or {}).get("enabled", False)
     if rag_enabled:
         try:
             from rag.apl_examples import retrieve_apl_examples
-            examples = retrieve_apl_examples(requirement, function_type, cfg, num=num_examples)
+            examples = retrieve_apl_examples(
+                requirement,
+                function_type,
+                cfg,
+                num=num_examples,
+                project_name=proj,
+                req_path=req_file_path,
+            )
         except Exception as e:
             print(f"[生成器] RAG 检索失败，回退到规则检索: {e}")
-            examples = load_examples(function_type, num_examples, requirement=requirement)
+            examples = load_examples(
+                function_type,
+                num_examples,
+                requirement=requirement,
+                project_name=proj,
+                req_path=req_file_path,
+            )
     else:
-        examples = load_examples(function_type, num_examples, requirement=requirement)
+        examples = load_examples(
+            function_type,
+            num_examples,
+            requirement=requirement,
+            project_name=proj,
+            req_path=req_file_path,
+        )
 
     # 构建字段上下文（若有缓存字段信息）
     fields_context = ""
     if fields_map:
         try:
             from fetcher.fetch_fields import build_fields_context
-            fields_context = build_fields_context(fields_map, req)
+            max_fields = int((cfg.get("generator") or {}).get("max_fields_in_prompt", 72))
+            fields_context = build_fields_context(
+                fields_map, req, max_fields_per_object=max_fields
+            )
             if fields_context:
                 total = sum(len(v) for v in fields_map.values())
                 print(f"[生成器] 已加载字段上下文：{len(fields_map)} 个对象，{total} 个字段")
@@ -197,9 +244,26 @@ def generate(req: dict, cfg: dict, fields_map: dict = None) -> Path:
             print(f"[生成器] 字段上下文构建失败（跳过）: {e}")
 
     print(f"[生成器] 函数类型: {function_type}，绑定对象: {object_api}")
-    print(f"[生成器] 加载 {len(examples)} 个 few-shot 示例")
+    from collections import Counter
+
+    tier_counts = Counter(ex.get("tier_label", "?") for ex in examples)
+    print(f"[生成器] 加载 {len(examples)} 个 few-shot 示例，分层: {dict(tier_counts)}")
 
     system_prompt = build_system_prompt(function_type)
+    # 注入历史修复记忆，让生成阶段也能避免已知错误
+    try:
+        from deployer.memory_store import _load_memory
+        mem_data = _load_memory()
+        entries = [e for e in mem_data.get("entries", []) if e.get("fix_snippet")]
+        if entries:
+            lines = ["\n## 历史高频错误（生成时务必避免）\n"]
+            for e in sorted(entries, key=lambda x: x.get("count", 1), reverse=True)[:5]:
+                lines.append(f"- [{e['type']}] {e.get('fix_rule', '')} (出现{e.get('count',1)}次)")
+                if e.get("fix_snippet"):
+                    lines.append(f"  正确写法示例：{e['fix_snippet'][:150]}")
+            system_prompt = system_prompt.rstrip() + "\n" + "\n".join(lines)
+    except Exception:
+        pass
     user_prompt = build_user_prompt(requirement, object_api, object_label, function_type,
                                     examples, fields_context=fields_context)
 
@@ -277,7 +341,12 @@ def main():
         if args.output_file:
             req["output_file"] = args.output_file
 
-    out_path = generate(req, cfg)
+    out_path = generate(
+        req,
+        cfg,
+        fields_map=None,
+        req_file_path=args.req if args.req else None,
+    )
     print(f"[生成器] 完成 → {out_path}")
     return str(out_path)
 

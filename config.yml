@@ -14,6 +14,19 @@ fxiaoke:
   password: ""
   # 函数管理页面路径（相对于 base_url）；不同租户可能不同，登录后复制地址栏路径
   function_path: "/XV/UI/manage#crmmanage/=/module-myfunction"
+  # ShareDev 证书认证（可选，用于免密码拉取对象/函数）
+  # sharedev_domain: "https://www.fxiaoke.com"
+  # sharedev_certificate: "开发者证书内容"
+  # 多项目时可用 sharedev_projects 或 cert.conf 的 [sharedev.项目名]
+  # sharedev_projects:
+  #   硅基流动: { domain: "https://www.fxiaoke.com", certificate: "证书A" }
+  #   中电长城: { domain: "https://www.fxiaoke.com", certificate: "证书B" }
+  # 代理登录（推荐）：每次调用 GetAdminAgentLoginToken 获取 token URL 登录，避免 Playwright 自动填表不稳定。
+  # 需先有一次手动登录以保存 session 到 session_{project}.json。
+  # agent_login_employee_id: "1001"
+  # 数据源选择：部署时按名称匹配或按索引选。datasource_prefer 按名称匹配（如「其他数据源」），datasource_index 为 0-based
+  # datasource_prefer: "其他数据源"
+  # datasource_index: 1
 
 openapi:
   # 企业标识（纷享销客开放平台 appId）
@@ -48,6 +61,8 @@ rag:
 generator:
   # few-shot 示例数量（RAG 启用时为语义检索 top-k，否则为规则排序 top-n）
   num_examples: 3
+  # 单对象写入 LLM 的字段行数上限（过大易触发代理/网关「构建请求失败」）
+  max_fields_in_prompt: 72
   # 生成文件默认输出目录（相对于项目根目录 test拨号/）
   output_dir: "."
   # 默认作者名

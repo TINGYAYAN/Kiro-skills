@@ -1,0 +1,10 @@
+# ShareDev 证书配置示例
+# 复制为项目根目录的 cert.conf 并填入真实值
+
+# [sharedev] 节名不需修改
+# domain: 企业域名（正式租户用 https://www.fxiaoke.com，测试/灰度用 https://www.ceshi112.com）
+# cert: 开发者证书（从租户后台「开发者证书」申请，粘贴到等号右侧）
+
+[sharedev]
+domain = https://www.fxiaoke.com
+cert = paste_your_cert_here

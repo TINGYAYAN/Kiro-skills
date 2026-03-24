@@ -16,12 +16,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from deployer import selectors as sel
 from deployer.deploy_login import (
-    login,
     navigate_to_function_list,
     get_frame,
     save_cookies,
     load_cookies,
     screenshot,
+    wait_for_manual_login,
+    dismiss_stale_apl_modals,
 )
 from utils import load_config
 
@@ -243,6 +244,12 @@ def create_function(frame, func_name: str, apl_code: str,
                     req: dict = None):
     """新建函数：填写第一步表单 → 下一步 → 填写代码 → 保存。"""
     print(f"[部署器] 新建函数: {func_name}")
+
+    root = getattr(frame, "page", None) or frame
+    try:
+        dismiss_stale_apl_modals(root)
+    except Exception:
+        pass
 
     # 点击「新建APL函数」按钮（尝试多个选择器，按钮可能在页面下方需滚动）
     frame.evaluate("window.scrollTo(0, 0)")
@@ -533,7 +540,7 @@ def _screenshot_frame(frame, name: str):
         pass
 
 
-def _scrape_fields_from_editor(frame) -> list:
+def _scrape_fields_from_editor(frame) :
     """在已打开的 APL 编辑器中，点击「字段API对照表」标签，抓取该对象的全部字段。
     返回 [{"label": "字段标签", "api": "field_api__c"}, ...]
     """
@@ -612,7 +619,10 @@ def _fill_code_and_save(frame, apl_code: str, cfg: dict = None,
                         fields_map[r_api] = r_cached
 
                 try:
-                    fields_context = build_fields_context(fields_map, req)
+                    mf = int((cfg.get("generator") or {}).get("max_fields_in_prompt", 72))
+                    fields_context = build_fields_context(
+                        fields_map, req, max_fields_per_object=mf
+                    )
                 except Exception as e:
                     print(f"  [字段抓取] 上下文构建失败: {e}")
                     fields_context = ""
@@ -750,8 +760,14 @@ def _fill_code_and_save(frame, apl_code: str, cfg: dict = None,
     time.sleep(5)
 
     # ── 选数据源 → 运行 → 自动修复循环（编译错误 + 业务逻辑校验）──
-    final_code, _ = _run_and_check(frame, cfg=cfg, current_code=apl_code,
-                                   output_file=output_file, func_name=func_name, req=req)
+    final_code, compile_err = _run_and_check(
+        frame, cfg=cfg, current_code=apl_code,
+        output_file=output_file, func_name=func_name, req=req)
+    if compile_err:
+        raise RuntimeError(
+            "APL 运行/编译未通过，已跳过正式发布（此前版本可能仍为草稿）。\n"
+            + str(compile_err)[:2000]
+        )
 
     # ── 所有修复完成后，正式发布（点「保存」并等待对话框关闭）──
     _final_publish(frame, cfg=cfg, current_code=final_code or apl_code,
@@ -840,7 +856,7 @@ def _get_datasource_input(frame):
     return None
 
 
-def _get_open_datasource_popper(frame, count_before: int = 0) -> list:
+def _get_open_datasource_popper(frame, count_before: int = 0) :
     """等待数据源下拉弹出并返回选项列表，结果出现即返回，不轮询。"""
     _READ_JS = """
         () => {
@@ -872,7 +888,7 @@ def _get_open_datasource_popper(frame, count_before: int = 0) -> list:
     return result or []
 
 
-def _open_datasource_dropdown(frame, cfg: dict = None) -> list:
+def _open_datasource_dropdown(frame, cfg: dict = None) :
     """点开数据源下拉，返回选项文字列表；展开失败返回空列表。
     先尝试 Playwright 选择器（快速），失败则 fallback 到 agent vision。"""
     inp = _get_datasource_input(frame)
@@ -1062,7 +1078,7 @@ def _select_datasource_by_idx(frame, idx: int, cfg: dict = None) -> str:
     return result
 
 
-def _agent_open_datasource(frame, cfg: dict) -> list:
+def _agent_open_datasource(frame, cfg: dict) :
     """Agent vision fallback：用 Playwright 点开下拉 → agent vision 读选项列表。"""
     try:
         from deployer.browser_agent import agent_read_datasource_options, agent_find_datasource_dropdown
@@ -1239,7 +1255,7 @@ _BIZ_FAILURE_KEYWORDS = [
 ]
 
 
-def _analyze_business_log(log_text: str) -> dict:
+def _analyze_business_log(log_text: str) :
     """根据运行日志中的 [业务] 行分析业务是否走到完成分支。
     返回 dict: has_complete, has_termination, has_failure, summary。
     """
@@ -1454,7 +1470,7 @@ def _get_code_context(code: str, line_num: int, context: int = 5) -> str:
     return "\n".join(snippet)
 
 
-def _apply_rule_based_fix(code: str, err_text: str) -> str | None:
+def _apply_rule_based_fix(code: str, err_text: str) :
     """规则化快速修复。已知模式直接替换，无需 LLM。成功返回修复后代码，否则返回 None。"""
     import re as _re
     fixed = code
@@ -1488,6 +1504,19 @@ def _apply_rule_based_fix(code: str, err_text: str) -> str | None:
         if fixed != before:
             changed = True
             print("  [自愈] 规则修复：for(int i...) -> .each{ i -> }")
+
+    if "ForStatements are not allowed" in err_text and _re.search(r'for\s*\(', fixed):
+        before = fixed
+        # for (Type var : collection) { body }
+        fixed = _re.sub(
+            r'for\s*\(\s*\w[\w<>, ]*\s+(\w+)\s*:\s*([\w.()]+)\s*\)\s*\{(.*?)\n\}',
+            lambda m: f"{m.group(2)}.each {{ {m.group(1)} ->{m.group(3)}\n}}",
+            fixed,
+            flags=_re.DOTALL
+        )
+        if fixed != before:
+            changed = True
+            print("  [自愈] 规则修复：for(Type var : coll) -> .each{ var -> }")
 
     if "toJavaDate" in err_text or "setTime" in err_text or "com.fxiaoke.functions.time.Date" in err_text:
         before = fixed
@@ -1575,6 +1604,11 @@ def _call_llm_fix(code: str, errors: str, cfg: dict, retry_feedback: str = "",
         "- FQLAttribute 没有 .limit(n) 方法，分页通过 SelectAttribute 处理\n"
         "- 三元组变量名不要用 _（平台报 warning），用真实变量名\n"
         "- QueryOperator.EQ() 参数类型要和字段类型匹配\n"
+        "- **禁止使用 `for` 循环**（平台报 ForStatements are not allowed），遍历一律用 `.each { item -> }` 或 `.each { k, v -> }`\n"
+        "\n"
+        "## ⚠️ 必须返回完整代码\n"
+        "- 你的响应必须是**完整的**修复后代码，从第一行到最后一行，不能截断或省略任何部分\n"
+        "- 不能只返回修改的片段，必须包含原代码中所有变量声明、逻辑块\n"
         "\n"
         "## ⚠️ 三元运算符（expecting ':', found 'if'）\n"
         "APL 禁止使用三元运算符 `? :`，平台会报此错误。\n"
@@ -1877,16 +1911,74 @@ def _has_compile_error_on_page(frame) -> bool:
 _DS_FAIL = frozenset(("no_input", "click_failed", "no_items", "no_dropdown", "no_item", "agent_failed", "agent_no_input"))
 
 
+def _click_datasource_option_at_index(frame, idx: int) -> str:
+    """下拉已展开时，直接点击第 idx 个选项，返回选中文本。不触发任何打开/关闭操作。"""
+    result = frame.evaluate(f"""
+        () => {{
+            const poppers = [...document.querySelectorAll('.el-select-dropdown.el-popper, .el-popper, [class*="dropdown"]')];
+            const visible = poppers.filter(p => {{
+                const r = p.getBoundingClientRect();
+                return r.height > 30 && r.width > 30 && getComputedStyle(p).display !== 'none';
+            }});
+            for (const target of visible.reverse()) {{
+                const items = [...target.querySelectorAll(
+                    'li.el-select-dropdown__item:not(.is-disabled), li[class*="item"], li'
+                )].filter(li => li.textContent.trim() && li.offsetHeight > 0);
+                if (items.length === 0) continue;
+                const item = items[{idx}] || items[items.length - 1];
+                if (!item) return 'no_item';
+                item.scrollIntoView({{block:'nearest'}});
+                ['mousedown','mouseup','click'].forEach(t =>
+                    item.dispatchEvent(new MouseEvent(t, {{bubbles:true, cancelable:true, view:window}}))
+                );
+                return item.textContent.trim();
+            }}
+            return 'no_dropdown';
+        }}
+    """)
+    time.sleep(0.3)
+    return result
+
+
+def _resolve_datasource_selection(cfg: dict) -> int | str:
+    """从 config 解析数据源选择：datasource_index (0-based) 或 datasource_prefer（按名称匹配如「其他数据源」）。"""
+    fx = (cfg or {}).get("fxiaoke") or {}
+    prefer = (fx.get("datasource_prefer") or "").strip()
+    if prefer:
+        return prefer
+    idx = fx.get("datasource_index")
+    if isinstance(idx, int):
+        return idx
+    if isinstance(idx, str) and idx.isdigit():
+        return int(idx)
+    return 0
+
+
+def _select_datasource_by_preference(frame, cfg: dict) -> str:
+    """按 config 选择数据源：datasource_prefer 优先按名称匹配，否则用 datasource_index（默认 0）。"""
+    val = _resolve_datasource_selection(cfg or {})
+    if isinstance(val, str):
+        options = _open_datasource_dropdown(frame, cfg)
+        if options:
+            for i, opt in enumerate(options):
+                if val in str(opt) or str(opt) in val:
+                    print(f"  [部署器] 按名称匹配数据源「{val}」，选择第 {i+1} 项: {opt}")
+                    return _click_datasource_option_at_index(frame, i)
+        print(f"  [部署器] 未匹配到「{val}」，回退到第 1 项")
+        return _select_datasource_by_idx(frame, 0, cfg=cfg)
+    return _select_datasource_by_idx(frame, val, cfg=cfg)
+
+
 def _do_one_run(frame, attempt_label: str, select_first_datasource: bool = False,
                 cfg: dict = None) -> tuple:
     """执行一次「运行脚本」。
-    select_first_datasource: 若 True 且存在数据源，则先选第 1 个再运行；否则不选（用于编译检测）。
+    select_first_datasource: 若 True 且存在数据源，则按 config 选择（datasource_prefer 或 datasource_index）再运行；否则不选。
     返回 (has_compile_error, errors_text, log_text)。"""
     if select_first_datasource:
-        selected = _select_datasource_by_idx(frame, 0, cfg=cfg)
+        selected = _select_datasource_by_preference(frame, cfg) if cfg else _select_datasource_by_idx(frame, 0, cfg=cfg)
         if selected in _DS_FAIL:
             time.sleep(2)
-            selected = _select_datasource_by_idx(frame, 0, cfg=cfg)
+            selected = _select_datasource_by_preference(frame, cfg) if cfg else _select_datasource_by_idx(frame, 0, cfg=cfg)
         if not selected or selected in _DS_FAIL:
             print("  [警告] 数据源选择失败，将不选数据源运行（日志可能显示入参为空）")
         elif selected:
@@ -1967,6 +2059,8 @@ def _run_and_check(frame, cfg: dict = None, current_code: str = "",
     requirement = (req or {}).get("requirement", "") or ""
 
     prev_err_sigs: list[str] = []
+    compile_passed = False
+    last_compile_err = ""
 
     while attempt <= MAX_FIX:
         has_err, errors, log = _do_one_run(frame, f"r{attempt}", select_first_datasource=True, cfg=cfg)
@@ -1992,11 +2086,32 @@ def _run_and_check(frame, cfg: dict = None, current_code: str = "",
                         attempt += 1
                         continue
                     else:
-                        print("  [部署器] 数据问题，代码无需修改")
+                        # 数据问题：切换数据源再跑一次验证
+                        options = _open_datasource_dropdown(frame, cfg)
+                        if options and len(options) > 1:
+                            for ds_idx in range(1, min(len(options), 3)):
+                                print(f"  [部署器] 切换数据源（第 {ds_idx+1} 项）再验证...")
+                                _click_datasource_option_at_index(frame, ds_idx)
+                                time.sleep(0.3)
+                                _click_run_btn(frame)
+                                _wait_for_run_result(frame, timeout=18)
+                                time.sleep(0.3)
+                                has_err2, _, log2 = _do_one_run(frame, f"r{attempt}_ds{ds_idx}", select_first_datasource=False, cfg=cfg)
+                                if has_err2:
+                                    break
+                                analysis2 = _analyze_business_log(log2)
+                                print(f"  [部署器] 数据源{ds_idx+1}业务分析: {analysis2['summary']}")
+                                if analysis2["has_complete"] or not (analysis2["has_termination"] or analysis2["has_failure"]):
+                                    print("  [部署器] 切换数据源后验证通过 ✓")
+                                    break
+                        else:
+                            print("  [部署器] 无其他数据源可切换，视为数据问题，代码无需修改")
+            compile_passed = True
             break
 
         attempt += 1
         err_text = errors or log
+        last_compile_err = err_text or last_compile_err
         print(f"  [部署器] 编译错误（第 {attempt} 次）:\n{err_text[:400]}")
 
         if not cfg or not code:
@@ -2047,6 +2162,10 @@ def _run_and_check(frame, cfg: dict = None, current_code: str = "",
         Path(output_file).write_text(code, encoding="utf-8")
         print(f"  [部署器] 最终代码已回写: {output_file}")
 
+    if not compile_passed:
+        msg = (last_compile_err or "").strip() or "编译/运行未通过（已达最大自动修复次数）"
+        return code, msg
+
     return code, ""
 
 
@@ -2056,7 +2175,7 @@ def _meta_path(apl_file: str) -> Path:
     return Path(apl_file).with_suffix(".meta.yml")
 
 
-def load_func_meta(apl_file: str) -> dict:
+def load_func_meta(apl_file: str) :
     """读取本地保存的函数元数据，不存在返回 {}。"""
     p = _meta_path(apl_file)
     if not p.exists():
@@ -2157,6 +2276,8 @@ def _deploy_in_page(page, apl_file: str, func_name: str, cfg: dict,
         """检测当前页面是否为登录页（URL 判断 + 登录 UI 元素判断双重保险）。"""
         if login_path in page.url:
             return True
+        if "proj/page/login" in page.url or "/page/login" in page.url:
+            return True
         # SPA hash 路由可能 URL 不变但内嵌了登录 UI（如 /XV/UI/manage#login）
         try:
             loc = page.locator(':text("扫码登录"), :text("账号登录"), :text("动态验证码登录")')
@@ -2205,21 +2326,67 @@ def _deploy_in_page(page, apl_file: str, func_name: str, cfg: dict,
         )
 
     if ensure_login:
-        has_session = load_cookies(page.context, cfg)
-        if has_session:
-            time.sleep(2.5)  # 给页面时间处理 cookies
-            ok = _go_to_func_list()
-            if not ok:
-                print("  [部署器] Session 已过期，重新登录...")
-                has_session = False
+        has_session = False
+        from deployer.deploy_login import get_session_path
+        if get_session_path(cfg).exists():
+            has_session = load_cookies(page.context, cfg)
+            if has_session:
+                time.sleep(2)
+                ok = _go_to_func_list()
+                if not ok:
+                    print("  [部署器] Session 已过期，尝试 token 登录...")
+                    has_session = False
         if not has_session:
-            login(page, cfg)
-            save_cookies(page.context, cfg)
-            time.sleep(2)  # 登录后稍等再导航
-            # 登录后只做一次导航，不再触发重复登录
-            if not _go_to_func_list():
-                screenshot(page, "login_then_redirect")
-                raise RuntimeError("登录后仍被重定向到登录页，请检查账号权限或手动登录后重试。")
+            bootstrap_url = (cfg.get("fxiaoke") or {}).get("bootstrap_token_url", "").strip() or None
+            if not bootstrap_url:
+                bootstrap_url = __import__("os").environ.get("FX_BOOTSTRAP_TOKEN_URL", "").strip() or None
+            if bootstrap_url:
+                print(f"  [部署器] 使用 token URL 登录...")
+                page.goto(bootstrap_url, wait_until="domcontentloaded", timeout=30000)
+                time.sleep(4)
+                try:
+                    page.wait_for_load_state("networkidle", timeout=10000)
+                except Exception:
+                    pass
+                if login_path not in page.url and "proj/page/login" not in page.url:
+                    save_cookies(page.context, cfg)
+                    has_session = True
+                    ok = _go_to_func_list()
+                    if ok:
+                        has_session = True
+                    else:
+                        has_session = False
+                else:
+                    has_session = False
+        if not has_session:
+            has_session = load_cookies(page.context, cfg)
+            if has_session:
+                time.sleep(2.5)
+                ok = _go_to_func_list()
+                if not ok:
+                    print("  [部署器] Session 已过期，重新登录...")
+                    has_session = False
+        if not has_session:
+            agent_id = (cfg.get("fxiaoke") or {}).get("agent_login_employee_id", "").strip()
+            if not agent_id:
+                agent_id = (cfg.get("openapi") or {}).get("current_open_user_id", "1000")
+            if agent_id:
+                try:
+                    from deployer.agent_login import login_via_agent, get_session_cookies
+                    cookies = get_session_cookies(cfg) or page.context.cookies()
+                    if cookies and login_via_agent(page, cfg, cookies) and _go_to_func_list():
+                        save_cookies(page.context, cfg)
+                        has_session = True
+                except Exception as e:
+                    print(f"  [部署器] 代理登录失败: {e}，将转为手动登录")
+            if not has_session:
+                if not wait_for_manual_login(page, cfg):
+                    raise RuntimeError("等待手动登录超时，请重试。")
+                save_cookies(page.context, cfg)
+                time.sleep(2)
+                if not _go_to_func_list():
+                    screenshot(page, "login_then_redirect")
+                    raise RuntimeError("登录后仍被重定向到登录页，请检查账号权限或手动登录后重试。")
     else:
         _go_to_func_list()
 
@@ -2282,7 +2449,34 @@ def deploy(apl_file: str, func_name: str, cfg: dict, headless: bool = False,
     部署模式：
       【新建函数】默认：不搜索，直接新建。适用于「生成函数」「函数需求」。
       【更新函数】--update：需求变更/需求修改时，必须提供 func_api_name，按 API 名搜索 → 点编辑 → 在现有函数基础上修改。
+
+    纯证书模式：配置 ShareDev 证书且为更新模式时，直接通过 API 推送，无需浏览器/登录。
     """
+    api_name = func_api_name or ((req or {}).get("func_api_name") or "").strip()
+    if not api_name and Path(apl_file).exists():
+        meta_path = Path(apl_file).with_suffix(".meta.yml")
+        if meta_path.exists():
+            try:
+                import yaml
+                meta = yaml.safe_load(meta_path.read_text(encoding="utf-8")) or {}
+                api_name = (meta.get("func_api_name") or "").strip()
+            except Exception:
+                pass
+    if update and api_name and Path(apl_file).exists():
+        try:
+            from fetcher.sharedev_client import ShareDevClient, load_sharedev_config
+            project = (cfg.get("fxiaoke") or {}).get("project_name", "").strip() or None
+            domain, cert = load_sharedev_config(project_name=project)
+            body = Path(apl_file).read_text(encoding="utf-8")
+            client = ShareDevClient(domain, cert)
+            client.update_func_body(api_name, body)
+            print(f"[部署器] 纯证书模式：已通过 ShareDev API 更新 [{api_name}]，无需登录")
+            return True
+        except ValueError:
+            pass
+        except Exception as e:
+            print(f"[部署器] 证书推送失败: {e}，回退到浏览器部署")
+
     from playwright.sync_api import sync_playwright
 
     for attempt in range(2):

@@ -1,0 +1,462 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: channel__c
+  label: 企业渠道号
+  options:
+  - label: 待定
+    value: '1'
+  - label: '29999'
+    value: '2'
+  - label: '29998'
+    value: '3'
+  - label: '29997'
+    value: '4'
+  - label: '29996'
+    value: '5'
+  - label: '29995'
+    value: '6'
+  - label: '29994'
+    value: '7'
+  - label: '29993'
+    value: '8'
+  - label: '29990'
+    value: '9'
+  - label: '29991'
+    value: '10'
+  - label: '29989'
+    value: '11'
+  - label: '29900'
+    value: '12'
+  - label: '29901'
+    value: '13'
+  - label: 28XXX
+    value: '14'
+  - label: '27000'
+    value: '15'
+  - label: '27001'
+    value: '16'
+  - label: '27002'
+    value: '17'
+  - label: '27003'
+    value: '18'
+  - label: '27004'
+    value: '19'
+  - label: '27005'
+    value: '20'
+  - label: '27006'
+    value: '21'
+  - label: '27007'
+    value: '22'
+  - label: '27008'
+    value: '23'
+  - label: '27009'
+    value: '24'
+  - label: '27010'
+    value: '25'
+  - label: '27011'
+    value: '26'
+  - label: '27012'
+    value: '27'
+  - label: '27013'
+    value: '28'
+  - label: '27014'
+    value: '29'
+  - label: '27015'
+    value: '30'
+  - label: '27016'
+    value: '31'
+  - label: '27017'
+    value: '32'
+  - label: '27018'
+    value: '33'
+  - label: '27019'
+    value: '34'
+  - label: '27020'
+    value: '35'
+  - label: '27021'
+    value: '36'
+  - label: '27022'
+    value: '37'
+  - label: '27023'
+    value: '38'
+  - label: '27024'
+    value: '39'
+  - label: '27025'
+    value: '40'
+  - label: '27026'
+    value: '41'
+  - label: '27027'
+    value: '42'
+  - label: '27028'
+    value: '43'
+  - label: '27029'
+    value: '44'
+  - label: '26000'
+    value: '45'
+  - label: '21000'
+    value: '46'
+  - label: '20011'
+    value: '47'
+  - label: '20010'
+    value: '48'
+  - label: '20004'
+    value: '49'
+  - label: '20003'
+    value: '50'
+  - label: '20001'
+    value: '51'
+  - label: '29992'
+    value: '52'
+  - label: '30001'
+    value: '53'
+  - label: '30002'
+    value: '54'
+  - label: '18899'
+    value: '55'
+  - label: '26998'
+    value: '56'
+  - label: '26999'
+    value: '57'
+  - label: 其他
+    value: other
+- api: first_channel__c
+  label: 线索一级通路
+  options:
+  - label: 销售自拓
+    value: '50'
+  - label: 原公司供给
+    value: '124'
+  - label: 生态合作
+    value: '5'
+  - label: 市场活动_营销会议
+    value: '108'
+  - label: 市场活动_生态市场联合拓客
+    value: '115'
+  - label: 内部推荐(MKT)
+    value: '43'
+  - label: 行业开发
+    value: '49'
+  - label: 老客推荐
+    value: '52'
+  - label: 老客分子公司
+    value: '53'
+  - label: 生态IM
+    value: '97'
+  - label: 400进线
+    value: '2'
+  - label: 线索中心拓展
+    value: '61'
+  - label: 线索中心老客拓展
+    value: '62'
+  - label: 客户注册
+    value: '1'
+  - label: 外部合作注册
+    value: '10'
+  - label: 官网留资
+    value: '3'
+  - label: 企业微信留资
+    value: '11'
+  - label: 媒介留资
+    value: '12'
+  - label: 营销活动
+    value: '4'
+  - label: C端开票
+    value: '6'
+  - label: CSM线索
+    value: '9'
+  - label: 注册页改留资
+    value: '13'
+  - label: 销售线索
+    value: '8'
+  - label: ES后台
+    value: '14'
+  - label: 主APP
+    value: '15'
+  - label: 支付宝小程序滴滴出行
+    value: '16'
+  - label: 小企业版
+    value: '17'
+  - label: 微信小程序滴滴出行
+    value: '18'
+  - label: 微信小程序出行广场
+    value: '19'
+  - label: 外部合作注册(平台运营)
+    value: '20'
+  - label: 企业微信
+    value: '21'
+  - label: 企业版APP
+    value: '22'
+  - label: 企微社群
+    value: '23'
+  - label: 离线触达
+    value: '24'
+  - label: 老CRM系统
+    value: '25'
+  - label: 活动页面入口
+    value: '26'
+  - label: 端外媒介留资(平台运营)
+    value: '27'
+  - label: 定向开发(平台运营)
+    value: '28'
+  - label: 生态平台市场活动
+    value: '29'
+  - label: 生态伙伴运营交换
+    value: '30'
+  - label: 商旅/福利平台注册
+    value: '31'
+  - label: 伙伴推荐(生态)
+    value: '32'
+  - label: 费控平台注册
+    value: '33'
+  - label: BD合作(MKT)
+    value: '34'
+  - label: 自然流量
+    value: '35'
+  - label: 营销会议
+    value: '36'
+  - label: 信息流
+    value: '37'
+  - label: ABM定向开发
+    value: '38'
+  - label: 搜索竞价(SEM)
+    value: '39'
+  - label: 苹果商店
+    value: '40'
+  - label: 品专
+    value: '41'
+  - label: 品牌投放
+    value: '42'
+  - label: 官网流量
+    value: '44'
+  - label: 端外媒介留资(MKT)
+    value: '45'
+  - label: 定向开发(MKT)
+    value: '46'
+  - label: 滴滴自媒体
+    value: '47'
+  - label: 安卓商店
+    value: '48'
+  - label: 内部推荐
+    value: '51'
+  - label: 滴滴费控推荐
+    value: '64'
+  - label: 叠宙注册
+    value: '54'
+  - label: 钉钉注册
+    value: '55'
+  - label: 无
+    value: '56'
+  - label: IM机器人
+    value: '57'
+  - label: 渠道开发(MKT)
+    value: '58'
+  - label: 生态市场联合拓客
+    value: '59'
+  - label: 园区营销
+    value: '60'
+  - label: 其它/历史
+    value: '7'
+  - label: 官网流量_SEO
+    value: '98'
+  - label: 微信小程序滴滴企业版助手
+    value: '63'
+  - label: 官网流量-PC
+    value: '65'
+  - label: 异业合作
+    value: '66'
+  - label: 微信搜索
+    value: '67'
+  - label: 外部合作注册（平台运营）
+    value: '68'
+  - label: 拓客通
+    value: '69'
+  - label: 出行券
+    value: '70'
+  - label: 头条信息流
+    value: '71'
+  - label: 线索采买
+    value: '72'
+  - label: 抖音信息流
+    value: '73'
+  - label: 生态数据营销
+    value: '74'
+  - label: 生态CPA合作
+    value: '75'
+  - label: 朋友圈
+    value: '76'
+  - label: 公众号和小程序
+    value: '77'
+  - label: 视频号
+    value: '78'
+  - label: 生态钉钉
+    value: '79'
+  - label: 生态企微
+    value: '80'
+  - label: 生态飞书
+    value: '81'
+  - label: 花小猪APP
+    value: '82'
+  - label: 花小猪小程序
+    value: '83'
+  - label: 品牌内容营销
+    value: '84'
+  - label: 生态平台注册
+    value: '85'
+  - label: 媒体营销
+    value: '86'
+  - label: 市场推荐
+    value: '87'
+  - label: 市场-推荐
+    value: '88'
+  - label: 内容营销
+    value: '89'
+  - label: 渠道伙伴
+    value: '90'
+  - label: 社群投放
+    value: '91'
+  - label: 转介绍
+    value: '92'
+  - label: 未匹配通路
+    value: '93'
+  - label: 历史通路映射
+    value: '94'
+  - label: 端内投放_历史通路映射
+    value: '95'
+  - label: 官网流量_官网
+    value: '96'
+  - label: MA剧本
+    value: '99'
+  - label: 端内投放_营销活动
+    value: '100'
+  - label: 端内投放_ES后台
+    value: '101'
+  - label: 端内投放_主APP
+    value: '102'
+  - label: 端内投放_支付宝小程序滴滴出行
+    value: '103'
+  - label: 端内投放_小企业版
+    value: '104'
+  - label: 端内投放_微信小程序滴滴出行
+    value: '105'
+  - label: 端内投放_企业版APP
+    value: '106'
+  - label: 端外投放_自然流量
+    value: '107'
+  - label: 端外投放_信息流
+    value: '109'
+  - label: 端外投放_SEM
+    value: '110'
+  - label: 端外投放_苹果商店
+    value: '111'
+  - label: 端外投放_品专
+    value: '112'
+  - label: 品牌_滴滴自媒体
+    value: '113'
+  - label: 端外投放_安卓商店
+    value: '114'
+  - label: 端内投放_微信小程序滴滴企业版助手
+    value: '116'
+  - label: 端外投放_头条信息流
+    value: '117'
+  - label: 端外投放_CPA合作
+    value: '118'
+  - label: 端内投放_花小猪APP
+    value: '119'
+  - label: 端内投放_花小猪小程序
+    value: '120'
+  - label: 品牌_内容营销
+    value: '121'
+  - label: 端外投放_渠道伙伴
+    value: '122'
+  - label: 端外投放_社群投放
+    value: '123'
+  - label: CRM提单开户
+    value: '125'
+  - label: 其他
+    value: other
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: is_deleted
+  label: is_deleted
+- api: dchn__c
+  label: dchn
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: thirdChannel__c
+  label: 线索三级通路
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: is_within_authorized_chann__c
+  label: 是否在授权通路范围内
+  options:
+  - label: 否
+    value: '1'
+  - label: 其他
+    value: other
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: secondChannel__c
+  label: 线索二级通路
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 线索_通路匹配规则
+    value: ''
+  - label: 外呼_匹配授权通路范围
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: entranceChannel__c
+  label: entrance_channel
+- api: data_own_department
+  label: 归属部门
+- api: name
+  label: 自动编号
+- api: _id
+  label: _id

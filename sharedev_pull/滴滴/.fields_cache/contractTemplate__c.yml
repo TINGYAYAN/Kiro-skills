@@ -1,0 +1,303 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: dangfang_seal_position__c
+  label: 丁方用印位置
+- api: party_d_seal_nature__c
+  label: 丁方印章性质
+  options:
+  - label: 印章
+    value: '1'
+  - label: 签字
+    value: '2'
+  - label: 代表人
+    value: '3'
+  - label: 签章+签字
+    value: '4'
+  - label: 其他
+    value: other
+- api: xsy_name__c
+  label: 销售易流水号
+- api: party_a_seal_position__c
+  label: 甲方用印位置
+- api: partyCNature__c
+  label: 丙方性质
+  options:
+  - label: 我方
+    value: '1'
+  - label: 对方
+    value: '2'
+  - label: 其他
+    value: other
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: contract_type_api__c
+  label: 适用于合同类型API
+- api: partyANature__c
+  label: 甲方性质
+  options:
+  - label: 我方
+    value: '1'
+  - label: 对方
+    value: '2'
+  - label: 其他
+    value: other
+- api: owner_department
+  label: 负责人主属部门
+- api: templateNo__c
+  label: 模板编号
+- api: third_party_seal_position__c
+  label: 丙方用印位置
+- api: version__c
+  label: 版本号
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: type__c
+  label: 模板类型
+  options:
+  - label: 主协议
+    value: '1'
+  - label: 补充协议
+    value: '2'
+  - label: 其他
+    value: other
+- api: typeC__c
+  label: 合同类型
+- api: data_own_department
+  label: 归属部门
+- api: name
+  label: 合同模板名称
+- api: _id
+  label: _id
+- api: party_b_seal_position__c
+  label: 乙方用印位置
+- api: businessType__c
+  label: 合同业务类型
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '5'
+  - label: 代驾
+    value: '2'
+  - label: 代驾券
+    value: '3'
+  - label: 出行券
+    value: '4'
+  - label: 出租车
+    value: '6'
+  - label: 聚合
+    value: '7'
+  - label: 其他
+    value: other
+- api: tenant_id
+  label: tenant_id
+- api: partyBNature__c
+  label: 乙方性质
+  options:
+  - label: 我方
+    value: '1'
+  - label: 对方
+    value: '2'
+  - label: 其他
+    value: other
+- api: electronicPaper__c
+  label: 适用于电签/纸质
+  options:
+  - label: 纸质
+    value: '1'
+  - label: 电签
+    value: '2'
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: contractType__c
+  label: 适用于合同类型
+  options:
+  - label: 用车-两方合同
+    value: businessType4__c
+  - label: 用车-三方合同
+    value: businessType7__c
+  - label: 用车-非标合同
+    value: businessType3__c
+  - label: 用车-两方关联补充协议
+    value: businessType8__c
+  - label: 用车-三方关联补充协议
+    value: businessType6__c
+  - label: 用车-两方开立补充协议
+    value: businessType9__c
+  - label: 用车-三方开立补充协议
+    value: businessType10__c
+  - label: 用车-两方延长补充协议
+    value: businessType11__c
+  - label: 用车-三方延长补充协议
+    value: businessType12__c
+  - label: 用车-两方延长/调整报价补充协议-带报价
+    value: businessType13__c
+  - label: 用车-三方延长补充协议-带报价
+    value: businessType14__c
+  - label: 用车-三方权利义务转移补充协议
+    value: businessType15__c
+  - label: 用车-四方权利义务转移补充协议
+    value: businessType16__c
+  - label: 商旅-两方合同
+    value: businessType17__c
+  - label: 商旅-三方合同
+    value: businessType18__c
+  - label: 商旅-非标合同
+    value: businessType19__c
+  - label: 商旅-补充协议-带报价
+    value: businessType20__c
+  - label: 出租车-两方合同
+    value: businessType21__c
+  - label: 出租车-非标合同
+    value: businessType22__c
+  - label: 聚合-补充协议
+    value: businessType23__c
+  - label: 三方增购补充协议（火车票+国际机票+国际酒店+签证）-授信
+    value: businessType25__c
+  - label: 两方增购补充协议（火车票+国际机票+国际酒店+签证）-授信
+    value: businessType24__c
+  - label: 代驾-两方合同-带报价
+    value: businessType32__c
+  - label: 代驾-两方合同-不带报价
+    value: businessType26__c
+  - label: 非常规合同-非标合同
+    value: businessType27__c
+  - label: 一个主体两方合同
+    value: businessType28__c
+  - label: 一个主体三方合同
+    value: businessType29__c
+  - label: 两个主体三方合同
+    value: businessType30__c
+  - label: 两个主体四方合同
+    value: businessType31__c
+  - label: 代驾-非标合同
+    value: businessType33__c
+  - label: 两方增购补充协议（火车票+国际机票+国际酒店+签证）-预存
+    value: businessType39__c
+  - label: 三方增购补充协议（火车票+国际机票+国际酒店+签证）-预存
+    value: businessType40__c
+  - label: 海外用车-非标合同
+    value: businessType41__c
+  - label: 其他
+    value: other
+- api: lock_user
+  label: 加锁人
+- api: valid__c
+  label: 是否有效
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: is_deleted
+  label: is_deleted
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: party_c_seal_nature__c
+  label: 丙方印章性质
+  options:
+  - label: 印章
+    value: '1'
+  - label: 签字
+    value: '2'
+  - label: 代表人
+    value: '3'
+  - label: 签章+签字
+    value: '4'
+  - label: 其他
+    value: other
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: party_a_seal_nature__c
+  label: 甲方印章性质
+  options:
+  - label: 印章
+    value: '1'
+  - label: 签字
+    value: '2'
+  - label: 代表人
+    value: '3'
+  - label: 签章+签字
+    value: '4'
+  - label: 其他
+    value: other
+- api: last_modified_time
+  label: 最后修改时间
+- api: is_my_sign_required__c
+  label: 是否免我方签章
+  options:
+  - label: 需要
+    value: '1'
+  - label: 不需要
+    value: '2'
+  - label: 其他
+    value: other
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: partyDNature__c
+  label: 丁方性质
+  options:
+  - label: 我方
+    value: '1'
+  - label: 对方
+    value: '2'
+  - label: 其他
+    value: other
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: xsyId__c
+  label: 销售易数据ID
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: party_b_seal_nature__c
+  label: 乙方印章性质
+  options:
+  - label: 印章
+    value: '1'
+  - label: 签字
+    value: '2'
+  - label: 代表人
+    value: '3'
+  - label: 签章+签字
+    value: '4'
+  - label: 其他
+    value: other

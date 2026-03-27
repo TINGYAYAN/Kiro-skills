@@ -1,0 +1,102 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: objectIds
+  label: 节点流转对象Id
+- api: duration
+  label: 流程耗时
+- api: sourceWorkflowId
+  label: 流程apiName
+- api: error_reason
+  label: 异常原因
+- api: taskNames
+  label: 当期任务
+- api: is_deleted
+  label: is_deleted
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: startTime
+  label: 流程发起时间
+- api: out_owner
+  label: 外部负责人
+- api: state
+  label: 流程状态
+  options:
+  - label: 进行中
+    value: in_progress
+  - label: 已完成
+    value: pass
+  - label: 已终止
+    value: cancel
+  - label: 异常
+    value: error
+- api: triggerSource
+  label: 发起类型
+  options:
+  - label: 手动发起
+    value: person
+  - label: 业务流程触发
+    value: bpm
+  - label: 工作流触发
+    value: workflow
+  - label: 审批流触发
+    value: approval
+- api: applicantId
+  label: 流程发起人
+- api: owner
+  label: 负责人
+- api: actual_duration
+  label: 耗时(仅工作时间)
+- api: lastModifyBy
+  label: 最后更新人
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: relatedObject
+  label: 发起对象
+- api: workflowName
+  label: 流程名称
+- api: last_modified_by
+  label: 最后修改人
+- api: stageNames
+  label: 当期阶段
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: cancel_reason
+  label: 终止原因
+- api: cancel_from_person
+  label: 终止人
+- api: data_own_department
+  label: 归属部门
+- api: current_candidate_ids
+  label: 当前待处理人
+- api: lastModifyTime
+  label: 最后更新时间
+- api: object_describe_id
+  label: object_describe_id
+- api: name
+  label: 流程主题
+- api: objectApiName
+  label: 流程发起对象
+- api: endTime
+  label: 流程结束时间
+- api: _id
+  label: _id
+- api: objectDataId
+  label: 流程发起数据
+- api: workflowId
+  label: 流程定义

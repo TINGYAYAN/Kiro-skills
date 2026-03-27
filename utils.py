@@ -1,12 +1,15 @@
 """公共工具函数。"""
+import json
 import os
 import re
+import time
 from pathlib import Path
 from typing import Optional
 
 import yaml
 
 TOOLS_DIR = Path(__file__).parent
+PULL_DIR = TOOLS_DIR / "sharedev_pull"
 
 # 对象中文名 → API 名映射（用于推断关联对象、批量模式等）
 OBJECT_LABEL_TO_API: dict[str, str] = {
@@ -18,18 +21,55 @@ OBJECT_LABEL_TO_API: dict[str, str] = {
     "特价申请": "special_price__c",
     "特配申请": "special_configuration_application__c",
     "特殊配置申请": "special_configuration_application__c",
+    # 订货单/销售订单：默认可为 __c；若租户为标准单，批量模式用 sharedev objects.json 覆盖为 SalesOrderObj
     "订货单": "SalesOrderObj__c",
+    "销售订单": "SalesOrderObj__c",
     "回款": "PaymentObj",
     "银行流水": "BankFlowObj",
     "提货单": "DeliveryOrderObj",
-    "销售订单": "SalesOrderObj__c",
 }
+
+
+def resolve_object_api_for_project(object_label: str, project_name: Optional[str]) -> Optional[str]:
+    """用 sharedev_pull/{{project}}/objects.json 的 display_name 解析 api_name（精确匹配优先，其次包含关系）。"""
+    label = (object_label or "").strip()
+    proj = (project_name or "").strip()
+    if not label or not proj:
+        return None
+    obj_path = PULL_DIR / proj / "objects.json"
+    if not obj_path.exists():
+        return None
+    try:
+        objs = json.loads(obj_path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    if not isinstance(objs, list):
+        return None
+    exact = None
+    fuzzy = None
+    for o in objs:
+        if not isinstance(o, dict):
+            continue
+        api = (o.get("api_name") or "").strip()
+        dn = (o.get("display_name") or "").strip()
+        if not api or not dn:
+            continue
+        if dn == label:
+            exact = api
+            break
+        if label in dn or dn in label:
+            if fuzzy is None:
+                fuzzy = api
+    return exact or fuzzy
+
 
 # 函数类型 → 命名空间 映射（新建函数时纷享下拉框的选项）
 # 命名空间在纷享 UI 中可能分组展示，如：平台(流程/计划任务/自定义控制器)、对象(按钮/UI事件)等
 FUNCTION_TYPE_TO_NAMESPACE = {
     "流程函数": "流程",
+    "流程": "流程",
     "UI函数": "UI事件",
+    "UI事件": "UI事件",
     "同步前函数": "流程",
     "同步后函数": "流程",
     "自定义控制器": "自定义控制器",
@@ -69,27 +109,46 @@ NAMESPACE_TO_CODE_PREFIX = {
 FUNCTION_TYPE_ALIASES = {
     "flow": "流程函数",
     "process": "流程函数",
+    "流程函数": "流程函数",
     "range_rule": "范围规则",
     "scope_rule": "范围规则",
+    "范围规则": "范围规则",
+    "关联对象范围规则": "关联对象范围规则",
     "ui": "UI函数",
+    "ui函数": "UI函数",
+    "ui事件": "UI函数",
+    "页面事件": "UI函数",
     "ui_event": "UI函数",
+    "按钮函数": "按钮",
     "button": "按钮",
     "btn": "按钮",
+    "按钮": "按钮",
     "sync_before": "同步前函数",
     "sync_after": "同步后函数",
+    "同步前函数": "同步前函数",
+    "同步后函数": "同步后函数",
     "custom_controller": "自定义控制器",
     "controller": "自定义控制器",
+    "自定义控制器": "自定义控制器",
     "scheduled_task": "计划任务",
     "cron": "计划任务",
     "schedule": "计划任务",
     "scheduler": "计划任务",
     "定时任务": "计划任务",
+    "计划任务": "计划任务",
     "validation": "校验函数",
     "validate": "校验函数",
+    "校验函数": "校验函数",
     "auto_number": "自增编号",
+    "自增编号": "自增编号",
     "import": "导入",
+    "导入": "导入",
     "关联对象范围": "关联对象范围规则",
     "流程": "流程函数",
+    "强制通知": "强制通知",
+    "促销": "促销",
+    "金蝶云星空": "金蝶云星空",
+    "数据集成": "数据集成",
 }
 
 
@@ -140,17 +199,20 @@ def infer_related_objects_from_requirement(
     requirement: str,
     object_api: str = "",
     object_label: str = "",
+    project_name: Optional[str] = None,
 ) -> list[dict]:
     """从需求文本中识别关联对象，返回 [{api, label}, ...]。
 
     规则：
     - 在 OBJECT_LABEL_TO_API 中查找需求里出现的中文对象名
+    - 若提供 project_name，关联对象的 api 优先用 sharedev objects.json 解析（与批量模式主对象一致）
     - 排除主对象（object_api / object_label）
     - 去重（同一 api 只保留一个）
     """
     text = (requirement or "").strip()
     main_api = (object_api or "").strip()
     main_label = (object_label or "").strip()
+    proj = (project_name or "").strip() or None
 
     # 主对象对应的所有可能标识（用于排除）
     main_ids = {main_api, main_label}
@@ -159,6 +221,10 @@ def infer_related_objects_from_requirement(
         main_ids.add(reverse.get(main_api, ""))
     if main_label:
         main_ids.add(OBJECT_LABEL_TO_API.get(main_label, ""))
+    if proj and main_label:
+        mp = resolve_object_api_for_project(main_label, proj)
+        if mp:
+            main_ids.add(mp)
 
     seen_api: set[str] = set()
     result: list[dict] = []
@@ -172,6 +238,10 @@ def infer_related_objects_from_requirement(
         if label == "回款" and ("近一个月回款" in text or "近一个季度回款" in text or "近半年回款" in text):
             continue
         api = OBJECT_LABEL_TO_API[label]
+        if proj:
+            resolved = resolve_object_api_for_project(label, proj)
+            if resolved:
+                api = resolved
         if api in main_ids or label in main_ids:
             continue
         if api in seen_api:
@@ -243,6 +313,59 @@ def infer_short_code_summary(requirement: str, object_label: str = "") -> str:
             first = first[len(prefix):].lstrip("，。、")
     first = re.sub(r"[，。\s！!？?：:]", "", first)
     return first[:10] if len(first) > 10 else (first or "函数")
+
+
+def cleanup_runtime_artifacts(
+    tools_dir: Optional[Path] = None,
+    *,
+    temp_keep_hours: int = 12,
+    report_keep_days: int = 7,
+    max_recent_reports: int = 20,
+) -> dict:
+    """轻量清理运行产物：删除过期 batch_req 临时文件，归档过期修复报告。"""
+    base = tools_dir or TOOLS_DIR
+    now = time.time()
+    cleaned_temp = 0
+    archived_reports = 0
+
+    for tmp in base.glob("batch_req_*.yml"):
+        try:
+            age_hours = (now - tmp.stat().st_mtime) / 3600
+            if age_hours >= temp_keep_hours:
+                tmp.unlink(missing_ok=True)
+                cleaned_temp += 1
+        except Exception:
+            continue
+
+    reports_dir = base / "reports"
+    archive_dir = reports_dir / "archive"
+    if reports_dir.exists():
+        report_files = sorted(
+            reports_dir.glob("fix_*.md"),
+            key=lambda p: p.stat().st_mtime,
+            reverse=True,
+        )
+        keep = {p.resolve() for p in report_files[:max_recent_reports]}
+        archive_dir.mkdir(parents=True, exist_ok=True)
+        for report in report_files[max_recent_reports:]:
+            try:
+                age_days = (now - report.stat().st_mtime) / 86400
+                if age_days < report_keep_days:
+                    continue
+                if report.resolve() in keep:
+                    continue
+                target = archive_dir / report.name
+                if target.exists():
+                    target.unlink()
+                report.rename(target)
+                archived_reports += 1
+            except Exception:
+                continue
+
+    return {
+        "cleaned_temp": cleaned_temp,
+        "archived_reports": archived_reports,
+    }
 
 
 def load_config(config_path: Optional[str] = None) -> dict:

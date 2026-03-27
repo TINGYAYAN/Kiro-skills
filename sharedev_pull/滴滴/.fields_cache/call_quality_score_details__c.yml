@@ -1,0 +1,144 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: is_deduction_item__c
+  label: 是否扣分项
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: qc_record__c
+  label: 质检记录
+- api: data_own_department
+  label: 归属部门
+- api: items_to_improve__c
+  label: 需提升项
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: name
+  label: 自动编号
+- api: _id
+  label: _id
+- api: score_item__c
+  label: 得分项
+  options:
+  - label: 开场与结束
+    value: '1'
+  - label: 服务意识
+    value: '2'
+  - label: 产品知识
+    value: '3'
+  - label: 多品类拓展
+    value: '4'
+  - label: 质-需求挖掘
+    value: '5'
+  - label: 不实承诺
+    value: '6'
+  - label: 九要素
+    value: '7'
+  - label: 系统操作
+    value: '8'
+  - label: 需求明确
+    value: '9'
+  - label: 意-需求挖掘
+    value: '10'
+  - label: 意-产品介绍
+    value: '11'
+  - label: 九要素衔接
+    value: '12'
+  - label: 有效KP
+    value: '13'
+  - label: 客户对企业需求是否清楚
+    value: '14'
+  - label: 意-异议处理
+    value: '15'
+  - label: 解决疑虑
+    value: '16'
+  - label: 挽留
+    value: '17'
+  - label: 口语表达
+    value: '18'
+  - label: 产品介绍
+    value: '19'
+  - label: 异议处理
+    value: '20'
+  - label: 流程推进
+    value: '21'
+  - label: 需求挖掘
+    value: '22'
+  - label: 安抚关怀
+    value: '23'
+  - label: 致命错误
+    value: '24'
+  - label: 非企业版需求/需求满足不了
+    value: '25'
+  - label: 其他
+    value: other
+- api: score__c
+  label: 分值

@@ -102,21 +102,29 @@ def call_llm(system: str, user: str, cfg: dict) -> str:
         return message.content[0].text.strip()
 
     elif provider == "openai":
-        from openai import OpenAI
+        from openai import OpenAI, NotFoundError
         base_url = cfg["llm"].get("base_url") or None
         timeout = float(cfg["llm"].get("timeout", 120))
         client = OpenAI(api_key=api_key, base_url=base_url, timeout=timeout)
         # 使用流式输出，避免代理合并换行符
-        stream = client.chat.completions.create(
-            model=model,
-            temperature=temperature,
-            max_tokens=max_tokens,
-            stream=True,
-            messages=[
-                {"role": "system", "content": system},
-                {"role": "user", "content": user},
-            ],
-        )
+        try:
+            stream = client.chat.completions.create(
+                model=model,
+                temperature=temperature,
+                max_tokens=max_tokens,
+                stream=True,
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user},
+                ],
+            )
+        except NotFoundError as e:
+            endpoint = (base_url or "https://api.openai.com/v1").rstrip("/")
+            raise RuntimeError(
+                f"LLM 接口返回 404：base_url={endpoint} model={model}。"
+                "通常是代理地址失效、路径不兼容，或该代理不支持当前模型。"
+                "请检查 llm.base_url / llm.model，或切换到已验证可用的代理。"
+            ) from e
         chunks = []
         for chunk in stream:
             if chunk.choices:
@@ -197,7 +205,7 @@ def generate(
     if not proj and req_file_path:
         proj = infer_project_name_from_req_path(req_file_path)
 
-    num_examples = int(cfg["generator"].get("num_examples", 6))
+    num_examples = int(cfg["generator"].get("num_examples", 8))
     rag_enabled = (cfg.get("rag") or {}).get("enabled", False)
     if rag_enabled:
         try:
@@ -247,7 +255,7 @@ def generate(
     from collections import Counter
 
     tier_counts = Counter(ex.get("tier_label", "?") for ex in examples)
-    print(f"[生成器] 加载 {len(examples)} 个 few-shot 示例，分层: {dict(tier_counts)}")
+    print(f"[生成器] 加载 {len(examples)} 个参考函数，分层: {dict(tier_counts)}")
 
     system_prompt = build_system_prompt(function_type)
     # 注入历史修复记忆，让生成阶段也能避免已知错误

@@ -1,0 +1,159 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: single_choice__c
+  label: 合同业务类型
+  options:
+  - label: 用车-两方合同
+    value: businessType4__c
+  - label: 用车-三方合同
+    value: businessType7__c
+  - label: 用车-非标合同
+    value: businessType3__c
+  - label: 用车-两方关联补充协议
+    value: businessType8__c
+  - label: 用车-三方关联补充协议
+    value: businessType6__c
+  - label: 用车-两方开立补充协议
+    value: businessType9__c
+  - label: 用车-三方开立补充协议
+    value: businessType10__c
+  - label: 用车-两方延长补充协议
+    value: businessType11__c
+  - label: 用车-三方延长补充协议
+    value: businessType12__c
+  - label: 用车-两方延长/调整报价补充协议-带报价
+    value: businessType13__c
+  - label: 用车-三方延长补充协议-带报价
+    value: businessType14__c
+  - label: 用车-三方权利义务转移补充协议
+    value: businessType15__c
+  - label: 用车-四方权利义务转移补充协议
+    value: businessType16__c
+  - label: 商旅-两方合同
+    value: businessType17__c
+  - label: 商旅-三方合同
+    value: businessType18__c
+  - label: 商旅-非标合同
+    value: businessType19__c
+  - label: 商旅-补充协议-带报价
+    value: businessType20__c
+  - label: 出租车-两方合同
+    value: businessType21__c
+  - label: 出租车-非标合同
+    value: businessType22__c
+  - label: 聚合-补充协议
+    value: businessType23__c
+  - label: 三方增购补充协议（火车票+国际机票+国际酒店+签证）-授信
+    value: businessType25__c
+  - label: 两方增购补充协议（火车票+国际机票+国际酒店+签证）-授信
+    value: businessType24__c
+  - label: 代驾-两方合同-带报价
+    value: businessType32__c
+  - label: 代驾-两方合同-不带报价
+    value: businessType26__c
+  - label: 非常规合同-非标合同
+    value: businessType27__c
+  - label: 一个主体两方合同
+    value: businessType28__c
+  - label: 一个主体三方合同
+    value: businessType29__c
+  - label: 两个主体三方合同
+    value: businessType30__c
+  - label: 两个主体四方合同
+    value: businessType31__c
+  - label: 代驾-非标合同
+    value: businessType33__c
+  - label: 两方增购补充协议（火车票+国际机票+国际酒店+签证）-预存
+    value: businessType39__c
+  - label: 三方增购补充协议（火车票+国际机票+国际酒店+签证）-预存
+    value: businessType40__c
+  - label: 海外用车-非标合同
+    value: businessType41__c
+  - label: 其他
+    value: other
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: is_deleted
+  label: is_deleted
+- api: apiName_field__c
+  label: 字段apiName
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: field_name__c
+  label: 字段名称
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: paper_or_electronic_signat__c
+  label: 纸质/电签
+  options:
+  - label: 电签
+    value: '1'
+  - label: 纸质
+    value: '2'
+  - label: 电签/纸质
+    value: '3'
+  - label: 其他
+    value: other
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 显示
+    value: ''
+  - label: 必填
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: data_own_department
+  label: 归属部门
+- api: name
+  label: 主属性
+- api: _id
+  label: _id

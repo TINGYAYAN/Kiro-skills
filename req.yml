@@ -1,5 +1,9 @@
-object_api: payment_record__c
-object_label: 银行流水
-related_object: AccountObj
-requirement: 计划任务，查询银行流水对象日期在当前日期1个月内的全部数据，汇总打款金额，将汇总金额更新到客户对象的近一个季度回款字段上
-trigger_type: scheduled_task
+requirement: "通过销售线索.Owner查人员.idass_account_id，匹配到人员更新线索负责人"
+object_api: sales_lead__c
+object_label: "销售线索"
+trigger_event: "create"
+trigger_object: "sales_lead__c"
+related_objects:
+  - api: person__c
+    label: "人员"
+    relation_field: "idass_account_id"

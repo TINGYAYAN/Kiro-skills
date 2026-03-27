@@ -1,0 +1,287 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: introducer
+  label: 介绍人
+- api: phone_number_attribution_city
+  label: 手机1归属市
+- api: wechat_nickname
+  label: 企微昵称
+- api: source
+  label: 来源
+  options:
+  - label: 搜索引擎
+    value: '1'
+  - label: 客户介绍
+    value: '2'
+  - label: 会议
+    value: '3'
+  - label: 广告
+    value: '4'
+  - label: 电话
+    value: '5'
+  - label: 网站
+    value: '6'
+  - label: 企业微信
+    value: '7'
+  - label: 其他
+    value: other
+- api: phone_number_attribution_province
+  label: 手机1归属省
+- api: mobile_phone_2__c
+  label: 手机号2
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: wechat_id__c
+  label: 微信号
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: last_time_to_become_a_lead__c
+  label: 最近一次成为线索的时间
+- api: owner_department
+  label: 负责人主属部门
+- api: tel
+  label: 电话
+- api: job_title
+  label: 职务
+- api: add
+  label: 地址
+- api: is_relevance_wechat
+  label: 是否关联企微
+  options:
+  - label: 否
+    value: 'False'
+  - label: 是
+    value: 'True'
+- api: day_of_birth
+  label: 生日日
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: phone_number_attribution_address
+  label: 手机1归属详细地址
+- api: display_name
+  label: 联系人
+- api: last_followed_time
+  label: 最后跟进时间
+- api: phone_number_attribution
+  label: 手机1归属地
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: mobile_phone_3__c
+  label: 手机号3
+- api: yesterday_key_behavior_typ__c
+  label: 昨日关键行为类型
+- api: data_own_department
+  label: 归属部门
+- api: relevance_wechat_date
+  label: 关联企微日期
+- api: parent_id
+  label: 直属上级
+- api: month_of_birth
+  label: 生日月
+- api: owner_changed_time
+  label: 联系人负责人变更时间
+- api: name
+  label: 手机号1
+- api: email__c
+  label: 邮箱
+- api: influence_level
+  label: 影响力层级
+  options:
+  - label: 决策者
+    value: '1'
+  - label: 使用者
+    value: '2'
+  - label: 评估者
+    value: '3'
+  - label: 批准者
+    value: '4'
+  - label: 影响者
+    value: '5'
+  - label: 支持者
+    value: '6'
+- api: name__c
+  label: 姓名
+- api: name_order
+  label: name_order
+- api: _id
+  label: _id
+- api: contact_competitor_strength
+  label: 联系人与竞争对手关系强度
+  options:
+  - label: 反对
+    value: '1'
+  - label: 中立
+    value: '2'
+  - label: 支持
+    value: '3'
+  - label: 绝对支持
+    value: '4'
+- api: card
+  label: 名片
+- api: tel1
+  label: 电话1
+- api: tenant_id
+  label: tenant_id
+- api: tel2
+  label: 电话2
+- api: main_contact_person__c
+  label: 主要联系人
+  options:
+  - label: 是
+    value: option_shi__c
+  - label: 否
+    value: option_fou__c
+  - label: 其他
+    value: other
+- api: communicable_channel__c
+  label: 可沟通渠道
+- api: gender
+  label: 性别
+  options:
+  - label: 男
+    value: '1'
+  - label: 女
+    value: '2'
+  - label: 其他
+    value: other
+- api: age__c
+  label: 年龄
+- api: date_of_birth
+  label: 生日
+- api: mobile1
+  label: 手机1
+- api: remark
+  label: 备注
+- api: department_affiliation__c
+  label: CDP所属部门
+- api: tel5
+  label: 电话5
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: tel3
+  label: 电话3
+- api: agent__c
+  label: 代理商
+- api: year_of_birth
+  label: 生日年
+- api: tel4
+  label: 电话4
+- api: dcj_user_position_identity__c
+  label: DCJ用户职务身份
+- api: leads_id
+  label: 源线索
+- api: is_deleted
+  label: is_deleted
+- api: mobile5
+  label: 手机5
+- api: contact_our_strength
+  label: 联系人与我方关系强度
+  options:
+  - label: 反对
+    value: '1'
+  - label: 中立
+    value: '2'
+  - label: 支持
+    value: '3'
+  - label: 绝对支持
+    value: '4'
+- api: mobile4
+  label: 手机4
+- api: mobile3
+  label: 手机3
+- api: mobile2
+  label: 手机2
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: phone_number_attribution_country
+  label: 手机1归属国家
+- api: company
+  label: 公司名称
+- api: out_owner
+  label: 外部负责人
+- api: department
+  label: 部门
+- api: phone_number_attribution_district
+  label: 手机1归属区
+- api: email
+  label: 邮件-旧
+- api: phone_number_attribution_location
+  label: 手机1归属定位
+- api: owner
+  label: 负责人
+- api: wechat_id
+  label: 微信号
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: mobile
+  label: 手机
+- api: treepath
+  label: 联系人层级
+- api: contact_status
+  label: 状态（原）
+  options:
+  - label: 正常
+    value: '0'
+  - label: 已作废
+    value: '99'
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: enterprise_wechat_user_id
+  label: 企业微信UserId
+- api: account_id
+  label: 客户名称
+- api: contact_type__c
+  label: 联系人类型
+  options:
+  - label: 客户联系人
+    value: option_customer_contact__c
+  - label: 代理商联系人
+    value: option_agent_contact_person__c
+  - label: 其他
+    value: other
+- api: primary_contact
+  label: 关键决策人
+  options:
+  - label: 否
+    value: '1'
+  - label: 是
+    value: '2'

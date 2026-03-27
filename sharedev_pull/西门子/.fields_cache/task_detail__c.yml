@@ -1,0 +1,191 @@
+fields:
+- api: task__c
+  label: 任务
+- api: lock_rule
+  label: 锁定规则
+- api: customer__c
+  label: 客户
+- api: task_processing_platform__c
+  label: 任务处理平台
+- api: this_task_configuration__c
+  label: 本次任务配置
+- api: completion_time__c
+  label: 完成时间
+- api: task_period_start_date__c
+  label: 任务周期起始日期
+- api: task_material__c
+  label: 任务内容
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: owner_department
+  label: 负责人主属部门
+- api: is_extension__c
+  label: 是否延期
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: display_name
+  label: 任务客户
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: attachment__c
+  label: 附件
+- api: data_own_department
+  label: 归属部门
+- api: name
+  label: 任务明细编号
+- api: task_type__c
+  label: 任务类型
+- api: _id
+  label: _id
+- api: delay_reason__c
+  label: 延期理由
+  options:
+  - label: 客户暂时无时间
+    value: option_customer_has_no_time_tempo__c
+  - label: 客户要求改期跟进
+    value: option_customer_request_to_change__c
+  - label: 客户关键联系人不可达
+    value: option_customer_key_contact_unrea__c
+  - label: 客户内部评估 / 决策中
+    value: option_customer_internal_assessme__c
+  - label: 客户需求尚未明确
+    value: option_customer_requirement_not_y__c
+  - label: 等待客户反馈
+    value: option_wait_for_customer_feedback__c
+  - label: 需要内部确认方案 / 报价
+    value: option_need_internal_confirmation__c
+  - label: 等待产品 / 技术支持支持
+    value: option_wait_for_product_technical__c
+  - label: 外部因素影响（节假日 / 突发情况）
+    value: option_external_factors_impact_ho__c
+  - label: 其他
+    value: other
+- api: tenant_id
+  label: tenant_id
+- api: main_contact_person__c
+  label: 本次联系人
+- api: field_62Dh4__c
+  label: 合作代理商
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: follow_up_result__c
+  label: 跟进结果
+  options:
+  - label: 已提交客户注册
+    value: option_submitted_customer_registr__c
+  - label: 重新发起21D Cadence
+    value: option_restart_21d_cadence__c
+  - label: 无效客户停止跟进
+    value: option_invalid_customer_stop_foll__c
+  - label: 其他
+    value: other
+- api: follow_up_time__c
+  label: 跟进时间
+- api: is_deleted
+  label: is_deleted
+- api: remark__c
+  label: 备注
+- api: customer_grading__c
+  label: 客户分级
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: overdue_days__c
+  label: 已逾期天数
+- api: task_description__c
+  label: 任务描述
+- api: reference_field__c
+  label: FY26销售预测(K/人民币)
+- api: out_owner
+  label: 外部负责人
+- api: last_follow_up_record__c
+  label: 上次跟进记录
+- api: next_follow_up_time__c
+  label: 下次跟进时间
+- api: owner
+  label: 负责人
+- api: last_modified_time
+  label: 最后修改时间
+- api: allocation_time__c
+  label: 分配时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: priority_level__c
+  label: 优先级
+- api: communication_willingness__c
+  label: 沟通意愿
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 客户分级任务
+    value: ''
+  - label: 21天任务
+    value: ''
+  - label: 自定义任务
+    value: ''
+- api: task_status__c
+  label: 任务状态
+  options:
+  - label: 已分配
+    value: option_already_assigned__c
+  - label: 进行中
+    value: option_in_progress__c
+  - label: 已延期
+    value: option_already_postponed__c
+  - label: 已取消
+    value: option_cancelled__c
+  - label: 已完成
+    value: option_completed__c
+  - label: 未分配
+    value: option_unassigned__c
+  - label: 已逾期
+    value: option_already_overdue__c
+  - label: 逾期完成
+    value: option_overdue_completion__c
+  - label: 其他
+    value: other
+- api: task_assigned_duration__c
+  label: 任务已分配天数
+- api: task_priority__c
+  label: 任务优先级
+- api: this_follow_up_record__c
+  label: 本次跟进记录
+- api: task_cycle_end_date__c
+  label: 任务周期结束日期

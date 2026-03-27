@@ -1,0 +1,174 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: relation_type
+  label: 互联状态
+  options:
+  - label: 创建中
+    value: '4'
+  - label: 配额过期
+    value: '6'
+  - label: 正常
+    value: '1'
+  - label: 停用
+    value: '2'
+  - label: 创建失败
+    value: '7'
+- api: extend_obj_data_id
+  label: 扩展字段在mt_data中的记录ID
+- api: profile_image
+  label: 企业头像
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: upstream_short_name
+  label: 上游企业简称
+- api: copy_status
+  label: 模板复制状态
+  options:
+  - label: 复制中
+    value: '1'
+  - label: 复制成功
+    value: '2'
+  - label: 复制失败
+    value: '3'
+- api: owner_department
+  label: 负责人主属部门
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: start_time
+  label: 启用时间
+- api: data_own_department
+  label: 归属部门
+- api: quota_expired
+  label: 配额过期导致下游企业失效
+- api: name
+  label: 企业名称
+- api: crm_open_status
+  label: CRM状态
+  options:
+  - label: 开通中
+    value: '1'
+  - label: 开通成功
+    value: '2'
+  - label: 开通失败
+    value: '3'
+- api: _id
+  label: _id
+- api: dest_short_name_spell
+  label: 简称拼音
+- api: tenant_id
+  label: tenant_id
+- api: mapper_account_id
+  label: 关联客户
+- api: stop_time
+  label: 停用时间
+- api: remark
+  label: 备注
+- api: upstream_short_name_spell
+  label: 上游企业简称拼音
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: has_fs_account
+  label: 是否开通CRM
+- api: license_name
+  label: CRM版本
+- api: is_deleted
+  label: is_deleted
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: enterprise_account
+  label: 企业账号
+- api: out_owner
+  label: 外部负责人
+- api: er_license
+  label: 用户许可
+  options:
+  - label: 1+N企业数
+    value: partner_firm_limit
+- api: mapper_partner_id
+  label: 关联合作伙伴
+- api: dest_outer_tenant_id
+  label: 外部ID
+- api: owner
+  label: 负责人
+- api: enterprise_name_spell
+  label: 名称拼音
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: dest_short_name
+  label: 简称
+- api: manage_mode
+  label: 帐号管理方式
+  options:
+  - label: 企业代管
+    value: '1'
+  - label: 自主管理
+    value: '2'
+- api: last_modified_by
+  label: 最后修改人
+- api: enterprise_id
+  label: 企业id
+- api: out_tenant_id
+  label: 外部企业
+- api: tenant_group
+  label: 企业组
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 企业
+    value: ''
+  - label: 个人
+    value: ''
+- api: register_type
+  label: 注册来源
+  options:
+  - label: 管理员添加
+    value: '1'
+  - label: 自注册
+    value: '2'
+- api: template_ea
+  label: 模板企业账号
+- api: mapper_status
+  label: 关联状态
+  options:
+  - label: 关联正常
+    value: '0'
+  - label: 关联客户失效
+    value: '1'
+  - label: 关联合作伙伴失效
+    value: '2'
+  - label: 关联客户、合作伙伴均失效
+    value: '3'

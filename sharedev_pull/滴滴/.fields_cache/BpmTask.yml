@@ -1,0 +1,242 @@
+fields:
+- api: remindLatency
+  label: 允许停留时长
+- api: workflow_name
+  label: 流程名称
+- api: action_code
+  label: 操作类型
+- api: assignees
+  label: 流程定义处理人
+- api: business_code
+  label: 应用节点类型
+  options:
+  - label: 派单员指派
+    value: assignSecond
+  - label: 服务组内指派
+    value: assignGroupToDispatchOrGrab
+  - label: 工程师接单
+    value: engineerAcceptOrder
+  - label: 服务外勤计划
+    value: newCheckIn
+  - label: 服务评价
+    value: workRate
+  - label: 工单回访
+    value: returnVisit
+  - label: 执行设备计划
+    value: executeDevicePlan
+  - label: 执行现场标准作业
+    value: createSOP
+  - label: 外部企业处理
+    value: dispatch
+  - label: 终端用户处理
+    value: terminalUserAction
+  - label: 生成服务报告
+    value: createServiceReport
+  - label: 检查组
+    value: checkGroup
+  - label: 服务产品消耗确认
+    value: serviceProjectConsumptionConfirm
+  - label: 指派给服务商工程师
+    value: downstreamAssign
+  - label: 工程师接单
+    value: downstreamEngineerAcceptOrder
+  - label: 服务外勤计划
+    value: newCheckOut
+  - label: 服务评价
+    value: downstreamWorkRate
+  - label: 应用节点
+    value: externalApplyNode
+  - label: 普通节点
+    value: normalNode
+  - label: 审批节点
+    value: approveNode
+  - label: 服务请求对象的指派节点
+    value: serviceRequestAssign
+  - label: 服务消耗确认
+    value: serviceChargeConfirm
+  - label: 下游SOP
+    value: downstreamSOP
+  - label: 终端用户任务
+    value: terminalUserTaskAction
+  - label: 签收
+    value: serviceCenterSign
+  - label: 寄回
+    value: serviceCenterSendBack
+  - label: 客户签收
+    value: rmaCustomerSign
+- api: activityId
+  label: 流程节点定义Id
+- api: sourceWorkflowId
+  label: 流程srcId
+- api: error_reason
+  label: 异常原因
+- api: activity_instance_id
+  label: 节点实例id
+- api: session_key
+  label: 会话分组
+- api: state
+  label: 任务状态
+  options:
+  - label: 进行中
+    value: in_progress
+  - label: 已完成
+    value: pass
+  - label: 已终止
+    value: cancel
+  - label: 异常
+    value: error
+  - label: 暂不处理
+    value: suspend
+  - label: 加签中
+    value: tag_waiting
+- api: applicantId
+  label: 流程发起人
+- api: workflowInstanceId
+  label: 所属业务流程
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: link_app_type
+  label: 外部业务类型
+- api: relatedObject
+  label: 所属对象
+- api: link_app_id
+  label: 外部所属业务
+- api: is_tag
+  label: 加签节点
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: candidateIds
+  label: 任务待处理人
+- api: data_own_department
+  label: 归属部门
+- api: object_describe_id
+  label: object_describe_id
+- api: name
+  label: 任务主题
+- api: taskName
+  label: 任务名称
+- api: _id
+  label: _id
+- api: workflowInstanceName
+  label: 流程主题
+- api: workflowId
+  label: 流程定义Id
+- api: object_record_type
+  label: 对象业务类型
+- api: last_suspend_time
+  label: 最后暂停时间
+- api: tenant_id
+  label: tenant_id
+- api: action_type
+  label: 审批结果
+  options:
+  - label: 同意
+    value: agree
+  - label: 不同意
+    value: reject
+- api: description
+  label: 任务描述
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: objectIds
+  label: 节点流转对象Id
+- api: duration
+  label: 任务耗时
+- api: stageName
+  label: 阶段名称
+- api: is_deleted
+  label: is_deleted
+- api: suspend_accumulate_time
+  label: 累计暂停时长
+- api: suspend_accumulate_time_calculate
+  label: 挂起总耗时
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: startTime
+  label: 任务开始时间
+- api: execution_type
+  label: 类型
+  options:
+  - label: 更新
+    value: update
+  - label: 审批
+    value: approve
+  - label: 选择新建关联对象
+    value: addRelatedObject
+  - label: 添加团队成员
+    value: operation-addteammember
+  - label: 更换负责人
+    value: operation-changeowner
+  - label: 退回
+    value: operation-return
+  - label: 确认收货
+    value: operation-confirmreceive
+  - label: 确认发货
+    value: operation-confirmdelivery
+  - label: 线索一转三
+    value: operation-HandleThree
+  - label: 应用节点
+    value: externalApplyTask
+  - label: 新建从对象
+    value: addMDObject
+  - label: 批量新建关联对象
+    value: batchAddRelatedObject
+  - label: 编辑从对象
+    value: batchEditMasterDetailObject
+  - label: 签到
+    value: operation-signin
+  - label: 签退
+    value: operation-signout
+- api: out_owner
+  label: 外部负责人
+- api: stageId
+  label: 当前阶段Id
+- api: owner
+  label: 负责人
+- api: actual_duration
+  label: 耗时(仅工作时间)
+- api: instance_current_candidate_ids
+  label: 流程待处理人
+- api: last_modified_time
+  label: 最后修改时间
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: timeoutTime
+  label: 超时时长
+- api: processorIds
+  label: 任务执行人
+- api: current_candidate_ids
+  label: 当前待处理人
+- api: isTimeout
+  label: 是否超时
+- api: read_employee
+  label: 已读人员
+- api: objectApiName
+  label: 所属业务对象
+- api: endTime
+  label: 任务结束时间
+- api: task_type
+  label: 任务类型
+  options:
+  - label: 多人审批
+    value: one_pass
+  - label: 会签审批
+    value: all_pass
+- api: objectDataId
+  label: 所属业务记录

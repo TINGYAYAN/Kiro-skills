@@ -1,0 +1,37 @@
+[task] started_at=2026-03-26 19:03:01
+[task] cmd=python3 batch_runner.py --runtime-precheck --no-notify
+
+[批量] 找到 1 条待执行记录
+  [部署器] 已加载 Session（项目：西门子）
+[部署器] 导航到函数管理页: https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction
+Traceback (most recent call last):
+  File "/Users/yanye/code/test拨号/_tools/batch_runner.py", line 964, in <module>
+    main()
+  File "/Users/yanye/code/test拨号/_tools/batch_runner.py", line 943, in main
+    results = run_batch(
+  File "/Users/yanye/code/test拨号/_tools/batch_runner.py", line 797, in run_batch
+    batch, browser, context, page = _execute_batch_records_loop(
+  File "/Users/yanye/code/test拨号/_tools/batch_runner.py", line 452, in _execute_batch_records_loop
+    browser, context, page = _start_batch_browser(pw, cfg, headless)
+  File "/Users/yanye/code/test拨号/_tools/batch_runner.py", line 389, in _start_batch_browser
+    navigate_to_function_list(page, cfg)
+  File "/Users/yanye/code/test拨号/_tools/deployer/deploy_login.py", line 830, in navigate_to_function_list
+    page.goto(url, wait_until="domcontentloaded", timeout=30000)
+  File "/Users/yanye/Library/Python/3.9/lib/python/site-packages/playwright/sync_api/_generated.py", line 9020, in goto
+    self._sync(
+  File "/Users/yanye/Library/Python/3.9/lib/python/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+  File "/Users/yanye/Library/Python/3.9/lib/python/site-packages/playwright/_impl/_page.py", line 552, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+  File "/Users/yanye/Library/Python/3.9/lib/python/site-packages/playwright/_impl/_frame.py", line 145, in goto
+    await self._channel.send("goto", locals_to_params(locals()))
+  File "/Users/yanye/Library/Python/3.9/lib/python/site-packages/playwright/_impl/_connection.py", line 61, in send
+    return await self._connection.wrap_api_call(
+  File "/Users/yanye/Library/Python/3.9/lib/python/site-packages/playwright/_impl/_connection.py", line 528, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TargetClosedError: Page.goto: Target page, context or browser has been closed
+Call log:
+  - navigating to "https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction", waiting until "domcontentloaded"
+
+
+[task] finished_at=2026-03-26 19:03:08 exit_code=1

@@ -1,0 +1,116 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: field_code__c
+  label: 字段编码
+- api: status__c
+  label: 状态
+  options:
+  - label: 启用
+    value: 'True'
+  - label: 禁用
+    value: 'False'
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: project_type__c
+  label: 项目类型
+  options:
+  - label: 实施交付
+    value: default__c
+  - label: 二次对接
+    value: record_wg24M__c
+  - label: 其他
+    value: other
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: field_name__c
+  label: 字段名称
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: project_stage__c
+  label: 项目阶段
+  options:
+  - label: 项目准备
+    value: '1'
+  - label: 项目启动
+    value: '2'
+  - label: 需求调研
+    value: '3'
+  - label: 方案确认
+    value: '4'
+  - label: 系统建设
+    value: '5'
+  - label: 系统上线试用
+    value: '6'
+  - label: 正式上线
+    value: '7'
+  - label: 运维支持
+    value: '8'
+  - label: 已交接
+    value: '9'
+  - label: 业务方取消
+    value: '10'
+  - label: 其他
+    value: other
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: data_own_department
+  label: 归属部门
+- api: name
+  label: 编号
+- api: _id
+  label: _id

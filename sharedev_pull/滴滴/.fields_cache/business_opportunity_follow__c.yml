@@ -1,0 +1,250 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: WhoWhoareourmaincompetitor__c
+  label: Who：谁是我们在该项目上的主要竞品？他们在该项目上其核心优劣势是什么？
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: owner_department
+  label: 负责人主属部门
+- api: implementation_process_app__c
+  label: 实施流程申请
+- api: sales_strategy_to_increase__c
+  label: How：我们应该采用怎样的销售策略以提高在该项目的赢单概率？
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: review_file__c
+  label: 复盘文件
+- api: budget_info__c
+  label: B：预算信息
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: data_own_department
+  label: 归属部门
+- api: sales_record__c
+  label: 销售记录
+- api: follow_up_person__c
+  label: 随访人员
+- api: name
+  label: 编号
+- api: _id
+  label: _id
+- api: why_customer_choose_or_rep__c
+  label: Why：客户为什么要选择/替换供应商？
+- api: tenant_id
+  label: tenant_id
+- api: mnutes__c
+  label: 会议纪要
+- api: next_visit_to_do__c
+  label: 下次拜访前ToDo
+- api: location__c
+  label: 位置
+- api: Objective1__c
+  label: 拜访目的（SMB）
+  options:
+  - label: 【用车】后台管控
+    value: '1'
+  - label: 【用车】账户内宣
+    value: '2'
+  - label: 【用车】制度渗透
+    value: '3'
+  - label: 【用车】非标方案
+    value: '4'
+  - label: 【用车】集团扩展
+    value: '5'
+  - label: 【用车】关联公司
+    value: '6'
+  - label: 【用车】账户因私
+    value: '7'
+  - label: 【用车】沉默召回
+    value: '8'
+  - label: 【商旅】拉新沟通
+    value: '9'
+  - label: 【商旅】激活沟通
+    value: '10'
+  - label: 【商旅】放量沟通
+    value: '11'
+  - label: 需求沟通
+    value: '12'
+  - label: 解决方案（系统对接）
+    value: '13'
+  - label: 合同确认
+    value: '14'
+  - label: 协助配置（制度管控）
+    value: '15'
+  - label: 技术问题解决
+    value: '16'
+  - label: 重要客诉跟进
+    value: '17'
+  - label: 结算事项（加款、对账、开票）
+    value: '18'
+  - label: 沉默/流失召回/新开账户
+    value: '19'
+  - label: 活动推广
+    value: '20'
+  - label: 其他
+    value: other
+- api: customItem204__c
+  label: 是否季度复盘
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: NDemandInformation__c
+  label: N：需求信息
+- api: is_deleted
+  label: is_deleted
+- api: decision_chain_info__c
+  label: A：决策链信息
+- api: project_expected_launch_ti__c
+  label: T：项目预期的上线时间
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: contentPic__c
+  label: 销售记录图片
+- api: out_owner
+  label: 外部负责人
+- api: role__c
+  label: 拜访角色
+  options:
+  - label: 老板
+    value: '1'
+  - label: 财务
+    value: '2'
+  - label: 行政
+    value: '3'
+  - label: 人力
+    value: '4'
+  - label: 采购
+    value: '5'
+  - label: 员工
+    value: '6'
+  - label: 其他
+    value: '7'
+  - label: 无
+    value: '8'
+- api: owner
+  label: 负责人
+- api: contactName__c
+  label: 拜访人
+- api: last_modified_time
+  label: 最后修改时间
+- api: opportunity__c
+  label: 商机
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: accompanyPerson__c
+  label: 陪访人员
+- api: purpose__c
+  label: 拜访目的
+  options:
+  - label: 关系维护
+    value: '1'
+  - label: 项目跟进
+    value: '2'
+  - label: 问题解决
+    value: '3'
+  - label: 合同续约
+    value: '4'
+  - label: 交接拜访
+    value: '5'
+  - label: 流失召回
+    value: '6'
+  - label: 生态伙伴洽谈
+    value: '7'
+  - label: 需求梳理
+    value: '8'
+  - label: 方案制定
+    value: '9'
+  - label: 决策沟通
+    value: '10'
+  - label: 合同开户
+    value: '11'
+  - label: 赢单
+    value: '12'
+  - label: 激活
+    value: '13'
+  - label: 内宣&放量
+    value: '14'
+  - label: 客户约访
+    value: '15'
+  - label: 前期沟通
+    value: '16'
+  - label: 了解需求
+    value: '17'
+  - label: 需求确定
+    value: '18'
+  - label: 渗透跟进-1部
+    value: '19'
+  - label: 渗透跟进-2部
+    value: '21'
+  - label: 日常运维
+    value: '22'
+- api: nextStep__c
+  label: 下一步计划
+- api: contentFile__c
+  label: 附件
+- api: next_visit_time__c
+  label: 下次计划拜访时间
+- api: current__c
+  label: 当前进展
+- api: customItem155__c
+  label: 本次拜访方式
+  options:
+  - label: 现场拜访
+    value: '5'
+  - label: 电话
+    value: '1'
+  - label: 线上会议
+    value: '4'
+  - label: 微信
+    value: '2'
+  - label: 邮件
+    value: '3'
+  - label: 地推
+    value: '6'
+  - label: 企微/微信
+    value: '7'
+  - label: 其他
+    value: other

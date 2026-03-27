@@ -1,0 +1,1242 @@
+fields:
+- api: endTime__c
+  label: 原协议延长至
+- api: renewalConfiguration__c
+  label: 续签配置申请
+- api: stamp_position_party_b__c
+  label: 甲方用印位置
+- api: xsy_name__c
+  label: 销售易流水号
+- api: affiliatedCompany10__c
+  label: 甲方关联公司10
+- api: partyCNature__c
+  label: 丙方性质
+  options:
+  - label: 我方
+    value: '1'
+  - label: 对方
+    value: '2'
+  - label: 其他
+    value: other
+- api: copies__c
+  label: 份数
+- api: accountLdapEmail__c
+  label: 客户所有人
+- api: partyCrelationCode__c
+  label: 丙方代表人
+- api: signer_code_b__c
+  label: 乙方签字人code
+- api: masterContract__c
+  label: 关联桔契主合同编号
+- api: cdepositBank__c
+  label: 丙方开户行名称
+- api: currency__c
+  label: 币种
+  options:
+  - label: 人民币
+    value: '1'
+  - label: 美元
+    value: '2'
+  - label: 其他
+    value: other
+- api: contractRemind__c
+  label: 合同提醒人员
+- api: non_standard_quotation_num__c
+  label: 非常规合同报价单ID合集
+- api: creator_and_owner_consiste__c
+  label: 创建人&合同所属人是否一致
+- api: version
+  label: version
+- api: affiliatedCompany15__c
+  label: 甲方关联公司15
+- api: paymentMethodX__c
+  label: 业务细类
+  options:
+  - label: 预存
+    value: '1'
+  - label: 授信
+    value: '2'
+  - label: 其他
+    value: other
+- api: aAddress__c
+  label: 甲方地址
+- api: useQrCodeVersion__c
+  label: 使用公司二维码版本
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: affiliatedCompany6__c
+  label: 甲方关联公司6
+- api: stamp_position_jiagfang__c
+  label: 丙方用印位置
+- api: partyAphone__c
+  label: 甲方代表人手机号
+- api: originalName__c
+  label: 原协议名称
+- api: contract_major_category__c
+  label: 合同大类
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '2'
+  - label: 出租车
+    value: '3'
+  - label: 代驾
+    value: '5'
+  - label: 聚合
+    value: '4'
+  - label: 跨境用车
+    value: '6'
+  - label: 其他
+    value: other
+- api: belongContact__c
+  label: 合同所属人
+- api: contract_original_file_key__c
+  label: 合同原版文件key
+- api: localService__c
+  label: 本地化服务费
+- api: partyBrelationCode__c
+  label: 乙方代表人
+- api: processTerminationReason__c
+  label: 驳回原因
+- api: archiveDate__c
+  label: 归档时间
+- api: attachment_type__c
+  label: 附件类型
+  options:
+  - label: 终版文件
+    value: ZI2ESBq01
+  - label: 定稿文件
+    value: option_finalized_file__c
+  - label: 其他
+    value: other
+- api: sealYN__c
+  label: 是否为非标合同
+  options:
+  - label: 是
+    value: '1'
+  - label: 否【系统生成报价单不用印，合同内嵌报价单与系统报价单一致】
+    value: '2'
+  - label: 其他
+    value: other
+- api: financial_note__c
+  label: 财务备注
+- api: platformServices__c
+  label: 出行费用及平台使用费
+- api: useOtherPartyElectronicSignature__c
+  label: 使用对方电子章/签名
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: aName__c
+  label: 甲方名称
+- api: belongMaDepartmentA__c
+  label: 合同申请人上级部门名称
+- api: masterContractNo__c
+  label: 桔契主合同编号
+- api: is_use_our_template__c
+  label: 是否使用我方模板
+  options:
+  - label: 是，使用我方模板
+    value: '1'
+  - label: 否，使用对方模板
+    value: '0'
+  - label: 其他
+    value: other
+- api: businessCategory__c
+  label: 业务细类_非标
+  options:
+  - label: 授信
+    value: '1'
+  - label: 预付
+    value: '2'
+  - label: 其他
+    value: other
+- api: partyDrelationCode__c
+  label: 丁方代表人
+- api: createrFoldTheMainId__c
+  label: 创建人叠宙ID
+- api: unconventional_opportunity__c
+  label: 商机（非常规）
+- api: out_tenant_id
+  label: 外部企业
+- api: customItem176__c
+  label: 流程实例ID
+- api: quote_share_id__c
+  label: 报价单.纷享ID
+- api: renewalStatus__c
+  label: 续签配置状态
+- api: partyDphone__c
+  label: 丁方代表人手机号
+- api: scanCompletedDate__c
+  label: 归档补录完成时间
+- api: signer_code_c__c
+  label: 丙方签字人code
+- api: stamp_position_my_side__c
+  label: 乙方用印位置
+- api: is_success__c
+  label: 是否成功
+  options:
+  - label: 成功
+    value: '1'
+  - label: 失败
+    value: '2'
+  - label: 其他
+    value: other
+- api: paymentTerm__c
+  label: 付款期限
+  options:
+  - label: 立即
+    value: '2'
+  - label: 7天到期
+    value: '3'
+  - label: 10天到期
+    value: '4'
+  - label: 15天到期
+    value: '5'
+  - label: 30天到期
+    value: '6'
+  - label: 40天到期
+    value: '7'
+  - label: 45天到期
+    value: '8'
+  - label: 60天到期
+    value: '9'
+  - label: 其他
+    value: other
+- api: id__c
+  label: 合同ID
+- api: invalidReason__c
+  label: 作废原因
+- api: single_choice__c
+  label: 非常规合同类型
+  options:
+  - label: 一个主体两方合同（小桔国旅）
+    value: '1'
+  - label: 一个主体三方合同（小桔国旅＋小桔天津分）
+    value: '2'
+  - label: 两个主体三方合同（滴滴出行＋小桔国旅）
+    value: '3'
+  - label: 两个主体四方合同（滴滴出行＋小桔国旅＋小桔天津分）
+    value: '4'
+  - label: 非标合同
+    value: '5'
+  - label: 其他
+    value: other
+- api: contract_business_type_con__c
+  label: 合同业务类型
+  options:
+  - label: 用车-两方合同
+    value: businessType4__c
+  - label: 用车-三方合同
+    value: businessType7__c
+  - label: 用车-非标合同
+    value: businessType3__c
+  - label: 用车-两方关联补充协议
+    value: businessType8__c
+  - label: 用车-三方关联补充协议
+    value: businessType6__c
+  - label: 用车-两方开立补充协议
+    value: businessType9__c
+  - label: 用车-三方开立补充协议
+    value: businessType10__c
+  - label: 用车-两方延长补充协议
+    value: businessType11__c
+  - label: 用车-三方延长补充协议
+    value: businessType12__c
+  - label: 用车-两方延长/调整报价补充协议-带报价
+    value: businessType13__c
+  - label: 用车-三方延长补充协议-带报价
+    value: businessType14__c
+  - label: 用车-三方权利义务转移补充协议
+    value: businessType15__c
+  - label: 用车-四方权利义务转移补充协议
+    value: businessType16__c
+  - label: 商旅-两方合同
+    value: businessType17__c
+  - label: 商旅-三方合同
+    value: businessType18__c
+  - label: 商旅-非标合同
+    value: businessType19__c
+  - label: 出租车-两方合同
+    value: businessType21__c
+  - label: 出租车-非标合同
+    value: businessType22__c
+  - label: 聚合-补充协议
+    value: businessType23__c
+  - label: 两方增购补充协议（火车票+国际机票+国际酒店+签证）-授信
+    value: businessType24__c
+  - label: 三方增购补充协议（火车票+国际机票+国际酒店+签证）-授信
+    value: businessType25__c
+  - label: 商旅-补充协议-带报价
+    value: businessType20__c
+  - label: 代驾-两方合同-不带报价
+    value: businessType26__c
+  - label: 代驾-两方合同-带报价
+    value: businessType32__c
+  - label: 代驾-非标合同
+    value: businessType38__c
+  - label: 一个主体两方合同
+    value: businessType33__c
+  - label: 一个主体三方合同
+    value: businessType34__c
+  - label: 两个主体三方合同
+    value: businessType35__c
+  - label: 两个主体四方合同
+    value: businessType36__c
+  - label: 非常规-非标合同
+    value: businessType37__c
+  - label: 两方增购补充协议（火车票+国际机票+国际酒店+签证）-预存
+    value: businessType39__c
+  - label: 三方增购补充协议（火车票+国际机票+国际酒店+签证）-预存
+    value: businessType40__c
+  - label: 跨境用车-非标合同
+    value: businessType41__c
+  - label: 其他
+    value: other
+- api: scanRecording__c
+  label: 扫描补录日期
+- api: completeDate__c
+  label: 合同我方主体印章签章时间
+- api: affiliatedCompany14__c
+  label: 甲方关联公司14
+- api: contract_subcategory__c
+  label: 合同小类
+  options:
+  - label: 两方合同
+    value: '1'
+  - label: 三方合同
+    value: '2'
+  - label: 非标合同
+    value: '3'
+  - label: 两方关联补充协议
+    value: '4'
+  - label: 三方关联补充协议
+    value: '5'
+  - label: 两方开立补充协议
+    value: '6'
+  - label: 三方开立补充协议
+    value: '7'
+  - label: 两方延长补充协议
+    value: '8'
+  - label: 三方延长补充协议
+    value: '9'
+  - label: 两方延长/调整报价补充协议-带报价
+    value: '10'
+  - label: 三方延长补充协议-带报价
+    value: '11'
+  - label: 三方权利义务转移补充协议
+    value: '12'
+  - label: 四方权利义务转移补充协议
+    value: '13'
+  - label: 补充协议-带报价
+    value: '14'
+  - label: 补充协议
+    value: '15'
+  - label: 两方增购补充协议（火车票+国际机票+国际酒店+签证）-授信
+    value: '16'
+  - label: 三方增购补充协议（火车票+国际机票+国际酒店+签证）-授信
+    value: '17'
+  - label: 两方合同-不带报价
+    value: '18'
+  - label: 两方合同-带报价
+    value: '19'
+  - label: 两方增购补充协议（火车票+国际机票+国际酒店+签证）-预存
+    value: '20'
+  - label: 三方增购补充协议（火车票+国际机票+国际酒店+签证）-预存
+    value: '21'
+  - label: 其他
+    value: other
+- api: contract_scan_file_key__c
+  label: 合同扫描文件key
+- api: platformServicesWords__c
+  label: 出行费用及平台使用费（大写）
+- api: cAccount__c
+  label: 丙方银行户名
+- api: partyANature__c
+  label: 甲方性质
+  options:
+  - label: 我方
+    value: '1'
+  - label: 对方
+    value: '2'
+  - label: 其他
+    value: other
+- api: datetime__c
+  label: 签署时间
+- api: originalNoJQ__c
+  label: 原协议编号-合同变量用
+- api: owner_department
+  label: 负责人主属部门
+- api: ownerMaDepart__c
+  label: 所有人上级部门
+- api: partner_address__c
+  label: 乙方地址
+- api: version__c
+  label: 版本号
+- api: create_time
+  label: 创建时间
+- api: partyArelation__c
+  label: 甲方印章
+  options:
+  - label: 公章
+    value: '1'
+  - label: 销售合同专用章
+    value: '2'
+  - label: 电子印章
+    value: '3'
+  - label: 其他
+    value: other
+- api: created_by
+  label: 创建人
+- api: settlementCycle__c
+  label: 结算周期
+  options:
+  - label: 3天
+    value: '1'
+  - label: 7天
+    value: '2'
+  - label: 15天
+    value: '3'
+  - label: 30天
+    value: '4'
+  - label: 45天
+    value: '5'
+  - label: 60天
+    value: '6'
+  - label: 其他
+    value: other
+- api: sourceSystemBusiness__c
+  label: 报价单编号
+- api: contract_final_version_fil__c
+  label: 合同终版文件key
+- api: name
+  label: 流水号
+- api: name__c
+  label: 姓名
+- api: affiliatedCompany2__c
+  label: 甲方关联公司2
+- api: customItem92__c
+  label: 今日日期
+- api: admin_data_processing_flag__c
+  label: 管理员数据处理标记
+- api: withdrawal__c
+  label: 撤回理由
+- api: partyArelationCode__c
+  label: 甲方代表人
+- api: state__c
+  label: 备注说明
+- api: contractApplicant__c
+  label: 合同申请人
+- api: partyCrelation__c
+  label: 丙方印章
+  options:
+  - label: 公章
+    value: '1'
+  - label: 销售合同专用章
+    value: '2'
+  - label: 电子印章
+    value: '3'
+  - label: 商旅实体合同章2
+    value: '23'
+  - label: 商旅实体合同章
+    value: BJXJGJLXSHT
+  - label: 北京小桔国际旅行社有限公司电子公章
+    value: '31'
+  - label: 北京小桔国际旅行社有限公司天津分公司电子公章
+    value: '32'
+  - label: 其他
+    value: other
+- api: dName__c
+  label: 丁方名称
+- api: expressnumber__c
+  label: 快递单号
+- api: storageCredit__c
+  label: 预存/授信
+- api: appLdap__c
+  label: 申请人邮箱
+- api: jqContractNo__c
+  label: 桔契合同编号
+- api: approvalCompletionTime__c
+  label: 审批完成时间
+- api: partyArelationFlag__c
+  label: 甲方印章性质
+  options:
+  - label: 印章
+    value: '1'
+  - label: 签字
+    value: '2'
+  - label: 代表人
+    value: '3'
+  - label: 印章+签字
+    value: '4'
+  - label: 其他
+    value: other
+- api: backdatingReason__c
+  label: 倒签理由
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 自增流水号
+- api: contractDateSelect__c
+  label: 合同日期
+  options:
+  - label: 有固定期限
+    value: '2'
+  - label: 以签章日为生效日
+    value: '3'
+  - label: 无固定期限
+    value: '1'
+  - label: 其他
+    value: other
+- api: partyCphone__c
+  label: 丙方代表人手机号
+- api: channelManager__c
+  label: 渠道经理
+- api: belongDepartment__c
+  label: 合同所属部门
+- api: businessLine__c
+  label: 业务线
+  options:
+  - label: 集团通用
+    value: '1'
+  - label: 其他
+    value: other
+- api: signer_code_d__c
+  label: 丁方签字人code
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: out_owner
+  label: 外部负责人
+- api: affiliatedCompany7__c
+  label: 甲方关联公司7
+- api: owner
+  label: 负责人
+- api: masterContractMsg__c
+  label: 选择主合同
+- api: customerCreditLimit__c
+  label: 集团客户授信
+- api: partyDNature__c
+  label: 丁方性质
+  options:
+  - label: 我方
+    value: '1'
+  - label: 对方
+    value: '2'
+  - label: 其他
+    value: other
+- api: signingBackgroundX__c
+  label: 签订背景
+  options:
+  - label: 已邮件审核，已核对上传合同内容与邮件最终审核版本一致
+    value: '1'
+  - label: 无条款修订，仅添加水印、合同编号
+    value: '2'
+  - label: 无条款修订，仅修改标点符号
+    value: '3'
+  - label: 无条款修订，仅添加客户银行账户
+    value: '4'
+  - label: 无条款修订，客户先盖章
+    value: '5'
+  - label: 无条款修订，使用旧模板
+    value: '6'
+  - label: 无条款修订，客户关联公司众多无法于标准合同流程中添加
+    value: '7'
+  - label: 其他（请填写不能走标准合同流程，但又未走线下邮件审批的原因）
+    value: '8'
+  - label: 新客户
+    value: '9'
+  - label: 老客续签
+    value: '10'
+  - label: 其他
+    value: '11'
+  - label: 禁用
+    value: other
+- api: xsyId__c
+  label: 销售易数据ID
+- api: affiliatedCompany13__c
+  label: 甲方关联公司13
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 常规合同
+    value: ''
+  - label: 非常规合同(多主体合并签约)
+    value: ''
+- api: financial_confirmed_contra__c
+  label: 财务确认的合同开始日期
+- api: linkcheck__c
+  label: 归档文件链接有无
+  options:
+  - label: 有
+    value: '1'
+  - label: 无
+    value: '2'
+  - label: 其他
+    value: other
+- api: party_d_signatory__c
+  label: 丁方签约代表
+- api: ownerLdap__c
+  label: 所属人邮箱
+- api: seal_order__c
+  label: 盖章顺序
+  options:
+  - label: 我方先盖章
+    value: '0'
+  - label: 对方先盖章
+    value: '1'
+  - label: 其他
+    value: other
+- api: historical_contract_number__c
+  label: 历史合同编号信息
+- api: localServiceWords__c
+  label: 本地化服务费（大写）
+- api: Cost_c__c
+  label: 金额
+- api: lock_rule
+  label: 锁定规则
+- api: finalContract__c
+  label: 合同终版文件
+- api: contract_owner_direct_supe__c
+  label: 合同所属人.直属上级
+- api: schemeAgreement__c
+  label: 票据方案协议
+- api: transferDate__c
+  label: 转让日
+- api: partyBphone__c
+  label: 乙方代表人手机号
+- api: contract_source_template_n__c
+  label: 合同.合同模板.模板类型
+- api: financial_attachment__c
+  label: 财务附件
+- api: manager__c
+  label: 直属上级
+- api: invalidDate__c
+  label: 作废时间
+- api: manualRenewalYN__c
+  label: 是否完成手动续约
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: opiesWords__c
+  label: 份数大写
+- api: partyDrelationFlag__c
+  label: 丁方印章性质
+  options:
+  - label: 印章
+    value: '1'
+  - label: 签字人
+    value: '2'
+  - label: 代表人
+    value: '3'
+  - label: 印章+签字
+    value: '4'
+  - label: 其他
+    value: other
+- api: affiliatedCompany9__c
+  label: 甲方关联公司9
+- api: emailSettlementManager__c
+  label: 结算经理邮箱
+- api: scannedContract__c
+  label: 合同扫描件
+- api: months__c
+  label: 已超期情况
+- api: d_signatory__c
+  label: 丁方签字人
+- api: personalInformationYN__c
+  label: 是否涉及提供个人信息
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: contractTypeApl__c
+  label: 合同类型
+- api: party_c_credit_code__c
+  label: 丙方企业信用代码
+- api: applayName__c
+  label: 合同申请人姓名
+- api: customerCreditFlag__c
+  label: 是否关联集团授信
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: endDate__c
+  label: 合同失效日期
+- api: originalSignedDate__c
+  label: 原协议签署日
+- api: signer__c
+  label: 乙方签字人
+- api: csm_customer__c
+  label: CSM客户
+- api: specialRequirements__c
+  label: 特殊要求
+- api: contractProper__c
+  label: 上传合同文本
+- api: contractNature__c
+  label: 合同性质
+  options:
+  - label: 主合同
+    value: '3'
+  - label: 补充协议-带报价
+    value: '4'
+  - label: 补充协议-不带报价
+    value: '5'
+  - label: 主体变更协议
+    value: '6'
+  - label: 终止协议
+    value: '7'
+  - label: 续签合同
+    value: '8'
+  - label: 续签合同-不带报价
+    value: '9'
+  - label: 其他
+    value: other
+- api: non_standard_quote_categor__c
+  label: 一个合同非标报价单品类
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '2'
+  - label: 代驾
+    value: '4'
+  - label: 出租车
+    value: '5'
+  - label: 聚合
+    value: '6'
+  - label: 费控
+    value: '3'
+  - label: 跨境用车
+    value: '8'
+  - label: 其他
+    value: other
+- api: partyBrelation__c
+  label: 乙方印章
+  options:
+  - label: 销售合同专用章
+    value: '2'
+  - label: 实体公章
+    value: '1'
+  - label: 电子合同章
+    value: '3'
+  - label: 用车实体合同章
+    value: '4'
+  - label: 电子公章
+    value: '5'
+  - label: 电子财务专用章1
+    value: '6'
+  - label: 电子公章1
+    value: '7'
+  - label: 出租车实体合同章
+    value: '8'
+  - label: 公章1
+    value: '9'
+  - label: 合同章1
+    value: '10'
+  - label: 合同专用章（销售）2
+    value: '11'
+  - label: 电子公章2
+    value: '12'
+  - label: 商旅实体合同章
+    value: '13'
+  - label: 公章2
+    value: '14'
+  - label: 电子公章3
+    value: '15'
+  - label: 合同章3
+    value: '16'
+  - label: 公章3
+    value: '17'
+  - label: 合同章4
+    value: '18'
+  - label: 电子公章4
+    value: '19'
+  - label: 公章4
+    value: '20'
+  - label: 代驾实体合同章
+    value: HZKJZXKJSTHTZ
+  - label: 滴滴出行科技有限公司电子公章
+    value: '30'
+  - label: 北京小桔国际旅行社有限公司电子公章
+    value: '31'
+  - label: 杭州快驾智行科技有限公司电子公章
+    value: '33'
+  - label: 天津小桔商业管理有限公司电子公章
+    value: '34'
+  - label: 其他
+    value: other
+- api: customItem191__c
+  label: 二级部门
+- api: tenant_id
+  label: tenant_id
+- api: other__c
+  label: 其他说明
+- api: partyBNature__c
+  label: 乙方性质
+  options:
+  - label: 我方
+    value: '1'
+  - label: 对方
+    value: '2'
+  - label: 其他
+    value: other
+- api: didiNum__c
+  label: 滴滴报价单号
+- api: financial_confirmed_contra_end__c
+  label: 财务确认的合同结束日期
+- api: affiliatedCompany12__c
+  label: 甲方关联公司12
+- api: businessBigType__c
+  label: 业务大类
+  options:
+  - label: 企业级销售类
+    value: '1'
+  - label: 其他
+    value: other
+- api: cooperateDirectionCode__c
+  label: 合作方向code
+- api: draftno__c
+  label: 拟定编号
+- api: final_draft_file_key__c
+  label: 最终定稿文件key
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: affiliatedCompanyall__c
+  label: 甲方关联公司ALL
+- api: originalContract__c
+  label: 合同原版文件
+- api: startDate__c
+  label: 合同生效日期
+- api: partyCrelationFlag__c
+  label: 丙方印章性质
+  options:
+  - label: 印章
+    value: '1'
+  - label: 签字
+    value: '2'
+  - label: 代表人
+    value: '3'
+  - label: 印章+签字
+    value: '4'
+  - label: 其他
+    value: other
+- api: affiliatedCompany__c
+  label: 甲方关联公司1
+- api: entityTypeName__c
+  label: 业务类型(文本名称)
+- api: remark__c
+  label: 备注（详见下方备注说明）
+- api: bName__c
+  label: 乙方名称
+- api: affiliatedCompany3__c
+  label: 甲方关联公司3
+- api: field_x1ddW__c
+  label: 商机类型
+- api: approved_quotation_number__c
+  label: 下游使用报价单号
+- api: contractTemplate__c
+  label: 来源模板编号
+- api: last_modified_time
+  label: 最后修改时间
+- api: gmtCreate__c
+  label: 合同创建时间
+- api: opportunity__c
+  label: 商机
+- api: sunshineAgreement__c
+  label: 包含阳光协议
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: is_owner_consistent__c
+  label: 所有人&所属人是否一致
+- api: otherAccessoriesRemark__c
+  label: 其他附件说明
+- api: whetherdraft__c
+  label: 是否草拟合同（切换选项，将清空合同文本）
+  options:
+  - label: 是，进入在线协同
+    value: '1'
+  - label: 否，提交合同审批
+    value: '2'
+  - label: 其他
+    value: other
+- api: belongMaDepart__c
+  label: 合同所属人上级部门
+- api: contractName__c
+  label: 合同名称
+- api: agreementYN__c
+  label: 上传的合同附件是否包括《数据共享与保护协议》或者《数据委托处理协议》
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: specialTerm__c
+  label: 包含特殊条款
+  options:
+  - label: 非标排他条款
+    value: '1'
+  - label: 非标违约条款
+    value: '2'
+  - label: 非标责任上限
+    value: '3'
+  - label: 非标知识产权条款
+    value: '4'
+  - label: 其他
+    value: other
+- api: party_c_signatory__c
+  label: 丙方签约代表
+- api: signing_representative__c
+  label: 甲方签约代表
+- api: contractStatus__c
+  label: 合同状态
+  options:
+  - label: 审批中
+    value: '1'
+  - label: 客户拒签
+    value: '2'
+  - label: 超期未签
+    value: '3'
+  - label: 已作废
+    value: '4'
+  - label: 扫描补录中
+    value: '5'
+  - label: 已归档
+    value: '6'
+  - label: 纸质归档中
+    value: '7'
+  - label: 签章中
+    value: '8'
+  - label: 已取消
+    value: '9'
+  - label: 我方签章中
+    value: '10'
+  - label: 对方签章中
+    value: '11'
+  - label: 协议终止
+    value: '12'
+  - label: 系统维护
+    value: '13'
+  - label: 草稿中
+    value: '14'
+  - label: 驳回
+    value: '15'
+  - label: 撤回
+    value: '16'
+  - label: 变更中
+    value: '17'
+  - label: 作废中
+    value: '18'
+  - label: 已拒绝
+    value: '19'
+  - label: 拟定中
+    value: '20'
+  - label: 待申请人确认
+    value: '21'
+  - label: 评审中
+    value: '22'
+  - label: 待提交用印
+    value: '23'
+  - label: 拟定完成
+    value: '24'
+  - label: 已撤回
+    value: '25'
+  - label: 待重启拟定
+    value: '26'
+  - label: 其他
+    value: other
+- api: otherAccessories__c
+  label: 其他附件（请勿在此处上传需要用印的文件）
+- api: affiliatedCompany8__c
+  label: 甲方关联公司8
+- api: partyBrelationFlag__c
+  label: 乙方印章性质
+  options:
+  - label: 印章
+    value: '1'
+  - label: 签字
+    value: '2'
+  - label: 代表人
+    value: '3'
+  - label: 印章+签字
+    value: '4'
+  - label: 其他
+    value: other
+- api: maintenanceTime__c
+  label: 维护时间
+- api: customer__c
+  label: 客户名称
+- api: dAddress__c
+  label: 丁方地址
+- api: contractNatureJQ__c
+  label: 合同性质1
+- api: contractLinkNew__c
+  label: 合同文件链接
+- api: isHistory__c
+  label: 是否为历史合同
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: framework__c
+  label: 框架协议
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: syncId__c
+  label: 接口使用数据ID
+- api: partyDrelation__c
+  label: 丁方印章
+  options:
+  - label: 公章
+    value: '1'
+  - label: 销售合同专用章
+    value: '2'
+  - label: 电子印章
+    value: '3'
+  - label: 商旅实体合同章2
+    value: BJXJGJLXSTJFGSSTHTZ
+  - label: 北京小桔国际旅行社有限公司天津分公司电子公章
+    value: '32'
+  - label: 其他
+    value: other
+- api: contractTemplateNum__c
+  label: 模板编号
+- api: taxYN__c
+  label: 是否含税
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: affiliatedCompany5__c
+  label: 甲方关联公司5
+- api: attachment_failure_reason__c
+  label: 附件失败原因
+- api: contractDate__c
+  label: 合同提醒日期
+- api: draftversion__c
+  label: 拟定版本
+- api: quotation__c
+  label: 报价单
+- api: autoRenew__c
+  label: 是否自动续约
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: quote_client_name__c
+  label: 报价单.客户名称.纷享ID
+- api: belongContactName__c
+  label: 合同所属人名称
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: amount__c
+  label: 合同金额
+- api: stamp_position_dingfang__c
+  label: 丁方用印位置
+- api: supplementary__c
+  label: 签订背景补充内容
+- api: affiliatedCompany11__c
+  label: 甲方关联公司11
+- api: relevant_team
+  label: 相关团队
+- api: cooperationParentCode__c
+  label: 合作方向父类code
+- api: finaldocment__c
+  label: 最终定稿文件
+- api: data_own_department
+  label: 归属部门
+- api: withdrawalCauseOfFailure__c
+  label: 撤回失败原因
+- api: quotationAccessories__c
+  label: 报价单附件
+- api: withdrawalStatus__c
+  label: 撤回状态
+  options:
+  - label: 撤回成功
+    value: '1'
+  - label: 撤回失败
+    value: '2'
+  - label: 未操作
+    value: '3'
+  - label: 其他
+    value: other
+- api: _id
+  label: _id
+- api: ownerLdapSys__c
+  label: 所有人邮箱
+- api: fileType__c
+  label: 文件类型
+  options:
+  - label: 合同原版文件
+    value: '1'
+  - label: 合同终版文件
+    value: '2'
+  - label: 合同扫描件
+    value: '3'
+  - label: 最终定稿文件
+    value: '4'
+  - label: 其他
+    value: other
+- api: originalDeadlinedate__c
+  label: 原协议截止日
+- api: electronicPaper__c
+  label: 纸质/电签
+  options:
+  - label: 纸质
+    value: '1'
+  - label: 电签
+    value: '2'
+  - label: 其他
+    value: other
+- api: draftcontractattachments__c
+  label: 上传合同文本1
+- api: contractType__c
+  label: 收支情况
+  options:
+  - label: 收入合作类
+    value: '1'
+  - label: 无收无支类
+    value: '2'
+  - label: 费用支出类
+    value: '3'
+  - label: 其他
+    value: other
+- api: signingBackground__c
+  label: 签订背景-接口用
+- api: aEmail__c
+  label: 甲方邮箱
+- api: party_a_credit_code__c
+  label: 甲方企业信用代码
+- api: originalNo__c
+  label: 原协议编号
+- api: cBank__c
+  label: 丙方银行账号
+- api: partner_id
+  label: 合作伙伴
+- api: is_deleted
+  label: is_deleted
+- api: terminationYN__c
+  label: 是否合同终止
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: cName__c
+  label: 丙方名称
+- api: out_resources
+  label: 外部来源
+  options:
+  - label: 代理通
+    value: partner
+  - label: 自注册
+    value: self_registration
+  - label: 访销通
+    value: kx_fxt
+- api: party_d_credit_code__c
+  label: 丁方企业信用代码
+- api: get_file_execution_time__c
+  label: 获取文件执行时间
+- api: address__c
+  label: 地址
+- api: cAddress__c
+  label: 丙方地址
+- api: financial_confirm_auto_ren__c
+  label: 财务确认的是否自动续签
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: phone__c
+  label: 电话
+- api: openAccount__c
+  label: 开立账户名称
+- api: last_modified_by
+  label: 最后修改人
+- api: noticeLevel__c
+  label: 提醒等级
+- api: is_config_change_completed__c
+  label: 是否完成配置变更
+  options:
+  - label: 否
+    value: '2'
+  - label: 是
+    value: '1'
+  - label: 其他
+    value: other
+- api: createName__c
+  label: 创建人姓名
+- api: affiliatedCompany4__c
+  label: 甲方关联公司4
+- api: third_party_signer__c
+  label: 丙方签字人

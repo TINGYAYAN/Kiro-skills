@@ -1,0 +1,134 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: field_share_summary
+  label: 微信分享摘要
+- api: field_creator
+  label: 创建人姓名
+- api: field_promotion_script
+  label: 推广话术
+- api: field_promotion_link
+  label: 推广链接
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: field_is_stick
+  label: 是否置顶
+  options:
+  - label: 否
+    value: '0'
+  - label: 是
+    value: '1'
+  - label: 其他
+    value: other
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: spread_count
+  label: 推广次数
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: field_visible_staff_range
+  label: 可见部门
+- api: owner
+  label: 负责人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: field_promotion
+  label: 微信分享标题
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: field_micro_page_id
+  label: 营销通内容ID
+- api: action_count
+  label: 行为记录数
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: field_creator_id
+  label: 创建人ID
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 个人营销资料库
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: field_original_file
+  label: pdf文件
+- api: data_own_department
+  label: 归属部门
+- api: field_original_link
+  label: 文章或网页链接
+- api: size
+  label: 大小（M）
+- api: name
+  label: 内容名称
+- api: current_status
+  label: 当前状态
+  options:
+  - label: 内容生成中
+    value: processing
+  - label: 正常推广
+    value: normal
+  - label: 生成失败
+    value: failed
+  - label: 暂停推广
+    value: pause
+  - label: 其他
+    value: other
+- api: _id
+  label: _id
+- api: field_type
+  label: 类型
+  options:
+  - label: PDF
+    value: pdf
+  - label: 公众号文章
+    value: article
+  - label: 外部网页
+    value: external_link
+  - label: 其他
+    value: other
+- api: spread_cover
+  label: 微信推广封面

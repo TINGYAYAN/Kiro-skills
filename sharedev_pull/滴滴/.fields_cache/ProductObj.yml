@@ -1,0 +1,461 @@
+fields:
+- api: interfaceYN__c
+  label: 是否下传
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: taxiPrice__c
+  label: 价格描述
+- api: lock_rule
+  label: 锁定规则
+- api: pricePercentage__c
+  label: 标准百分比价格
+- api: product_name_specialEditio__c
+  label: 产品名称（一个合同特殊版）
+- api: new_quotation_pricing_method__c
+  label: 新版报价单-计价方式
+  options:
+  - label: 基础版
+    value: '1'
+  - label: 专业版
+    value: '2'
+  - label: 高级版
+    value: '3'
+  - label: 基础款
+    value: '4'
+  - label: 优选款
+    value: '5'
+  - label: 高级款
+    value: '6'
+  - label: 按航段
+    value: '7'
+  - label: 按票张
+    value: '8'
+  - label: 按订单
+    value: '9'
+  - label: 按票价百分比
+    value: '10'
+  - label: 按订单百分比
+    value: '11'
+  - label: 航意险-150w保额
+    value: '12'
+  - label: 航意险-200w保额
+    value: '13'
+  - label: 航意险-320w保额
+    value: '14'
+  - label: 其他
+    value: other
+- api: is_saleable
+  label: 可独立销售
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: product_category_id
+  label: 产品分类
+- api: productIntroduction__c
+  label: 产品内容
+- api: syncId__c
+  label: 接口使用数据ID
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: off_shelves_time
+  label: 下架时间
+- api: cateTypeName__c
+  label: 产品分类名称
+- api: unit__c
+  label: 销售单位
+- api: field_R8jl5__c
+  label: MIS-白岩
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: price
+  label: 标准价格
+- api: mnemonic_code
+  label: 助记码
+- api: model
+  label: 型号
+- api: owner_department
+  label: 负责人主属部门
+- api: barcode
+  label: 条形码
+- api: minimumPrice__c
+  label: 底价
+- api: maintenance_period
+  label: 保养周期（天）
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: is_giveaway
+  label: 是否赠品
+  options:
+  - label: 否
+    value: '0'
+  - label: 是
+    value: '1'
+- api: create_time
+  label: 创建时间
+- api: cateParentId__c
+  label: 一级分类Id
+- api: order_field
+  label: 排序
+- api: policyFeeItem__c
+  label: 销售政策费目
+  options:
+  - label: 出行费用
+    value: '1'
+  - label: 套餐-基础版
+    value: '2'
+  - label: 套餐-专业版
+    value: '3'
+  - label: 套餐-高级版
+    value: '4'
+  - label: 套餐可选项-员工钱包
+    value: '5'
+  - label: 套餐可选项-API使用费
+    value: '6'
+  - label: 套餐可选项-用车报告高级版
+    value: '7'
+  - label: 套餐可选项-事故无忧基础款
+    value: '8'
+  - label: 套餐可选项-事故无忧优选款
+    value: '9'
+  - label: 套餐可选项-接机服务
+    value: '10'
+  - label: 套餐可选项-机场快速安检通道
+    value: '11'
+  - label: 协议酒店-间夜
+    value: '12'
+  - label: 海外用车-平台使用费
+    value: '13'
+  - label: 国际机票灵活报价配置
+    value: '14'
+  - label: 其他
+    value: other
+- api: productLineId__c
+  label: 产品线ID
+  options:
+  - label: 企业级
+    value: '1'
+  - label: 费控
+    value: '2'
+  - label: 其他
+    value: other
+- api: description__c
+  label: 产品描述
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: cateName__c
+  label: 二级分类名称
+- api: product_line
+  label: 产品线
+  options:
+  - label: 产品线1
+    value: '1'
+  - label: 产品线2
+    value: '2'
+  - label: 产品线3
+    value: '3'
+- api: unit
+  label: 单位
+  options:
+  - label: 个
+    value: '1'
+  - label: 块
+    value: '2'
+  - label: 只
+    value: '3'
+  - label: 把
+    value: '4'
+  - label: 枚
+    value: '5'
+  - label: 条
+    value: '6'
+  - label: 瓶
+    value: '7'
+  - label: 盒
+    value: '8'
+  - label: 套
+    value: '9'
+  - label: 箱
+    value: '10'
+  - label: 米
+    value: '11'
+  - label: 千克
+    value: '12'
+  - label: 吨
+    value: '13'
+- api: data_own_department
+  label: 归属部门
+- api: product_content_special_ve__c
+  label: 产品内容（一个合同特殊版）
+- api: name
+  label: 产品名称
+- api: pricing_method__c
+  label: 计价方式
+  options:
+  - label: 折后金额
+    value: '1'
+  - label: 折扣比例
+    value: '2'
+  - label: 其他
+    value: other
+- api: _id
+  label: _id
+- api: field_41Px7__c
+  label: MIS-贾赛
+- api: product_subcategory__c
+  label: 产品小类
+  options:
+  - label: 用车服务
+    value: '1'
+  - label: 国内机票
+    value: '2'
+  - label: 中国港澳台&国际机票
+    value: '3'
+  - label: 国内酒店
+    value: '4'
+  - label: 中国港澳台&国际酒店
+    value: '5'
+  - label: 火车票服务
+    value: '6'
+  - label: 出租车服务
+    value: '7'
+  - label: 商务代驾
+    value: '8'
+  - label: 个人代驾
+    value: '9'
+  - label: 跨境商务
+    value: '10'
+  - label: 其他
+    value: other
+- api: cateParentName__c
+  label: 一级分类名称
+- api: tenant_id
+  label: tenant_id
+- api: chargeType__c
+  label: 收费类型
+- api: cateType__c
+  label: 产品分类id
+- api: description
+  label: 图文描述
+- api: product_status
+  label: 上下架
+  options:
+  - label: 已上架
+    value: '1'
+  - label: 已下架
+    value: '2'
+- api: remark
+  label: 备注
+- api: replacement_period
+  label: 更换周期（天）
+- api: product_code
+  label: 产品编码
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 流水号
+- api: pricingType__c
+  label: 计价类型
+  options:
+  - label: 服务项逐项收费
+    value: '1'
+  - label: 一口价
+    value: '2'
+  - label: 订单金额比例（酒店专用，需废弃）
+    value: '3'
+  - label: 阶梯计价
+    value: '4'
+  - label: 按订单百分比
+    value: '5'
+  - label: 按服务项基础价倍数
+    value: '6'
+  - label: 其他
+    value: other
+- api: package_type__c
+  label: 套餐类型
+  options:
+  - label: 服务费套餐
+    value: '1'
+  - label: 功能套餐
+    value: '2'
+  - label: 其他
+    value: other
+- api: on_shelves_time
+  label: 上架时间
+- api: productCheck__c
+  label: 产品适用票据方案
+- api: safety_stock
+  label: 安全库存
+- api: cateId__c
+  label: 二级分类Id
+- api: new_quotation_product_name__c
+  label: 新版报价单-产品显示名称
+- api: is_deleted
+  label: is_deleted
+- api: product_category__c
+  label: 产品大类
+  options:
+  - label: 用车
+    value: '1'
+  - label: 机票
+    value: '2'
+  - label: 酒店
+    value: '3'
+  - label: 火车票
+    value: '4'
+  - label: 出租车
+    value: '5'
+  - label: 代驾
+    value: '6'
+  - label: 跨境用车
+    value: '7'
+  - label: 其他
+    value: other
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: out_owner
+  label: 外部负责人
+- api: feeItem__c
+  label: 费目
+  options:
+  - label: 出行费用
+    value: '1'
+  - label: 平台使用费
+    value: '2'
+  - label: 票据方案
+    value: '3'
+  - label: 增值服务
+    value: '4'
+  - label: 商旅用车服务费
+    value: '5'
+  - label: 信息技术服务费
+    value: '6'
+  - label: 商旅代驾服务费
+    value: '7'
+  - label: 其他
+    value: other
+- api: corresponding_didi_mis_pac__c
+  label: 对应滴滴MIS套餐
+- api: owner
+  label: 负责人
+- api: picture_path
+  label: 产品图片
+- api: productId__c
+  label: 滴滴产品Id
+- api: is_package
+  label: 产品组合
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: product_video
+  label: 视频
+- api: last_modified_by
+  label: 最后修改人
+- api: isPrintShow__c
+  label: 是否在打印中显示
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: technical_parameter
+  label: 技术参数
+- api: out_tenant_id
+  label: 外部企业
+- api: xsyId__c
+  label: 销售易数据ID
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+  - label: 出行类产品
+    value: ''
+  - label: 商旅类产品
+    value: ''
+  - label: 出租车类产品
+    value: ''
+  - label: 代驾类产品
+    value: ''
+  - label: 海外出行类产品
+    value: ''
+  - label: 测试新产品
+    value: ''
+- api: is_contract_product__c
+  label: 是否一个合同产品
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: product_spec
+  label: 规格属性
+- api: insured__c
+  label: 保额
+- api: is_support_decimal__c
+  label: 是否支持小数
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: changeStatus__c
+  label: 产品变更状态
+  options:
+  - label: 追加
+    value: '1'
+  - label: 变更
+    value: '2'
+  - label: 删除
+    value: '3'
+  - label: 其他
+    value: other
+- api: category
+  label: 分类
+  options:
+  - label: 滴滴企业级产品
+    value: '1'
+- api: personalAdvance__c
+  label: 个垫是否可用
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'

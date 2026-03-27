@@ -1,0 +1,238 @@
+fields:
+- api: refundOwner__c
+  label: 发起人
+- api: lock_rule
+  label: 锁定规则
+- api: statusPush__c
+  label: 状态推送
+  options:
+  - label: 系统自动推送
+    value: '1'
+  - label: 人工确认推送
+    value: '2'
+  - label: 其他
+    value: other
+- api: accountId__c
+  label: 关联客户
+- api: planFinishDate__c
+  label: 截止时间
+- api: changeName__c
+  label: 异动名称
+- api: syncId__c
+  label: 接口使用数据ID
+- api: customItem11__c
+  label: 常用原因
+  options:
+  - label: 正常业务波动
+    value: '4'
+  - label: 节假日影响
+    value: '5'
+  - label: 行业影响
+    value: '1'
+  - label: 企业内部原因
+    value: '6'
+  - label: 切换竞品
+    value: '3'
+  - label: 运力不足
+    value: '7'
+  - label: 账户停用
+    value: '8'
+  - label: 多账号使用
+    value: '9'
+  - label: 其他
+    value: '10'
+  - label: 疫情影响
+    value: '2'
+  - label: 客户该异动类型不再跟进
+    value: '11'
+  - label: 正常业务波动-会议用车
+    value: '101'
+  - label: 正常业务波动-代叫车
+    value: '102'
+  - label: 正常业务波动-季节性因素波动
+    value: '103'
+  - label: 正常业务波动-项目用车
+    value: '104'
+  - label: 企业内部原因-删除离职员工
+    value: '201'
+  - label: 企业内部原因-制度限额用完
+    value: '202'
+  - label: 企业内部原因-使用公司车队
+    value: '203'
+  - label: 企业内部原因-裁员
+    value: '204'
+  - label: 企业内部原因-降本提效
+    value: '205'
+  - label: 企业内部原因-组织架构调整
+    value: '206'
+  - label: 企业内部原因-调整系统
+    value: '207'
+  - label: 企业内部原因-合并账号
+    value: '208'
+  - label: 企业内部原因-切换账号
+    value: '209'
+  - label: 切换竞品-已流失
+    value: '301'
+  - label: 切换竞品-即将流失
+    value: '302'
+  - label: 切换竞品-并行使用
+    value: '303'
+  - label: 无法满足需求-价格贵
+    value: '401'
+  - label: 无法满足需求-运力无法满足
+    value: '402'
+  - label: 无法满足需求-车型无法满足
+    value: '403'
+  - label: 无法满足需求-转线下报销
+    value: '404'
+  - label: 无法满足需求-管控需求无法满足
+    value: '405'
+  - label: 余额不足提醒-忘记充值了
+    value: '501'
+  - label: 余额不足提醒-已充值
+    value: '502'
+  - label: 余额不足提醒-请款中
+    value: '503'
+  - label: 余额不足提醒-已更换管理员
+    value: '504'
+  - label: 无效沟通-无人接听
+    value: '601'
+  - label: 无效沟通-不愿意沟通挂断
+    value: '602'
+- api: noticeInfo__c
+  label: 提醒消息内容
+- api: changeContent__c
+  label: 异动内容
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: import_batch_id__c
+  label: 导入批次号
+- api: owner_department
+  label: 负责人主属部门
+- api: refundNo__c
+  label: 退款单号
+- api: planStartDate__c
+  label: 开始时间
+- api: refundAmount__c
+  label: 退款金额
+- api: workingDays__c
+  label: 多少工作日未操作
+- api: changeId__c
+  label: 异动Id
+- api: refundTime__c
+  label: 发起退款时间
+- api: refundExpirationTime__c
+  label: 退款到期操作时间
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: description__c
+  label: 任务描述
+- api: isRefund__c
+  label: 是否退款
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: data_own_department
+  label: 归属部门
+- api: followupReason__c
+  label: 跟进原因
+- api: name
+  label: 任务名称
+- api: _id
+  label: _id
+- api: refundReason__c
+  label: 退款原因
+- api: tenant_id
+  label: tenant_id
+- api: actualFinishDate__c
+  label: 实际完成时间
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 流水号
+- api: is_deleted
+  label: is_deleted
+- api: remark__c
+  label: 备注
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: cid__c
+  label: 客户ID
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: taskStatus__c
+  label: 任务状态
+  options:
+  - label: 未完成
+    value: '1'
+  - label: 已完成
+    value: '2'
+  - label: 其他
+    value: other
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: xsyId__c
+  label: 销售易数据ID
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 异动企业任务
+    value: ''
+  - label: 退款任务
+    value: ''
+  - label: 自动化营销
+    value: ''
+- api: ownerId__c
+  label: 异动任务ownerId
+- api: isMatchAccount__c
+  label: 是否匹配客户
+  options:
+  - label: 否
+    value: '1'
+  - label: 是
+    value: '2'
+  - label: 其他
+    value: other
+- api: pushStatus__c
+  label: 推送状态

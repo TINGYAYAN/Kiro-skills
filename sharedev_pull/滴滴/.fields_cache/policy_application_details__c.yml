@@ -1,0 +1,115 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: is_deleted
+  label: is_deleted
+- api: policy_validity_period__c
+  label: 政策有效期
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: version_selection_name__c
+  label: 版本选择名称
+- api: version_selection__c
+  label: 版本选择
+  options:
+  - label: 基础版
+    value: '1'
+  - label: 优选版
+    value: '2'
+  - label: 其他
+    value: other
+- api: owner
+  label: 负责人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 用车
+    value: ''
+  - label: 商旅
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: data_own_department
+  label: 归属部门
+- api: special_policy_type__c
+  label: 特殊政策类型
+  options:
+  - label: 特殊返点
+    value: T0001
+  - label: 特殊返券
+    value: T0009
+  - label: 服务费优惠
+    value: T0002
+  - label: 赠送事故无忧
+    value: T0003
+  - label: 高级版用车报告
+    value: T0004
+  - label: 减免API对接费
+    value: T0005
+  - label: 协议酒店对赌
+    value: T0006
+  - label: 商旅GMV对赌
+    value: T0007
+  - label: 其他
+    value: T0008
+  - label: 其他（废）
+    value: other
+- api: name
+  label: 编号
+- api: special_policy_type_name__c
+  label: 特殊政策类型名称
+- api: quote_sheet__c
+  label: 报价单
+- api: _id
+  label: _id
+- api: policy_description__c
+  label: 政策描述

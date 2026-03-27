@@ -1,0 +1,158 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: remark
+  label: 备注
+- api: send_back_reason
+  label: 上报原因
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: ad_account_id
+  label: 上报广告账户
+- api: extend_obj_data_id
+  label: 扩展字段在mt_data中的记录ID
+- api: report_data
+  label: 上报数据
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: landing_page_url
+  label: 落地页地址
+- api: email
+  label: 邮箱
+- api: lead_id
+  label: 销售线索
+- api: convent_type
+  label: 转化类型
+  options:
+  - label: 回访-电话接通
+    value: '1'
+  - label: 回访-信息确认
+    value: '2'
+  - label: 回访-发现意向
+    value: '3'
+  - label: 回访-高潜成交
+    value: '4'
+  - label: 回访-成单客户
+    value: '5'
+  - label: Qualified lead
+    value: qualified_lead
+  - label: Converted lead
+    value: converted_lead
+  - label: Contact
+    value: contact
+  - label: Submit lead form
+    value: submit_lead_form
+  - label: Book appointment
+    value: book_appointment
+  - label: Sign-up
+    value: sign_up
+  - label: Request quote
+    value: request_quote
+  - label: Get directions
+    value: get_directions
+  - label: Outbound click
+    value: outbound_click
+  - label: 其他
+    value: other
+- api: owner
+  label: 负责人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: encrypted_email
+  label: 加密邮箱号
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: landing_page
+  label: 落地页
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: encrypted_phone
+  label: 加密手机号
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: marketing_event_id
+  label: 市场活动
+- api: data_own_department
+  label: 归属部门
+- api: ad_platform
+  label: 上报平台
+  options:
+  - label: 百度广告
+    value: baidu
+  - label: 腾讯广告
+    value: tencent
+  - label: 巨量引擎
+    value: headline
+  - label: google Ads
+    value: google
+  - label: 其他
+    value: other
+- api: click_id
+  label: 点击ID
+- api: phone
+  label: 手机号
+- api: name
+  label: 编号
+- api: trigger_employee
+  label: 触发员工
+- api: _id
+  label: _id
+- api: send_back_time
+  label: 转化时间
+- api: status
+  label: 上报状态
+  options:
+  - label: 失败
+    value: failure
+  - label: 成功
+    value: success
+  - label: 其他
+    value: other

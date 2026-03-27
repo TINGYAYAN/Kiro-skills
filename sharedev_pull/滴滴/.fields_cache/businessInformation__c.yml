@@ -1,0 +1,121 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: checkDate__c
+  label: 审核时间
+- api: termStart__c
+  label: 营业期限自
+- api: operName__c
+  label: 法人姓名
+- api: registCapi__c
+  label: 注册资本
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: telephone__c
+  label: 企业联系电话
+- api: owner_department
+  label: 负责人主属部门
+- api: syncId_business__c
+  label: 接口使用数据ID
+- api: xsyId_business__c
+  label: 销售易数据ID
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: province__c
+  label: 省份
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: type__c
+  label: 公司类型
+- api: belongOrg__c
+  label: 登记机关
+- api: data_own_department
+  label: 归属部门
+- api: regNo__c
+  label: 工商注册号
+- api: name
+  label: 企业工商名称
+- api: email__c
+  label: 电子邮箱
+- api: _id
+  label: _id
+- api: tenant_id
+  label: tenant_id
+- api: actualCapi__c
+  label: 实缴资金
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 流水号
+- api: batch_number__c
+  label: 批次号
+- api: startDate__c
+  label: 注册日期
+- api: creditNo__c
+  label: 社会信用代码
+- api: is_deleted
+  label: is_deleted
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: out_owner
+  label: 外部负责人
+- api: termEnd__c
+  label: 营业期限至
+- api: scope__c
+  label: 经营范围
+- api: owner
+  label: 负责人
+- api: address__c
+  label: 企业地址
+- api: industryBusiness__c
+  label: 行业
+- api: last_modified_time
+  label: 最后修改时间
+- api: webUrl__c
+  label: 公司网站
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: newStatusCode__c
+  label: 企业状态码
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: orgNo__c
+  label: 组织机构代码
+- api: colleguesNum__c
+  label: 从业人数

@@ -90,6 +90,8 @@ fields:
     value: '2'
   - label: 其他
     value: other
+- api: amount_last_year__c
+  label: 近一年回款
 - api: age__c
   label: 年龄
 - api: store_age_years__c

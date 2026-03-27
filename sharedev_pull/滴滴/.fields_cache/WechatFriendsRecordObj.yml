@@ -1,0 +1,220 @@
+fields:
+- api: friend_status
+  label: 当前好友状态
+  options:
+  - label: 正常
+    value: '0'
+  - label: 员工已删除客户好友
+    value: '1'
+  - label: 客户已删除员工好友
+    value: '2'
+  - label: 客户员工互删好友
+    value: '3'
+- api: lock_rule
+  label: 锁定规则
+- api: wechat_employee_id
+  label: 企微员工
+- api: friend_type
+  label: 好友类型
+- api: mc_exchange_rate
+  label: 汇率
+- api: extend_obj_data_id
+  label: 扩展字段在mt_data中的记录ID
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: qr_code_id
+  label: 来源员工活码ID
+- api: owner_department
+  label: 负责人主属部门
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: add_emp
+  label: 添加员工
+- api: create_time
+  label: 创建时间
+- api: resource
+  label: 添加来源
+  options:
+  - label: 未知来源
+    value: '0'
+  - label: 扫描二维码
+    value: '1'
+  - label: 搜索手机号
+    value: '2'
+  - label: 名片分享
+    value: '3'
+  - label: 聊群
+    value: '4'
+  - label: 手机通讯录
+    value: '5'
+  - label: 微信联系人
+    value: '6'
+  - label: 安装第三方应用时自动添加的客服人员
+    value: '8'
+  - label: 搜索邮箱
+    value: '9'
+  - label: 视频号添加
+    value: '10'
+  - label: 通过日程参与人添加
+    value: '11'
+  - label: 通过会议参与人添加
+    value: '12'
+  - label: 添加微信好友对应的企业微信
+    value: '13'
+  - label: 通过智慧硬件专属客服添加
+    value: '14'
+  - label: 通过上门服务客服添加
+    value: '15'
+  - label: 通过获客链接添加
+    value: '16'
+  - label: 通过定制开发添加
+    value: '17'
+  - label: 通过需求回复添加
+    value: '18'
+  - label: 通过第三方售前客服添加
+    value: '21'
+  - label: 通过可能的商务伙伴添加
+    value: '22'
+  - label: 通过接受微信账号收到的好友申请添加
+    value: '24'
+  - label: 内部成员共享
+    value: '201'
+  - label: 管理员/负责人分配
+    value: '202'
+  - label: 其他
+    value: other
+- api: custom_id
+  label: 客户
+- api: enterprise_full_name
+  label: 企业全称
+- api: display_name
+  label: 昵称
+- api: qr_code_name
+  label: 来源员工活码
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: related_leads_count__c
+  label: 已关联线索数
+- api: data_own_department
+  label: 归属部门
+- api: remark_tel
+  label: 电话
+- api: user_id
+  label: 员工
+- api: name
+  label: 记录编号
+- api: remark_name
+  label: 备注名
+- api: _id
+  label: _id
+- api: tenant_id
+  label: tenant_id
+- api: delete_time
+  label: 删除好友时间
+- api: data_own_organization
+  label: 归属组织
+- api: remark_describe
+  label: 描述
+- api: remark_enterprise
+  label: 企业
+- api: contact_id
+  label: 联系人
+- api: marketing_promotion_source_id
+  label: 营销推广来源
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: is_deleted
+  label: is_deleted
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: out_owner
+  label: 外部负责人
+- api: mc_functional_currency
+  label: 本位币
+  options:
+  - label: EUR - 欧元
+    value: EUR
+- api: qywx_user_id
+  label: 企微员工ID
+- api: owner
+  label: 负责人
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: sex
+  label: 性别
+- api: avatar
+  label: 客户头像
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: mc_currency
+  label: 币种
+  options:
+  - label: USD - 美元
+    value: USD
+  - label: CNY - 人民币
+    value: CNY
+  - label: ALL - 阿尔巴尼亚列克
+    value: ALL
+  - label: AUD - 澳元
+    value: AUD
+  - label: AED - 阿联酋迪拉姆
+    value: AED
+  - label: EUR - 欧元
+    value: EUR
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+  - label: Whats App
+    value: ''
+- api: external_user_id
+  label: 企微客户
+- api: enterprise_wechat_user_id
+  label: 外部联系人id
+- api: record_id
+  label: 记录ID
+- api: marketing_event_id
+  label: 市场活动
+- api: mc_exchange_rate_version
+  label: 汇率版本
+- api: add_time
+  label: 添加时间
+- api: app_scope
+  label: 应用范围
+  options:
+  - label: CRM
+    value: CRM
+  - label: 营销通
+    value: Marketing

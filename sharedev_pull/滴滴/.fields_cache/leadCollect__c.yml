@@ -1,0 +1,1082 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: followStatus__c
+  label: 线索中心跟进后状态
+  options:
+  - label: 联系不上
+    value: '1'
+  - label: MQL
+    value: '2'
+  - label: MAL指定分配
+    value: '3'
+  - label: 特殊MQL
+    value: '4'
+  - label: 非MQL
+    value: '5'
+  - label: 其他
+    value: other
+- api: xsy_name__c
+  label: 销售易实时线索编号
+- api: salesFollow__c
+  label: 是否同意销售跟进
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: syncId__c
+  label: 接口使用数据ID
+- api: follow__c
+  label: 跟进人
+- api: distribution__c
+  label: 是否已分配
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: leadStatus__c
+  label: 线索状态
+  options:
+  - label: 未跟进
+    value: '1'
+  - label: 已跟进
+    value: '2'
+  - label: 多次无法联系上
+    value: '3'
+  - label: 成功客户
+    value: '4'
+  - label: 其他
+    value: other
+- api: chuchaiguankong__c
+  label: 现有出差管控模式
+- api: owner_department
+  label: 负责人主属部门
+- api: callReasonSelect__c
+  label: 线索外呼原因
+  options:
+  - label: 非KP
+    value: '1'
+  - label: 品类与信息不符
+    value: '2'
+  - label: 规模与信息不一致
+    value: '3'
+  - label: 无互动信息
+    value: '4'
+  - label: 非近期使用
+    value: '5'
+  - label: 非企业版业务
+    value: '6'
+  - label: 跟进中商机
+    value: '7'
+  - label: 成功客户
+    value: '8'
+  - label: 其他
+    value: other
+- api: remind__c
+  label: 提示
+- api: workNo__c
+  label: 工单号
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: chaibiao__c
+  label: 差标
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: travelScale__c
+  label: 商旅规模
+- api: highStatus__c
+  label: 线索归属
+  options:
+  - label: 公海
+    value: '1'
+  - label: 私海
+    value: '2'
+  - label: 其他
+    value: other
+- api: data_own_department
+  label: 归属部门
+- api: carScene__c
+  label: 用车场景
+- api: xsy_leadId__c
+  label: 销售易线索ID
+- api: field_k2lfW__c
+  label: 粘贴识别
+- api: name
+  label: 实时线索编号
+- api: _id
+  label: _id
+- api: carNum__c
+  label: 用车人数
+- api: noMqlReason__c
+  label: 非MQL原因
+- api: travelScene__c
+  label: 商旅场景
+- api: otherComment__c
+  label: 其他建议或补充
+- api: tenant_id
+  label: tenant_id
+- api: opportunityStatus__c
+  label: 关联线索状态
+- api: wireOperator__c
+  label: 接线人
+- api: accountName__c
+  label: 公司名称
+- api: leadId__c
+  label: 关联线索
+- api: leadCenterSign__c
+  label: 后续跟进动作
+  options:
+  - label: 直接分配
+    value: '1'
+  - label: 需外呼
+    value: '2'
+  - label: 其他
+    value: other
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 流水号
+- api: companyScale__c
+  label: 公司规模
+  options:
+  - label: 1-10人
+    value: '1'
+  - label: 11-30人
+    value: '2'
+  - label: 31-50人
+    value: '3'
+  - label: 51-100人
+    value: '4'
+  - label: 101-200人
+    value: '5'
+  - label: 201-500人
+    value: '6'
+  - label: 501-1000人
+    value: '7'
+  - label: 1001-3000人
+    value: '8'
+  - label: 3000以上
+    value: '9'
+- api: is_deleted
+  label: is_deleted
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: returnReason__c
+  label: 退回原因
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: contactName__c
+  label: 联系人
+- api: salesFollowStatus__c
+  label: 销售跟进结果
+  options:
+  - label: SQL
+    value: '1'
+  - label: 退回
+    value: '2'
+  - label: 跟进中
+    value: '3'
+  - label: 客户注销
+    value: '4'
+  - label: 其他
+    value: other
+- api: last_modified_time
+  label: 最后修改时间
+- api: receiveStatus__c
+  label: 线索中心接收时状态
+  options:
+  - label: 成功客户
+    value: '1'
+  - label: 新建线索
+    value: '2'
+  - label: 新线索未分配
+    value: '3'
+  - label: 库存线索
+    value: '4'
+  - label: AE跟进中MQL
+    value: '5'
+  - label: AE跟进中客户相同联系人进线
+    value: '6'
+  - label: AE跟进中客户不同联系人进线
+    value: '7'
+  - label: AE退回MQL
+    value: '10'
+  - label: 输单客户
+    value: '11'
+  - label: 非商机诉求
+    value: '12'
+  - label: 其他
+    value: other
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: city__c
+  label: 联系人所在城市
+  options:
+  - label: 安庆
+    value: '1'
+  - label: 蚌埠
+    value: '2'
+  - label: 亳州
+    value: '3'
+  - label: 池州
+    value: '4'
+  - label: 滁州
+    value: '5'
+  - label: 阜阳
+    value: '6'
+  - label: 合肥
+    value: '7'
+  - label: 淮北
+    value: '8'
+  - label: 淮南
+    value: '9'
+  - label: 黄山
+    value: '10'
+  - label: 六安
+    value: '11'
+  - label: 马鞍山
+    value: '12'
+  - label: 铜陵
+    value: '13'
+  - label: 芜湖
+    value: '14'
+  - label: 宿州
+    value: '15'
+  - label: 宣城
+    value: '16'
+  - label: 北京
+    value: '17'
+  - label: 福州
+    value: '18'
+  - label: 龙岩
+    value: '19'
+  - label: 南平
+    value: '20'
+  - label: 宁德
+    value: '21'
+  - label: 莆田
+    value: '22'
+  - label: 泉州
+    value: '23'
+  - label: 三明
+    value: '24'
+  - label: 厦门
+    value: '25'
+  - label: 漳州
+    value: '26'
+  - label: 白银
+    value: '27'
+  - label: 定西
+    value: '28'
+  - label: 甘南藏族自治州
+    value: '29'
+  - label: 嘉峪关
+    value: '30'
+  - label: 金昌
+    value: '31'
+  - label: 酒泉
+    value: '32'
+  - label: 兰州
+    value: '33'
+  - label: 临夏回族自治州
+    value: '34'
+  - label: 陇南
+    value: '35'
+  - label: 平凉
+    value: '36'
+  - label: 庆阳
+    value: '37'
+  - label: 天水
+    value: '38'
+  - label: 武威
+    value: '39'
+  - label: 张掖
+    value: '40'
+  - label: 潮州
+    value: '41'
+  - label: 东莞
+    value: '42'
+  - label: 佛山
+    value: '43'
+  - label: 广州
+    value: '44'
+  - label: 河源
+    value: '45'
+  - label: 惠州
+    value: '46'
+  - label: 江门
+    value: '47'
+  - label: 揭阳
+    value: '48'
+  - label: 茂名
+    value: '49'
+  - label: 梅州
+    value: '50'
+  - label: 清远
+    value: '51'
+  - label: 汕头
+    value: '52'
+  - label: 汕尾
+    value: '53'
+  - label: 韶关
+    value: '54'
+  - label: 深圳
+    value: '55'
+  - label: 阳江
+    value: '56'
+  - label: 云浮
+    value: '57'
+  - label: 湛江
+    value: '58'
+  - label: 肇庆
+    value: '59'
+  - label: 中山
+    value: '60'
+  - label: 珠海
+    value: '61'
+  - label: 百色
+    value: '62'
+  - label: 北海
+    value: '63'
+  - label: 崇左
+    value: '64'
+  - label: 防城港
+    value: '65'
+  - label: 贵港
+    value: '66'
+  - label: 桂林
+    value: '67'
+  - label: 河池
+    value: '68'
+  - label: 贺州
+    value: '69'
+  - label: 来宾
+    value: '70'
+  - label: 柳州
+    value: '71'
+  - label: 南宁
+    value: '72'
+  - label: 钦州
+    value: '73'
+  - label: 梧州
+    value: '74'
+  - label: 玉林
+    value: '75'
+  - label: 安顺
+    value: '76'
+  - label: 毕节
+    value: '77'
+  - label: 贵阳
+    value: '78'
+  - label: 六盘水
+    value: '79'
+  - label: 黔东南苗族侗族自治州
+    value: '80'
+  - label: 黔南布依族苗族自治州
+    value: '81'
+  - label: 黔西南布依族苗族自治州
+    value: '82'
+  - label: 铜仁
+    value: '83'
+  - label: 遵义
+    value: '84'
+  - label: 白沙黎族自治县
+    value: '85'
+  - label: 保亭黎族苗族自治县
+    value: '86'
+  - label: 昌江黎族自治县
+    value: '87'
+  - label: 澄迈县
+    value: '88'
+  - label: 儋州
+    value: '89'
+  - label: 定安县
+    value: '90'
+  - label: 东方
+    value: '91'
+  - label: 海口
+    value: '92'
+  - label: 乐东黎族自治县
+    value: '93'
+  - label: 临高县
+    value: '94'
+  - label: 陵水黎族自治县
+    value: '95'
+  - label: 琼海
+    value: '96'
+  - label: 琼中黎族苗族自治县
+    value: '97'
+  - label: 三沙
+    value: '98'
+  - label: 三亚
+    value: '99'
+  - label: 屯昌县
+    value: '100'
+  - label: 万宁
+    value: '101'
+  - label: 文昌
+    value: '102'
+  - label: 五指山
+    value: '103'
+  - label: 保定
+    value: '104'
+  - label: 沧州
+    value: '105'
+  - label: 承德
+    value: '106'
+  - label: 邯郸
+    value: '107'
+  - label: 衡水
+    value: '108'
+  - label: 廊坊
+    value: '109'
+  - label: 秦皇岛
+    value: '110'
+  - label: 石家庄
+    value: '111'
+  - label: 唐山
+    value: '112'
+  - label: 邢台
+    value: '113'
+  - label: 张家口
+    value: '114'
+  - label: 安阳
+    value: '115'
+  - label: 鹤壁
+    value: '116'
+  - label: 济源
+    value: '117'
+  - label: 焦作
+    value: '118'
+  - label: 开封
+    value: '119'
+  - label: 洛阳
+    value: '120'
+  - label: 漯河
+    value: '121'
+  - label: 南阳
+    value: '122'
+  - label: 平顶山
+    value: '123'
+  - label: 濮阳
+    value: '124'
+  - label: 三门峡
+    value: '125'
+  - label: 商丘
+    value: '126'
+  - label: 新乡
+    value: '127'
+  - label: 信阳
+    value: '128'
+  - label: 许昌
+    value: '129'
+  - label: 郑州
+    value: '130'
+  - label: 周口
+    value: '131'
+  - label: 驻马店
+    value: '132'
+  - label: 大庆
+    value: '133'
+  - label: 大兴安岭地区
+    value: '134'
+  - label: 哈尔滨
+    value: '135'
+  - label: 鹤岗
+    value: '136'
+  - label: 黑河
+    value: '137'
+  - label: 鸡西
+    value: '138'
+  - label: 佳木斯
+    value: '139'
+  - label: 牡丹江
+    value: '140'
+  - label: 七台河
+    value: '141'
+  - label: 齐齐哈尔
+    value: '142'
+  - label: 双鸭山
+    value: '143'
+  - label: 绥化
+    value: '144'
+  - label: 伊春
+    value: '145'
+  - label: 鄂州
+    value: '146'
+  - label: 恩施土家族苗族自治州
+    value: '147'
+  - label: 黄冈
+    value: '148'
+  - label: 黄石
+    value: '149'
+  - label: 荆门
+    value: '150'
+  - label: 荆州
+    value: '151'
+  - label: 潜江
+    value: '152'
+  - label: 神农架林区
+    value: '153'
+  - label: 十堰
+    value: '154'
+  - label: 随州
+    value: '155'
+  - label: 天门
+    value: '156'
+  - label: 武汉
+    value: '157'
+  - label: 仙桃
+    value: '158'
+  - label: 咸宁
+    value: '159'
+  - label: 襄阳
+    value: '160'
+  - label: 孝感
+    value: '161'
+  - label: 宜昌
+    value: '162'
+  - label: 常德
+    value: '163'
+  - label: 郴州
+    value: '164'
+  - label: 衡阳
+    value: '165'
+  - label: 怀化
+    value: '166'
+  - label: 娄底
+    value: '167'
+  - label: 邵阳
+    value: '168'
+  - label: 湘潭
+    value: '169'
+  - label: 湘西土家族苗族自治州
+    value: '170'
+  - label: 益阳
+    value: '171'
+  - label: 永州
+    value: '172'
+  - label: 岳阳
+    value: '173'
+  - label: 张家界
+    value: '174'
+  - label: 长沙
+    value: '175'
+  - label: 株洲
+    value: '176'
+  - label: 白城
+    value: '177'
+  - label: 白山
+    value: '178'
+  - label: 吉林
+    value: '179'
+  - label: 辽源
+    value: '180'
+  - label: 四平
+    value: '181'
+  - label: 松原
+    value: '182'
+  - label: 通化
+    value: '183'
+  - label: 延边朝鲜族自治州
+    value: '184'
+  - label: 长春
+    value: '185'
+  - label: 常州
+    value: '186'
+  - label: 淮安
+    value: '187'
+  - label: 连云港
+    value: '188'
+  - label: 南京
+    value: '189'
+  - label: 南通
+    value: '190'
+  - label: 苏州
+    value: '191'
+  - label: 泰州
+    value: '192'
+  - label: 无锡
+    value: '193'
+  - label: 宿迁
+    value: '194'
+  - label: 徐州
+    value: '195'
+  - label: 盐城
+    value: '196'
+  - label: 扬州
+    value: '197'
+  - label: 镇江
+    value: '198'
+  - label: 抚州
+    value: '199'
+  - label: 赣州
+    value: '200'
+  - label: 吉安
+    value: '201'
+  - label: 景德镇
+    value: '202'
+  - label: 九江
+    value: '203'
+  - label: 南昌
+    value: '204'
+  - label: 萍乡
+    value: '205'
+  - label: 上饶
+    value: '206'
+  - label: 新余
+    value: '207'
+  - label: 宜春
+    value: '208'
+  - label: 鹰潭
+    value: '209'
+  - label: 鞍山
+    value: '210'
+  - label: 本溪
+    value: '211'
+  - label: 朝阳
+    value: '212'
+  - label: 大连
+    value: '213'
+  - label: 丹东
+    value: '214'
+  - label: 抚顺
+    value: '215'
+  - label: 阜新
+    value: '216'
+  - label: 葫芦岛
+    value: '217'
+  - label: 锦州
+    value: '218'
+  - label: 辽阳
+    value: '219'
+  - label: 盘锦
+    value: '220'
+  - label: 沈阳
+    value: '221'
+  - label: 铁岭
+    value: '222'
+  - label: 营口
+    value: '223'
+  - label: 阿拉善盟
+    value: '224'
+  - label: 巴彦淖尔
+    value: '225'
+  - label: 包头
+    value: '226'
+  - label: 赤峰
+    value: '227'
+  - label: 鄂尔多斯
+    value: '228'
+  - label: 呼和浩特
+    value: '229'
+  - label: 呼伦贝尔
+    value: '230'
+  - label: 通辽
+    value: '231'
+  - label: 乌海
+    value: '232'
+  - label: 乌兰察布
+    value: '233'
+  - label: 锡林郭勒盟
+    value: '234'
+  - label: 兴安盟
+    value: '235'
+  - label: 固原
+    value: '236'
+  - label: 石嘴山
+    value: '237'
+  - label: 吴忠
+    value: '238'
+  - label: 银川
+    value: '239'
+  - label: 中卫
+    value: '240'
+  - label: 果洛藏族自治州
+    value: '241'
+  - label: 海北藏族自治州
+    value: '242'
+  - label: 海东
+    value: '243'
+  - label: 海南藏族自治州
+    value: '244'
+  - label: 海西蒙古族藏族自治州
+    value: '245'
+  - label: 黄南藏族自治州
+    value: '246'
+  - label: 西宁
+    value: '247'
+  - label: 玉树藏族自治州
+    value: '248'
+  - label: 滨州
+    value: '249'
+  - label: 德州
+    value: '250'
+  - label: 东营
+    value: '251'
+  - label: 菏泽
+    value: '252'
+  - label: 济南
+    value: '253'
+  - label: 济宁
+    value: '254'
+  - label: 莱芜
+    value: '255'
+  - label: 聊城
+    value: '256'
+  - label: 临沂
+    value: '257'
+  - label: 青岛
+    value: '258'
+  - label: 日照
+    value: '259'
+  - label: 泰安
+    value: '260'
+  - label: 威海
+    value: '261'
+  - label: 潍坊
+    value: '262'
+  - label: 烟台
+    value: '263'
+  - label: 枣庄
+    value: '264'
+  - label: 淄博
+    value: '265'
+  - label: 大同
+    value: '266'
+  - label: 晋城
+    value: '267'
+  - label: 晋中
+    value: '268'
+  - label: 临汾
+    value: '269'
+  - label: 吕梁
+    value: '270'
+  - label: 朔州
+    value: '271'
+  - label: 太原
+    value: '272'
+  - label: 忻州
+    value: '273'
+  - label: 阳泉
+    value: '274'
+  - label: 运城
+    value: '275'
+  - label: 长治
+    value: '276'
+  - label: 安康
+    value: '277'
+  - label: 宝鸡
+    value: '278'
+  - label: 汉中
+    value: '279'
+  - label: 商洛
+    value: '280'
+  - label: 铜川
+    value: '281'
+  - label: 渭南
+    value: '282'
+  - label: 西安
+    value: '283'
+  - label: 咸阳
+    value: '284'
+  - label: 延安
+    value: '285'
+  - label: 杨凌示范区
+    value: '286'
+  - label: 榆林
+    value: '287'
+  - label: 上海
+    value: '288'
+  - label: 阿坝藏族羌族自治州
+    value: '289'
+  - label: 巴中
+    value: '290'
+  - label: 成都
+    value: '291'
+  - label: 达州
+    value: '292'
+  - label: 德阳
+    value: '293'
+  - label: 甘孜藏族自治州
+    value: '294'
+  - label: 广安
+    value: '295'
+  - label: 广元
+    value: '296'
+  - label: 乐山
+    value: '297'
+  - label: 凉山彝族自治州
+    value: '298'
+  - label: 泸州
+    value: '299'
+  - label: 眉山
+    value: '300'
+  - label: 绵阳
+    value: '301'
+  - label: 南充
+    value: '302'
+  - label: 内江
+    value: '303'
+  - label: 攀枝花
+    value: '304'
+  - label: 遂宁
+    value: '305'
+  - label: 雅安
+    value: '306'
+  - label: 宜宾
+    value: '307'
+  - label: 资阳
+    value: '308'
+  - label: 自贡
+    value: '309'
+  - label: 天津
+    value: '310'
+  - label: 阿里地区
+    value: '311'
+  - label: 昌都
+    value: '312'
+  - label: 拉萨
+    value: '313'
+  - label: 林芝
+    value: '314'
+  - label: 那曲
+    value: '315'
+  - label: 日喀则
+    value: '316'
+  - label: 山南
+    value: '317'
+  - label: 阿克苏地区
+    value: '318'
+  - label: 阿拉尔
+    value: '319'
+  - label: 阿勒泰地区
+    value: '320'
+  - label: 巴音郭楞蒙古自治州
+    value: '321'
+  - label: 北屯
+    value: '322'
+  - label: 博尔塔拉蒙古自治州
+    value: '323'
+  - label: 昌吉回族自治州
+    value: '324'
+  - label: 哈密
+    value: '325'
+  - label: 和田地区
+    value: '326'
+  - label: 喀什地区
+    value: '327'
+  - label: 可克达拉
+    value: '328'
+  - label: 克拉玛依
+    value: '329'
+  - label: 克孜勒苏柯尔克孜自治州
+    value: '330'
+  - label: 昆玉
+    value: '331'
+  - label: 石河子
+    value: '332'
+  - label: 双河
+    value: '333'
+  - label: 塔城地区
+    value: '334'
+  - label: 铁门关
+    value: '335'
+  - label: 图木舒克
+    value: '336'
+  - label: 吐鲁番
+    value: '337'
+  - label: 乌鲁木齐
+    value: '338'
+  - label: 五家渠
+    value: '339'
+  - label: 伊犁哈萨克自治州
+    value: '340'
+  - label: 保山
+    value: '341'
+  - label: 楚雄彝族自治州
+    value: '342'
+  - label: 大理白族自治州
+    value: '343'
+  - label: 德宏傣族景颇族自治州
+    value: '344'
+  - label: 迪庆藏族自治州
+    value: '345'
+  - label: 红河哈尼族彝族自治州
+    value: '346'
+  - label: 昆明
+    value: '347'
+  - label: 丽江
+    value: '348'
+  - label: 临沧
+    value: '349'
+  - label: 怒江傈僳族自治州
+    value: '350'
+  - label: 普洱
+    value: '351'
+  - label: 曲靖
+    value: '352'
+  - label: 文山壮族苗族自治州
+    value: '353'
+  - label: 西双版纳傣族自治州
+    value: '354'
+  - label: 玉溪
+    value: '355'
+  - label: 昭通
+    value: '356'
+  - label: 杭州
+    value: '357'
+  - label: 湖州
+    value: '358'
+  - label: 嘉兴
+    value: '359'
+  - label: 金华
+    value: '360'
+  - label: 丽水
+    value: '361'
+  - label: 宁波
+    value: '362'
+  - label: 衢州
+    value: '363'
+  - label: 绍兴
+    value: '364'
+  - label: 台州
+    value: '365'
+  - label: 温州
+    value: '366'
+  - label: 舟山
+    value: '367'
+  - label: 重庆
+    value: '368'
+- api: companyNum__c
+  label: 公司人数
+- api: provice__c
+  label: 联系人所在省份
+  options:
+  - label: 安徽省
+    value: '1'
+  - label: 北京市
+    value: '2'
+  - label: 福建省
+    value: '3'
+  - label: 甘肃省
+    value: '4'
+  - label: 广东省
+    value: '5'
+  - label: 广西壮族自治区
+    value: '6'
+  - label: 贵州省
+    value: '7'
+  - label: 海南省
+    value: '8'
+  - label: 河北省
+    value: '9'
+  - label: 河南省
+    value: '10'
+  - label: 黑龙江省
+    value: '11'
+  - label: 湖北省
+    value: '12'
+  - label: 湖南省
+    value: '13'
+  - label: 吉林省
+    value: '14'
+  - label: 江苏省
+    value: '15'
+  - label: 江西省
+    value: '16'
+  - label: 辽宁省
+    value: '17'
+  - label: 内蒙古自治区
+    value: '18'
+  - label: 宁夏回族自治区
+    value: '19'
+  - label: 青海省
+    value: '20'
+  - label: 山东省
+    value: '21'
+  - label: 山西省
+    value: '22'
+  - label: 陕西省
+    value: '23'
+  - label: 上海市
+    value: '24'
+  - label: 四川省
+    value: '25'
+  - label: 天津市
+    value: '26'
+  - label: 西藏自治区
+    value: '27'
+  - label: 新疆维吾尔自治区
+    value: '28'
+  - label: 云南省
+    value: '29'
+  - label: 浙江省
+    value: '30'
+  - label: 重庆市
+    value: '31'
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: contactPosition__c
+  label: 联系人职位
+- api: xsyId__c
+  label: 销售易数据ID
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 生态商供给线索
+    value: ''
+  - label: 400客户需对接专员
+    value: ''
+  - label: 400客户需对接销售
+    value: ''
+- api: leadInterestCategory__c
+  label: 感兴趣品类
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '2'
+  - label: 用车+商旅
+    value: '3'
+  - label: 其他
+    value: other
+- api: contactPhone__c
+  label: 联系方式

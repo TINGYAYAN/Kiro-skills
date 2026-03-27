@@ -1,0 +1,163 @@
+fields:
+- api: match_pattern
+  label: 匹配方式
+  options:
+  - label: 包含
+    value: any_hit
+  - label: 完全匹配
+    value: all_hit
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: msg_user
+  label: 通知接收成员
+- api: failed_msg
+  label: 失败原因
+- api: third_party_id
+  label: 企微规则id
+- api: type
+  label: 质检类型
+  options:
+  - label: 关键词质检
+    value: '1'
+  - label: 行为质检
+    value: '2'
+  - label: 会话特征质检
+    value: '3'
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: msg_user__label
+  label: 通知接收成员
+- api: lock_user
+  label: 加锁人
+- api: keyword_list
+  label: 关键词列表
+- api: is_deleted
+  label: is_deleted
+- api: session_feature_rule
+  label: 超时时间
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: dirty_words
+  label: 关键词规则(旧)
+- api: out_owner
+  label: 外部负责人
+- api: session_type
+  label: 使用会话场景
+  options:
+  - label: 单聊
+    value: '1'
+  - label: 群聊
+    value: '2'
+- api: monitors__label
+  label: 被质检成员
+- api: owner
+  label: 负责人
+- api: keyword_tested_personnel
+  label: 关键词质检人员
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: msg_push
+  label: 通知方式
+  options:
+  - label: 发送实时消息通知
+    value: '1'
+- api: target_type
+  label: 质检角色
+  options:
+  - label: 企微客户
+    value: '1'
+  - label: 员工
+    value: '2'
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: record_type
+  label: 质检类型
+  options:
+  - label: 关键词质检
+    value: ''
+  - label: 会话特征质检
+    value: ''
+  - label: 行为质检
+    value: ''
+- api: data_own_department
+  label: 归属部门
+- api: session_feature
+  label: 会话特征
+  options:
+  - label: 超时回复
+    value: '1'
+- api: session_action
+  label: 行为类型
+  options:
+  - label: 删除客户
+    value: '1'
+  - label: 被客户删除
+    value: '2'
+- api: object_describe_id
+  label: object_describe_id
+- api: name
+  label: 质检名称
+- api: sync_status
+  label: 同步企微结果
+  options:
+  - label: 新增成功
+    value: add_success
+  - label: 新增失败
+    value: add_failed
+  - label: 开始同步编辑
+    value: edit_pre
+  - label: 编辑成功
+    value: edit_success
+  - label: 编辑失败
+    value: edit_failed
+  - label: 开始同步删除
+    value: del_pre
+  - label: 删除成功
+    value: del_success
+  - label: 删除失败
+    value: del_failed
+- api: _id
+  label: _id
+- api: monitors
+  label: 被质检成员

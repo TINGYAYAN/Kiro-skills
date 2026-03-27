@@ -1,0 +1,136 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: biz_reg_name
+  label: 工商注册
+  options:
+  - label: 否
+    value: 'False'
+  - label: 是
+    value: 'True'
+- api: document
+  label: 竞品对手分析文档
+- api: competitiveness
+  label: 竞争力
+  options:
+  - label: 弱竞争力
+    value: '1'
+  - label: 一般竞争力
+    value: '2'
+  - label: 潜在竞争力
+    value: '3'
+  - label: 强竞争力
+    value: '4'
+  - label: 其他
+    value: other
+- api: contact_information
+  label: 联系信息
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: market_situation_analysis
+  label: 市场情况分析
+- api: identification
+  label: 竞争对手标识
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: weaknesses
+  label: 劣势
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人所在部门
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: uniform_social_credit_code
+  label: 统一社会信用代码
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: advantage
+  label: 优势
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: response_strategy
+  label: 应对策略
+- api: sales_analysis
+  label: 销售情况分析
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: url
+  label: 网址
+- api: industry_ext
+  label: 工商扩展
+- api: data_own_department
+  label: 归属部门
+- api: size
+  label: 规模（人）
+  options:
+  - label: 0-20
+    value: '1'
+  - label: 20-50
+    value: '2'
+  - label: 50-100
+    value: '3'
+  - label: 100-200
+    value: '4'
+  - label: 200-500
+    value: '5'
+  - label: 500-1000
+    value: '6'
+  - label: 1000以上
+    value: '7'
+  - label: 其他
+    value: other
+- api: name
+  label: 竞争对手名称
+- api: _id
+  label: _id
+- api: remarks
+  label: 备注

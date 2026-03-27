@@ -1,0 +1,203 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: new_quotation_pricing_method__c
+  label: 计价方式
+- api: price_editable
+  label: 价格可编辑
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: amount_any
+  label: 数量是否任意值
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: sales_unit__c
+  label: 销售单位
+- api: product_id
+  label: 产品名称
+- api: owner_department
+  label: 负责人主属部门
+- api: fee_item__c
+  label: 费目
+- api: modified_adjust_price
+  label: 修改调整价格
+- api: price_mode
+  label: 定价模式
+  options:
+  - label: 配置价格
+    value: '1'
+  - label: 价目表价格
+    value: '2'
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: min_amount
+  label: 最小数量
+- api: order_field
+  label: 序号
+- api: product_life_status
+  label: 产品生命状态
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: product_introduction__c
+  label: 产品内容
+- api: relevant_team
+  label: 相关团队
+- api: bom_path
+  label: BOM路径
+- api: data_own_department
+  label: 归属部门
+- api: price_book_id
+  label: 价目表
+- api: name
+  label: 产品选配明细编号
+- api: _id
+  label: _id
+- api: product_subcategory__c
+  label: 产品小类
+- api: related_core_id
+  label: 关联产品组合
+- api: tenant_id
+  label: tenant_id
+- api: is_displayed_on_page__c
+  label: 是否在页面显示
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: standard_price__c
+  label: 标准价格
+- api: selected_by_default
+  label: 默认选中
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: increment
+  label: 增加数量幅度
+- api: product_status
+  label: 上下架
+- api: remark
+  label: 备注
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: productCheck__c
+  label: 产品适用票据方案
+- api: new_quotation_product_name__c
+  label: 产品显示名称
+- api: adjust_price
+  label: 标准选配价格
+- api: core_id
+  label: 产品组合
+- api: is_deleted
+  label: is_deleted
+- api: is_required
+  label: 必选
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: product_category__c
+  label: 产品大类
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: root_id
+  label: 根BOMid
+- api: out_owner
+  label: 外部负责人
+- api: node_bom_core_version
+  label: 子件bom版本
+- api: product_salesforce_id__c
+  label: 产品销售易ID
+- api: owner
+  label: 负责人
+- api: amount
+  label: 数量
+- api: is_package
+  label: 是否产品包
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: enabled_status
+  label: 启用状态
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: amount_editable
+  label: 数量可编辑
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: product_group_id
+  label: 产品分组
+- api: is_contract_product__c
+  label: 是否一个合同产品
+- api: parent_bom_id
+  label: 父BOMid
+- api: node_bom_core_type
+  label: 子件类型
+  options:
+  - label: 选配件
+    value: configure
+  - label: 普通品
+    value: product
+- api: max_amount
+  label: 最大数量

@@ -1,0 +1,1005 @@
+fields:
+- api: emailYN__c
+  label: 是否提醒对应销售
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: lock_rule
+  label: 锁定规则
+- api: location_details__c
+  label: 位置详情
+- api: demand__c
+  label: 客户需求
+- api: follow_up_person2__c
+  label: 随访人员2
+- api: next_call_datetime__c
+  label: 下次通话日期时间
+- api: WhoWhoareourmaincompetitor__c
+  label: Who：谁是我们在该项目上的主要竞品？他们在该项目上其核心优劣势是什么？
+- api: active_record_content
+  label: 沟通记录内容
+- api: changeName__c
+  label: 异动名称
+- api: Reason__c
+  label: 跟进类型
+  options:
+  - label: 挖掘商机
+    value: '1'
+  - label: 确认增量商机
+    value: '2'
+  - label: 拉新（转介绍、流失领取等）
+    value: '5'
+  - label: 挖掘增量商机
+    value: '6'
+  - label: 商机放量—流程推进
+    value: '3'
+  - label: 日常维护
+    value: '4'
+  - label: 其他
+    value: other
+- api: changeContent__c
+  label: 异动内容
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: mainMattersOfVisit__c
+  label: 详细内容
+- api: weekly_report_attachment__c
+  label: 周报附件
+- api: source_api_name
+  label: 原始数据来源
+- api: sales_strategy_to_increase__c
+  label: How：我们应该采用怎样的销售策略以提高在该项目的赢单概率？
+- api: review_file__c
+  label: 复盘文件
+- api: call_frequencyID__c
+  label: 外呼频控唯一ID
+- api: contacts__c
+  label: 拜访人（KP）
+- api: version
+  label: version
+- api: type__c
+  label: 商机类型
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '2'
+  - label: 其他
+    value: other
+- api: csm_customer__c
+  label: CSM客户
+- api: failureReasons__c
+  label: 未放量卡点/跟死原因
+  options:
+  - label: 政策/优惠不符合客户预期
+    value: '1'
+  - label: 标准系统方案未满足客户需求
+    value: '2'
+  - label: 找不到关键KP/决策人
+    value: '3'
+  - label: 对接人长时间不回复
+    value: '4'
+  - label: 对方提供的增量信息不准确
+    value: '5'
+  - label: 竞对因素（如价格、客户已有竞对相关的生态）
+    value: '6'
+  - label: 平台能力无法满足（如运力）
+    value: '7'
+  - label: 质疑平台服务能力（如客服、司机服务）
+    value: '8'
+  - label: 客户内部流程冗长
+    value: '9'
+  - label: 无-正常跟进或放量
+    value: '10'
+  - label: 其他
+    value: other
+- api: visitor_2__c
+  label: 拜访人2
+- api: lead_statuss__c
+  label: 线索状态
+  options:
+  - label: 未跟进
+    value: '1'
+  - label: 待定
+    value: '3'
+  - label: 孵化
+    value: '5'
+  - label: 有效
+    value: '2'
+  - label: 已转换
+    value: '4'
+  - label: 无效
+    value: '6'
+  - label: 已注销
+    value: '8'
+  - label: 其他
+    value: other
+- api: why_customer_choose_or_rep__c
+  label: Why：客户为什么要选择/替换供应商？
+- api: field_PJA70__c
+  label: 多行文本
+- api: auto_import_previous_bant__c
+  label: 是否自动带入上一次的BANT记录
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: tenant_id
+  label: tenant_id
+- api: dbcRelation26__c
+  label: 被访客户
+- api: next_visit_to_do__c
+  label: 下次拜访前ToDo
+- api: location__c
+  label: 位置
+- api: Objective1__c
+  label: 拜访目的（SMB）
+  options:
+  - label: 【用车】后台管控
+    value: '1'
+  - label: 【用车】账户内宣
+    value: '2'
+  - label: 【用车】制度渗透
+    value: '3'
+  - label: 【用车】非标方案
+    value: '4'
+  - label: 【用车】集团扩展
+    value: '5'
+  - label: 【用车】关联公司
+    value: '6'
+  - label: 【用车】账户因私
+    value: '7'
+  - label: 【用车】沉默召回
+    value: '8'
+  - label: 【商旅】拉新沟通
+    value: '9'
+  - label: 【商旅】激活沟通
+    value: '10'
+  - label: 【商旅】放量沟通
+    value: '11'
+  - label: 需求沟通
+    value: '12'
+  - label: 解决方案（系统对接）
+    value: '13'
+  - label: 合同确认
+    value: '14'
+  - label: 协助配置（制度管控）
+    value: '15'
+  - label: 技术问题解决
+    value: '16'
+  - label: 重要客诉跟进
+    value: '17'
+  - label: 结算事项（加款、对账、开票）
+    value: '18'
+  - label: 沉默/流失召回/新开账户
+    value: '19'
+  - label: 活动推广
+    value: '20'
+  - label: 其他
+    value: other
+- api: callType__c
+  label: 拨号类型
+  options:
+  - label: 授权拨号
+    value: authorization
+  - label: 正常拨号
+    value: normal
+  - label: 其他
+    value: other
+- api: follow_up_person_3__c
+  label: 随访人员3
+- api: answer_role__c
+  label: 接听人角色
+  options:
+  - label: 老板
+    value: '1'
+  - label: 财务
+    value: '2'
+  - label: 行政
+    value: '3'
+  - label: 人力
+    value: '4'
+  - label: 采购
+    value: '5'
+  - label: 员工
+    value: '6'
+  - label: 其他
+    value: '7'
+  - label: 无
+    value: '8'
+- api: appstatus__c
+  label: 审批状态
+  options:
+  - label: 待提交
+    value: '1'
+  - label: 审批中
+    value: '2'
+  - label: 审批通过
+    value: '3'
+  - label: 审批拒绝
+    value: '4'
+  - label: 撤回
+    value: '5'
+  - label: 历史数据
+    value: '6'
+  - label: 其他
+    value: other
+- api: dbcRelation26_id__c
+  label: 被访客户接口使用ID
+- api: longitude__c
+  label: 经度
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lost_reason__c
+  label: 流失原因
+  options:
+  - label: 优惠力度不够/价格贵
+    value: '1'
+  - label: 疫情影响
+    value: '2'
+  - label: 充值门槛高
+    value: '3'
+  - label: 支付方式不方便
+    value: '4'
+  - label: 误注册
+    value: '5'
+  - label: 阶段性用车需求
+    value: '6'
+  - label: 管理员离职
+    value: '7'
+  - label: 后台操作频繁
+    value: '8'
+  - label: 公司自有车辆
+    value: '9'
+  - label: 公司倒闭/福利取消
+    value: '10'
+  - label: 无卡点
+    value: '11'
+  - label: 对用车安全顾虑
+    value: '12'
+  - label: 老板不批准
+    value: '13'
+  - label: 其他
+    value: '14'
+  - label: 其他（标准）
+    value: other
+- api: batch_number__c
+  label: 批次号
+- api: dimDepart__c
+  label: 所属部门名称（接口用）
+- api: Stage__c
+  label: 放量阶段
+  options:
+  - label: 未放量
+    value: '1'
+  - label: 放量中
+    value: '2'
+  - label: 已放量
+    value: '3'
+  - label: 线索跟死
+    value: '4'
+  - label: 不涉及放量
+    value: '5'
+  - label: 其他
+    value: other
+- api: leadCompany__c
+  label: 线索公司名称
+- api: teleIntention__c
+  label: 电销意向度
+  options:
+  - label: 无人接听
+    value: '4'
+  - label: 高意向
+    value: '1'
+  - label: 中意向
+    value: '2'
+  - label: 低意向
+    value: '3'
+  - label: 无意向
+    value: '5'
+- api: NDemandInformation__c
+  label: N：需求信息
+- api: field_5kJYR__c
+  label: 图片
+- api: project_expected_launch_ti__c
+  label: T：项目预期的上线时间
+- api: reference_field__c
+  label: 线索状态（引用）
+- api: contentPic__c
+  label: 销售记录图片
+- api: role__c
+  label: 拜访角色
+  options:
+  - label: 老板
+    value: '1'
+  - label: 财务
+    value: '2'
+  - label: 行政
+    value: '3'
+  - label: 人力
+    value: '4'
+  - label: 采购
+    value: '5'
+  - label: 员工
+    value: '6'
+  - label: 其他
+    value: '7'
+  - label: 无
+    value: '8'
+- api: visit_person_3__c
+  label: 拜访人3
+- api: contactName__c
+  label: 拜访人
+- api: intent_level__c
+  label: 意向度
+  options:
+  - label: A
+    value: '1'
+  - label: B
+    value: '2'
+  - label: C
+    value: '3'
+  - label: D
+    value: '4'
+  - label: 其他
+    value: other
+- api: last_modified_time
+  label: 最后修改时间
+- api: opportunity__c
+  label: 商机
+- api: follow_up_person1__c
+  label: 随访人员1
+- api: intention_level__c
+  label: 意向程度
+  options:
+  - label: 无意向（暂不选）
+    value: '0'
+  - label: 略有意向
+    value: '1'
+  - label: 意向一般
+    value: '2'
+  - label: 意向较高
+    value: '3'
+  - label: 意向极高
+    value: '4'
+  - label: 优质客户
+    value: '5'
+  - label: 意向良好
+    value: '6'
+  - label: 意向低
+    value: '7'
+  - label: 无意向
+    value: '9'
+  - label: 无
+    value: '8'
+  - label: 其他
+    value: other
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: customItem205__c
+  label: 待解决卡点是否需要支持
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: out_tenant_id
+  label: 外部企业
+- api: publisher_second_departmen__c
+  label: 发布人二级部门
+- api: ownerId__c
+  label: 负责人ID
+- api: related_object
+  label: 关联业务模块
+- api: nextStep__c
+  label: 下一步计划
+- api: field_1g179__c
+  label: 线索阶段-辅助字段
+- api: next_call_time__c
+  label: 下次通话时间
+- api: next_visit_time__c
+  label: 下次计划拜访时间
+- api: source_id
+  label: 原始数据ID
+- api: current__c
+  label: 当前进展
+- api: focus__c
+  label: 客户关注点
+  options:
+  - label: 价格
+    value: '1'
+  - label: 服务
+    value: '2'
+  - label: 合规
+    value: '3'
+  - label: 内部制度
+    value: '4'
+  - label: 产品功能
+    value: '5'
+  - label: 发票
+    value: '6'
+  - label: APP功能
+    value: '7'
+  - label: 其他
+    value: other
+- api: customItem202__c
+  label: 拜访品类
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '2'
+  - label: 用车+商旅
+    value: '3'
+  - label: 其他
+    value: other
+- api: opp_type__c
+  label: 商机类型（接口用）
+- api: actualcreatedAt__c
+  label: 实际发布日期
+- api: authorization_situation_de__c
+  label: 授权情况说明
+  options:
+  - label: 现在不方便，需要再联系
+    value: '1'
+  - label: 需要销售再次介绍
+    value: '2'
+  - label: 用户语音助手接通
+    value: '3'
+  - label: 客户再次咨询
+    value: '4'
+  - label: 通路在授权范围内
+    value: '5'
+  - label: 历史数据已授权
+    value: '6'
+  - label: 商机阶段
+    value: '7'
+  - label: 其他
+    value: other
+- api: lead_to_opportunity_remind__c
+  label: 线索转商机提示
+- api: syncId__c
+  label: 接口使用数据ID
+- api: extend_obj_data_id
+  label: 扩展字段在mt_data中的记录ID
+- api: customItem11__c
+  label: 常用原因
+  options:
+  - label: 正常业务波动
+    value: '4'
+  - label: 节假日影响
+    value: '5'
+  - label: 行业影响
+    value: '1'
+  - label: 企业内部原因
+    value: '6'
+  - label: 切换竞品
+    value: '3'
+  - label: 运力不足
+    value: '7'
+  - label: 账户停用
+    value: '8'
+  - label: 多账号使用
+    value: '9'
+  - label: 其他
+    value: '10'
+  - label: 疫情影响
+    value: '2'
+  - label: 客户该异动类型不再跟进
+    value: '11'
+  - label: 正常业务波动-会议用车
+    value: '101'
+  - label: 正常业务波动-代叫车
+    value: '102'
+  - label: 正常业务波动-季节性因素波动
+    value: '103'
+  - label: 正常业务波动-项目用车
+    value: '104'
+  - label: 企业内部原因-删除离职员工
+    value: '201'
+  - label: 企业内部原因-制度限额用完
+    value: '202'
+  - label: 企业内部原因-使用公司车队
+    value: '203'
+  - label: 企业内部原因-裁员
+    value: '204'
+  - label: 企业内部原因-降本提效
+    value: '205'
+  - label: 企业内部原因-组织架构调整
+    value: '206'
+  - label: 企业内部原因-调整系统
+    value: '207'
+  - label: 企业内部原因-合并账号
+    value: '208'
+  - label: 企业内部原因-切换账号
+    value: '209'
+  - label: 切换竞品-已流失
+    value: '301'
+  - label: 切换竞品-即将流失
+    value: '302'
+  - label: 切换竞品-并行使用
+    value: '303'
+  - label: 无法满足需求-价格贵
+    value: '401'
+  - label: 无法满足需求-运力无法满足
+    value: '402'
+  - label: 无法满足需求-车型无法满足
+    value: '403'
+  - label: 无法满足需求-转线下报销
+    value: '404'
+  - label: 无法满足需求-管控需求无法满足
+    value: '405'
+  - label: 余额不足提醒-忘记充值了
+    value: '501'
+  - label: 余额不足提醒-已充值
+    value: '502'
+  - label: 余额不足提醒-请款中
+    value: '503'
+  - label: 余额不足提醒-已更换管理员
+    value: '504'
+  - label: 无效沟通-无人接听
+    value: '601'
+  - label: 无效沟通-不愿意沟通挂断
+    value: '602'
+- api: visitor_1__c
+  label: 拜访人1
+- api: opportunityLevel__c
+  label: 商机级别
+  options:
+  - label: 无人接听
+    value: '5'
+  - label: 头部
+    value: '1'
+  - label: 高潜
+    value: '2'
+  - label: 中等
+    value: '3'
+  - label: 长尾
+    value: '4'
+- api: owner_department
+  label: 负责人主属部门
+- api: whethereffective__c
+  label: 是否有效拜访
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: interested_category__c
+  label: 线索感兴趣品类
+- api: customItem177__c
+  label: 下次通话日期
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: lead__c
+  label: 销售线索
+- api: budget_info__c
+  label: B：预算信息
+- api: related_object_data
+  label: 关联业务数据
+- api: smsTemplate__c
+  label: 短信模版
+  options:
+  - label: 【滴滴企业版】您好，企业用车解决方案引领者，年底大促充1000返600充5000返3200（10元无门槛专快车组合券），活动本月有效，致电您无人接听，请您注意电话我们将再次与您联系，如有疑问可致电【xxxxxxxxxxx】微信同号。拒收请回复R
+    value: '1'
+  - label: 【滴滴企业版】企业统一充值统一开票，员工免垫付免贴票，财务免审票，行程费用清晰透明，用车和预定机酒火统一线上化管控，助力企业降本增效，现年底大促充1000返600充5000返3200（10元无门槛专快车组合券）活动本月有效！合作流程：1注册企业版账号2充值3导入员工4设置制度5员工下载滴滴企业版APP打车企业支付
+    value: '2'
+  - label: 【滴滴企业版】您好，企业用车解决方案引领者，年底大促充1000返1000充5000返5000（10元无门槛专快车组合券）致电您无人接听，请您注意电话我们将再次与您联系，如有疑问可致电【xxxxxxxxxxx】微信同号。拒收请回复R
+    value: '3'
+  - label: 【滴滴企业版】统一充值统一开票，员工免垫付免贴票，财务免审票，行程费用清晰透明，用车商旅统一线上化管控，助力企业降本增效，现年底大促充1000返1000充5000返5000（10元无门槛专快车组合券）名额有限；合作流程：1注册企业版账号2充值3导入员工4设置制度5员工下载滴滴企业版APP打车企业支付，如有疑问可致电【xxxxxxxxxxx】微信同号。拒收请回复R
+    value: '4'
+  - label: 【滴滴企业版】您好，企业用车解决方案引领者，年底大促充1000返1000充5000返5000（10元无门槛专快车组合券），活动还有3个工作日结束！致电您无人接听，请您注意电话我们将再次与您联系，如有疑问可致电【xxxxxxxxxxx】微信同号。拒收请回复R
+    value: '5'
+  - label: 【滴滴企业版】统一充值统一开票，员工免垫付免贴票，财务免审票，行程费用清晰透明，用车和预定机酒火统一线上化管控，助力企业降本增效，现年底大促充1000返1000充5000返5000（10元无门槛专快车组合券）活动还有3个工作日结束！合作流程：1注册企业版账号2充值3导入员工4设置制度5员工下载滴滴企业版APP打车企业支付
+    value: '6'
+  - label: 【滴滴企业版】您好，企业用车解决方案引领者，年底大促充1000返1000充5000返5000（10元无门槛专快车组合券），活动还有最后2天！致电您无人接听，请您注意电话我们将再次与您联系，如有疑问可致电【xxxxxxxxxxx】微信同号。拒收请回复R
+    value: '7'
+  - label: 【滴滴企业版】统一充值统一开票，员工免垫付免贴票，财务免审票，行程费用清晰透明，用车和预定机酒火统一线上化管控，助力企业降本增效，现年底大促充1000返1000充5000返5000（10元无门槛专快车组合券）活动还有最后两天！合作流程：1注册企业版账号2充值3导入员工4设置制度5员工下载滴滴企业版APP打车企业支付
+    value: '8'
+  - label: 【滴滴企业版】您好，企业用车解决方案引领者，年初大促充1000返600充5000返3200（10元无门槛专快车组合券），活动本月28号前有效，致电您无人接听，请您注意电话我们将再次与您联系，如有疑问可致电【xxxxxxxxxxx】微信同号。拒收请回复R
+    value: '9'
+  - label: 【滴滴企业版】企业统一充值统一开票，员工免垫付免贴票，财务免审票，行程费用清晰透明，用车和预定机酒火统一线上化管控，助力企业降本增效，现年初大促充1000返600充5000返3200（10元无门槛专快车组合券）活动本月28号前有效！合作流程：1注册企业版账号2充值3导入员工4设置制度5员工下载滴滴企业版APP打车企业支付
+    value: '10'
+  - label: '【滴滴企业版】企业统一充值统一开票，员工免垫付免贴票，财务免审票，行程费用清晰透明，用车和预定机酒火统一线上化管控，助力企业降本增效，周年庆大促充1千最高返2千打车金;充5千最高返1万打车金;充1万最高返2万打车金;充3万最高返6万打车金;活动本月31号前有效!合作流程:
+      1注册企业版账号2充值3导入员工4设置制度5员工下载滴滴企业版APP打车企业支付。拒收请回复R'
+    value: '11'
+  - label: 您好，企业用车解决方案引领者，周年庆大促充1千最高返2千打车金;充5千最高返1万打车金;充1万最高返2万打车金;充3万最高返6万打车金;活动本月31号前有效！致电您无人接听，请您注意电话我们将再次与您联系，如有疑问可致电【xxxxxxxxxxx】微信同号。拒收请回复R
+    value: '12'
+  - label: 【滴滴企业版】您好，企业用车解决方案引领者，年初大促充1000返600充5000返3200（10元无门槛专快车组合券），活动本月28号前有效，致电您无人接听，请您注意电话我们将再次与您联系，如有疑问可致电【xxxxxxxxxxx】微信同号。拒收请回复R,【滴滴企业版】企业统一充值统一开票，员工免垫付免贴票，财务免审票，行程费用清晰透明，用车和预定机酒火统一线上化管控，助力企业降本增效，现年初大促充1000返600充5000返3200（10元无门槛专快车组合券）活动本月28号前有效！合作流程：1注册企业版账号2充值3导入员工4设置制度5员工下载滴滴企业版APP打车企业支付
+    value: '13'
+  - label: 【滴滴企业版】您好，企业用车解决方案引领者，年底大促充1000返600充5000返3200（10元无门槛专快车组合券），活动本月有效，致电您无人接听，请您注意电话我们将再次与您联系，如有疑问可致电【xxxxxxxxxxx】微信同号。拒收请回复R,【滴滴企业版】企业统一充值统一开票，员工免垫付免贴票，财务免审票，行程费用清晰透明，用车和预定机酒火统一线上化管控，助力企业降本增效，现年底大促充1000返600充5000返3200（10元无门槛专快车组合券）活动本月有效！合作流程：1注册企业版账号2充值3导入员工4设置制度5员工下载滴滴企业版APP打车企业支付
+    value: '14'
+  - label: 其他
+    value: other
+- api: created_by
+  label: 创建人
+- api: content__c
+  label: 工作内容
+  options:
+  - label: 日常沟通（节假日关怀/客情维护）
+    value: '1'
+  - label: 客户对接人变动/交接拜访
+    value: '3'
+  - label: 需求挖掘
+    value: '4'
+  - label: 方案制定
+    value: '5'
+  - label: 分子公司
+    value: '10'
+  - label: 品类
+    value: '11'
+  - label: 账户
+    value: '12'
+  - label: 招投标跟进
+    value: '6'
+  - label: 上线推进（签约/实施/内宣）
+    value: '9'
+  - label: 重点投诉
+    value: '7'
+  - label: 使用解答
+    value: '8'
+  - label: 合同续约/政策沟通
+    value: '19'
+  - label: 账单/开票/回款支持
+    value: '18'
+  - label: 流失预警
+    value: '13'
+  - label: 其他
+    value: '2'
+  - label: 其他（标准）
+    value: other
+- api: relevant_team
+  label: 相关团队
+- api: recording_link
+  label: 互动语料链接
+- api: data_own_department
+  label: 归属部门
+- api: customItem207__c
+  label: 日报分类
+  options:
+  - label: 线下拜访
+    value: '1'
+  - label: 线上会议
+    value: '2'
+  - label: 日常日报
+    value: '3'
+  - label: 其他
+    value: other
+- api: follow_up_person__c
+  label: 随访人员
+- api: followupReason__c
+  label: 跟进原因
+- api: name
+  label: 记录ID
+- api: _id
+  label: _id
+- api: lead_stage__c
+  label: 线索阶段
+  options:
+  - label: MQL
+    value: '1'
+  - label: SQL
+    value: '10'
+  - label: 暂无需求
+    value: '8'
+  - label: 非决策人，无法推进
+    value: '9'
+  - label: 无人接听
+    value: '5'
+  - label: 开场白挂断
+    value: '6'
+  - label: 有意向，需多次跟进
+    value: '7'
+  - label: 空号
+    value: '2'
+  - label: 重复注册
+    value: '3'
+  - label: 拒绝再次联系
+    value: '4'
+  - label: 未开语音服务
+    value: '12'
+  - label: 停机
+    value: '13'
+  - label: 注册错误
+    value: '14'
+  - label: 关机
+    value: '15'
+  - label: 拒接
+    value: '16'
+  - label: 无法接通
+    value: '17'
+  - label: 秒挂
+    value: '18'
+  - label: 接了不说话
+    value: '19'
+  - label: 无效沟通
+    value: '20'
+  - label: 需求不匹配
+    value: '21'
+  - label: 客户已经注销
+    value: '11'
+  - label: 未联系上
+    value: '22'
+  - label: 其他
+    value: other
+- api: latitude__c
+  label: 纬度
+- api: nextFollowupDate__c
+  label: 预计下次跟进时间
+- api: related_api_names
+  label: 关联业务对象
+  options:
+  - label: 客保延期申请
+    value: customerInsuranceExtension__c
+  - label: 联系人
+    value: ContactObj
+  - label: CSM客户
+    value: csm_customer__c
+  - label: 任务
+    value: task__c
+  - label: 实时线索传递库
+    value: leadCollect__c
+  - label: 销售线索
+    value: LeadsObj
+  - label: 售前项目
+    value: pre_sales_project__c
+  - label: 商机
+    value: NewOpportunityObj
+  - label: 实施项目
+    value: project__c
+  - label: 客户
+    value: AccountObj
+- api: active_record_type
+  label: 跟进类型（标准字段禁用）
+  options:
+  - label: 上门培训
+    value: 0171d325d10945ee966f90b176f68ce3
+  - label: 视频辅导
+    value: d962c237b4854c43b7ee24b0a9c0e9c0
+  - label: 上门维修
+    value: ef39bdee3e764d09a1ceadd376f6448e
+  - label: 客户投诉
+    value: 52806e86ae3b4e1daeeda6583022b8b4
+  - label: 客户反馈
+    value: aba1a4f8e2be406c8706a175316e7b60
+  - label: 产品发货
+    value: d56c6f97ec05441e832abaec7d592a37
+  - label: 产品安装
+    value: d6168c82036f42a2b7453994d255f630
+  - label: 定期检修
+    value: 1e79855eeb8843809fb0eacb595c3fc7
+  - label: 企业微信
+    value: b9523b9e443d41f993a20cd8e9ded0b9
+- api: mnutes__c
+  label: 会议纪要
+- api: owner_name__c
+  label: 负责人姓名（接口用）
+- api: customItem204__c
+  label: 是否季度复盘
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: interactive_types
+  label: 互动类型
+  options:
+  - label: 打电话
+    value: call
+  - label: 在线会议
+    value: meeting
+  - label: 在线聊天
+    value: chat
+  - label: 邮件
+    value: email
+  - label: 现场拜访
+    value: visit
+  - label: 其他
+    value: other
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 流水号
+- api: is_deleted
+  label: is_deleted
+- api: decision_chain_info__c
+  label: A：决策链信息
+- api: last_call_status__c
+  label: 上一次拨通情况
+  options:
+  - label: 是
+    value: option_shi__c
+  - label: 否
+    value: option_fou__c
+  - label: 其他
+    value: other
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: follow_up_content__c
+  label: 跟进内容
+- api: out_owner
+  label: 外部负责人
+- api: business_opportunity_statu__c
+  label: 商机状态
+- api: proposal__c
+  label: 产品建议
+- api: call_id__c
+  label: 通话记录ID
+- api: owner
+  label: 负责人
+- api: customItem201__c
+  label: 拜访日期
+- api: delete_flag__c
+  label: 删除标识
+  options:
+  - label: 未删除
+    value: '0'
+  - label: 已删除
+    value: '1'
+  - label: 其他
+    value: other
+- api: lead_status__c
+  label: 线索情况
+  options:
+  - label: 正常
+    value: '1'
+  - label: 仍需孵化
+    value: '2'
+  - label: 无效线索
+    value: '3'
+  - label: 其他
+    value: other
+- api: last_modified_by
+  label: 最后修改人
+- api: xsyId__c
+  label: 销售易数据ID
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 未使用_SMB运营电话
+    value: ''
+  - label: 未使用_销售记录
+    value: ''
+  - label: 线索拜访
+    value: ''
+  - label: 商机拜访
+    value: ''
+  - label: 日工作报告
+    value: ''
+  - label: 线索中心电话
+    value: ''
+  - label: SMB运营拜访（仅客户）
+    value: ''
+  - label: SMB销售电话
+    value: ''
+  - label: 异动任务
+    value: ''
+  - label: 项目跟进
+    value: ''
+  - label: 外呼授权记录
+    value: ''
+- api: accompanyPerson__c
+  label: 陪访人员
+- api: answer_status__c
+  label: 接听状态
+  options:
+  - label: 接通
+    value: '1'
+  - label: 接通并挂断
+    value: '2'
+  - label: 占线
+    value: '3'
+  - label: 关机
+    value: '4'
+  - label: 停机
+    value: '5'
+  - label: 空号
+    value: '6'
+  - label: 拒接
+    value: '7'
+  - label: 无人接听
+    value: '8'
+  - label: 接后挂断
+    value: '9'
+  - label: 待外呼
+    value: '10'
+  - label: 其他
+    value: other
+- api: purpose__c
+  label: 拜访目的
+  options:
+  - label: 关系维护
+    value: '1'
+  - label: 项目跟进
+    value: '2'
+  - label: 问题解决
+    value: '3'
+  - label: 合同续约
+    value: '4'
+  - label: 交接拜访
+    value: '5'
+  - label: 流失召回
+    value: '6'
+  - label: 生态伙伴洽谈
+    value: '7'
+  - label: 需求梳理
+    value: '8'
+  - label: 方案制定
+    value: '9'
+  - label: 决策沟通
+    value: '10'
+  - label: 合同开户
+    value: '11'
+  - label: 赢单
+    value: '12'
+  - label: 激活
+    value: '13'
+  - label: 内宣&放量
+    value: '14'
+  - label: 客户约访
+    value: '15'
+  - label: 前期沟通
+    value: '16'
+  - label: 了解需求
+    value: '17'
+  - label: 需求确定
+    value: '18'
+  - label: 渗透跟进-1部
+    value: '19'
+  - label: 渗透跟进-2部
+    value: '21'
+  - label: 日常运维
+    value: '22'
+- api: channel_manager__c
+  label: 渠道经理
+- api: specialType__c
+  label: 部门分类（接口用）
+- api: contentFile__c
+  label: 附件
+- api: contactPhone__c
+  label: 拜访人电话
+- api: customItem155__c
+  label: 本次拜访方式
+  options:
+  - label: 现场拜访
+    value: '5'
+  - label: 电话
+    value: '1'
+  - label: 线上会议
+    value: '4'
+  - label: 微信
+    value: '2'
+  - label: 邮件
+    value: '3'
+  - label: 地推
+    value: '6'
+  - label: 企微/微信
+    value: '7'
+  - label: 其他
+    value: other

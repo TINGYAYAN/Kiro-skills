@@ -1,3 +1,58 @@
+参会人员(activity_customer__c):
+  ID: _id
+  is_deleted: is_deleted
+  object_describe_api_name: object_describe_api_name
+  package: package
+  version: version
+  业务类型: record_type
+  业务编码: name
+  产品方案: product_solution__c
+  作废前生命状态: life_status_before_invalid
+  创建人: created_by
+  创建时间: create_time
+  加锁人: lock_user
+  参会人员及会议: display_name
+  参会类型: participation_type__c
+  取消原因: cancel_reason__c
+  备注: remark__c
+  外部企业: out_tenant_id
+  外部负责人: out_owner
+  家庭情况: family_situation__c
+  年龄: age__c
+  归属部门: data_own_department
+  性别: gender__c
+  成交金额取消时间: transaction_amount_cancel__c
+  成交金额（元）: transaction_amount__c
+  抗拒点: resistance_point__c
+  提货编号: pick_up_goods__c
+  数据来源(系统内置): origin_source
+  最后修改人: last_modified_by
+  最后修改时间: last_modified_time
+  最高消费金额（万）: highest_consumption_amount__c
+  未成交原因: unclosed_reason__c
+  本次参会结果: participation_result__c
+  活动名称: activity_name__c
+  消费习惯: consumption_habit__c
+  状态: status__c
+  生命状态: life_status
+  相关团队: relevant_team
+  租户ID: tenant_id
+  结束日期: end_date__c
+  职业: occupation__c
+  见过几次: seen_several_times__c
+  订单编号: order_number__c
+  负责人: owner
+  负责人主属部门: owner_department
+  跟进方案: follow_up_plan__c
+  铺垫产品: foreshadowing_product__c
+  锁定状态: lock_status
+  锁定规则: lock_rule
+  门店名称: store__c
+  门票: ticket__c
+  门票产品: ticket_product__c
+  需求: requirement__c
+  顾客姓名: customer_name__c
+  顾客现有项目: customer_existing_project__c
 客户(AccountObj):
   1级行业: industry_level1
   2级行业: industry_level2
@@ -198,32 +253,3 @@
   饮品偏好: drink__c
   饮食喜好: dietary_preference__c
   首次分配营养师日期: first_allocation_dietitian__c
-银行流水(payment_record__c):
-  ID: _id
-  is_deleted: is_deleted
-  object_describe_api_name: object_describe_api_name
-  package: package
-  version: version
-  业务类型: record_type
-  作废前生命状态: life_status_before_invalid
-  创建人: created_by
-  创建时间: create_time
-  加锁人: lock_user
-  外部企业: out_tenant_id
-  外部负责人: out_owner
-  客户名称: store_name__c
-  归属部门: data_own_department
-  打款金额: transfer_amount__c
-  摘要: abstract__c
-  数据来源(系统内置): origin_source
-  日期: date__c
-  最后修改人: last_modified_by
-  最后修改时间: last_modified_time
-  流水号: name
-  生命状态: life_status
-  相关团队: relevant_team
-  租户ID: tenant_id
-  负责人: owner
-  负责人主属部门: owner_department
-  锁定状态: lock_status
-  锁定规则: lock_rule

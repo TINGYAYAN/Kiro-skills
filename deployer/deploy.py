@@ -8,12 +8,15 @@ APL 函数部署器 —— 通过 Playwright 浏览器自动化将 APL 代码部
 from __future__ import annotations
 
 import argparse
+import hashlib
+import html
 import json
 import sys
 import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
+from apl_doc_rules import build_doc_guardrails, build_official_docs_section
 from deployer import selectors as sel
 from deployer.deploy_login import (
     navigate_to_function_list,
@@ -24,7 +27,7 @@ from deployer.deploy_login import (
     wait_for_manual_login,
     dismiss_stale_apl_modals,
 )
-from utils import load_config
+from utils import load_config, resolve_namespace
 
 SCREENSHOTS_DIR = Path(__file__).parent / "screenshots"
 SCREENSHOTS_DIR.mkdir(exist_ok=True)
@@ -42,6 +45,262 @@ def _get_search_input_locator(frame):
         except Exception:
             continue
     return None
+
+
+def _active_form_dialog_js() -> str:
+    return """
+        (() => {
+            const dialogs = [...document.querySelectorAll('.paas-func-dialog, .f-g-dialog.paas-func-dialog-height')];
+            let best = null;
+            let bestScore = -1e9;
+            dialogs.forEach((el, idx) => {
+                const rect = el.getBoundingClientRect();
+                const style = window.getComputedStyle(el);
+                if (style.display === 'none' || style.visibility === 'hidden' || rect.width < 40 || rect.height < 40) {
+                    return;
+                }
+                const text = (el.innerText || '').trim();
+                const z = Number.parseInt(style.zIndex || '0', 10);
+                const zScore = Number.isFinite(z) ? z : 0;
+                const signalWords = ['新建自定义APL函数', '代码名称', '命名空间', '绑定对象', '描述'];
+                const signalCount = signalWords.filter(word => text.includes(word)).length;
+                const inputCount = el.querySelectorAll('input, textarea, .paasf-form-select').length;
+                const closeConfirm = text.includes('关闭后设置的函数将不能保存') || text.includes('确认要关闭');
+                const score = signalCount * 1000 + inputCount * 25 + zScore + idx / 1000 - (closeConfirm ? 500 : 0);
+                if (score > bestScore) {
+                    best = el;
+                    bestScore = score;
+                }
+            });
+            return best;
+        })()
+    """
+
+
+def _get_active_form_dialog_index(frame) -> int:
+    try:
+        return int(frame.evaluate(f"""() => {{
+            const all = [...document.querySelectorAll('.paas-func-dialog, .f-g-dialog.paas-func-dialog-height')];
+            const target = {_active_form_dialog_js()};
+            return target ? all.indexOf(target) : -1;
+        }}"""))
+    except Exception:
+        return -1
+
+
+def _get_active_form_dialog_locator(frame):
+    idx = _get_active_form_dialog_index(frame)
+    if idx < 0:
+        return None
+    return frame.locator('.paas-func-dialog, .f-g-dialog.paas-func-dialog-height').nth(idx)
+
+
+def _wait_for_any_visible(frame, selectors: list[str], timeout_ms: int = 8000) -> str:
+    deadline = time.perf_counter() + timeout_ms / 1000
+    while time.perf_counter() < deadline:
+        for sel_text in selectors:
+            try:
+                if frame.locator(sel_text).first.is_visible(timeout=150):
+                    return sel_text
+            except Exception:
+                continue
+        time.sleep(0.1)
+    return ""
+
+
+def _wait_for_text(frame, text: str, *, visible: bool, timeout_ms: int = 5000) -> bool:
+    state = "visible" if visible else "hidden"
+    try:
+        frame.locator(f':text("{text}")').first.wait_for(state=state, timeout=timeout_ms)
+        return True
+    except Exception:
+        return False
+
+
+def _remark_dialog_visible(frame) -> bool:
+    target = getattr(frame, "page", None) or frame
+    for text in ("请输入版本备注信息", "备注信息", "版本备注"):
+        try:
+            if target.locator(f':text("{text}")').first.is_visible(timeout=150):
+                return True
+        except Exception:
+            continue
+    return False
+
+
+def _get_visible_remark_dialog_index(frame) -> int:
+    target = getattr(frame, "page", None) or frame
+    try:
+        return int(target.evaluate(
+            """
+            () => {
+                const visible = (el) => {
+                    if (!el) return false;
+                    const rect = el.getBoundingClientRect();
+                    const style = window.getComputedStyle(el);
+                    return style.display !== 'none'
+                        && style.visibility !== 'hidden'
+                        && rect.width > 30
+                        && rect.height > 30;
+                };
+                const dialogs = [...document.querySelectorAll('.el-message-box__wrapper, .fx-message-box__wrapper, [role="dialog"]')]
+                    .filter(visible)
+                    .sort((a, b) => {
+                        const za = parseInt(window.getComputedStyle(a).zIndex || '0', 10) || 0;
+                        const zb = parseInt(window.getComputedStyle(b).zIndex || '0', 10) || 0;
+                        return zb - za;
+                    });
+                const target = dialogs.find(d => {
+                    const text = (d.innerText || '').trim();
+                    return text.includes('请输入版本备注信息') || text.includes('版本备注') || text.includes('备注信息');
+                });
+                if (!target) return -1;
+                const all = [...document.querySelectorAll('.el-message-box__wrapper, .fx-message-box__wrapper, [role="dialog"]')];
+                return all.indexOf(target);
+            }
+            """
+        ))
+    except Exception:
+        return -1
+
+
+def _get_visible_remark_dialog(frame):
+    target = getattr(frame, "page", None) or frame
+    idx = _get_visible_remark_dialog_index(frame)
+    if idx < 0:
+        return None
+    return target.locator('.el-message-box__wrapper, .fx-message-box__wrapper, [role="dialog"]').nth(idx)
+
+
+def _wait_for_remark_dialog_closed(frame, timeout_ms: int = 4000) -> bool:
+    deadline = time.perf_counter() + timeout_ms / 1000
+    while time.perf_counter() < deadline:
+        if not _remark_dialog_visible(frame):
+            return True
+        time.sleep(0.12)
+    return not _remark_dialog_visible(frame)
+
+
+def _wait_for_remark_dialog_visible(frame, timeout_ms: int = 5000) -> bool:
+    deadline = time.perf_counter() + timeout_ms / 1000
+    while time.perf_counter() < deadline:
+        if _remark_dialog_visible(frame):
+            return True
+        time.sleep(0.12)
+    return _remark_dialog_visible(frame)
+
+
+def _click_close_confirm_dialog(frame) -> bool:
+    target = getattr(frame, "page", None) or frame
+    try:
+        clicked = bool(target.evaluate(
+            """
+            () => {
+                const visible = (el) => {
+                    if (!el) return false;
+                    const rect = el.getBoundingClientRect();
+                    const style = window.getComputedStyle(el);
+                    return style.display !== 'none'
+                        && style.visibility !== 'hidden'
+                        && rect.width > 20
+                        && rect.height > 20;
+                };
+                const dialogs = [...document.querySelectorAll('.el-message-box__wrapper, .fx-message-box__wrapper, .paas-func-dialog, .f-g-dialog.paas-func-dialog-height, [role="dialog"]')]
+                    .filter(visible)
+                    .sort((a, b) => {
+                        const za = parseInt(window.getComputedStyle(a).zIndex || '0', 10) || 0;
+                        const zb = parseInt(window.getComputedStyle(b).zIndex || '0', 10) || 0;
+                        return zb - za;
+                    });
+                const dlg = dialogs.find(d => {
+                    const text = (d.innerText || '').trim();
+                    return text.includes('关闭后设置的函数将不能保存') || text.includes('确认要关闭吗');
+                });
+                if (!dlg) return false;
+                const nodes = [...dlg.querySelectorAll('button, span, a, div')].filter(visible);
+                const target = nodes.find(el => ((el.innerText || el.textContent || '').trim() === '确定'))
+                    || nodes.find(el => ['确认', 'OK'].includes((el.innerText || el.textContent || '').trim()));
+                if (!target) return false;
+                ['mousedown', 'mouseup', 'click'].forEach((evt) => {
+                    target.dispatchEvent(new MouseEvent(evt, { bubbles: true, cancelable: true, view: window }));
+                });
+                return true;
+            }
+            """
+        ))
+        if clicked:
+            print("  [部署器] 已处理关闭确认弹窗")
+            time.sleep(0.5)
+            return True
+    except Exception:
+        pass
+    return False
+
+
+def _wait_for_select_dropdown(frame, *, open_state: bool, timeout_ms: int = 3000) -> bool:
+    want_open = True if open_state else False
+    deadline = time.perf_counter() + timeout_ms / 1000
+    while time.perf_counter() < deadline:
+        try:
+            is_open = bool(frame.evaluate(
+                "() => [...document.querySelectorAll('.el-select-dropdown.el-popper')]"
+                ".some(el => el.offsetHeight > 0 && el.getBoundingClientRect().height > 0)"
+            ))
+            if is_open == want_open:
+                return True
+        except Exception:
+            pass
+        time.sleep(0.08)
+    return False
+
+
+def _wait_for_ui_mask_clear(frame, timeout_ms: int = 5000) -> bool:
+    target = getattr(frame, "page", None) or frame
+    deadline = time.perf_counter() + timeout_ms / 1000
+    while time.perf_counter() < deadline:
+        try:
+            has_mask = bool(target.evaluate(
+                """
+                () => [...document.querySelectorAll('.ui-mask, [class*="ui-mask"], [class*="loading-mask"], .el-loading-mask')]
+                    .some(el => {
+                        const rect = el.getBoundingClientRect();
+                        const style = window.getComputedStyle(el);
+                        return style.display !== 'none'
+                            && style.visibility !== 'hidden'
+                            && rect.width > 10
+                            && rect.height > 10;
+                    })
+                """
+            ))
+            if not has_mask:
+                return True
+        except Exception:
+            return True
+        time.sleep(0.08)
+    return False
+
+
+def _wait_for_run_controls_ready(frame, timeout_ms: int = 8000) -> str:
+    return _wait_for_any_visible(
+        frame,
+        ['input[placeholder*="数据源"]', 'input[placeholder*="请选择"]', ':text("运行脚本")'],
+        timeout_ms=timeout_ms,
+    )
+
+
+def _wait_for_editor_ready(frame, timeout_ms: int = 40000) -> bool:
+    matched = _wait_for_any_visible(
+        frame,
+        [
+            ':text-is("保存草稿")',
+            '.ace_editor',
+            '.monaco-editor',
+            '.CodeMirror',
+            '[class*="code-editor"]',
+        ],
+        timeout_ms=timeout_ms,
+    )
+    return bool(matched)
 
 
 def find_function(frame, func_name: str) -> bool:
@@ -87,7 +346,7 @@ def _click_select_option(frame, label_text: str, option_text: str):
     # （先用 JS 找到 input，再用 Playwright locator 操作，更可靠）
     input_index = frame.evaluate(f"""
         () => {{
-            const dialog = document.querySelector('.paas-func-dialog') || document.body;
+            const dialog = {_active_form_dialog_js()} || document.body;
             const walker = document.createTreeWalker(dialog, NodeFilter.SHOW_TEXT,
                 {{acceptNode: n => n.textContent.trim() === {repr(label_text)}
                     ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP}});
@@ -110,17 +369,44 @@ def _click_select_option(frame, label_text: str, option_text: str):
 
     if input_index >= 0:
         trigger = frame.locator('.el-input__inner').nth(input_index)
-        trigger.click()          # 打开下拉
-        time.sleep(0.3)
+        _wait_for_ui_mask_clear(frame, timeout_ms=2500)
+        try:
+            trigger.click(timeout=3000)          # 打开下拉
+        except Exception as e:
+            print(f"  [部署器] {label_text} 触发器点击受阻，尝试等待遮罩后改用 JS 打开: {e}")
+            _wait_for_ui_mask_clear(frame, timeout_ms=5000)
+            js_opened = False
+            try:
+                js_opened = bool(frame.evaluate(
+                    f"""
+                    () => {{
+                        const all = [...document.querySelectorAll('.el-input__inner')];
+                        const inp = all[{input_index}] || null;
+                        if (!inp) return false;
+                        const host = inp.closest('.el-input, .el-select, .paasf-form-select') || inp;
+                        ['mousedown', 'mouseup', 'click'].forEach((evt) => {{
+                            host.dispatchEvent(new MouseEvent(evt, {{ bubbles: true, cancelable: true, view: window }}));
+                            inp.dispatchEvent(new MouseEvent(evt, {{ bubbles: true, cancelable: true, view: window }}));
+                        }});
+                        inp.focus();
+                        return true;
+                    }}
+                    """
+                ))
+            except Exception:
+                js_opened = False
+            if not js_opened:
+                raise
+        _wait_for_select_dropdown(frame, open_state=True, timeout_ms=2000)
         # 若为 filterable，输入过滤；过滤可能不生效（如 自定义控制器 在分组内），Step2 会滚动查找
         try:
             trigger.fill(option_text)
         except Exception:
             pass
-        time.sleep(0.3)
+        _wait_for_select_dropdown(frame, open_state=True, timeout_ms=1200)
     else:
         print(f"  [警告] 未找到 {label_text} 触发器")
-        return
+        return "trigger_not_found"
 
     # ── Step 2：在 body 层找打开的 el-select-dropdown，scrollIntoView 后点 li ──
     # 支持分组下拉（如 平台>自定义控制器），选项可能在 el-select-group__wrap 内
@@ -180,11 +466,10 @@ def _click_select_option(frame, label_text: str, option_text: str):
             print(f"  [部署器] 清除过滤重试失败: {e}")
 
     print(f"  [部署器] {label_text} → {option_text}: {result}")
-    time.sleep(0.2)
 
     # ── Step 3：按 Escape 确保下拉关闭，不遮挡后续操作 ──
     frame.keyboard.press("Escape")
-    time.sleep(0.2)
+    _wait_for_select_dropdown(frame, open_state=False, timeout_ms=1500)
     return result
 
 
@@ -194,7 +479,6 @@ def _handle_editor_mode_dialog(frame, page):
         # 支持「选择编辑器」或「选择编译器」两种文案
         editor_title = frame.locator('text=/选择编辑|选择编译/').first
         editor_title.wait_for(state="visible", timeout=5000)
-        time.sleep(0.5)
         # 选 Code Editor（或「代码编辑器」）
         for opt_text in ["Code Editor", "代码编辑器"]:
             try:
@@ -206,8 +490,8 @@ def _handle_editor_mode_dialog(frame, page):
                     break
             except Exception:
                 continue
-        time.sleep(0.5)
         ok_btn = frame.locator(':text-is("确定")').last
+        ok_btn.wait_for(state="visible", timeout=3000)
         ok_bbox = ok_btn.bounding_box(timeout=3000)
         if ok_bbox:
             page.mouse.click(ok_bbox['x'] + ok_bbox['width'] / 2,
@@ -215,7 +499,10 @@ def _handle_editor_mode_dialog(frame, page):
         else:
             ok_btn.click(force=True)
         print("  [部署器] 已处理「选择编辑器」弹窗，选择 Code Editor")
-        time.sleep(1)
+        try:
+            editor_title.wait_for(state="hidden", timeout=5000)
+        except Exception:
+            pass
     except Exception:
         pass  # 没有弹出该对话框，直接继续
 
@@ -241,19 +528,74 @@ def _parse_binding_object_from_apl(apl_path_or_code) -> str:
 def create_function(frame, func_name: str, apl_code: str,
                     namespace: str = "公共库", object_label: str = "",
                     description: str = "", cfg: dict = None, output_file: str = None,
-                    req: dict = None):
+                    req: dict = None, fields_map_snapshot: dict | None = None):
     """新建函数：填写第一步表单 → 下一步 → 填写代码 → 保存。"""
     print(f"[部署器] 新建函数: {func_name}")
 
     root = getattr(frame, "page", None) or frame
+
+    def _clear_open_editor_overlay() -> None:
+        for _ in range(6):
+            acted = False
+            try:
+                if frame.locator(':text-is("保存草稿")').first.is_visible(timeout=300):
+                    acted = True
+                    frame.evaluate(
+                        """
+                        () => {
+                            const visible = (el) => {
+                                if (!el) return false;
+                                const rect = el.getBoundingClientRect();
+                                const style = window.getComputedStyle(el);
+                                return style.display !== 'none'
+                                    && style.visibility !== 'hidden'
+                                    && rect.width > 10
+                                    && rect.height > 10;
+                            };
+                            const dialogs = [...document.querySelectorAll('.paas-func-dialog, .f-g-dialog.paas-func-dialog-height')]
+                                .filter(visible)
+                                .sort((a, b) => {
+                                    const za = parseInt(window.getComputedStyle(a).zIndex || '0', 10) || 0;
+                                    const zb = parseInt(window.getComputedStyle(b).zIndex || '0', 10) || 0;
+                                    return zb - za;
+                                });
+                            const top = dialogs[0];
+                            if (!top) return false;
+                            const closers = [...top.querySelectorAll('.f-g-dialog-close, .el-dialog__headerbtn, [aria-label=\"Close\"]')];
+                            const btn = closers.find(visible);
+                            if (!btn) return false;
+                            ['mousedown', 'mouseup', 'click'].forEach((evt) => {
+                                btn.dispatchEvent(new MouseEvent(evt, { bubbles: true, cancelable: true, view: window }));
+                            });
+                            return true;
+                        }
+                        """
+                    )
+                    time.sleep(0.35)
+                    dismiss_stale_apl_modals(root)
+                    time.sleep(0.35)
+            except Exception:
+                pass
+            try:
+                dismiss_stale_apl_modals(root)
+            except Exception:
+                pass
+            try:
+                if not frame.locator(':text-is("保存草稿")').first.is_visible(timeout=300):
+                    return
+            except Exception:
+                return
+            if not acted:
+                time.sleep(0.2)
+
     try:
         dismiss_stale_apl_modals(root)
     except Exception:
         pass
+    _clear_open_editor_overlay()
 
     # 点击「新建APL函数」按钮（尝试多个选择器，按钮可能在页面下方需滚动）
     frame.evaluate("window.scrollTo(0, 0)")
-    time.sleep(0.5)
     btn_loc = None
     for sel_btn in [sel.FUNC_NEW_BTN] + getattr(sel, "FUNC_NEW_BTN_ALT", []):
         try:
@@ -279,15 +621,20 @@ def create_function(frame, func_name: str, apl_code: str,
     if not btn_loc:
         raise RuntimeError("未找到「新建APL函数」按钮，可能未登录或页面未加载完成。可用 PWDEBUG=1 打开 Inspector 查看页面结构。")
     btn_loc.click()
+    try:
+        dismiss_stale_apl_modals(root)
+    except Exception:
+        pass
 
     # 等弹窗标题出现（"新建自定义APL函数"）
     frame.wait_for_selector(':text("新建自定义APL函数")', timeout=10000)
-    time.sleep(0.3)
+    _wait_for_any_visible(frame, ['input[type="text"]:not([readonly])', 'textarea'], timeout_ms=4000)
 
     # 填写「代码名称」—— 用 JS 找到"代码名称"文字节点旁边的 input，
     # 触发 Vue 响应式（需要用 native value setter）
     result = frame.evaluate(f"""
         () => {{
+            const dialog = {_active_form_dialog_js()} || document.body;
             function fillInput(el, val) {{
                 const setter = Object.getOwnPropertyDescriptor(
                     window.HTMLInputElement.prototype, 'value'
@@ -299,7 +646,7 @@ def create_function(frame, func_name: str, apl_code: str,
 
             // 1. 找"代码名称"文字节点，从它的父元素向上找 input
             const walker = document.createTreeWalker(
-                document.body, NodeFilter.SHOW_TEXT,
+                dialog, NodeFilter.SHOW_TEXT,
                 {{acceptNode: n => n.textContent.trim() === '代码名称'
                     ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP}}
             );
@@ -315,7 +662,7 @@ def create_function(frame, func_name: str, apl_code: str,
             }}
 
             // 2. fallback：找弹窗内第一个可见、无 placeholder 的 text input
-            const all = [...document.querySelectorAll('input[type="text"]:not([readonly])')];
+            const all = [...dialog.querySelectorAll('input[type="text"]:not([readonly])')];
             const visible = all.filter(el => {{
                 const r = el.getBoundingClientRect();
                 return r.width > 100 && r.height > 0;
@@ -329,15 +676,26 @@ def create_function(frame, func_name: str, apl_code: str,
     if result == "not_found":
         raise RuntimeError("找不到「代码名称」输入框")
 
-    time.sleep(0.2)
-
     # 选择「命名空间」
-    _click_select_option(frame, "命名空间", namespace)
+    namespace_result = _click_select_option(frame, "命名空间", namespace)
+    if not namespace_result or not str(namespace_result).startswith("ok:"):
+        raise RuntimeError(f"未能选择命名空间「{namespace}」，当前结果: {namespace_result}")
 
     # 点击「自动生成」填写 Api Name，若格式报错则手动填一个合规名
     try:
-        frame.locator(':text("自动生成")').first.click(timeout=5000)
-        time.sleep(0.8)
+        active_dialog = _get_active_form_dialog_locator(frame)
+        auto_gen = active_dialog.locator(':text("自动生成")').first if active_dialog is not None else frame.locator(':text("自动生成")').first
+        try:
+            auto_gen.click(timeout=5000)
+        except Exception:
+            frame.evaluate(f"""
+                () => {{
+                    const dialog = {_active_form_dialog_js()} || document.body;
+                    const el = [...dialog.querySelectorAll('*')].find(node => (node.textContent || '').trim() === '自动生成');
+                    if (el) el.click();
+                }}
+            """)
+        _wait_for_any_visible(frame, ['input[placeholder*="请输入"]', '.el-form-item__error'], timeout_ms=2500)
         # 检查是否出现"不符合规则"错误
         has_error = frame.evaluate("""
             () => document.body.innerText.includes('不符合规则')
@@ -349,7 +707,7 @@ def create_function(frame, func_name: str, apl_code: str,
             api_name = f"Proc_{suffix}__c"
             frame.evaluate(f"""
                 () => {{
-                    const dialog = document.querySelector('[class*="paas-func-dialog"]') || document.body;
+                    const dialog = {_active_form_dialog_js()} || document.body;
                     const inputs = [...dialog.querySelectorAll('input')];
                     // Api Name 输入框有 placeholder="请输入"
                     const apiInput = inputs.find(i => i.placeholder && i.placeholder.includes('请输入'));
@@ -362,7 +720,6 @@ def create_function(frame, func_name: str, apl_code: str,
                     }}
                 }}
             """)
-            time.sleep(0.3)
             print(f"  [部署器] Api Name 重新填写: {api_name}")
         else:
             print("  [部署器] Api Name 已自动生成")
@@ -372,10 +729,10 @@ def create_function(frame, func_name: str, apl_code: str,
     # 选择「绑定对象」（流程函数必填）
     if object_label:
         result = _click_select_option(frame, "绑定对象", object_label)
-        if result and result.startswith("not_found"):
+        if not result or not str(result).startswith("ok:"):
             # 下拉找不到选项时，打印可用选项并抛出明确错误，避免继续走下去被表单拦截
             raise RuntimeError(
-                f"「绑定对象」下拉框找不到「{object_label}」。\n"
+                f"「绑定对象」下拉框未能正确选择「{object_label}」。\n"
                 f"可用选项：{result}\n"
                 f"请检查 req.yml 里的 object_label 是否与纷享销客对象中文名一致。"
             )
@@ -385,7 +742,7 @@ def create_function(frame, func_name: str, apl_code: str,
         description = func_name  # 至少填函数名作为描述
     desc_result = frame.evaluate(f"""
         () => {{
-            const dialog = document.querySelector('.paas-func-dialog') || document.body;
+            const dialog = {_active_form_dialog_js()} || document.body;
             const walker = document.createTreeWalker(dialog, NodeFilter.SHOW_TEXT,
                 {{acceptNode: n => n.textContent.trim() === '描述'
                     ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP}});
@@ -409,21 +766,28 @@ def create_function(frame, func_name: str, apl_code: str,
         }}
     """)
     print(f"  [部署器] 描述填写: {desc_result}")
-
-    time.sleep(0.3)
+    if desc_result != "ok":
+        raise RuntimeError(f"未能填写描述，当前结果: {desc_result}")
 
     # 点「下一步」→ 可能出现「选择模板」弹窗 → 点「使用空模板」
-    next_btn = frame.locator(sel.FUNC_NEXT_BTN).first
+    active_dialog = _get_active_form_dialog_locator(frame)
+    next_btn = (active_dialog.locator(sel.FUNC_NEXT_BTN).first
+                if active_dialog is not None else frame.locator(sel.FUNC_NEXT_BTN).first)
     next_btn.wait_for(state="visible", timeout=8000)
     next_btn.click()
 
     page = getattr(frame, 'page', frame)
+    _wait_for_any_visible(
+        frame,
+        [':text("使用空模板")', 'text=/选择编辑|选择编译/', ':text-is("保存草稿")', '.ace_editor', '.monaco-editor'],
+        timeout_ms=5000,
+    )
     # 点「使用空模板」（弹窗加载可能很慢，等待 20 秒）
     # 用 bounding_box + mouse.click 穿透 Shadow DOM，避免 .click() 不生效导致 toast 报错
     for retry in range(2):
         try:
             empty_tmpl = frame.locator(':text("使用空模板")').first
-            empty_tmpl.wait_for(state="visible", timeout=20000)
+            empty_tmpl.wait_for(state="visible", timeout=8000)
             bbox = empty_tmpl.bounding_box(timeout=5000)
             if bbox:
                 page.mouse.click(bbox['x'] + bbox['width'] / 2, bbox['y'] + bbox['height'] / 2)
@@ -434,8 +798,12 @@ def create_function(frame, func_name: str, apl_code: str,
             break
         except Exception as e:
             if retry == 0:
-                print(f"  [部署器] 等待「使用空模板」超时，2 秒后重试: {e}")
-                time.sleep(2)
+                print(f"  [部署器] 等待「使用空模板」超时，快速重试: {e}")
+                _wait_for_any_visible(
+                    frame,
+                    [':text("使用空模板")', 'text=/选择编辑|选择编译/', ':text-is("保存草稿")', '.ace_editor', '.monaco-editor'],
+                    timeout_ms=1200,
+                )
             else:
                 print(f"  [警告] 未找到「使用空模板」按钮（可能无模板弹窗）: {e}")
 
@@ -444,19 +812,16 @@ def create_function(frame, func_name: str, apl_code: str,
 
     # 等编辑器加载完成：「保存草稿」出现 + 代码编辑器容器出现
     print("  [部署器] 等待编辑器加载...")
-    frame.wait_for_selector(':text-is("保存草稿")', timeout=40000)
-    try:
-        frame.wait_for_selector('.ace_editor, .monaco-editor, .CodeMirror, [class*="code-editor"]',
-                                timeout=5000)
-    except Exception:
-        pass
+    if not _wait_for_editor_ready(frame, timeout_ms=40000):
+        raise RuntimeError("编辑器加载超时：未看到保存草稿按钮或代码编辑器容器")
 
     _fill_code_and_save(frame, apl_code, cfg=cfg, output_file=output_file,
-                        func_name=func_name, req=req)
+                        func_name=func_name, req=req, fields_map_snapshot=fields_map_snapshot)
 
 
 def update_function(frame, func_name: str, apl_code: str,
-                    cfg: dict = None, output_file: str = None, req: dict = None):
+                    cfg: dict = None, output_file: str = None, req: dict = None,
+                    fields_map_snapshot: dict | None = None):
     """找到已有函数，点击编辑进入编辑页。
     Element UI 固定列表格会把函数名列和操作列渲染在两个独立的 <table> 里，
     不能在同一个 <tr> 里同时找到函数名和「编辑」按钮。
@@ -524,7 +889,7 @@ def update_function(frame, func_name: str, apl_code: str,
         _handle_editor_mode_dialog(frame, page)
 
         _fill_code_and_save(frame, apl_code, cfg=cfg, output_file=output_file,
-                            func_name=func_name, req=req)
+                            func_name=func_name, req=req, fields_map_snapshot=fields_map_snapshot)
         return
 
     raise RuntimeError(f"找不到函数「{func_name}」的编辑入口（全局「编辑」{len(edit_locs)} 个，最近 Y 偏差 {best_dist:.1f}px）")
@@ -563,9 +928,200 @@ def _scrape_fields_from_editor(frame) :
     return fields
 
 
+def _runtime_precheck_enabled(cfg: dict | None) -> bool:
+    deployer_cfg = ((cfg or {}).get("deployer") or {})
+    return bool(deployer_cfg.get("runtime_debug_precheck", True))
+
+
+def _web_create_api_enabled(cfg: dict | None) -> bool:
+    deployer_cfg = ((cfg or {}).get("deployer") or {})
+    return bool(deployer_cfg.get("web_create_api", False))
+
+
+def _runtime_debug_namespace(req: dict | None) -> str:
+    namespace = resolve_namespace(req or {})
+    mapping = {
+        "流程": "flow",
+        "按钮": "button",
+        "UI事件": "ui_event",
+        "计划任务": "scheduler_task",
+        "范围规则": "scope_rule",
+        "自定义控制器": "apl_controller",
+        "校验函数": "validate_function",
+        "导入": "import",
+    }
+    return mapping.get(namespace, "flow")
+
+
+def _runtime_debug_api_name(func_name: str, req: dict | None = None) -> str:
+    ns = _runtime_debug_namespace(req)
+    prefix = {
+        "flow": "Proc",
+        "button": "Btn",
+        "ui_event": "UIEvt",
+        "scheduler_task": "PlnTask",
+        "scope_rule": "Scope",
+        "apl_controller": "Ctrl",
+        "validate_function": "Valid",
+        "import": "Import",
+    }.get(ns, "Proc")
+    basis = func_name or json.dumps(req or {}, ensure_ascii=False, sort_keys=True)
+    suffix = hashlib.md5(basis.encode("utf-8")).hexdigest()[:6]
+    return f"{prefix}_{suffix}__c"
+
+
+def _create_api_name(func_name: str, req: dict | None = None) -> str:
+    return _runtime_debug_api_name(func_name, req=req)
+
+
+def _normalize_runtime_debug_text(text: str) -> str:
+    if not text:
+        return ""
+    normalized = html.unescape(str(text))
+    normalized = normalized.replace("</br>", "\n").replace("<br/>", "\n").replace("<br>", "\n")
+    normalized = normalized.replace("&nbsp;", " ")
+    return normalized.strip()
+
+
+def _trim_runtime_log(log_text: str, max_lines: int = 8) -> str:
+    lines = [line.rstrip() for line in (log_text or "").splitlines() if line.strip()]
+    if len(lines) <= max_lines:
+        return "\n".join(lines)
+    return "\n".join(lines[:max_lines]) + "\n..."
+
+
+def _runtime_debug_precheck(
+    apl_code: str,
+    *,
+    cfg: dict,
+    req: dict | None,
+    func_name: str,
+) -> dict:
+    object_api = ((req or {}).get("object_api") or "").strip()
+    if not object_api:
+        return {"skipped": True, "reason": "缺少 object_api，跳过 runtime/debug 预检"}
+
+    function_name = func_name or ((req or {}).get("function_name") or "").strip() or Path(func_name or "tmp.apl").stem
+    binding_object_label = ((req or {}).get("object_label") or "").strip()
+    project_name = ((req or {}).get("project") or ((cfg.get("fxiaoke") or {}).get("project_name")) or "").strip() or None
+    api_name = _runtime_debug_api_name(function_name, req=req)
+    name_space = _runtime_debug_namespace(req)
+
+    try:
+        from fetcher.sharedev_client import runtime_debug_func
+
+        result = runtime_debug_func(
+            api_name=api_name,
+            body=apl_code,
+            binding_object_api_name=object_api,
+            project_name=project_name,
+            cfg=cfg,
+            function_name=function_name,
+            binding_object_label=binding_object_label,
+            name_space=name_space,
+        )
+    except Exception as e:
+        return {"ok": False, "transport_error": True, "error": str(e), "raw": {}}
+
+    value = result.get("Value") or {}
+    ok = bool(value.get("success"))
+    err = _normalize_runtime_debug_text(value.get("errorInfo") or value.get("error") or "")
+    log_text = _normalize_runtime_debug_text(value.get("logInfo") or "")
+    status = "ok" if ok else ("compile_error" if err else "runtime_error")
+    return {"ok": ok, "status": status, "error": err, "log": log_text, "raw": result}
+
+
+def inspect_runtime_precheck(
+    apl_code: str,
+    *,
+    cfg: dict,
+    req: dict | None,
+    func_name: str,
+) -> dict:
+    """对外暴露的 runtime/debug 预检摘要。
+
+    仅用于状态提示，不修改代码。
+    返回：
+      {
+        enabled: bool,
+        skipped: bool,
+        ok: bool,
+        status: ok|compile_error|runtime_error|data_issue|logic_risk|transport_error|skipped,
+        message: str,
+        error: str,
+        log: str,
+      }
+    """
+    if not _runtime_precheck_enabled(cfg):
+        return {
+            "enabled": False,
+            "skipped": True,
+            "ok": True,
+            "status": "skipped",
+            "message": "本地编译预检未开启",
+            "error": "",
+            "log": "",
+        }
+
+    result = _runtime_debug_precheck(apl_code, cfg=cfg, req=req, func_name=func_name)
+    if result.get("skipped"):
+        return {
+            "enabled": True,
+            "skipped": True,
+            "ok": True,
+            "status": "skipped",
+            "message": f"本地编译预检跳过：{result.get('reason')}",
+            "error": "",
+            "log": "",
+        }
+    if result.get("transport_error"):
+        return {
+            "enabled": True,
+            "skipped": False,
+            "ok": False,
+            "status": "transport_error",
+            "message": f"本地编译预检调用失败：{result.get('error')}",
+            "error": result.get("error") or "",
+            "log": result.get("log") or "",
+        }
+
+    if not result.get("ok"):
+        err = (result.get("error") or "").strip() or "未返回明确错误"
+        return {
+            "enabled": True,
+            "skipped": False,
+            "ok": False,
+            "status": result.get("status") or "compile_error",
+            "message": f"本地编译不通过：{err}",
+            "error": err,
+            "log": result.get("log") or "",
+        }
+
+    biz = _analyze_business_log(result.get("log") or "")
+    if biz.get("has_failure"):
+        status = "logic_risk"
+        message = f"本地编译通过，但业务日志疑似异常：{biz.get('summary')}"
+    elif biz.get("has_termination") and not biz.get("has_complete"):
+        status = "data_issue"
+        message = f"本地编译通过，但当前日志显示入参或测试数据不足：{biz.get('summary')}"
+    else:
+        status = "ok"
+        message = "本地编译通过"
+
+    return {
+        "enabled": True,
+        "skipped": False,
+        "ok": status in ("ok", "data_issue"),
+        "status": status,
+        "message": message,
+        "error": result.get("error") or "",
+        "log": result.get("log") or "",
+    }
+
+
 def _fill_code_and_save(frame, apl_code: str, cfg: dict = None,
                         output_file: str = None, func_name: str = "",
-                        req: dict = None):
+                        req: dict = None, fields_map_snapshot: dict | None = None):
     """向代码编辑器填入代码并保存，之后运行并自动修复错误（若提供 cfg）。
     若提供 req，会在编辑器打开后抓取「字段API对照表」并用真实字段名重新生成代码。
     """
@@ -575,7 +1131,7 @@ def _fill_code_and_save(frame, apl_code: str, cfg: dict = None,
 
     # ── 读取并保存系统生成的函数 API 名（用于后续精确定位函数）──
     if output_file:
-        api_name = _read_func_api_name_from_page(frame)
+        api_name = _read_func_api_name_from_page(frame, func_name=func_name)
         if api_name:
             save_func_meta(output_file, {"func_api_name": api_name})
             print(f"  [部署器] 函数 API 名: {api_name}（已保存到 .meta.yml）")
@@ -585,38 +1141,42 @@ def _fill_code_and_save(frame, apl_code: str, cfg: dict = None,
         try:
             from fetcher.fetch_fields import load_cache, save_cache, build_fields_context, _project_from_cfg
             obj_api = req.get("object_api", "")
-            project_name = _project_from_cfg(cfg)
+            project_name = req.get("project") or _project_from_cfg(cfg)
+            fields_map = dict(fields_map_snapshot or {})
 
-            # 优先使用缓存，避免重复抓取
-            cached_fields = load_cache(obj_api, project_name) if obj_api else None
-            if cached_fields:
-                print(f"  [字段抓取] 使用缓存字段（{len(cached_fields)} 个），跳过重新抓取")
-                fields = cached_fields
+            if fields_map:
+                total = sum(len(v) for v in fields_map.values())
+                print(f"  [字段抓取] 使用上游字段快照（{len(fields_map)} 个对象，{total} 个字段）")
             else:
-                fields = _scrape_fields_from_editor(frame)
-                if fields:
-                    save_cache(obj_api, fields, project_name)
-                    print(f"  [字段抓取] 抓取到 {len(fields)} 个字段，已写入缓存")
+                # 兼容旧入口：未传快照时再回退到缓存/编辑器抓取
+                cached_fields = load_cache(obj_api, project_name) if obj_api else None
+                if cached_fields:
+                    print(f"  [字段抓取] 使用缓存字段（{len(cached_fields)} 个），跳过重新抓取")
+                    fields = cached_fields
                 else:
-                    print(f"  [字段抓取] 编辑器内未能抓取到字段，将使用原始生成代码继续部署")
+                    fields = _scrape_fields_from_editor(frame)
+                    if fields:
+                        save_cache(obj_api, fields, project_name)
+                        print(f"  [字段抓取] 抓取到 {len(fields)} 个字段，已写入缓存")
+                    else:
+                        print(f"  [字段抓取] 编辑器内未能抓取到字段，将使用原始生成代码继续部署")
 
-            if fields:
-                fields_map = {obj_api: fields}
-                # 关联对象：优先用 req 配置，否则从需求推断
-                related_list = req.get("related_objects") or []
-                if not related_list and req.get("requirement"):
-                    from utils import infer_related_objects_from_requirement
-                    obj_label = req.get("object_label", "")
-                    related_list = infer_related_objects_from_requirement(
-                        req["requirement"], obj_api, obj_label
-                    )
-                    if related_list:
-                        print(f"  [字段抓取] 从需求推断关联对象: {[r['label'] for r in related_list]}")
-                for related in related_list:
-                    r_api = related.get("api", "")
-                    r_cached = load_cache(r_api, project_name) if r_api else None
-                    if r_cached:
-                        fields_map[r_api] = r_cached
+                if fields:
+                    fields_map = {obj_api: fields}
+                    related_list = req.get("related_objects") or []
+                    if not related_list and req.get("requirement"):
+                        from utils import infer_related_objects_from_requirement
+                        obj_label = req.get("object_label", "")
+                        related_list = infer_related_objects_from_requirement(
+                            req["requirement"], obj_api, obj_label, project_name=project_name
+                        )
+                        if related_list:
+                            print(f"  [字段抓取] 从需求推断关联对象: {[r['label'] for r in related_list]}")
+                    for related in related_list:
+                        r_api = related.get("api", "")
+                        r_cached = load_cache(r_api, project_name) if r_api else None
+                        if r_cached:
+                            fields_map[r_api] = r_cached
 
                 try:
                     mf = int((cfg.get("generator") or {}).get("max_fields_in_prompt", 72))
@@ -638,6 +1198,83 @@ def _fill_code_and_save(frame, apl_code: str, cfg: dict = None,
                         print(f"  [部署器] 重新生成失败，使用原始代码: {e}")
         except Exception as e:
             print(f"  [字段抓取] 编辑器内字段抓取异常: {e}")
+
+    # ── 可选：用系统 runtime/debug 接口做一轮预检（默认关闭，不影响原流程）──
+    if req and cfg and _runtime_precheck_enabled(cfg):
+        preview_code = apl_code
+        preview_result = None
+        for attempt in range(3):
+            preview_result = _runtime_debug_precheck(
+                preview_code, cfg=cfg, req=req, func_name=func_name
+            )
+            if preview_result.get("skipped"):
+                print(f"  [预检] runtime/debug 跳过: {preview_result.get('reason')}")
+                break
+            if preview_result.get("transport_error"):
+                print(f"  [预检] runtime/debug 调用失败，跳过本轮预检: {preview_result.get('error')}")
+                break
+            if preview_result.get("ok"):
+                log_excerpt = _trim_runtime_log(preview_result.get("log") or "")
+                biz = _analyze_business_log(preview_result.get("log") or "")
+                if biz.get("has_failure") or (biz.get("has_termination") and not biz.get("has_complete")):
+                    print(f"  [预检] runtime/debug 业务日志诊断: {biz.get('summary')}")
+                    fixed, issue_type = _call_llm_fix_business_logic(
+                        preview_code,
+                        preview_result.get("log") or "",
+                        (req or {}).get("requirement") or "",
+                        cfg,
+                    )
+                    if issue_type == "LOGIC_ISSUE" and fixed and fixed != preview_code:
+                        print("  [预检] 识别为逻辑问题，已按业务日志修复后重试 runtime/debug...")
+                        preview_code = fixed
+                        apl_code = preview_code
+                        continue
+                    if log_excerpt:
+                        print("  [预检] 预检可运行，但当前日志更像数据/入参问题，保留原代码继续浏览器校验")
+                        print(log_excerpt)
+                    else:
+                        print("  [预检] 预检可运行，但当前日志更像数据/入参问题，保留原代码继续浏览器校验")
+                    apl_code = preview_code
+                    break
+                if log_excerpt:
+                    print("  [预检] runtime/debug 预检通过（接口可运行，以下为摘要日志）")
+                    print(log_excerpt)
+                else:
+                    print("  [预检] runtime/debug 预检通过")
+                apl_code = preview_code
+                break
+
+            err_text = (preview_result.get("error") or "").strip()
+            if not err_text:
+                log_excerpt = _trim_runtime_log(preview_result.get("log") or "")
+                print("  [预检] runtime/debug 未通过，但未返回明确编译错误；继续走浏览器内运行校验")
+                if log_excerpt:
+                    print(log_excerpt)
+                break
+
+            print(f"  [预检] runtime/debug 发现问题: {err_text[:300]}")
+            fixed = _apply_rule_based_fix(preview_code, err_text)
+            if fixed != preview_code:
+                print("  [预检] 规则修复后重试 runtime/debug...")
+                preview_code = fixed
+                apl_code = preview_code
+                continue
+
+            fixed = _call_llm_fix(
+                preview_code,
+                err_text,
+                cfg,
+                retry_feedback="来自 runtime/debug 预检",
+                req=req,
+            )
+            if fixed != preview_code:
+                print("  [预检] LLM 修复后重试 runtime/debug...")
+                preview_code = fixed
+                apl_code = preview_code
+                continue
+
+            print("  [预检] 未找到可用修复，继续走浏览器内运行/保存链路做二次校验")
+            break
 
     # 尝试多种编辑器 API 写入代码（各自 try-catch 独立容错）
     filled = frame.evaluate(f"""
@@ -713,51 +1350,27 @@ def _fill_code_and_save(frame, apl_code: str, cfg: dict = None,
     """)
     print(f"  [部署器] 代码填写方式: {filled}")
 
-    # JS 注入失败 / ACE 元素存在但无法获取实例 → 键盘粘贴（最可靠）
+    # 不再使用页面级键盘粘贴兜底，避免焦点漂移到地址栏或其他输入框。
+    # 如果编辑器实例拿不到，直接让当前记录失败，由上层进入下一条，避免“假输入/误输入”。
     if filled in ("not_found", "ace_noinst", "contenteditable"):
-        print("  [部署器] 使用键盘粘贴方式填入代码...")
-        # 优先点击 ACE editor 区域，否则点击对话框左侧中央
-        try:
-            ace_loc = frame.locator('.ace_editor').first
-            if ace_loc.is_visible(timeout=2000):
-                ace_loc.click()
-            else:
-                raise Exception()
-        except Exception:
-            frame.mouse.click(360, 350)
-        time.sleep(0.5)
-        # Ctrl+A 全选，Delete 清空
-        frame.keyboard.press("Control+a")
-        time.sleep(0.2)
-        frame.keyboard.press("Delete")
-        time.sleep(0.2)
-        # JS 复制代码到系统剪贴板
-        frame.evaluate(f"""
-            () => {{
-                const ta = document.createElement('textarea');
-                ta.value = {repr(apl_code)};
-                ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
-                document.body.appendChild(ta);
-                ta.focus();
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-            }}
-        """)
-        time.sleep(0.3)
-        frame.keyboard.press("Control+v")
-        time.sleep(1.5)
-        filled = "keyboard_paste"
-
-    time.sleep(0.3)
+        raise RuntimeError(
+            "编辑器实例未就绪，已停止本条自动输入，避免误把代码粘贴到错误位置。"
+        )
 
     # ── 先「保存草稿」，对话框保持开着，后续可运行 ──
     _click_save_draft_btn(frame)
-    time.sleep(0.8)
     print("  [部署器] 草稿已保存")
 
-    # 等待数据源下拉就绪（保存后需时间渲染，el-select 异步加载）
-    time.sleep(5)
+    # 等待数据源/运行区域就绪（保存后异步渲染），就绪即继续，避免固定空等
+    ready = _wait_for_any_visible(
+        frame,
+        ['input[placeholder*="数据源"]', 'input[placeholder*="请选择"]', ':text("运行脚本")'],
+        timeout_ms=8000,
+    )
+    if ready:
+        print(f"  [部署器] 运行区域已就绪: {ready}")
+    else:
+        print("  [部署器] 运行区域未明确就绪，继续按现有流程尝试执行")
 
     # ── 选数据源 → 运行 → 自动修复循环（编译错误 + 业务逻辑校验）──
     final_code, compile_err = _run_and_check(
@@ -770,9 +1383,60 @@ def _fill_code_and_save(frame, apl_code: str, cfg: dict = None,
         )
 
     # ── 所有修复完成后，正式发布（点「保存」并等待对话框关闭）──
-    _final_publish(frame, cfg=cfg, current_code=final_code or apl_code,
-                   output_file=output_file, func_name=func_name)
-    print("[部署器] 保存完成（请核查截图确认结果）")
+    publish_code = final_code or apl_code
+    publish_attempt = 0
+    publish_error = ""
+    while publish_attempt < 3:
+        publish_result = _final_publish(
+            frame, cfg=cfg, current_code=publish_code,
+            output_file=output_file, func_name=func_name,
+            object_label=(req or {}).get("object_label", ""),
+            description=((req or {}).get("requirement", "") or "").strip().splitlines()[0][:100]
+            if ((req or {}).get("requirement", "") or "").strip() else ""
+        )
+        if publish_result.get("success"):
+            break
+        publish_error = (publish_result.get("errors") or "保存时未确认发布成功").strip()
+        print(f"  [部署器] 保存阶段被阻断，进入修复闭环（第 {publish_attempt + 1} 次）:\n{publish_error[:500]}")
+        transient_publish_issue = any(
+            token in publish_error for token in (
+                "版本备注弹窗仍未关闭",
+                "保存时未确认发布成功",
+            )
+        )
+        if transient_publish_issue:
+            publish_attempt += 1
+            time.sleep(0.8)
+            continue
+        if not cfg or not publish_code:
+            break
+        fixed = _apply_rule_based_fix(publish_code, publish_error)
+        if not fixed:
+            retry_feedback = "这是保存阶段阻断错误，不是普通编译错误。请优先修复平台扫描 warning / 循环内逐条更新等问题。"
+            fixed = _call_llm_fix(publish_code, publish_error, cfg, retry_feedback=retry_feedback, req=req)
+        if not fixed or fixed.strip() == publish_code.strip():
+            break
+        _refill_editor(frame, fixed)
+        _save_in_editor(frame)
+        publish_code, compile_err = _run_and_check(
+            frame, cfg=cfg, current_code=fixed,
+            output_file=output_file, func_name=func_name, req=req
+        )
+        if compile_err:
+            raise RuntimeError(
+                "保存阻断修复后，重新运行/编译未通过。\n" + str(compile_err)[:2000]
+            )
+        publish_attempt += 1
+    else:
+        publish_result = {"success": False, "errors": publish_error}
+
+    if not publish_result.get("success"):
+        detail = (publish_result.get("errors") or "保存时未确认发布成功").strip()
+        raise RuntimeError(
+            "APL 正式发布未成功，已阻止记成功回写。\n"
+            + detail[:3000]
+        )
+    print("[部署器] 保存完成（已确认发布成功）")
 
 
 def _get_datasource_input(frame):
@@ -928,7 +1592,6 @@ def _open_datasource_dropdown(frame, cfg: dict = None) :
             suffix = frame.locator('.el-input__suffix, .el-select__caret, [class*="arrow"]').first
             if suffix.is_visible(timeout=1000):
                 suffix.click(timeout=2000)
-                time.sleep(0.6)
                 options = _get_open_datasource_popper(frame, count_before)
         except Exception:
             pass
@@ -948,7 +1611,6 @@ def _open_datasource_dropdown(frame, cfg: dict = None) :
                 print(f"  [agent] vision 读取失败: {e}")
             # agent 也没读到，再尝试重新点开
             frame.keyboard.press("Escape")
-            time.sleep(0.5)
             return _agent_open_datasource(frame, cfg)
         frame.keyboard.press("Escape")
         print("  [部署器] 数据源下拉无选项或加载超时")
@@ -1005,12 +1667,10 @@ def _select_datasource_by_idx(frame, idx: int, cfg: dict = None) -> str:
                 print(f"  [agent] 数据源选择异常: {e}")
         return "click_failed"
 
-    time.sleep(1)
     options = _get_open_datasource_popper(frame, count_before)
     if not options:
         try:
             inp.evaluate("el => { el.closest('.el-select')?.querySelector('.el-input__suffix')?.click(); }")
-            time.sleep(0.6)
             options = _get_open_datasource_popper(frame, count_before)
         except Exception:
             pass
@@ -1019,12 +1679,10 @@ def _select_datasource_by_idx(frame, idx: int, cfg: dict = None) -> str:
     def _try_keyboard_select():
         try:
             inp.focus()
-            time.sleep(0.2)
             for _ in range(idx + 1):
                 frame.keyboard.press("ArrowDown")
-                time.sleep(0.1)
             frame.keyboard.press("Enter")
-            time.sleep(0.4)
+            time.sleep(0.2)
             return True
         except Exception:
             return False
@@ -1069,9 +1727,7 @@ def _select_datasource_by_idx(frame, idx: int, cfg: dict = None) -> str:
     if result in ("no_dropdown", "no_item"):
         print("  [部署器] DOM 点击失败，尝试键盘选择...")
         frame.keyboard.press("Escape")
-        time.sleep(0.2)
         inp.click(timeout=2000)
-        time.sleep(0.8)
         if _try_keyboard_select():
             return "keyboard_selected"
         frame.keyboard.press("Escape")
@@ -1216,7 +1872,7 @@ def _extract_run_result(frame) -> tuple:
             if (btn) btn.click();
         }
     """)
-    time.sleep(0.3)
+    _wait_for_any_visible(frame, ['.run-log', '[class*="run-log"]', '.el-message-box__content', '.compile-error'], timeout_ms=1200)
 
     # ── 3. 读运行日志（执行 ID 通常以 E-E- 开头；找最小包含 StopWatch 的块）──
     log = frame.evaluate("""
@@ -1350,36 +2006,20 @@ def _refill_editor(frame, new_code: str):
     print(f"  [部署器] 代码重填方式: {result}")
 
     if result in ("not_found", "ace_noinst"):
+        editor_ready = False
         try:
-            ace_loc = frame.locator('.ace_editor').first
-            if ace_loc.is_visible(timeout=1500):
-                ace_loc.click()
-            else:
-                frame.mouse.click(360, 350)
+            editor_ready = bool(_wait_for_any_visible(
+                frame,
+                [':text-is("保存草稿")', '.ace_editor', '.monaco-editor', '.CodeMirror'],
+                timeout_ms=1200,
+            ))
         except Exception:
-            frame.mouse.click(360, 350)
-        time.sleep(0.3)
-        frame.keyboard.press("Control+a")
-        time.sleep(0.2)
-        frame.keyboard.press("Delete")
-        time.sleep(0.2)
-        frame.evaluate(f"""
-            () => {{
-                const ta = document.createElement('textarea');
-                ta.value = {repr(new_code)};
-                ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
-                document.body.appendChild(ta);
-                ta.focus(); ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-            }}
-        """)
-        time.sleep(0.3)
-        frame.keyboard.press("Control+v")
-        time.sleep(1.5)
-        result = "keyboard_paste"
+            editor_ready = False
+        if not editor_ready:
+            raise RuntimeError("编辑器已不可用，无法继续自动修复；将结束当前记录并进入下一条。")
+        raise RuntimeError("编辑器实例未就绪，已停止本条自动修复，避免误把代码输入到错误位置。")
 
-    time.sleep(0.5)
+    _wait_for_any_visible(frame, [':text-is("保存草稿")', '.ace_editor', '.monaco-editor'], timeout_ms=1000)
 
 
 def _call_llm_fix_business_logic(code: str, log_text: str, requirement: str, cfg: dict) -> tuple:
@@ -1389,6 +2029,12 @@ def _call_llm_fix_business_logic(code: str, log_text: str, requirement: str, cfg
         from generator.generate import call_llm
     except ImportError:
         return None, "DATA_ISSUE"
+
+    if "The number of keys in the map cannot exceed 1" in (log_text or ""):
+        fixed = _rewrite_multi_key_querytemplate_and(code)
+        if fixed and fixed != code:
+            print("  [自愈] 规则修复：QueryTemplate.AND 多键 Map -> 多个单键 Map 参数")
+            return fixed, "LOGIC_ISSUE"
 
     system = """你是纷享销客 APL 业务逻辑分析专家。
 
@@ -1417,7 +2063,7 @@ def _call_llm_fix_business_logic(code: str, log_text: str, requirement: str, cfg
 当前代码：
 {code[:4000]}
 
-请判断并按要求格式输出。"""
+    请判断并按要求格式输出。"""
 
     try:
         resp = call_llm(system, user, cfg)
@@ -1436,14 +2082,228 @@ def _call_llm_fix_business_logic(code: str, log_text: str, requirement: str, cfg
                     started = True
                     code_lines.append(ln)
             fc = "\n".join(code_lines).strip()
-            if fc and "def " in fc:
-                if fc.startswith("```"):
-                    fc = "\n".join(fc.split("\n")[1:-1]).strip()
+            fc = _sanitize_llm_code_output(fc)
+            if fc and ("def " in fc or "String " in fc or "QueryTemplate " in fc):
                 return fc, "LOGIC_ISSUE"
         return None, "DATA_ISSUE"
     except Exception as e:
         print(f"  [警告] 业务逻辑分析失败: {e}")
         return None, "DATA_ISSUE"
+
+
+def _rewrite_multi_key_querytemplate_and(code: str) -> str | None:
+    import re as _re
+
+    def _replace(match):
+        inner = match.group(1)
+        key_count = len(_re.findall(r'["\'][^"\']+["\']\s*:', inner))
+        if key_count <= 1:
+            return match.group(0)
+        rewritten = _re.sub(r'\s*,\s*(?=(["\'][^"\']+["\']\s*:))', '], [', inner)
+        return f"QueryTemplate.AND([{rewritten}])"
+
+    updated = _re.sub(r'QueryTemplate\.AND\(\[(.*?)\]\)', _replace, code, flags=_re.DOTALL)
+    return updated if updated != code else None
+
+
+def _rewrite_querytemplate_or_list_to_varargs(code: str) -> str | None:
+    marker = "QueryTemplate.OR("
+    idx = 0
+    changed = False
+    parts: list[str] = []
+
+    while True:
+        start = code.find(marker, idx)
+        if start == -1:
+            parts.append(code[idx:])
+            break
+        parts.append(code[idx:start])
+        pos = start + len(marker)
+        while pos < len(code) and code[pos].isspace():
+            pos += 1
+        if pos >= len(code) or code[pos] != "[":
+            parts.append(marker)
+            idx = pos
+            continue
+
+        bracket_depth = 0
+        end_list = None
+        i = pos
+        while i < len(code):
+            ch = code[i]
+            if ch == "[":
+                bracket_depth += 1
+            elif ch == "]":
+                bracket_depth -= 1
+                if bracket_depth == 0:
+                    end_list = i
+                    break
+            i += 1
+        if end_list is None:
+            parts.append(code[start:])
+            break
+
+        inner = code[pos + 1:end_list].strip()
+        tail_pos = end_list + 1
+        while tail_pos < len(code) and code[tail_pos].isspace():
+            tail_pos += 1
+        if code.startswith("as List<QueryTemplate>", tail_pos):
+            tail_pos += len("as List<QueryTemplate>")
+            while tail_pos < len(code) and code[tail_pos].isspace():
+                tail_pos += 1
+
+        if tail_pos >= len(code) or code[tail_pos] != ")":
+            parts.append(code[start:tail_pos])
+            idx = tail_pos
+            continue
+
+        parts.append(f"{marker}{inner})")
+        changed = True
+        idx = tail_pos + 1
+
+    updated = "".join(parts)
+    return updated if changed and updated != code else None
+
+
+def _rewrite_loop_update_to_batch_update(code: str) -> str | None:
+    import re as _re
+
+    pattern = _re.compile(
+        r'(?P<indent>[ \t]*)'
+        r'(?P<map_name>\w+)\.each\s*\{\s*String\s+(?P<id_var>\w+),\s*(?:Double|BigDecimal|Integer|Long|String|Object|def)\s+(?P<value_var>\w+)\s*->\s*'
+        r'(?P<body>.*?)'
+        r'def\s*\(\s*Boolean\s+(?P<err_var>\w+)\s*,\s*Map\s+(?P<result_var>\w+)\s*,\s*String\s+(?P<msg_var>\w+)\s*\)\s*=\s*Fx\.object\.update\(\s*'
+        r'(?P<object_api>"[^"]+")\s*,\s*'
+        r'(?P=id_var)\s*,\s*'
+        r'\[\s*(?P<field_api>"[^"]+")\s*:\s*(?P=value_var)\s*\]\s*as\s*Map<String,\s*Object>\s*,\s*'
+        r'(?P<attr>UpdateAttribute\.builder\(\).*?)\s*\)\s*'
+        r'(?P<tail>.*?)'
+        r'\n(?P=indent)\}',
+        _re.DOTALL,
+    )
+
+    def _replace(match):
+        indent = match.group("indent")
+        map_name = match.group("map_name")
+        id_var = match.group("id_var")
+        value_var = match.group("value_var")
+        err_var = match.group("err_var")
+        msg_var = match.group("msg_var")
+        object_api = match.group("object_api")
+        field_api = match.group("field_api")
+        body = (match.group("body") or "").strip("\n")
+        body_lines = [ln.rstrip() for ln in body.splitlines() if ln.strip()]
+        prep = "\n".join(body_lines)
+        if prep:
+            prep = prep + "\n"
+        return (
+            f"{indent}Map<String, Map<String, Object>> batchUpdateData = [:]\n"
+            f"{indent}{map_name}.each {{ String {id_var}, def {value_var} ->\n"
+            f"{prep}"
+            f"{indent}    batchUpdateData[{id_var}] = [{field_api}: {value_var}] as Map<String, Object>\n"
+            f"{indent}}}\n\n"
+            f"{indent}List updateFields = [{field_api}]\n"
+            f"{indent}def (Boolean {err_var}, List batchResult, String {msg_var}) = Fx.object.batchUpdate(\n"
+            f"{indent}    {object_api},\n"
+            f"{indent}    batchUpdateData,\n"
+            f"{indent}    updateFields,\n"
+            f"{indent}    BatchUpdateAttribute.builder().convert2SingleOperation(true).triggerWorkflow(false).build()\n"
+            f"{indent})\n"
+            f"{indent}if ({err_var}) {{\n"
+            f'{indent}    log.error("[业务] 批量更新失败: " + {msg_var})\n'
+            f"{indent}    return\n"
+            f"{indent}}}\n"
+            f'{indent}log.info("[业务][诊断] batchUpdate result: " + batchResult)\n'
+        )
+
+    updated = pattern.sub(_replace, code, count=1)
+    return updated if updated != code else None
+
+
+def _extract_first_code_block(text: str) -> str:
+    import re as _re
+
+    raw = (text or "").strip()
+    if not raw:
+        return ""
+    if "```" in raw:
+        blocks = _re.findall(r"```(?:\w+)?\n(.*?)```", raw, flags=_re.DOTALL)
+        if blocks:
+            for block in blocks:
+                candidate = block.strip()
+                if candidate:
+                    return candidate
+    return raw
+
+
+def _has_obvious_narrative_prefix(text: str) -> bool:
+    lines = (text or "").splitlines()
+    for ln in lines[:8]:
+        stripped = ln.strip()
+        if not stripped:
+            continue
+        if stripped.startswith(("//", "/*", "*", "import ", "String ", "def ", "if ", "if(", "return", "Map ", "List ", "Boolean ", "Integer ", "Long ", "BigDecimal ", "QueryTemplate ", "log.", "Fx.", "{", "}")):
+            return False
+        if any(token in stripped for token in ("分析", "修复", "原因", "说明", "如下", "代码如下", "计划", "思路", "错误", "第一步", "第二步")):
+            return True
+        return False
+    return False
+
+
+def _validate_fixed_code(candidate: str, req: dict | None = None) -> tuple[bool, str]:
+    code = (candidate or "").strip()
+    if not code:
+        return False, "LLM 未返回代码"
+    if "```" in code:
+        return False, "返回结果仍包含 markdown 代码块"
+    if _has_obvious_narrative_prefix(code):
+        return False, "返回结果前部包含中文说明或修复分析，不是纯代码"
+
+    function_type = ((req or {}).get("function_type") or "").strip()
+    namespace = ((req or {}).get("namespace") or "").strip()
+    is_scope_rule = function_type in ("范围规则", "关联对象范围规则") or namespace == "范围规则"
+
+    if is_scope_rule:
+        if "Fx.object." in code:
+            return False, "范围规则返回了 Fx.object 调用"
+        if "log.info" in code or "log.error" in code:
+            return False, "范围规则返回了日志代码"
+        if "context.data" not in code and 'return [:]' not in code and 'return[:]' not in code:
+            return False, "范围规则缺少 context.data 或有效返回"
+        if "searchCondition" not in code and 'return [:]' not in code and 'return[:]' not in code:
+            return False, "范围规则缺少 searchCondition 返回"
+
+    return True, ""
+
+
+def _build_fix_plan(code: str, errors: str, cfg: dict, req: dict | None = None) -> list[str]:
+    try:
+        from generator.generate import call_llm
+    except ImportError:
+        return []
+
+    function_type = ((req or {}).get("function_type") or "").strip() or "未知类型"
+    system = (
+        "你是纷享销客 APL 修复规划器。你的任务不是直接输出代码，而是先给出最小修复计划。\n"
+        "只参考官方 API 约束、当前项目写法和错误信息，避免凭空改业务语义。\n"
+        "输出要求：只输出 1 到 4 行，每行一个短句，以 '- ' 开头；不要输出代码，不要输出分析长文。"
+    )
+    user = (
+        f"函数类型：{function_type}\n"
+        f"静态错误：\n{(errors or '')[:1200]}\n\n"
+        f"当前代码：\n{(code or '')[:2500]}\n\n"
+        "请给出最小修复计划。"
+    )
+    try:
+        resp = call_llm(system, user, cfg)
+    except Exception:
+        return []
+    plan = []
+    for line in (resp or "").splitlines():
+        stripped = line.strip()
+        if stripped.startswith("- "):
+            plan.append(stripped)
+    return plan[:4]
 
 
 def _extract_error_location(err_text: str) -> tuple[int | None, int | None]:
@@ -1534,6 +2394,33 @@ def _apply_rule_based_fix(code: str, err_text: str) :
             changed = True
             print("  [自愈] 规则修复：Date/Calendar -> System.currentTimeMillis")
 
+    if "QueryOperator#BETWEEN" in err_text or "matching method com.fxiaoke.functions.tools.QueryOperator#BETWEEN" in err_text:
+        before = fixed
+        fixed = _re.sub(
+            r'QueryOperator\.BETWEEN\s*\(\s*([^,()]+?)\s*,\s*([^()]+?)\s*\)',
+            r'QueryOperator.GTE(\1)',
+            fixed,
+        )
+        if fixed != before:
+            changed = True
+            print("  [自愈] 规则修复：QueryOperator.BETWEEN(start, end) -> QueryOperator.GTE(start)")
+
+    if "QueryTemplate#OR(java.util.List" in err_text or "Cannot find matching method com.fxiaoke.functions.model.QueryTemplate#OR(java.util.List" in err_text:
+        before = fixed
+        rewritten = _rewrite_querytemplate_or_list_to_varargs(fixed)
+        if rewritten:
+            fixed = rewritten
+            changed = True
+            print("  [自愈] 规则修复：QueryTemplate.OR([a, b]) -> QueryTemplate.OR(a, b)")
+
+    if "Calling the data processing API for a single data record in a loop" in err_text:
+        before = fixed
+        rewritten = _rewrite_loop_update_to_batch_update(fixed)
+        if rewritten:
+            fixed = rewritten
+            changed = True
+            print("  [自愈] 规则修复：循环内逐条 Fx.object.update -> Fx.object.batchUpdate")
+
     if "expecting ':', found 'if'" in err_text or "found 'if'" in err_text:
         before = fixed
 
@@ -1556,7 +2443,7 @@ def _apply_rule_based_fix(code: str, err_text: str) :
 
 
 def _call_llm_fix(code: str, errors: str, cfg: dict, retry_feedback: str = "",
-                  prev_errors: list[str] | None = None) -> str:
+                  prev_errors: list[str] | None = None, req: dict | None = None) -> str:
     """调用 LLM 根据错误修复 APL 代码。失败返回空字符串。
     会从 memory 检索相似历史修复并注入 prompt，形成数据闭环。
     retry_feedback: 同错误多次时提示 LLM 换策略；prev_errors: 历史错误列表用于判断是否重复。"""
@@ -1570,8 +2457,21 @@ def _call_llm_fix(code: str, errors: str, cfg: dict, retry_feedback: str = "",
     except Exception:
         mem_ctx = ""
 
+    function_type = ((req or {}).get("function_type") or "").strip()
+    namespace = ((req or {}).get("namespace") or "").strip()
+    is_scope_rule = function_type in ("范围规则", "关联对象范围规则") or namespace == "范围规则"
+    repair_plan = _build_fix_plan(code, errors, cfg, req=req)
+    plan_text = ("\n".join(repair_plan) + "\n") if repair_plan else ""
+    doc_guardrails = build_doc_guardrails(function_type if function_type else namespace)
+    doc_links = build_official_docs_section()
+
     system = (
         "你是纷享销客 APL 函数专家。请根据静态类型检查错误修复下方 Groovy APL 代码。\n"
+        "你必须优先遵守官方 API 文档签名和当前项目中已存在的正确写法；不要凭空扩展语法，不要臆造 API。\n"
+        + doc_links
+        + "\n\n"
+        + doc_guardrails
+        + "\n\n"
         "\n"
         "## 必须遵守的 API 签名规则\n"
         "\n"
@@ -1604,6 +2504,9 @@ def _call_llm_fix(code: str, errors: str, cfg: dict, retry_feedback: str = "",
         "- FQLAttribute 没有 .limit(n) 方法，分页通过 SelectAttribute 处理\n"
         "- 三元组变量名不要用 _（平台报 warning），用真实变量名\n"
         "- QueryOperator.EQ() 参数类型要和字段类型匹配\n"
+        "- 若报错包含 `QueryOperator#BETWEEN(...)` 签名不匹配：不要继续尝试 BETWEEN，直接改为单边条件 `QueryOperator.GTE(startTs)`\n"
+        "- 若报错包含 `QueryTemplate#OR(java.util.List)`：说明 `QueryTemplate.OR` 不能传 List，必须改成变参写法，例如 `QueryTemplate.OR(query1, query2)`，不要再输出 `QueryTemplate.OR([query1, query2])`\n"
+        "- 若报错包含 `Calling the data processing API for a single data record in a loop`：说明平台禁止在循环里逐条 `Fx.object.update/create`。必须改成先构造 `Map batchUpdateData = [id: [field: value]]`，再用 `Fx.object.batchUpdate(objectApi, batchUpdateData, fields, BatchUpdateAttribute.builder().convert2SingleOperation(true).build())`\n"
         "- **禁止使用 `for` 循环**（平台报 ForStatements are not allowed），遍历一律用 `.each { item -> }` 或 `.each { k, v -> }`\n"
         "\n"
         "## ⚠️ 必须返回完整代码\n"
@@ -1626,13 +2529,24 @@ def _call_llm_fix(code: str, errors: str, cfg: dict, retry_feedback: str = "",
         "- create 的 result Map：必须写 `String newId = createResult?[\"_id\"] as String`\n"
         "- update 的 result Map：不需要时加 `else { log.info(\"更新成功\") }` 让逻辑完整\n"
         "  或直接将 updateResult 用于某个字段取值\n"
+        "- batchUpdate 的返回值也必须被引用，至少写 `log.info(\"[业务][诊断] batchUpdate result: \" + batchResult)`\n"
         "\n"
         "⚠️ 响应格式要求（违反将导致编译失败）：\n"
         "- 只输出 Groovy 代码本身，第一个字符必须是代码字符（`/`、`S`、`d`、`i` 等）\n"
         "- 不能在代码前加任何中文说明、分析、原因描述\n"
         "- 不加 markdown 代码块标记（不加 ``` 围栏）\n"
-        "- 不加反引号、不加任何非 Groovy 语法字符"
+        "- 不加反引号、不加任何非 Groovy 语法字符\n"
+        "- 如果你不确定，不要加入解释文字，仍然只返回最小修改后的完整代码"
     )
+    if is_scope_rule:
+        system += (
+            "\n\n## 范围规则专属硬约束\n"
+            "- 只能读取 context.data，不能调用 Fx.object.find/create/update\n"
+            "- 不能输出 log.info / log.error\n"
+            "- 只能返回 `return [:]` 或 `return [\"searchCondition\": ...]`\n"
+            "- 不要为了通过编译删掉业务条件；若原逻辑包含两个条件分支，修复时必须尽量保留两个条件的表达\n"
+            "- 若需要 OR 条件且当前错误是 OR(List)，优先改成 `QueryTemplate.OR(cond1, cond2)`，不要退化成只保留一个条件"
+        )
     if mem_ctx:
         system = system.rstrip() + "\n" + mem_ctx
 
@@ -1643,29 +2557,45 @@ def _call_llm_fix(code: str, errors: str, cfg: dict, retry_feedback: str = "",
         if snippet:
             err_context = f"\n\n**报错位置（第 {line_num} 行附近）：**\n```\n{snippet}\n```\n"
     retry_hint = f"\n\n⚠️ **重试提示**：{retry_feedback}\n" if retry_feedback else ""
-    user = f"APL 代码（需修复）：\n{code}\n\n静态类型检查错误：\n{errors}{err_context}{retry_hint}\n\n请返回修复后的完整 APL 代码："
+    plan_hint = f"\n\n建议修复计划：\n{plan_text}" if plan_text else ""
+    user = f"APL 代码（需修复）：\n{code}\n\n静态类型检查错误：\n{errors}{err_context}{retry_hint}{plan_hint}\n\n请返回修复后的完整 APL 代码："
 
-    try:
-        fixed = call_llm(system, user, cfg)
-        # ── 去掉 LLM 可能带的代码围栏 ──
-        if "```" in fixed:
-            lines = fixed.split("\n")
-            start = next((i for i, l in enumerate(lines) if l.startswith("```")), 0) + 1
-            end = next((i for i in range(len(lines) - 1, -1, -1) if lines[i].startswith("```")), len(lines))
-            fixed = "\n".join(lines[start:end])
-        # ── 去掉 LLM 在代码前加的中文解释行（会导致 unexpected char 编译错误）──
-        # 代码有效起始字符：注释符 /、声明关键字首字母、空行
-        import re as _re
-        code_start_re = _re.compile(r'^(\s*//|\s*/\*|String |def |import |if |Boolean |Map |List |Integer |Long |void |\s*$)')
-        lines = fixed.split("\n")
-        for i, ln in enumerate(lines):
-            if code_start_re.match(ln):
-                fixed = "\n".join(lines[i:])
-                break
-        return fixed.strip()
-    except Exception as e:
-        print(f"  [警告] LLM 修复调用失败: {e}")
-        return ""
+    for llm_attempt in range(2):
+        try:
+            fixed = call_llm(system, user, cfg)
+        except Exception as e:
+            print(f"  [警告] LLM 修复调用失败: {e}")
+            return ""
+        sanitized = _sanitize_llm_code_output(fixed).strip()
+        ok, reason = _validate_fixed_code(sanitized, req=req)
+        if ok:
+            return sanitized
+        print(f"  [警告] LLM 修复结果无效（第 {llm_attempt + 1} 次）: {reason}")
+        user = (
+            f"{user}\n\n上一次返回无效，原因：{reason}\n"
+            "请重新只输出完整 Groovy 代码，不要说明文字。"
+        )
+    return ""
+
+
+def _sanitize_llm_code_output(text: str) -> str:
+    import re as _re
+
+    fixed = _extract_first_code_block(text)
+
+    code_start_re = _re.compile(
+        r'^\s*(//|/\*|\*|String |def |import |if\b|Boolean |Map |List |Integer |Long |BigDecimal |QueryTemplate |return\b|log\.|Fx\.|[{}])'
+    )
+    lines = fixed.split("\n")
+    start_idx = 0
+    for i, ln in enumerate(lines):
+        if not ln.strip():
+            continue
+        if code_start_re.match(ln):
+            start_idx = i
+            break
+    fixed = "\n".join(lines[start_idx:]).strip()
+    return fixed
 
 
 def _click_save_draft_btn(frame):
@@ -1721,12 +2651,55 @@ def _click_save_btn(frame):
 
 
 def _confirm_remark_dialog(frame):
-    """确认备注弹窗（优先「确定并关闭」，再试「确定」；用坐标点击穿透 Shadow DOM）。"""
+    """确认备注弹窗。优先走「确定并关闭」完成提交流程；若随后出现关闭确认，再单独处理。"""
     page = getattr(frame, 'page', frame)
-    # 优先尝试「确定并关闭」，再试「确定」「提交」「确认」
+    target = page
+    try:
+        clicked = bool(target.evaluate(
+            """
+            () => {
+                const visible = (el) => {
+                    if (!el) return false;
+                    const rect = el.getBoundingClientRect();
+                    const style = window.getComputedStyle(el);
+                    return style.display !== 'none'
+                        && style.visibility !== 'hidden'
+                        && rect.width > 20
+                        && rect.height > 20;
+                };
+                const dialogs = [...document.querySelectorAll('.el-message-box__wrapper, .fx-message-box__wrapper, .paas-func-dialog, .f-g-dialog.paas-func-dialog-height, [role="dialog"]')]
+                    .filter(visible)
+                    .sort((a, b) => {
+                        const za = parseInt(window.getComputedStyle(a).zIndex || '0', 10) || 0;
+                        const zb = parseInt(window.getComputedStyle(b).zIndex || '0', 10) || 0;
+                        return zb - za;
+                    });
+                const dlg = dialogs.find(d => {
+                    const text = (d.innerText || '').trim();
+                    return text.includes('请输入版本备注信息') || text.includes('版本备注') || text.includes('备注信息');
+                });
+                if (!dlg) return false;
+                const nodes = [...dlg.querySelectorAll('button, span, a, div')].filter(visible);
+                const target = nodes.find(el => ((el.innerText || el.textContent || '').trim() === '确定并关闭'))
+                    || nodes.find(el => ((el.innerText || el.textContent || '').trim() === '确定'))
+                    || nodes.find(el => ['提交', '确认', 'OK'].includes((el.innerText || el.textContent || '').trim()));
+                if (!target) return false;
+                ['mousedown', 'mouseup', 'click'].forEach((evt) => {
+                    target.dispatchEvent(new MouseEvent(evt, { bubbles: true, cancelable: true, view: window }));
+                });
+                return true;
+            }
+            """
+        ))
+        if clicked:
+            print("  [部署器] 备注弹窗已确认 (js)")
+            time.sleep(0.8)
+            return True
+    except Exception:
+        pass
     for btn_text in ["确定并关闭", "确定", "提交", "确认", "OK"]:
         try:
-            btn = frame.locator(f':text-is("{btn_text}")').last
+            btn = target.locator(f':text-is("{btn_text}")').last
             bbox = btn.bounding_box(timeout=1500)
             if bbox:
                 page.mouse.click(bbox['x'] + bbox['width'] / 2, bbox['y'] + bbox['height'] / 2)
@@ -1738,7 +2711,7 @@ def _confirm_remark_dialog(frame):
     # 兜底：force click
     for btn_text in ["确定并关闭", "确定", "提交"]:
         try:
-            btn = frame.locator(f':text-is("{btn_text}")').last
+            btn = target.locator(f':text-is("{btn_text}")').last
             btn.click(force=True, timeout=1000)
             print(f"  [部署器] 备注弹窗已确认-force (按钮: {btn_text})")
             time.sleep(0.8)
@@ -1752,6 +2725,7 @@ def _handle_save_remark(frame, remark: str = "1"):
     """点「保存」后处理版本备注弹窗：检测弹窗 → 填写备注 → 点确定。
     全程用 Playwright locator + bounding_box 坐标点击，穿透 Shadow DOM。"""
     page = getattr(frame, 'page', frame)
+    target = page
 
     # 检测备注弹窗（等最多 3 秒）
     dialog_visible = False
@@ -1766,44 +2740,140 @@ def _handle_save_remark(frame, remark: str = "1"):
     if not dialog_visible:
         return
 
-    # 填写备注 textarea：迭代所有 textarea，找有真实尺寸的那个
-    # （代码编辑器隐藏 textarea 的 bounding_box 返回 None，跳过即可）
     filled = False
+    remark_dialog = _get_visible_remark_dialog(frame)
+    # 先用 JS 直接在可见备注弹窗里填，避免被编辑器隐藏 textarea 干扰。
     try:
-        count = frame.locator('textarea').count()
-        print(f"  [调试] 页面 textarea 共 {count} 个")
-        for idx in range(min(count, 10)):
-            try:
-                ta = frame.locator('textarea').nth(idx)
-                bbox = ta.bounding_box(timeout=500)
-                if not bbox or bbox['height'] < 20:
-                    continue
-                cx = bbox['x'] + bbox['width'] / 2
-                cy = bbox['y'] + bbox['height'] / 2
-                page.mouse.click(cx, cy)
-                time.sleep(0.15)
-                page.keyboard.press("Control+a")
-                page.keyboard.type(remark)
-                time.sleep(0.2)
-                filled = True
-                print(f"  [部署器] 备注已填写(textarea#{idx}, h={bbox['height']:.0f}): {remark!r}")
-                break
-            except Exception:
-                continue
+        filled = bool(target.evaluate(
+            """
+            (remarkText) => {
+                const visible = (el) => {
+                    if (!el) return false;
+                    const rect = el.getBoundingClientRect();
+                    const style = window.getComputedStyle(el);
+                    return style.display !== 'none'
+                        && style.visibility !== 'hidden'
+                        && rect.width > 30
+                        && rect.height > 20;
+                };
+                const dialogs = [...document.querySelectorAll('.el-message-box__wrapper, .fx-message-box__wrapper, .paas-func-dialog, .f-g-dialog.paas-func-dialog-height, [role="dialog"]')]
+                    .filter(visible)
+                    .sort((a, b) => {
+                        const za = parseInt(window.getComputedStyle(a).zIndex || '0', 10) || 0;
+                        const zb = parseInt(window.getComputedStyle(b).zIndex || '0', 10) || 0;
+                        return zb - za;
+                    });
+                const dlg = dialogs.find(d => {
+                    const text = (d.innerText || '').trim();
+                    return text.includes('请输入版本备注信息') || text.includes('版本备注') || text.includes('备注信息');
+                });
+                if (!dlg) return false;
+                const ta = [...dlg.querySelectorAll('textarea')].find(visible);
+                if (!ta) return false;
+                const setter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value').set;
+                setter.call(ta, remarkText);
+                ta.dispatchEvent(new Event('input', { bubbles: true }));
+                ta.dispatchEvent(new Event('change', { bubbles: true }));
+                return true;
+            }
+            """,
+            remark,
+        ))
+        if filled:
+            print(f"  [部署器] 备注已填写(js): {remark!r}")
     except Exception as e:
-        print(f"  [调试] 填写备注 textarea 失败: {e}")
+        print(f"  [调试] JS 填写备注失败: {e}")
+
+    if filled:
+        try:
+            filled = bool(target.evaluate(
+                """
+                () => {
+                    const visible = (el) => {
+                        if (!el) return false;
+                        const rect = el.getBoundingClientRect();
+                        const style = window.getComputedStyle(el);
+                        return style.display !== 'none'
+                            && style.visibility !== 'hidden'
+                            && rect.width > 30
+                            && rect.height > 20;
+                    };
+                    const dialogs = [...document.querySelectorAll('.el-message-box__wrapper, .fx-message-box__wrapper, [role="dialog"]')]
+                        .filter(visible)
+                        .sort((a, b) => {
+                            const za = parseInt(window.getComputedStyle(a).zIndex || '0', 10) || 0;
+                            const zb = parseInt(window.getComputedStyle(b).zIndex || '0', 10) || 0;
+                            return zb - za;
+                        });
+                    const dlg = dialogs.find(d => {
+                        const text = (d.innerText || '').trim();
+                        return text.includes('请输入版本备注信息') || text.includes('版本备注') || text.includes('备注信息');
+                    });
+                    if (!dlg) return false;
+                    const ta = [...dlg.querySelectorAll('textarea')].find(visible);
+                    return !!(ta && (ta.value || '').trim().length > 0);
+                }
+                """
+            ))
+        except Exception:
+            pass
+
+    # 再退回 Playwright fill，但仍然只对可见 textarea 操作；绝不走键盘打字，
+    # 避免焦点丢到浏览器地址栏后把备注输错位置。
+    if not filled:
+        try:
+            if remark_dialog is not None:
+                textarea = remark_dialog.locator("textarea").first
+                textarea.wait_for(state="visible", timeout=1500)
+                textarea.fill(remark, timeout=1500)
+                time.sleep(0.15)
+                try:
+                    current = textarea.input_value(timeout=500)
+                except Exception:
+                    current = ""
+                filled = bool((current or "").strip())
+                if filled:
+                    print(f"  [部署器] 备注已填写(dialog textarea): {remark!r}")
+            if not filled:
+                count = target.locator('textarea').count()
+                print(f"  [调试] 页面 textarea 共 {count} 个")
+                for idx in range(min(count, 10)):
+                    try:
+                        ta = target.locator('textarea').nth(idx)
+                        bbox = ta.bounding_box(timeout=500)
+                        if not bbox or bbox['height'] < 20:
+                            continue
+                        ta.fill(remark, timeout=1000)
+                        time.sleep(0.15)
+                        current = ""
+                        try:
+                            current = ta.input_value(timeout=500)
+                        except Exception:
+                            pass
+                        filled = bool((current or "").strip())
+                        if filled:
+                            print(f"  [部署器] 备注已填写(textarea#{idx}, h={bbox['height']:.0f}): {remark!r}")
+                            break
+                    except Exception:
+                        continue
+        except Exception as e:
+            print(f"  [调试] 填写备注 textarea 失败: {e}")
 
     if not filled:
-        print("  [调试] 未能填写备注，直接点确定")
+        print("  [警告] 未能填写备注，已跳过键盘输入兜底，直接尝试确认")
 
     # 点确定按钮
-    _confirm_remark_dialog(frame)
+    if _confirm_remark_dialog(frame):
+        if not _wait_for_remark_dialog_closed(frame, timeout_ms=2500):
+            print("  [部署器] 备注弹窗仍未关闭，尝试再次确认")
+            _confirm_remark_dialog(frame)
+            _wait_for_remark_dialog_closed(frame, timeout_ms=2000)
 
 
 def _save_in_editor(frame):
     """在代码编辑器页内点「保存草稿」→ 中间保存，对话框保持开着。"""
     _click_save_draft_btn(frame)
-    time.sleep(0.8)
+    _wait_for_run_controls_ready(frame, timeout_ms=4000)
     print("  [部署器] 代码已保存草稿")
 
 
@@ -1832,59 +2902,208 @@ def _extract_scan_errors(frame) -> str:
         return ""
 
 
+def _is_publish_blocking_error(text: str) -> bool:
+    msg = (text or "").strip().lower()
+    if not msg:
+        return False
+    blocking_signals = [
+        "static type checking",
+        "cannot find",
+        "is not used",
+        "接口已过期",
+        "deprecated",
+        "calling the data processing api",
+        "not used",
+        "未使用变量",
+        "编译错误",
+    ]
+    return any(sig in msg for sig in blocking_signals)
+
+
+def _page_has_busy_indicators(frame) -> bool:
+    try:
+        return bool(frame.evaluate("""
+            () => {
+                const visible = (el) => {
+                    if (!el) return false;
+                    const rect = el.getBoundingClientRect();
+                    const style = window.getComputedStyle(el);
+                    return style.display !== 'none'
+                        && style.visibility !== 'hidden'
+                        && rect.width > 6
+                        && rect.height > 6;
+                };
+                const selectors = [
+                    '.el-loading-mask',
+                    '.is-loading',
+                    '.el-icon-loading',
+                    '[class*="loading"]',
+                    '[class*="spinner"]',
+                    '[class*="mask"]'
+                ];
+                if ([...document.querySelectorAll(selectors.join(','))].some(visible)) return true;
+                const text = document.body.innerText || '';
+                return text.includes('保存中') || text.includes('发布中') || text.includes('提交中');
+            }
+        """))
+    except Exception:
+        return False
+
+
+def _publish_looks_successful(frame, func_name: str = "") -> bool:
+    try:
+        if not frame.locator(':text("新建自定义APL函数")').first.is_visible(timeout=150):
+            return True
+    except Exception:
+        return True
+    try:
+        if frame.locator(':text-is("保存草稿")').first.is_visible(timeout=150):
+            return False
+    except Exception:
+        pass
+    if func_name:
+        try:
+            matched = bool(frame.evaluate(
+                f"""() => [...document.querySelectorAll('{sel.FUNC_LIST_ITEM}')]
+                    .some(el => (el.innerText || '').includes({json.dumps(func_name)}))"""
+            ))
+            if matched:
+                return True
+        except Exception:
+            pass
+    return False
+
+
+def _wait_for_publish_outcome(frame, timeout_ms: int = 15000, grace_ms: int = 12000,
+                              func_name: str = "") -> tuple[bool, str]:
+    deadline = time.perf_counter() + timeout_ms / 1000
+    max_deadline = deadline + grace_ms / 1000
+    seen_busy = False
+    while time.perf_counter() < deadline:
+        if _click_close_confirm_dialog(frame):
+            deadline = min(max_deadline, max(deadline, time.perf_counter() + 2.0))
+            continue
+        try:
+            if not frame.locator(':text("新建自定义APL函数")').first.is_visible(timeout=150):
+                return True, ""
+        except Exception:
+            return True, ""
+        if _publish_looks_successful(frame, func_name=func_name):
+            return True, ""
+        scan_errors = _extract_scan_errors(frame)
+        if scan_errors and _is_publish_blocking_error(scan_errors):
+            return False, scan_errors
+        if _page_has_busy_indicators(frame):
+            seen_busy = True
+            deadline = min(max_deadline, max(deadline, time.perf_counter() + 2.5))
+        elif seen_busy:
+            # 刚从 loading 状态切回空闲，额外给 UI 一个短窗口完成关闭/回显
+            deadline = min(max_deadline, max(deadline, time.perf_counter() + 1.2))
+        time.sleep(0.2)
+    late_errors = _extract_scan_errors(frame)
+    if late_errors and _is_publish_blocking_error(late_errors):
+        return False, late_errors
+    if _click_close_confirm_dialog(frame):
+        if _publish_looks_successful(frame, func_name=func_name):
+            return True, ""
+    if _publish_looks_successful(frame, func_name=func_name):
+        return True, ""
+    return False, late_errors
+
+
 def _final_publish(frame, cfg: dict = None, current_code: str = "",
-                   output_file: str = None, func_name: str = ""):
+                   output_file: str = None, func_name: str = "",
+                   object_label: str = "", description: str = ""):
     """所有修复完成后，点「保存」完成发布并等待对话框关闭。"""
     print("  [部署器] 执行最终发布（点「保存」）...")
 
     # 先按 Escape 关闭任何浮层
     try:
         frame.keyboard.press("Escape")
-        time.sleep(0.5)
+        _wait_for_select_dropdown(frame, open_state=False, timeout_ms=1000)
     except Exception:
         pass
 
     # 发布前先尝试读取 API 名（编辑器内通常在此时可见）
     if output_file:
-        api_name = _read_func_api_name_from_page(frame)
+        api_name = _read_func_api_name_from_page(frame, func_name=func_name)
         if api_name:
             save_func_meta(output_file, {"func_api_name": api_name})
             print(f"  [部署器] 函数 API 名（发布前读取）: {api_name}")
 
     # 保存草稿让编辑器进入干净状态
     _click_save_draft_btn(frame)
-    time.sleep(1)
+    _wait_for_run_controls_ready(frame, timeout_ms=4000)
 
     _click_save_btn(frame)
-    time.sleep(1)
 
-    # 处理备注弹窗
-    _handle_save_remark(frame)
-    time.sleep(0.8)
+    # 备注弹窗挂在页面顶层，不一定在编辑器 frame 内立即可见。
+    # 这里主动轮询 page 级弹窗，一旦出现就立刻填写并确认，避免先卡一轮 publish_timeout。
+    handled_remark = False
+    if _wait_for_remark_dialog_visible(frame, timeout_ms=4500):
+        _handle_save_remark(frame)
+        handled_remark = True
+    else:
+        # 可能平台先弹出关闭确认或短暂 loading，给一个短窗口继续观察
+        observe_deadline = time.perf_counter() + 2.5
+        while time.perf_counter() < observe_deadline:
+            if _click_close_confirm_dialog(frame):
+                handled_remark = True
+            if _remark_dialog_visible(frame):
+                _handle_save_remark(frame)
+                handled_remark = True
+                break
+            if _publish_looks_successful(frame, func_name=func_name):
+                break
+            time.sleep(0.15)
+
+    if _remark_dialog_visible(frame):
+        return {"success": False, "errors": "版本备注弹窗仍未关闭，可能备注未填写成功或确定按钮未生效"}
 
     # 等待主对话框关闭（最多 30 秒）
-    closed = False
-    try:
-        frame.wait_for_selector(':text("新建自定义APL函数")', state="hidden", timeout=15000)
-        closed = True
+    closed, scan_errors = _wait_for_publish_outcome(frame, timeout_ms=15000, func_name=func_name)
+    if closed:
         print("  [部署器] 函数已发布，对话框已关闭 ✓")
         _screenshot_frame(frame, "published")
-    except Exception:
+    else:
         _screenshot_frame(frame, "publish_timeout")
 
     # 发布后再读一次 API 名（作为兜底，此时 UI 可能已更新）
     if output_file and closed:
-        api_name_after = _read_func_api_name_from_page(frame)
+        api_name_after = _read_func_api_name_from_list(
+            frame,
+            func_name=func_name,
+            object_label=object_label,
+            description=description,
+        )
         if api_name_after:
             save_func_meta(output_file, {"func_api_name": api_name_after})
             print(f"  [部署器] 函数 API 名（发布后确认）: {api_name_after}")
 
+    if not closed and output_file:
+        api_name_after = _read_func_api_name_from_list(
+            frame,
+            func_name=func_name,
+            object_label=object_label,
+            description=description,
+        )
+        if api_name_after:
+            save_func_meta(output_file, {"func_api_name": api_name_after})
+            print(f"  [部署器] 发布超时但已读到系统 API，按成功收口: {api_name_after}")
+            closed = True
+
     if not closed:
-        scan_errors = _extract_scan_errors(frame)
         if scan_errors:
             print(f"  [警告] 保存被阻断，扫描发现以下错误（需修复后重新部署）：\n{scan_errors}")
         else:
             print("  [警告] 等待对话框关闭超时，请核查截图确认保存状态")
+        try:
+            root = getattr(frame, "page", None) or frame
+            dismiss_stale_apl_modals(root)
+        except Exception:
+            pass
+        return {"success": False, "errors": scan_errors}
+    return {"success": True, "errors": ""}
 
 
 def _has_compile_error_on_page(frame) -> bool:
@@ -1977,16 +3196,16 @@ def _do_one_run(frame, attempt_label: str, select_first_datasource: bool = False
     if select_first_datasource:
         selected = _select_datasource_by_preference(frame, cfg) if cfg else _select_datasource_by_idx(frame, 0, cfg=cfg)
         if selected in _DS_FAIL:
-            time.sleep(2)
+            _wait_for_run_controls_ready(frame, timeout_ms=2000)
             selected = _select_datasource_by_preference(frame, cfg) if cfg else _select_datasource_by_idx(frame, 0, cfg=cfg)
         if not selected or selected in _DS_FAIL:
             print("  [警告] 数据源选择失败，将不选数据源运行（日志可能显示入参为空）")
         elif selected:
-            time.sleep(0.3)
+            _wait_for_text(frame, "运行脚本", visible=True, timeout_ms=800)
     _click_run_btn(frame)
     print(f"  [部署器] 已点击「运行脚本」，等待执行日志...")
     _wait_for_run_result(frame, timeout=18)
-    time.sleep(0.3)
+    _wait_for_any_visible(frame, ['.run-log', '[class*="run-log"]', '.el-message-box__content', '.compile-error'], timeout_ms=1000)
 
     # 先判断编译错误（在提取文字前，弹窗还在）
     has_compile_err = _has_compile_error_on_page(frame)
@@ -2061,6 +3280,7 @@ def _run_and_check(frame, cfg: dict = None, current_code: str = "",
     prev_err_sigs: list[str] = []
     compile_passed = False
     last_compile_err = ""
+    last_fixed_codes: list[str] = []
 
     while attempt <= MAX_FIX:
         has_err, errors, log = _do_one_run(frame, f"r{attempt}", select_first_datasource=True, cfg=cfg)
@@ -2114,6 +3334,11 @@ def _run_and_check(frame, cfg: dict = None, current_code: str = "",
         last_compile_err = err_text or last_compile_err
         print(f"  [部署器] 编译错误（第 {attempt} 次）:\n{err_text[:400]}")
 
+        compact_err = (err_text or "").strip()
+        if compact_err in ("{}", "返回值:\n{}", "返回值:\r\n{}"):
+            print("  [部署器] 未检测到明确编译错误文本，停止自动修复并以下一轮运行结果为准")
+            return code, ""
+
         if not cfg or not code:
             return code, err_text
 
@@ -2134,14 +3359,20 @@ def _run_and_check(frame, cfg: dict = None, current_code: str = "",
         err_sig = (err_text or "")[:150].replace(" ", "")
         same_count = sum(1 for s in prev_err_sigs if s == err_sig)
         prev_err_sigs.append(err_sig)
+        if same_count >= 2:
+            print("  [部署器] 同类编译错误连续出现，停止自动修复，避免循环空转")
+            return code, err_text
         retry_feedback = ""
         if same_count >= 1:
             retry_feedback = f"该错误已修复失败 {same_count + 1} 次，请务必尝试完全不同的修复方式，不要重复上次的修改。"
 
         print(f"  [部署器] LLM 修复中...")
-        fixed = _call_llm_fix(code, err_text, cfg, retry_feedback=retry_feedback)
+        fixed = _call_llm_fix(code, err_text, cfg, retry_feedback=retry_feedback, req=req)
         if not fixed:
             print("  [警告] LLM 未返回修复结果，终止")
+            return code, err_text
+        if fixed.strip() == code.strip() or fixed.strip() in last_fixed_codes:
+            print("  [部署器] 修复结果未产生有效变化，停止自动修复，避免重复提交同一版本")
             return code, err_text
 
         diff = "".join(difflib.unified_diff(
@@ -2149,6 +3380,9 @@ def _run_and_check(frame, cfg: dict = None, current_code: str = "",
             fromfile=f"v{attempt-1}", tofile=f"v{attempt}", n=2
         ))
         fix_history.append({"error": err_text[:600], "diff": diff, "fixed_code": fixed})
+        last_fixed_codes.append(fixed.strip())
+        if len(last_fixed_codes) > 3:
+            last_fixed_codes = last_fixed_codes[-3:]
         _refill_editor(frame, fixed)
         _save_in_editor(frame)
         code = fixed
@@ -2196,40 +3430,81 @@ def save_func_meta(apl_file: str, data: dict):
     p.write_text(_yaml.dump(existing, allow_unicode=True), encoding="utf-8")
 
 
-def _read_func_api_name_from_page(frame) -> str:
-    """从已打开的 APL 编辑器中读取系统生成的函数 API 名（如 Proc_BXYcW__c）。"""
+def _read_func_api_name_from_page(frame, func_name: str = "") -> str:
+    """从当前可见的 APL 编辑器/弹窗中读取函数 API 名，避免误读整页其他函数。"""
     try:
-        result = frame.evaluate(r"""
-            () => {
-                const text = document.body.innerText;
+        result = frame.evaluate(f"""
+            () => {{
+                const dialog = {_active_form_dialog_js()};
+                const visibleNodes = [...document.querySelectorAll(
+                    '.paas-func-dialog, .f-g-dialog.paas-func-dialog-height, .ace_editor, .monaco-editor, .CodeMirror, [class*="code-editor"]'
+                )].filter(el => {{
+                    const rect = el.getBoundingClientRect();
+                    const style = window.getComputedStyle(el);
+                    return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 40 && rect.height > 40;
+                }});
+                const root = dialog || visibleNodes.find(el => {{
+                    const text = (el.innerText || '').trim();
+                    return text.includes({repr(func_name)}) || text.includes('void ') || /Proc_[A-Za-z0-9]+__c/.test(text);
+                }}) || visibleNodes[0] || document.body;
 
-                // 1. 编辑器头部 "void Proc_XXXXX__c (" 风格
-                let m = text.match(/void\s+(\w+__c)\s*\(/);
-                if (m) return m[1];
+                const collect = (value, out) => {{
+                    const text = (value || '').trim();
+                    if (!text) return;
+                    const voidMatch = text.match(/void\\s+([A-Z][A-Za-z0-9]*_[A-Za-z0-9]+__c)\\s*\\(/);
+                    if (voidMatch) out.push(voidMatch[1]);
+                    const matches = text.match(/\\b([A-Z][A-Za-z0-9]*_[A-Za-z0-9]+__c)\\b/g) || [];
+                    for (const item of matches) out.push(item);
+                }};
 
-                // 2. 直接出现 Proc_XXXX__c 形式（UI 标签、只读输入框等）
-                m = text.match(/\b(Proc_[A-Za-z0-9]+__c)\b/);
-                if (m) return m[1];
+                const candidates = [];
+                collect(root.innerText || '', candidates);
+                for (const el of root.querySelectorAll(
+                    'input, textarea, span, div, label, .api-name, [class*="apiName"], [class*="api_name"]'
+                )) {{
+                    const rect = el.getBoundingClientRect();
+                    if (rect.width < 20 || rect.height < 10) continue;
+                    collect(el.value || el.textContent || '', candidates);
+                }}
 
-                // 3. 其他常见 APL 函数前缀
-                m = text.match(/\b([A-Z][A-Za-z0-9]*_[A-Za-z0-9]+__c)\b/);
-                if (m) return m[1];
-
-                // 4. 查 input/span/label 显示 API 名的元素
-                const els = document.querySelectorAll(
-                    'input[readonly], input[disabled], .api-name, [class*="apiName"], [class*="api_name"]'
-                );
-                for (const el of els) {
-                    const v = (el.value || el.textContent || '').trim();
-                    if (/__c$/.test(v)) return v;
-                }
-
-                return '';
-            }
+                return candidates.find(v => /__c$/.test(v)) || '';
+            }}
         """)
         return result or ""
     except Exception:
         return ""
+
+
+def _read_func_api_name_from_list(frame, func_name: str = "", object_label: str = "", description: str = "") -> str:
+    """发布后从函数列表中按函数名读取 API 名，并优先匹配对象/描述/最新时间。"""
+    if not func_name:
+        return ""
+    try:
+        candidates = []
+        rows = frame.query_selector_all(sel.FUNC_LIST_ITEM)
+        for row in rows:
+            text = (row.inner_text() or "").strip()
+            if func_name not in text:
+                continue
+            m = re.search(r'\b([A-Z][A-Za-z0-9]*_[A-Za-z0-9]+__c)\b', text)
+            if not m:
+                continue
+            score = 100
+            if object_label and object_label in text:
+                score += 25
+            if description and description in text:
+                score += 15
+            ts_matches = re.findall(r'(\d{4}-\d{2}-\d{2} \d{2}:\d{2})', text)
+            latest_ts = max(ts_matches) if ts_matches else ""
+            if latest_ts:
+                score += 5
+            candidates.append((score, latest_ts, m.group(1)))
+        if candidates:
+            candidates.sort(key=lambda item: (item[0], item[1]), reverse=True)
+            return candidates[0][2]
+    except Exception:
+        return ""
+    return ""
 
 
 def find_function_by_api_name(frame, func_api_name: str) -> bool:
@@ -2255,7 +3530,8 @@ def _deploy_in_page(page, apl_file: str, func_name: str, cfg: dict,
                     namespace: str = "公共库", object_label: str = "",
                     description: str = "", update: bool = False,
                     req: dict = None, ensure_login: bool = True,
-                    func_api_name_override: str = "") -> bool:
+                    func_api_name_override: str = "",
+                    fields_map_snapshot: dict | None = None) -> bool:
     """在已有 page 上执行完整部署流程（不打开/关闭浏览器）。
     ensure_login=True 时检查 session 是否有效并在必要时重新登录；
     ensure_login=False 时跳过登录检查（调用方已保证已登录）。
@@ -2388,13 +3664,18 @@ def _deploy_in_page(page, apl_file: str, func_name: str, cfg: dict,
                     screenshot(page, "login_then_redirect")
                     raise RuntimeError("登录后仍被重定向到登录页，请检查账号权限或手动登录后重试。")
     else:
-        _go_to_func_list()
+        # 批量模式复用浏览器时 ensure_login=False：必须检查返回值，否则会误闯登录页仍去点「新建」导致莫名失败
+        if not _go_to_func_list():
+            raise RuntimeError(
+                "导航函数列表失败：当前似为登录页或会话已失效（复用浏览器/批量模式未在本步重新登录）。"
+                "请关闭后重跑批量，或与单条 pipeline 一样使用有头模式完成一次登录。"
+            )
 
     frame = get_frame(page)
 
     screenshot(page, "step_func_list")
 
-    kwargs = dict(cfg=cfg, output_file=apl_file, req=req)
+    kwargs = dict(cfg=cfg, output_file=apl_file, req=req, fields_map_snapshot=fields_map_snapshot)
 
     # ── 部署模式（两路径，不混用）──
     # 【新建函数】用户说「生成函数」「函数需求」时：不搜索，直接新建。pipeline 默认即此路径。
@@ -2443,7 +3724,8 @@ def _is_target_closed_error(e: Exception) -> bool:
 
 def deploy(apl_file: str, func_name: str, cfg: dict, headless: bool = False,
            namespace: str = "公共库", object_label: str = "", description: str = "",
-           update: bool = False, req: dict = None, func_api_name: str = "") -> bool:
+           update: bool = False, req: dict = None, func_api_name: str = "",
+           fields_map_snapshot: dict | None = None) -> bool:
     """主部署流程，返回是否成功。
 
     部署模式：
@@ -2477,6 +3759,40 @@ def deploy(apl_file: str, func_name: str, cfg: dict, headless: bool = False,
         except Exception as e:
             print(f"[部署器] 证书推送失败: {e}，回退到浏览器部署")
 
+    if not update and _web_create_api_enabled(cfg) and Path(apl_file).exists():
+        try:
+            from fetcher.sharedev_client import web_create_func, web_create_success
+            body = Path(apl_file).read_text(encoding="utf-8")
+            project = ((req or {}).get("project") or (cfg.get("fxiaoke") or {}).get("project_name") or "").strip() or None
+            object_api = ((req or {}).get("object_api") or "").strip()
+            object_label_resolved = object_label or ((req or {}).get("object_label") or "").strip() or "--"
+            if not object_api:
+                raise ValueError("缺少 object_api，无法使用 Web API 直连创建函数")
+            api_name = api_name or _create_api_name(func_name, req=req)
+            result = web_create_func(
+                api_name=api_name,
+                body=body,
+                binding_object_api_name=object_api,
+                project_name=project,
+                cfg=cfg,
+                function_name=func_name,
+                binding_object_label=object_label_resolved,
+                name_space=_runtime_debug_namespace(req),
+            )
+            ok, func = web_create_success(result)
+            created_api = (func.get("api_name") or api_name).strip()
+            if apl_file and created_api:
+                save_func_meta(apl_file, {"func_api_name": created_api})
+            if ok:
+                print(f"[部署器] Web API 直连创建成功: {func_name} -> {created_api}")
+                return True
+            raise RuntimeError(
+                "create 接口未返回有效函数对象："
+                + json.dumps(result, ensure_ascii=False)[:800]
+            )
+        except Exception as e:
+            print(f"[部署器] Web API 直连创建失败: {e}，回退到浏览器部署")
+
     from playwright.sync_api import sync_playwright
 
     for attempt in range(2):
@@ -2494,7 +3810,8 @@ def deploy(apl_file: str, func_name: str, cfg: dict, headless: bool = False,
                     return _deploy_in_page(page, apl_file, func_name, cfg,
                                            namespace=namespace, object_label=object_label,
                                            description=description, update=update, req=req,
-                                           ensure_login=True, func_api_name_override=func_api_name)
+                                           ensure_login=True, func_api_name_override=func_api_name,
+                                           fields_map_snapshot=fields_map_snapshot)
                 except Exception as e:
                     err_msg = str(e).lower()
                     if _is_target_closed_error(e) and attempt == 0:
@@ -2534,9 +3851,19 @@ def main():
     parser.add_argument("--func-api-name", dest="func_api_name", default="",
                         help="更新模式时必填：系统函数 API 名，如 Proc_XXX__c")
     parser.add_argument("--config", default=None, help="config 文件路径")
+    parser.add_argument("--runtime-precheck", dest="runtime_precheck", action="store_true",
+                        help="部署前调用系统 runtime/debug 预检编译错误（默认关闭）")
+    parser.add_argument("--web-create-api", dest="web_create_api", action="store_true",
+                        help="新建函数时优先走 Web Session create 接口（默认关闭，失败回退浏览器）")
     args = parser.parse_args()
 
     cfg = load_config(args.config)
+    if getattr(args, "runtime_precheck", False):
+        cfg.setdefault("deployer", {})
+        cfg["deployer"]["runtime_debug_precheck"] = True
+    if getattr(args, "web_create_api", False):
+        cfg.setdefault("deployer", {})
+        cfg["deployer"]["web_create_api"] = True
     ok = deploy(args.file, args.func_name, cfg,
                 headless=args.headless, update=args.update,
                 func_api_name=getattr(args, "func_api_name", "") or "")

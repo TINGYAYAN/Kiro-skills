@@ -1,0 +1,196 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: settle_type
+  label: 结算方式
+  options:
+  - label: 预付
+    value: '1'
+  - label: 现付
+    value: '2'
+  - label: 赊销
+    value: '3'
+- api: current_level
+  label: 已审批节点数量
+- api: discount
+  label: 整单折扣
+- api: order_time
+  label: 下单日期
+- api: receivable_amount
+  label: 待回款金额
+- api: logistics_status
+  label: 发货状态
+  options:
+  - label: 待发货
+    value: '1'
+  - label: 部分发货
+    value: '2'
+  - label: 已发货
+    value: '3'
+  - label: 部分收货
+    value: '4'
+  - label: 已收货
+    value: '5'
+- api: ship_to_id
+  label: 收货人
+- api: ship_to_add
+  label: 收货地址
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: ship_to_add_control
+  label: 控制收货地址可选数据范围字段
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: order_amount
+  label: 销售订单金额
+- api: owner_department
+  label: 负责人主属部门
+- api: signature_attachment
+  label: 电子签章附件
+- api: plan_payment_amount
+  label: 已计划回款金额
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: new_opportunity_id
+  label: 商机
+- api: submit_time
+  label: 提交时间
+- api: resource
+  label: 来源
+  options:
+  - label: CRM
+    value: '0'
+  - label: 订货通
+    value: '1'
+  - label: 快消订货
+    value: '2'
+- api: quote_id
+  label: 报价单
+- api: payment_amount
+  label: 已回款金额
+- api: delivery_comment
+  label: 发货备注
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: confirmed_receive_date
+  label: 收货时间
+- api: delivery_date
+  label: 交货日期
+- api: data_own_department
+  label: 归属部门
+- api: price_book_id
+  label: 价目表
+- api: sale_contract_id
+  label: 销售合同
+- api: name
+  label: 销售订单编号
+- api: bill_money_to_confirm
+  label: 待确认的开票金额
+- api: delivered_amount_sum
+  label: 已发货金额
+- api: _id
+  label: _id
+- api: payment_money_to_confirm
+  label: 待确认的回款金额
+- api: invoice_status
+  label: 开票完成状态
+  options:
+  - label: 已开票
+    value: '1'
+  - label: 部分开票
+    value: '2'
+  - label: 未开票
+    value: '3'
+- api: tenant_id
+  label: tenant_id
+- api: promotion_id
+  label: 促销活动
+- api: remark
+  label: 备注
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: invoice_amount
+  label: 已开票金额(元)
+- api: lock_user
+  label: 加锁人
+- api: shipping_warehouse_id
+  label: 订货仓库
+- api: is_deleted
+  label: is_deleted
+- api: receipt_type
+  label: 收款类型
+  options:
+  - label: 保证金
+    value: '1'
+  - label: 服务费
+    value: '2'
+  - label: 贷款
+    value: '3'
+- api: returned_goods_amount
+  label: 退货单金额
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: refund_amount
+  label: 已退款金额
+- api: out_owner
+  label: 外部负责人
+- api: product_amount
+  label: 产品合计
+- api: owner
+  label: 负责人
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: is_user_define_work_flow
+  label: 是否是自定义的工作流
+- api: ship_to_tel
+  label: 收货人电话
+- api: work_flow_id
+  label: 自由流程
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: account_id
+  label: 客户名称
+- api: no_invoice_amount
+  label: 待开票金额
+- api: dynamic_amount
+  label: 额外调整
+- api: confirmed_delivery_date
+  label: 发货时间
+- api: commision_info
+  label: 提成信息

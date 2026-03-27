@@ -1,0 +1,307 @@
+fields:
+- api: tender__c
+  label: 招投标管理
+- api: approval_status__c
+  label: 审批状态
+  options:
+  - label: 待提交
+    value: '1'
+  - label: 审批中
+    value: '2'
+  - label: 审批通过
+    value: '3'
+  - label: 审批拒绝
+    value: '4'
+  - label: 撤回
+    value: '5'
+  - label: 历史数据
+    value: '6'
+  - label: 其他
+    value: other
+- api: lock_rule
+  label: 锁定规则
+- api: tenderConfig__c
+  label: 招投标平台
+- api: platformUrl__c
+  label: 平台网址
+- api: tenderCompany__c
+  label: 参加招投标主体
+- api: oppOwner__c
+  label: 商机所有人
+- api: xsy_name__c
+  label: 销售易申请编号
+- api: otherSealRrequire__c
+  label: 其他用印要求说明
+- api: otherCover__c
+  label: 用印申请审批封面
+- api: platformInfo__c
+  label: 招投标平台信息
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: packageColour__c
+  label: 胶装封面及背面颜色
+- api: corporateSignNum__c
+  label: 法人签字申请编号
+- api: otherPrint__c
+  label: 其他打印要求说明
+- api: owner_department
+  label: 负责人主属部门
+- api: platformCompany__c
+  label: 招投标平台主体
+- api: caReceive__c
+  label: CA领取方式
+  options:
+  - label: 自取
+    value: '1'
+  - label: 快递
+    value: '2'
+  - label: 其他
+    value: other
+- api: feedbackDescription__c
+  label: 反馈说明
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: instruction__c
+  label: 申请说明
+- api: create_time
+  label: 创建时间
+- api: account__c
+  label: 客户名称
+- api: baggingRequire__c
+  label: 装袋要求
+  options:
+  - label: 不需要装袋
+    value: '1'
+  - label: 牛皮纸袋
+    value: '2'
+  - label: 透明塑料文件袋
+    value: '3'
+  - label: 其他
+    value: other
+- api: endDate__c
+  label: CA使用结束时间
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: printSelect__c
+  label: 单/双面打印
+  options:
+  - label: 请按需选择
+    value: '1'
+  - label: 单面
+    value: '2'
+  - label: 正反面
+    value: '3'
+  - label: 其他
+    value: other
+- api: relevant_team
+  label: 相关团队
+- api: approvalCompleteDate__c
+  label: 审批结束时间
+- api: baggingCover__c
+  label: 档案袋外封面
+  options:
+  - label: 无需外封面
+    value: '1'
+  - label: 默认封面
+    value: '2'
+  - label: 用印申请审批封面
+    value: '3'
+  - label: 其他
+    value: other
+- api: sealFile__c
+  label: 附件
+- api: corporateSealLocation__c
+  label: 法人章具体盖章位置
+- api: data_own_department
+  label: 归属部门
+- api: officialSealCrevice__c
+  label: 公章盖骑缝章位置
+- api: copyNum__c
+  label: 副本打印份数
+- api: storageRequire__c
+  label: 其他要求说明
+- api: name
+  label: 申请编号
+- api: courierNumber__c
+  label: 快递单号
+- api: tenderAmount__c
+  label: 标的金额(万元)
+- api: _id
+  label: _id
+- api: corporateSealNum__c
+  label: 法人章用印申请编号(FB开头)
+- api: officialSealNum__c
+  label: 公章用印申请编号(NC开头)
+- api: sealRequire__c
+  label: 封条要求
+  options:
+  - label: 无需封条
+    value: '1'
+  - label: 滴滴标准封条
+    value: '2'
+  - label: 用印申请审批封条
+    value: '3'
+  - label: 其他
+    value: other
+- api: tenant_id
+  label: tenant_id
+- api: package__c
+  label: 装订方式
+  options:
+  - label: 不需要装订
+    value: '1'
+  - label: 胶装
+    value: '2'
+  - label: 订书器
+    value: '3'
+  - label: 曲别针
+    value: '4'
+  - label: 长尾夹
+    value: '5'
+  - label: 其他
+    value: other
+- api: platformName__c
+  label: 平台名称
+- api: packageDescription__c
+  label: 每份文件具体装订要求
+- api: bidding_opportunity_info__c
+  label: 招投标客户商机信息
+- api: certificateFile__c
+  label: 证明文件
+- api: officialSealLocation__c
+  label: 公章具体盖章位置
+- api: bidding_opportunity__c
+  label: 招投标客户商机
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: tenderDate__c
+  label: 预计投标时间
+- api: fileReceive__c
+  label: 纸质文件获取方式
+  options:
+  - label: 不需要纸质文件
+    value: '1'
+  - label: 自取
+    value: '2'
+  - label: 快递
+    value: '3'
+  - label: 其他
+    value: other
+- api: startDate__c
+  label: CA使用开始时间
+- api: partner_id
+  label: 合作伙伴
+- api: is_deleted
+  label: is_deleted
+- api: fileBaggingRequire__c
+  label: 文件装袋要求
+- api: endorseRequire__c
+  label: 代签字具体要求
+- api: officialSealSign__c
+  label: 法人签字具体位置
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: tenderResult__c
+  label: 投标结果
+- api: out_owner
+  label: 外部负责人
+- api: out_resources
+  label: 外部来源
+  options:
+  - label: 代理通
+    value: partner
+  - label: 自注册
+    value: self_registration
+  - label: 访销通
+    value: kx_fxt
+- api: contactInfo__c
+  label: 快递收件人信息
+- api: owner
+  label: 负责人
+- api: otherSealRequire__c
+  label: 用印申请审批封条
+- api: last_modified_time
+  label: 最后修改时间
+- api: opportunity__c
+  label: 商机名称
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: approvalSubmitDate__c
+  label: 审批提交时间
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: xsyId__c
+  label: 销售易数据ID
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 招投标平台账号密码＆CA申请
+    value: ''
+  - label: 资质证照申请
+    value: ''
+  - label: 打印用印装订申请
+    value: ''
+- api: storageName__c
+  label: 电子版存储文件命名
+- api: packageLocation__c
+  label: 订书器位置
+- api: is_opportunity_owner__c
+  label: 是否商机所有人
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: originalNum__c
+  label: 正本打印份数
+- api: feedbackFile__c
+  label: 反馈附件
+- api: needCa__c
+  label: 是否需要CA
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: otherBaggingRequire__c
+  label: 其他要求说明2
+- api: storageContent__c
+  label: U盘/光盘存储内容
+- api: storageType__c
+  label: 电子版存储方式
+  options:
+  - label: 不需要电子版
+    value: '1'
+  - label: U盘
+    value: '2'
+  - label: 光盘
+    value: '3'
+  - label: 其他
+    value: other

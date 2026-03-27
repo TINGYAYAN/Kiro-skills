@@ -1,0 +1,12 @@
+[task] started_at=2026-03-26 18:58:29
+[task] cmd=python3 batch_runner.py --runtime-precheck --dry-run --no-notify --project 西门子
+
+[批量] 项目「西门子」下没有待执行的记录
+  提示：需「描述」已填且「系统API名」为空；状态为待执行/空，或❌失败且系统API名仍为空（可自动重试）
+  若想重做：清空该行的系统API名，或将状态改回待执行；或 batch_runner.py --regenerate
+  另外请确认该行「项目」列已明确填写且与本次项目过滤一致。
+没有待执行的记录。
+
+提示：在多维表格「描述」列填写需求，并保持「系统API名」为空，再发送「批量生成」。
+
+[task] finished_at=2026-03-26 18:58:31 exit_code=0

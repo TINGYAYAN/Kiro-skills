@@ -1,0 +1,842 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: account_type
+  label: 客户类型
+  options:
+  - label: EU
+    value: option_eu__c
+  - label: OEM
+    value: option_oem__c
+  - label: Service Company
+    value: option_service__c
+  - label: End-Account
+    value: option_end_account__c
+  - label: System Integrator
+    value: option_system_integrator__c
+  - label: Wholeseller, Distributor
+    value: option_wholeseller_distributor__c
+  - label: Panel Builder
+    value: option_panel_builder__c
+  - label: Vendor/Reseller/Retailer
+    value: option_vendor_reseller_retailer__c
+  - label: EPC/General Contractor
+    value: option_epc_general_contractor__c
+  - label: Decision Influencer
+    value: option_decision_influencer__c
+  - label: Other
+    value: other
+- api: is_iss_registered_customer__c
+  label: 是否ISS注册客户
+- api: is_blacklist
+  label: 是否为黑名单
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: phone_number_attribution_city
+  label: 电话归属市
+- api: enable_risk_portrait
+  label: 是否开启风险画像
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: account_no
+  label: No.
+- api: fy26_sales_forecast_k_cny__c
+  label: Yearly Fcst(K/人民币)
+- api: latest_contact_time__c
+  label: 最新联系时间
+- api: main_contact__c
+  label: 主要联系人
+- api: province
+  label: 省
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: credit_limit_upper
+  label: 推荐授信额度上限
+- api: remind_days
+  label: 回收提前提醒天数
+- api: tel
+  label: 电话
+- api: fax
+  label: 传真
+- api: extend_days
+  label: 申请延期天数
+- api: biz_status
+  label: 分配状态
+  options:
+  - label: 未分配
+    value: unallocated
+  - label: 已分配
+    value: allocated
+- api: customer_introduction_long__c
+  label: 客户简介
+- api: last_add_to_cart_goods_dat__c
+  label: 最近一次加购商品日期
+- api: phone_number_attribution_address
+  label: 电话归属详细地址
+- api: version
+  label: version
+- api: e_code__c
+  label: E-Code
+- api: customer_registration_stat__c
+  label: 客户注册状态
+  options:
+  - label: 未注册
+    value: option_not_registered__c
+  - label: 注册中
+    value: option_registering__c
+  - label: 已注册
+    value: option_already_registered__c
+  - label: 其他
+    value: other
+- api: completion_rate
+  label: 客户资料完善度
+- api: start_m_time__c
+  label: 开始摸排时间
+- api: relevance_wechat_date
+  label: 关联企微日期
+- api: back_reason
+  label: 销售人员退回原因
+  options:
+  - label: 联系不上客户
+    value: '0'
+  - label: 客户暂无需求
+    value: '1'
+  - label: 未满足客户需求
+    value: '2'
+  - label: 其他
+    value: other
+- api: order_frequency__c
+  label: 下单频次
+  options:
+  - label: 每月下单
+    value: option_place_order_monthly__c
+  - label: 每季度下单
+    value: option_place_order_every_quarter__c
+  - label: 每半年或每年下单
+    value: option_place_order_every_half_yea__c
+  - label: 其他
+    value: other
+- api: fy26_potential_k_cny__c
+  label: Yearly Potential(K/人民币)
+- api: tenant_id
+  label: tenant_id
+- api: is_overdue_survey__c
+  label: 是否超期摸排
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '0'
+  - label: 其他
+    value: other
+- api: city
+  label: 市
+- api: next_followed_remark
+  label: 下次跟进要点
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: sales_amount_k_cny_since_f__c
+  label: FY25财年至今销售额(K/人民币)
+- api: filling_checker_id
+  label: 报备审核人
+- api: phone_number_attribution_country
+  label: 电话归属国家
+- api: last_follower
+  label: 最后跟进人
+- api: is_er_enterprise
+  label: 是否关联对接企业
+  options:
+  - label: 否
+    value: 'False'
+  - label: 是
+    value: 'True'
+- api: phone_number_attribution_district
+  label: 电话归属区
+- api: email
+  label: 邮件
+- api: deal_status
+  label: 成交状态
+  options:
+  - label: 未成交
+    value: '1'
+  - label: 已成交
+    value: '2'
+  - label: 多次成交
+    value: '3'
+- api: wechat_id
+  label: 微信号
+- api: uniform_social_credit_code
+  label: USCC
+- api: address
+  label: 详细地址
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: out_tenant_id
+  label: 外部企业
+- api: url
+  label: 网址
+- api: claimed_time
+  label: 领取/分配时间
+- api: enterprise_wechat_user_id
+  label: 企业微信UserId
+- api: sales_amount_since_fiscal__c
+  label: 财年至今销售额(K/人民币)
+- api: credit_limit_lower
+  label: 推荐授信额度下限
+- api: transfer_count
+  label: 转手次数
+- api: total_refund_amount
+  label: 退款总额
+- api: high_seas_name
+  label: 所属公海（名称）
+- api: customer_source__c
+  label: 客户来源
+  options:
+  - label: Transferred from SU
+    value: option_transferred_from_su__c
+  - label: Digital operation
+    value: option_digital_operation__c
+  - label: Other
+    value: other
+- api: country
+  label: 国家
+- api: biz_reg_name
+  label: 工商注册
+  options:
+  - label: 否
+    value: 'False'
+  - label: 是
+    value: 'True'
+- api: risk_scores_model_name
+  label: 第三方风险评级规则名称
+- api: wechat_nickname
+  label: 企微昵称
+- api: account_status
+  label: 状态（原）
+  options:
+  - label: 报备中
+    value: '1'
+  - label: 未分配
+    value: '2'
+  - label: 已分配
+    value: '3'
+  - label: 未生效
+    value: '4'
+  - label: 变更中
+    value: '5'
+  - label: 已作废
+    value: '99'
+- api: last_deal_closed_time
+  label: 最后一次成交时间
+- api: completed_field_quantity
+  label: 完成字段总数
+- api: phone_number_attribution_province
+  label: 电话归属省
+- api: customer_status__c
+  label: 客户状态
+  options:
+  - label: 正常
+    value: option_normal__c
+  - label: 摸排中
+    value: option_check__c
+  - label: 无效
+    value: option_invalid__c
+  - label: 其他
+    value: other
+- api: customer_tiering__c
+  label: 客户分级
+  options:
+  - label: Tier 1
+    value: option_tier_1__c
+  - label: Tier 2
+    value: option_tier_2__c
+  - label: Tier 3
+    value: option_tier_3__c
+  - label: Tier 4
+    value: option_tier_4__c
+  - label: 其他
+    value: other
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: next_followed_time
+  label: 下次跟进时间
+- api: company_english_name__c
+  label: 公司英文名
+- api: pin_yin
+  label: 名称拼写
+- api: last_year_search_keywords__c
+  label: 最近一年搜索关键词（TOP10)
+- api: field_JvcDq__c
+  label: 合作代理商
+- api: formula_credit_limit
+  label: 公式授信额度
+- api: latest_follow_up_record__c
+  label: 跟进记录
+- api: main_product__c
+  label: 主要产品
+- api: fy25_sales_amount_k_cny__c
+  label: FY25 销售额(K/人民币)
+- api: owner_department
+  label: 负责人主属部门
+- api: cooperation_agent__c
+  label: 合作代理商(原)
+- api: poi_information
+  label: POI信息
+- api: is_relevance_wechat
+  label: 是否关联企微
+  options:
+  - label: 否
+    value: 'False'
+  - label: 是
+    value: 'True'
+- api: area_location
+  label: 地区定位
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: last_deal_closed_amount
+  label: 最后一次成交金额
+- api: challenge_and_required_sup__c
+  label: 挑战&所需支持
+- api: expire_time
+  label: 预计收回时间
+- api: self_service_scores_rule_name
+  label: 第三方风险评分规则名称
+- api: high_seas_id
+  label: 所属公海
+- api: last_followed_time
+  label: 最后跟进时间
+- api: phone_number_attribution
+  label: 电话归属地
+- api: extend_reason
+  label: 延期原因
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: industry_ext
+  label: 工商扩展
+- api: third_party_risk_level
+  label: 第三方风险等级
+- api: remaining_time
+  label: 剩余保有时间
+- api: purchase_channel__c
+  label: 采买渠道
+  options:
+  - label: Online
+    value: option_online__c
+  - label: Offline
+    value: option_2_offline__c
+  - label: Online+Offline
+    value: option_online_offline__c
+  - label: 其他
+    value: other
+- api: yesterday_key_behavior_typ__c
+  label: 昨日关键行为类型
+- api: data_own_department
+  label: 归属部门
+- api: parent_account_id
+  label: 上级客户
+- api: district
+  label: 区
+- api: industry_level2
+  label: 2级行业
+  options:
+  - label: 银行
+    value: 37341248386d41c497c44b5b74d4f2eb
+  - label: 保险
+    value: 28c1a49a2b80452a94b0e895ebe05e46
+  - label: 其他
+    value: 420e584f103349239fed3659bc23f993
+  - label: 基金/证券/期货/投资
+    value: 5a60776c867c46b7b48874523a37721d
+  - label: 信托/担保/拍卖/典当
+    value: 24df2475061e49589095ddd341d4b5f6
+  - label: 其他
+    value: e3247295d6f640788cad37a86dfe328d
+  - label: 物业管理/商业中心
+    value: 460f342d5f4a458da192fd6853487f82
+  - label: 家居/室内设计/装饰装潢
+    value: 9de436e20bf546b89cb496107f083475
+  - label: 房地产/建筑/建筑建材/建材/工程
+    value: 947d7889271941fa93a722575f5d4299
+  - label: 其他
+    value: 854c8619ec4b4a3fa93076f81a5b6052
+  - label: 交通/运输
+    value: 26e6237646f747bd8ab8722c9befe637
+  - label: 物流/仓储
+    value: a3e0f1a5b94e4402a27e4a340dd1bff6
+  - label: 其他
+    value: 7da5b302096749bd9ebac9ceb7a9782b
+  - label: 渔
+    value: 46a5d69516164caa8233d59a0ed3a29b
+  - label: 林
+    value: 9d36398273fa4280b0e6717d96de2247
+  - label: 牧
+    value: c00e9f369df14899b0251d05124f96b3
+  - label: 农
+    value: f7d77bcadb43463eb1eea74de00e2308
+  - label: 加工制造（原料加工）
+    value: fdfba38e3fa14d39a2d5d1ff1b3e0e33
+  - label: 大型设备/机电设备/重工业
+    value: fa2382b4471a47d48613dcfb5d759bd9
+  - label: 其他
+    value: b7bbfdcfe9a5452c882c4a270be94139
+  - label: 医药/生物工程
+    value: b5c685719a324d2487d42c3a67d3e5e7
+  - label: 加工制造（模具）
+    value: 1d11105f433e407b97900c4e6a0dd9c9
+  - label: 汽车/摩托车
+    value: 7f3b526992e9477083638dad7282ca47
+  - label: 礼品/玩具/工艺美术/收藏品/奢侈品
+    value: 195f6031fc934c8abae7e85eeb709c03
+  - label: 医疗设备/器械
+    value: 6ae20dd9386044f7bbe3042c30f4dc31
+  - label: 航空/航天研究与制造
+    value: a424edc1af0f498a9f6145307b5ecda1
+  - label: 仪器仪表及工业自动化
+    value: 486b949b7a49426095dc48be4ea67175
+  - label: 贸易/进出口
+    value: a3675318512c4fe29cf8ed5729c887f8
+  - label: 快速消费品（饮料/烟酒）
+    value: cd083089cd3a44eab83a63236a5386cd
+  - label: 服饰
+    value: a063f24c563746e6881d44b56cd7d9f3
+  - label: 食品
+    value: 01805a27e003452fb7ac2062a414ff09
+  - label: 皮革
+    value: 9d557d574ccf46f7b5021ebee03454df
+  - label: 租赁服务
+    value: d0ff3c76dd0e454c99344250bc9ac7b1
+  - label: 零售/批发
+    value: c10ef8a943bd4ffb82c5b686bc42ffcd
+  - label: 家具
+    value: f49b10851d2d4e2290496eda95551499
+  - label: 纺织
+    value: 8276dae2b21642f3b6d1d7b79d138553
+  - label: 日化
+    value: cb0d2a7f6fdb49b19b39720ffc6995de
+  - label: 其他
+    value: 0e089b594f4b4585a26f963ae86a5cab
+  - label: 家电
+    value: 7264727d64d14031bf0517faa4341794
+  - label: 无
+    value: 6145a96bf8844b58a848090669bb68c5
+  - label: 政府/公共事业/非盈利机构
+    value: 0b2a26a653ab436bb9894e381ba118b2
+  - label: 学术/科研
+    value: 63d646c2d75c4ce39b76f79fb59c11db
+  - label: 其他
+    value: 469818c2ed4b493b96f42a87133f4d6f
+  - label: 检验/检测/认证
+    value: 58b171e6e7d94a798e51c19ee29b0c93
+  - label: 中介服务
+    value: fd75f40c00c44c838a8eae7194958830
+  - label: 专业服务/咨询（财会/法律人力资源等
+    value: e9387e02dc174ad19fc9bee00851749c
+  - label: 其他
+    value: 4aab497c996249d1800ea420969d6b74
+  - label: 公关
+    value: 8474935931a54e54a3b205882890a6dd
+  - label: 广告
+    value: af94c68bed6442f8a970318efd62adbe
+  - label: 展会
+    value: 37e52874e44b40f89f09a201f64d31d5
+  - label: 外包服务
+    value: c5235233d98c41a8966fec161610be6e
+  - label: 旅游/度假
+    value: ecd59e52f67149ca8142b5a168e5ac87
+  - label: 酒店/餐饮
+    value: 50cb331c6041484997a83ae8e63aae30
+  - label: 医疗/医疗服务护理/美容/保健卫生服务
+    value: 981f3bc0e9164bcd9c0098b2c518d6fa
+  - label: 其他
+    value: 1164bbcef53243c6919c8daac1341241
+  - label: 计算机软件
+    value: a2ab2114890f4c888039afc9127bdfed
+  - label: IT服务（系统/数据/维护）
+    value: 237762d2dc6342a2abe627c46381c7fa
+  - label: 网络游戏
+    value: a6afbcd66333471cbd77d61c17806dc9
+  - label: 电子技术/半导体/集成电路
+    value: 35c83bdf8583428a9e4f803aa4689d44
+  - label: 通信/电信/网络设备
+    value: 07103cad35b943219690fd71c4c76b19
+  - label: 电信运营/增值服务
+    value: c83a94fde3d74e23b79224223c18d865
+  - label: 其他
+    value: f9de2026dfe940e8b5a02388bf00d416
+  - label: 互联网/电子商务
+    value: 687f41b6b10242c19d48a7f06749afe7
+  - label: 计算机硬件
+    value: a30e239747ee49ff92f063443bcbb2e0
+  - label: 其他
+    value: d211f96199d04cf2ada3d7a863926e43
+  - label: 娱乐/体育/休闲
+    value: c7716683b4164f9180be991401a6e3a9
+  - label: 教育/培训/院校
+    value: 61c21e06ef2e4f9890d89ea86fdeb46f
+  - label: 媒体/出版/影视/文化传播
+    value: a0beb19262af42b68213e40b10594ad3
+  - label: 能源/矿产/采掘/冶炼
+    value: f544c749085c4819a763f733fb1f5175
+  - label: 石油/石化/化工
+    value: 80156d090c6f4f36a79b5fde4c7bf866
+  - label: 其他
+    value: 83ccf24414a14953b4714be3713fab3c
+  - label: 环保
+    value: b3f2b893eeb34d45bbe4b20e70f84ad6
+  - label: 电气/电力/水利
+    value: 64741287732646fcb079f050b22dee38
+  - label: 国际组织
+    value: 24992238797d728cc5ad35005b79db0f
+  - label: 国家机构
+    value: 1fafb3f659db2f781d4eb0b54eb63f1c
+  - label: 人民政协、民主党派
+    value: c392f42918b838a314eb853c6fcfbca9
+  - label: 社会保障
+    value: 4b77cd4fda9b5764a07a852356c7b103
+  - label: 群众团体、社会团体和其他成员组织
+    value: ced1f587e092b6a9b741c27561cf6d60
+  - label: 广播、电视、电影和录音制作业
+    value: 5a19a81825526d8f1837798e3534e5db
+  - label: 卫生
+    value: 29dacaa3d48316c88b97a8434f62a4a8
+  - label: 社会工作
+    value: f450454cb67a69583923c5abf60d98a3
+  - label: 教育
+    value: fcf3eb639360dfd83c7229500973d391
+  - label: 居民服务业
+    value: fa79a11cfbee9d48cd8dc9b4dae00fe0
+  - label: 机动车、电子产品和日用产品修理业
+    value: 6c71381249c044c8d9c43fdbe652e23a
+  - label: 其他服务业
+    value: 26dd015c166991c689e500d8f2fd8a42
+  - label: 水利管理业
+    value: 3d332098418d1e9fe71c9c66ff595d4f
+  - label: 生态保护和环境治理业
+    value: afc7c01d30ef95cd8cfb7cc31a20fe2f
+  - label: 公共设施管理业
+    value: a6251b0a82f093789ef420f7a14f4fc9
+  - label: 土地管理业
+    value: 8bce51fefbfc7a8ef2c65a62ea8e0652
+  - label: 研究和试验发展
+    value: ae05d30ca570abc0f3b08c51489c0de9
+  - label: 专业技术服务业
+    value: 93b5c9b4fae0bfd939be474f9291b7ec
+  - label: 科技推广和应用服务业
+    value: 4f2b45f6854af9149e81314c51608e92
+  - label: 租赁业
+    value: e29ca20a85e6065720f6b73808c21436
+  - label: 商务服务业
+    value: aca65d6d8fddd53adc3c69aaae3a57f7
+  - label: 铁路运输业
+    value: c3d7006639a567745439a600f6596d61
+  - label: 道路运输业
+    value: dac77c3e3f1d3a8daff596771ace1e3e
+  - label: 水上运输业
+    value: ef747620357fa2a8e593f28e44b27f9a
+  - label: 航空运输业
+    value: 459c22dc261e61fb3035464837fa8722
+  - label: 管道运输业
+    value: d33938b3b1d4ffdc6e62f2e3c55392da
+  - label: 邮政业
+    value: 6552796f425d815c9027568f51020414
+  - label: 房屋建筑业
+    value: d629c35de20c8498edca88556f4818a6
+  - label: 建筑安装业
+    value: 5f024cfe63bc7303579295a075c85c37
+  - label: 电力、热力生产和供应业
+    value: dd07d0abc9409466646e6f75c65fa5a7
+  - label: 燃气生产和供应业
+    value: be679cd6deaa00f8be0c6af534ad28fc
+  - label: 水的生产和供应业
+    value: cf0e70914b1bea0a2b2dd9a31b202775
+  - label: 食品制造业
+    value: 8e135975be862213e5d5b07a0af57425
+  - label: 酒、饮料和精制茶制造业
+    value: 6dc32bad197709964481daeaf5e0a9d9
+  - label: 烟草制品业
+    value: d42a16de90479cea9d436ab3c5e0fbcd
+  - label: 纺织业
+    value: 111587f71eed7a345de65416e93ea0cf
+  - label: 纺织服装、服饰业
+    value: fe00f348f2650ad1b79720794acb806f
+  - label: 皮革、毛皮、羽毛及其制品和制鞋业
+    value: 711b4622077aa65338e5742ff7324f09
+  - label: 木材加工和木、竹、藤、棕、草制品业
+    value: 84fdb0ccc142672347b07290d7d77d8a
+  - label: 家具制造业
+    value: 4d4d7e5745c83454ae80581d6982712b
+  - label: 造纸和纸制品业
+    value: c3d025ebc1cf362ff2398e2598720a48
+  - label: 印刷和记录媒介复制业
+    value: 0a7d39babb9705749fe242f2d5d33e58
+  - label: 化学原料和化学制品制造业
+    value: b4d156ab39327a18a48237894ce2561c
+  - label: 橡胶和塑料制品业
+    value: ed16bd830c3f7958e02aebcaa99e4d6a
+  - label: 非金属矿物制品业
+    value: 4e24d54ed8939169b387b290b7781968
+  - label: 黑色金属冶炼和压延加工业
+    value: 2b9181aa21ef211ade91811c5e13d24a
+  - label: 有色金属冶炼和压延加工业
+    value: 1855f70f50728d01c914eaca92051253
+  - label: 金属制品业
+    value: 0e2290a37c8089898ccee7f5a610ac39
+  - label: 专用设备制造业
+    value: 242efff2017a0f4eac3530d7491807d7
+  - label: 电气机械和器材制造业
+    value: d30707eb341d8bde3f8eba9aa8d07bbb
+  - label: 计算机、通信和其他电子设备制造业
+    value: 9e40e3a6919b0bcecdb51bcd6d284928
+  - label: 废弃资源综合利用业
+    value: 6f0bd8a0faff972efa02675787c6258b
+  - label: 金属制品、机械和设备修理业
+    value: 0f2234dc511a6cc07f9bbb7e528e7185
+  - label: 黑色金属矿采选业
+    value: d1a5fb9d5427872f8923450773561901
+  - label: 有色金属矿采选业
+    value: 6650d0377490883945076751e384ab0d
+  - label: 非金属矿采选业
+    value: fb2aabb674a97d0d7204d57c6730e42e
+  - label: 开采专业及辅助性活动
+    value: bd135eddf4357a53bdbc1784d053ef7b
+- api: name
+  label: 公司名称
+- api: industry_level1
+  label: 1级行业
+  options:
+  - label: 金融业
+    value: 13cb944990de42a085a4b4896cc4c3a6
+  - label: 房地产/建筑业
+    value: 2a77fd525e3c4921aed6d4f957b03f2f
+  - label: 交通/运输/物流/仓储
+    value: f5d57cb355e34ed2ad534c71d85411c1
+  - label: 农/林/牧/渔/其他
+    value: 9242b0633f484501a4242d79763a9ee5
+  - label: 生产/加工/制造
+    value: 7d18b41f71474604ac11f53997ca3263
+  - label: 贸易/批发/零售/租赁业
+    value: b5cf016ea3ad4df1bf226c47606a71e7
+  - label: 跨领域经营
+    value: 3209b7d6d08243638aca6272f966dbdb
+  - label: 政府/非盈利机构
+    value: a83f96e093f3496d87ce878d2e2fa4f9
+  - label: 商业服务
+    value: c3e04661a4e745e3a45e8bddd54ce07b
+  - label: 服务业
+    value: 2981dbf62f2a4d74b49990312aff2935
+  - label: IT/通信/电子/互联网
+    value: 6e2286ca487d424cb802be035c880184
+  - label: 文化/传媒/娱乐/体育
+    value: b4ae642bbf6741489ca72df119f3274f
+  - label: 能源/矿产/环保
+    value: 3d3938a283274285a22de2b1fd54bc0c
+  - label: 其他
+    value: other
+  - label: 国际组织
+    value: 9d88b6ceacd98bc656b98290e1823040
+  - label: 卫生和社会工作
+    value: b11f757e9f24fd00fd52eb250f3ff299
+  - label: 教育
+    value: d2437df90ad5511934dca8c055858f9d
+  - label: 居民服务、修理和其他服务业
+    value: 0bd52231b4ad9fb4ea270b5813b25566
+  - label: 水利、环境和公共设施管理业
+    value: c053d8f054daa75e3b659a7fb4ec07ab
+  - label: 科学研究和技术服务业
+    value: b2ff3969fc387684c395b467900297b8
+  - label: 租赁和商务服务业
+    value: 9fbeb52819300d231b3fd2818f806dd6
+  - label: 电力、热力、燃气及水生产和供应业
+    value: 397ed942659fcc1fc67adcae72b7bb0a
+- api: _id
+  label: _id
+- api: is_remind_recycling
+  label: 是否待回收提醒
+  options:
+  - label: 否
+    value: 'False'
+  - label: 是
+    value: 'True'
+- api: responsible_area__c
+  label: 区域
+  options:
+  - label: RN
+    value: option_rn__c
+  - label: RS
+    value: option_rs__c
+  - label: RE
+    value: option_re__c
+  - label: RC
+    value: option_rc__c
+  - label: RW
+    value: option_rw__c
+  - label: RNE
+    value: option_rne__c
+  - label: 其他
+    value: other
+- api: account_class_category
+  label: 客户分级分类
+  options:
+  - label: 重要价值客户
+    value: '1'
+  - label: 重要唤回客户
+    value: '2'
+  - label: 重要深耕客户
+    value: '3'
+  - label: 潜力客户
+    value: '4'
+  - label: 新客户
+    value: '5'
+  - label: 一般维持客户
+    value: '6'
+  - label: 流失客户
+    value: '7'
+  - label: 其他
+    value: other
+- api: willingness__c
+  label: 客户意愿度
+  options:
+  - label: 强
+    value: option_gao__c
+  - label: 中
+    value: option_zhong__c
+  - label: 弱
+    value: option_low__c
+  - label: 其他
+    value: other
+- api: account_level
+  label: 客户级别
+  options:
+  - label: 重要客户
+    value: '1'
+  - label: 普通客户
+    value: '2'
+  - label: 一般客户
+    value: '3'
+  - label: 其他
+    value: other
+- api: remark
+  label: 备注
+- api: lock_user
+  label: 加锁人
+- api: blacklist_desc
+  label: 标记/取消黑名单原因
+- api: leads_id
+  label: 源线索
+- api: is_deleted
+  label: is_deleted
+- api: last_year_viewed_products__c
+  label: 近一年浏览产品(Top10)
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: historical_ecommerce_purch__c
+  label: 历史至今电商购买渠道
+- api: out_owner
+  label: 外部负责人
+- api: task_count__c
+  label: 已分配任务数
+- api: is_risk_monitor
+  label: 是否风险监控
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: phone_number_attribution_location
+  label: 电话归属定位
+- api: owner
+  label: 负责人
+- api: recycled_reason
+  label: 退回/收回原因
+- api: last_modified_by
+  label: 最后修改人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: sales_team__c
+  label: 所属团队
+  options:
+  - label: Team 1
+    value: option_team_1__c
+  - label: Team 2
+    value: option_team_2__c
+  - label: 其他
+    value: other
+- api: third_party_risk_scores
+  label: 第三方风险评分
+- api: owner_modified_time
+  label: 负责人变更时间
+- api: location
+  label: 定位
+- api: returned_time
+  label: 退回/收回时间
+- api: account_path
+  label: 客户层级
+- api: account_source
+  label: 来源
+  options:
+  - label: 转介绍
+    value: '1'
+  - label: 线上注册
+    value: '2'
+  - label: 线上询价
+    value: '3'
+  - label: 预约上门
+    value: '4'
+  - label: 陌拜
+    value: '5'
+  - label: 招商资源
+    value: '6'
+  - label: 公司资源
+    value: '7'
+  - label: 展会资源
+    value: '8'
+  - label: 个人资源
+    value: '9'
+  - label: 电话咨询
+    value: '10'
+  - label: 邮件咨询
+    value: '11'
+  - label: 企业微信
+    value: enterprise_wechat
+  - label: 其他
+    value: other
+  - label: 招投标公告
+    value: procurementEnterpriseTransfer
+- api: credit_rule_name
+  label: 授信规则名称

@@ -1,0 +1,120 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: business_opportunity__c
+  label: 商机
+- api: didi_customer_id__c
+  label: 滴滴客户ID
+- api: customer__c
+  label: 客户
+- api: multiple_lines_text__c
+  label: 税点方案提醒
+- api: status__c
+  label: 审核状态
+  options:
+  - label: 示例选项
+    value: option1
+  - label: 审核中
+    value: '1'
+  - label: 审核成功
+    value: '2'
+  - label: 审核驳回
+    value: '3'
+  - label: 草稿中
+    value: '4'
+  - label: 其他
+    value: other
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: field_yy42P__c
+  label: 发起人
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: synCauseOfFailure__c
+  label: 同步失败原因(MIS)
+- api: is_tax_rate_prepaid__c
+  label: 是否有税点前置
+  options:
+  - label: 否
+    value: '0'
+  - label: 是
+    value: '1'
+  - label: 其他
+    value: other
+- api: owner
+  label: 负责人
+- api: adjustment_reason__c
+  label: 调整原因
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: products_with_timestamp_0__c
+  label: 时间戳为0的产品
+- api: synStatus__c
+  label: 同步状态（MIS）
+  options:
+  - label: 未同步
+    value: '1'
+  - label: 同步成功
+    value: '2'
+  - label: 同步失败
+    value: '3'
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: data_own_department
+  label: 归属部门
+- api: name
+  label: 主属性
+- api: _id
+  label: _id

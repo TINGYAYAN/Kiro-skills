@@ -1,0 +1,168 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: rejection_reason__c
+  label: 驳回原因
+- api: business_signer_id_back__c
+  label: 企业签约人身份证反面
+- api: business_term_end_time__c
+  label: 营业期限结束时间
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: business_credit_code__c
+  label: 企业信用代码
+- api: owner_department
+  label: 负责人主属部门
+- api: company__c
+  label: 企业名称
+- api: sync_status__c
+  label: 同步状态
+  options:
+  - label: 未同步
+    value: '1'
+  - label: 同步成功
+    value: '2'
+  - label: 同步失败
+    value: '3'
+  - label: 其他
+    value: other
+- api: field_sG27n__c
+  label: 日期范围
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: sync_failure_reason__c
+  label: 同步失败原因
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: business_term_start_time__c
+  label: 营业期限开始时间
+- api: field_tG9mT__c
+  label: 结束时间
+- api: display_name
+  label: 企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: field_s8Dcw__c
+  label: 开始时间
+- api: relevant_team
+  label: 相关团队
+- api: company_name_text__c
+  label: 公司名称（文本）
+- api: data_own_department
+  label: 归属部门
+- api: applicant_email__c
+  label: 申请人邮箱
+- api: name
+  label: 申请编号
+- api: _id
+  label: _id
+- api: cooperation_direction__c
+  label: 合作方向
+- api: tenant_id
+  label: tenant_id
+- api: signing_representative_nam__c
+  label: 签约代表姓名
+- api: applicant_name__c
+  label: 申请人姓名
+- api: business_signer_id_card_fr__c
+  label: 企业签约人身份证正面
+- api: is_legal_representative_si__c
+  label: 签约代表是否为法人
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: legal_person_id_number__c
+  label: 法人身份证号
+- api: sign_representative_email__c
+  label: 签约代表邮箱
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: applicant__c
+  label: 申请人
+- api: lock_user
+  label: 加锁人
+- api: field_t5Kvd__c
+  label: 富文本
+- api: is_deleted
+  label: is_deleted
+- api: application_status__c
+  label: 申请状态
+  options:
+  - label: 草稿
+    value: '1'
+  - label: 审批中
+    value: '2'
+  - label: 已完成
+    value: '3'
+  - label: 已撤回
+    value: '4'
+  - label: 已驳回
+    value: '5'
+  - label: 已拒绝
+    value: '6'
+  - label: 已终止
+    value: '7'
+  - label: 其他
+    value: other
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: authorization_upload__c
+  label: 授权书上传
+- api: out_owner
+  label: 外部负责人
+- api: authorization_end_time__c
+  label: 授权结束时间
+- api: signed_phone_number__c
+  label: 签约手机号
+- api: signing_representative_id__c
+  label: 签约代表身份证号
+- api: owner
+  label: 负责人
+- api: company_application_id__c
+  label: 企业申请编号
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: business_license_attachmen__c
+  label: 营业执照附件
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: authorization_start_time__c
+  label: 授权开始时间
+- api: legal_person_name__c
+  label: 企业法人

@@ -1,0 +1,11 @@
+requirement: 通过销售线索.最终客户查询客户.公司名称，如果匹配到客户赋值销售线索.客户，并更新销售线索.客户创建结果=已关联老客户
+object_api: LeadsObj
+object_label: 销售线索
+trigger_type: process_function
+logic_type: query_and_update
+query_field: end_customer__c
+target_object: AccountObj
+target_field: name
+match_field: customer__c
+update_field: customer_creation_result__c
+update_value: 已关联老客户

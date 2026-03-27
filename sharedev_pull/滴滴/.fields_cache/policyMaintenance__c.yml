@@ -1,0 +1,367 @@
+fields:
+- api: deductionamounttype__c
+  label: 返点基数扣减额类型
+  options:
+  - label: 无
+    value: '1'
+  - label: 固定值
+    value: '2'
+  - label: X月X日-X月X日
+    value: '3'
+  - label: 其他
+    value: other
+- api: cycleStart__c
+  label: 周期起始日
+- api: lock_rule
+  label: 锁定规则
+- api: rebate__c
+  label: 统计指标
+  options:
+  - label: 无
+    value: '1'
+  - label: 总GMV
+    value: '2'
+  - label: 用车GMV
+    value: '3'
+  - label: 用车完单量
+    value: '4'
+  - label: 平台使用费订单：即收费的用车完单量
+    value: '5'
+  - label: 平台使用费
+    value: '6'
+  - label: 用车GMV（不含平台使用费）
+    value: '7'
+  - label: 用车GMV（不含平台使用费和路桥/停车/洗车/清洁等第三方费用）
+    value: '8'
+  - label: 间夜比-半年度
+    value: '9'
+  - label: 其他
+    value: other
+- api: salesPolicy__c
+  label: 销售政策
+- api: mergerebate__c
+  label: 是否合并计算返点
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: sales_policy_salesforce_id__c
+  label: 销售政策销售易ID
+- api: designatedcustomer__c
+  label: 合并计算后指定返点对象
+- api: policyTrigForm__c
+  label: 政策触发形式大类
+  options:
+  - label: 节点
+    value: '1'
+  - label: 金额
+    value: '2'
+  - label: 其他
+    value: other
+- api: syncId__c
+  label: 接口使用数据ID
+- api: designatedcustomer_interface__c
+  label: 合并计算后指定返点对象-接口使用数据ID
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: last_modified_by_api_data__c
+  label: 最后修改人-接口使用数据ID
+- api: days__c
+  label: 优惠日数
+- api: cycleCalculate__c
+  label: 是否循环计算
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: owner_department
+  label: 负责人主属部门
+- api: creator_interface_data_id__c
+  label: 创建人-接口使用数据ID
+- api: merged_calculated_refund_o__c
+  label: 合并计算后指定返点对象销售易ID
+- api: cycleEnd__c
+  label: 周期截止日
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: amount__c
+  label: 满足金额
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: customItem37__c
+  label: 特殊说明
+- api: simple_text__c
+  label: 触发同步用
+- api: data_own_department
+  label: 归属部门
+- api: strength__c
+  label: 优惠方案
+  options:
+  - label: 券批次
+    value: '1'
+  - label: '%'
+    value: '2'
+  - label: 元
+    value: '3'
+  - label: 折
+    value: '4'
+  - label: 元/单
+    value: '5'
+  - label: 平台使用费的X%
+    value: '6'
+  - label: 其他
+    value: other
+- api: name
+  label: 政策名称
+- api: salesPolicy_interface__c
+  label: 销售政策-接口使用数据ID
+- api: _id
+  label: _id
+- api: couponBatch__c
+  label: 券批次
+- api: preferential__c
+  label: 优惠形式
+  options:
+  - label: 返券
+    value: '1'
+  - label: 返额
+    value: '2'
+  - label: 折扣
+    value: '3'
+  - label: 赠送
+    value: '4'
+  - label: 其他
+    value: other
+- api: tenant_id
+  label: tenant_id
+- api: policyTrigConditionSub__c
+  label: 触发动作的周期限制
+  options:
+  - label: 即时
+    value: '1'
+  - label: 后 X 日
+    value: '2'
+  - label: X 月 X 日前
+    value: '3'
+  - label: 满足 X 元
+    value: '4'
+  - label: 环比增量
+    value: '5'
+  - label: X 月 X 日 - X 月 X 日
+    value: '6'
+  - label: 其他
+    value: other
+- api: dailyValue__c
+  label: 日数值
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 流水号
+- api: kickspecial__c
+  label: 特价是否计量
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: is_deleted
+  label: is_deleted
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: out_owner
+  label: 外部负责人
+- api: feeItem__c
+  label: 费目
+  options:
+  - label: 出行费用
+    value: '1'
+  - label: 套餐-基础版
+    value: '2'
+  - label: 套餐-专业版
+    value: '3'
+  - label: 套餐-高级版
+    value: '4'
+  - label: 套餐可选项-员工钱包
+    value: '5'
+  - label: 套餐可选项-API使用费
+    value: '6'
+  - label: 套餐可选项-用车报告高级版
+    value: '7'
+  - label: 套餐可选项-事故无忧基础款
+    value: '8'
+  - label: 套餐可选项-事故无忧优选款
+    value: '9'
+  - label: 套餐可选项-接机服务
+    value: '10'
+  - label: 套餐可选项-机场快速安检通道
+    value: '11'
+  - label: 协议酒店-间夜
+    value: '12'
+  - label: 海外用车-平台使用费
+    value: '13'
+  - label: 国际机票灵活报价配置
+    value: '14'
+  - label: 其他
+    value: other
+- api: dateValue__c
+  label: 日期值
+- api: owner
+  label: 负责人
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: period__c
+  label: 核算频率
+  options:
+  - label: 一次性
+    value: '1'
+  - label: 月度
+    value: '3'
+  - label: 月度（一次性）
+    value: '6'
+  - label: 日数
+    value: '2'
+  - label: 季度
+    value: '4'
+  - label: 每半年
+    value: '9'
+  - label: 年度
+    value: '5'
+  - label: 180天
+    value: '7'
+  - label: 间夜比
+    value: '8'
+  - label: 其他
+    value: other
+- api: policyTrigFormSub__c
+  label: 政策触发动作
+  options:
+  - label: 开户
+    value: '1'
+  - label: 充值
+    value: '2'
+  - label: 激活
+    value: '3'
+  - label: 消费
+    value: '4'
+  - label: 续约合同生效
+    value: '6'
+  - label: 固定周期
+    value: '5'
+  - label: 合同起始日期
+    value: '7'
+  - label: 其他
+    value: other
+- api: rebatemethod__c
+  label: 合并计算后的返点方式
+  options:
+  - label: 圈选客户分摊返点
+    value: '1'
+  - label: 指定单一客户返点
+    value: '2'
+  - label: 其他
+    value: other
+- api: deductionend__c
+  label: 返点基数扣减额终止日期
+- api: deductionstart__c
+  label: 返点基数扣减额起始日期
+- api: deductioncategory__c
+  label: 抵扣账单品类
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '2'
+  - label: 其他
+    value: other
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: distinguishmodels__c
+  label: 限制返点的车型范围
+  options:
+  - label: 快车
+    value: '1'
+  - label: 优享
+    value: '2'
+  - label: 滴滴特快
+    value: '3'
+  - label: 专车
+    value: '4'
+  - label: 豪华车
+    value: '5'
+  - label: 包车（含快专豪等各种包车）
+    value: '6'
+  - label: 出租车
+    value: '7'
+  - label: 企业特价快车
+    value: '8'
+  - label: 远必省
+    value: '9'
+  - label: 花小猪
+    value: '10'
+  - label: 其他
+    value: other
+- api: xsyId__c
+  label: 销售易数据ID
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+  - label: 标准政策
+    value: ''
+  - label: 特殊政策
+    value: ''
+- api: deductionamount__c
+  label: 返点基数扣减额
+- api: preferentialRange1__c
+  label: 补充条款有效期
+- api: paymentmethod__c
+  label: 限制订单的支付方式
+  options:
+  - label: 企业支付
+    value: '1'
+  - label: 个人垫付
+    value: '2'
+  - label: 混合支付中的企支部分
+    value: '3'
+  - label: 自费用车
+    value: '4'
+  - label: 混合支付中的个支部分
+    value: '5'
+  - label: 其他
+    value: other

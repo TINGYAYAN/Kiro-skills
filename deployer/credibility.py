@@ -30,7 +30,10 @@ def _extract_field_apis_from_code(code: str) -> set[str]:
     for m in re.finditer(r'\.put\(["\']([a-zA-Z_][a-zA-Z0-9_]*(?:__c)?)["\']', code):
         apis.add(m.group(1))
     # 排除对象 API、标准字段
-    skip = {"_id", "name", "data", "dataList", "content", "errorCode", "errorMessage"}
+    skip = {
+        "_id", "name", "data", "dataList", "content", "errorCode", "errorMessage",
+        "searchCondition", "newId",
+    }
     return {a for a in apis if a not in skip and not a.endswith("Obj")}
 
 

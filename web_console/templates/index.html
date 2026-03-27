@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>APL 自动化控制台</title>
+    <link rel="stylesheet" href="/static/app.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <img src="/static/fxiaoke-logo.png" alt="纷享销客" class="brand-logo" />
+          <div class="brand-copy">
+            <h1>APL 自动化控制台</h1>
+          </div>
+        </div>
+        <div class="sidebar-section">
+          <span class="sidebar-title">工作区</span>
+          <nav>
+            <a href="#dashboard">总览</a>
+            <a href="#single">单条生成</a>
+            <a href="#batch">批量生成</a>
+            <a href="#history">历史记录</a>
+            <a href="#settings">配置管理</a>
+          </nav>
+        </div>
+      </aside>
+      <main class="content">
+        <section class="topbar">
+          <div>
+            <div class="topbar-title">纷享销客 APL 工作台</div>
+            <div class="topbar-subtitle">面向实施、顾问和开发同事的一体化控制面板</div>
+          </div>
+        </section>
+        <section id="dashboard" class="panel">
+          <div class="panel-head">
+            <h2>总览</h2>
+          </div>
+          <div class="stats" id="dashboard-stats">
+            <div class="stat-card">
+              <span class="stat-label">项目数</span>
+              <strong id="stat-projects">0</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">最近任务</span>
+              <strong id="stat-tasks">0</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">成功任务</span>
+              <strong id="stat-success">0</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-label">失败任务</span>
+              <strong id="stat-failed">0</strong>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="card">
+              <h3>项目</h3>
+              <div id="projects" class="project-grid"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="single" class="panel">
+          <div class="panel-head">
+            <h2>单条生成</h2>
+          </div>
+          <form id="single-form" class="form">
+            <div class="grid two">
+              <label>项目
+                <select name="project" id="single-project"></select>
+              </label>
+              <label>函数类型
+                <select name="function_type">
+                  <option>流程函数</option>
+                  <option>范围规则</option>
+                  <option>UI函数</option>
+                  <option>按钮</option>
+                  <option>计划任务</option>
+                  <option>自定义控制器</option>
+                </select>
+              </label>
+              <label>绑定对象
+                <div class="object-combobox" id="single-object-combobox">
+                  <input id="single-object-search" placeholder="输入对象中文名或 API 名后选择" autocomplete="off" />
+                  <div class="object-dropdown hidden" id="single-object-dropdown"></div>
+                </div>
+                <input type="hidden" name="object_api" id="single-object-api" />
+                <input type="hidden" name="object_label" id="single-object-label" />
+                <span class="field-hint" id="single-object-hint">输入后会自动显示匹配对象</span>
+              </label>
+              <label>函数名（可选）
+                <input name="code_name" placeholder="例如：【流程】关联客户" />
+              </label>
+            </div>
+            <label>需求
+              <textarea name="requirement" rows="7" placeholder="填写完整业务需求"></textarea>
+            </label>
+            <div class="actions">
+              <input type="hidden" name="web_create_api" value="on" />
+              <button type="submit">确认生成函数</button>
+            </div>
+          </form>
+          <pre id="single-result" class="result"></pre>
+        </section>
+
+        <section id="batch" class="panel">
+          <div class="panel-head">
+            <h2>批量生成</h2>
+            <a class="ghost-button" href="/api/templates/batch?kind=blank">下载空白模板</a>
+          </div>
+          <div class="panel-intro">
+            支持直接上传模板文档批量执行，也支持按项目筛选已有待执行记录。
+          </div>
+          <form id="batch-upload-form" class="form upload-form">
+            <div class="grid two">
+              <label>项目（可选）
+                <select name="project" id="batch-upload-project"></select>
+              </label>
+              <label>上传 CSV 模板
+                <input type="file" name="file" id="batch-upload-file" accept=".csv" />
+              </label>
+            </div>
+            <div class="actions">
+              <button type="submit">上传并执行</button>
+            </div>
+          </form>
+          <form id="batch-form" class="form inline">
+            <label>项目
+              <select name="project" id="batch-project"></select>
+            </label>
+            <button type="submit">开始批量生成</button>
+          </form>
+          <pre id="batch-result" class="result"></pre>
+        </section>
+
+        <section id="history" class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>历史记录</h2>
+              <div class="section-subtitle">按项目、状态、时间范围筛选最近执行结果，点击行可查看完整日志。</div>
+            </div>
+            <div class="actions">
+              <button id="refresh-history">刷新</button>
+            </div>
+          </div>
+          <form id="history-filter-form" class="form history-filter">
+            <div class="history-toolbar">
+              <label class="history-field history-field-wide">系统 API / 关键词
+                <input name="api_name" id="history-api-name" placeholder="例如 Proc_xxx__c 或 函数名关键词" />
+              </label>
+              <label class="history-field">项目
+                <select name="project" id="history-project"></select>
+              </label>
+              <label class="history-field">任务类型
+                <select name="kind" id="history-kind">
+                  <option value="">全部</option>
+                  <option value="single">单条生成</option>
+                  <option value="batch">批量生成</option>
+                  <option value="batch_upload">模板批量</option>
+                </select>
+              </label>
+              <label class="history-field">状态
+                <select name="status" id="history-status">
+                  <option value="">全部</option>
+                  <option value="running">执行中</option>
+                  <option value="success">成功</option>
+                  <option value="failed">失败</option>
+                </select>
+              </label>
+              <label class="history-field">部署结果
+                <select name="deploy_result" id="history-deploy-result">
+                  <option value="">全部</option>
+                  <option value="success">部署成功</option>
+                  <option value="failed">部署失败</option>
+                </select>
+              </label>
+              <label class="history-field">开始日期
+                <input type="date" name="date_from" id="history-date-from" />
+              </label>
+              <label class="history-field">结束日期
+                <input type="date" name="date_to" id="history-date-to" />
+              </label>
+            </div>
+            <div class="history-actions">
+              <div id="history-filter-summary" class="history-filter-summary">当前显示全部记录</div>
+              <div class="actions">
+              <button type="button" id="history-reset" class="ghost-button">重置</button>
+              </div>
+            </div>
+          </form>
+          <div class="history-layout">
+            <div class="card history-table-card history-full">
+              <div class="table-wrap">
+                <table class="history-table">
+                  <thead>
+                    <tr>
+                      <th>项目</th>
+                      <th class="col-kind">任务类型</th>
+                      <th>状态</th>
+                      <th class="col-time">执行时间</th>
+                      <th class="col-compile">编译结果</th>
+                      <th>部署结果</th>
+                      <th>系统 API</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tasks"></tbody>
+                </table>
+              </div>
+              <div class="pagination" id="history-pagination"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="settings" class="panel">
+          <div class="panel-head">
+            <h2>配置管理</h2>
+          </div>
+          <form id="settings-form" class="form">
+            <div class="grid two">
+              <label>当前项目
+                <select name="project_name" id="settings-project-name"></select>
+              </label>
+              <label>代理登录 URL
+                <input name="bootstrap_token_url" />
+              </label>
+              <label>登录账号
+                <input name="username" placeholder="手机号或邮箱" />
+              </label>
+              <label>登录密码
+                <input type="password" name="password" placeholder="保存后会更新本地配置" />
+              </label>
+              <label>代理员工 ID
+                <input name="agent_login_employee_id" />
+              </label>
+              <label>项目域名
+                <input name="domain" placeholder="例如：https://www.fxiaoke.com" />
+              </label>
+            </div>
+            <div class="actions">
+              <button type="submit">保存基础配置</button>
+            </div>
+          </form>
+
+          <form id="cert-form" class="form">
+            <h3>更新项目证书</h3>
+            <div class="grid two">
+              <label>项目
+                <select name="project" id="cert-project"></select>
+              </label>
+            </div>
+            <label>证书
+              <textarea name="certificate" rows="5" placeholder="粘贴开发者证书"></textarea>
+            </label>
+            <div class="actions">
+              <button type="submit">保存项目证书</button>
+            </div>
+          </form>
+          <pre id="settings-result" class="result"></pre>
+        </section>
+      </main>
+    </div>
+    <div id="log-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-backdrop" id="log-modal-backdrop"></div>
+      <div class="modal-dialog">
+        <div class="modal-head">
+          <div>
+            <h3 id="log-modal-title">任务日志</h3>
+            <div class="row-sub">支持滚动查看完整执行日志</div>
+          </div>
+          <button type="button" class="modal-close" id="log-modal-close">关闭</button>
+        </div>
+        <pre id="task-log" class="log-viewer modal-log">选择一条任务查看日志</pre>
+      </div>
+    </div>
+    <div id="function-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-backdrop" id="function-modal-backdrop"></div>
+      <div class="modal-dialog function-dialog">
+        <div class="modal-head">
+          <div>
+            <h3 id="function-modal-title">函数详情</h3>
+            <div class="row-sub" id="function-modal-subtitle">查看已生成函数</div>
+          </div>
+          <button type="button" class="modal-close" id="function-modal-close">关闭</button>
+        </div>
+        <div class="function-meta" id="function-meta"></div>
+        <pre id="function-code" class="log-viewer modal-log function-code-viewer">暂无函数内容</pre>
+      </div>
+    </div>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

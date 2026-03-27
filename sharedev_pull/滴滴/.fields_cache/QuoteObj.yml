@@ -1,0 +1,368 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: approval_display__c
+  label: 审批展示
+- api: schemeAgreement__c
+  label: 酒店票据方案
+  options:
+  - label: 全开专
+    value: '2'
+  - label: 收普开普
+    value: '3'
+  - label: 无酒店产品
+    value: '1'
+  - label: 其他
+    value: other
+- api: quotationTitle__c
+  label: 报价单名称
+- api: quote_customer_id__c
+  label: 报价单.客户.纷享ID
+- api: xsy_name__c
+  label: 销售易报价单编号
+- api: pending_quote_detail_updat__c
+  label: 未完成报价单明细结构更新标记
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: IfRegularCustomer__c
+  label: 是否老客户
+  options:
+  - label: 否
+    value: '1'
+  - label: 是
+    value: '2'
+  - label: 其他
+    value: other
+- api: approvalStatus__c
+  label: 审批状态-导入
+- api: usageStatus__c
+  label: 报价单使用状态
+  options:
+  - label: 未使用
+    value: '1'
+  - label: 已使用
+    value: '2'
+  - label: 其他
+    value: other
+- api: new_opportunity_id
+  label: 商机
+- api: version
+  label: version
+- api: is_approved_policy__c
+  label: 是否审批_政策
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: customer_salesforce_id__c
+  label: 客户销售易ID
+- api: price_book_id
+  label: 价目表
+- api: quotationNum__c
+  label: 滴滴报价单号
+- api: policyDiscount__c
+  label: 政策有无优惠
+  options:
+  - label: 无
+    value: '1'
+  - label: 有-标准政策
+    value: '2'
+  - label: 有-特殊政策
+    value: '3'
+  - label: 其他
+    value: other
+- api: isApprovalTravelTaxi__c
+  label: 停用_出租车是否审批
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: tenant_id
+  label: tenant_id
+- api: accountName__c
+  label: 客户名称(计算)
+- api: is_HD__c
+  label: 是否华滴客户
+- api: CustomerBackground__c
+  label: 客户背景
+- api: locked_status_import__c
+  label: 锁定状态-导入
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: opportunity_type__c
+  label: 商机类型
+- api: policy_application_info__c
+  label: 政策申请信息
+- api: expirationDateN__c
+  label: 失效日期
+- api: approved_quotation_number__c
+  label: 下游使用报价单号
+- api: last_modified_time
+  label: 最后修改时间
+- api: preferred_price_table_sale__c
+  label: 可用最惠价格表销售易ID
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: available_best_price_list__c
+  label: 可用最惠价格表类型
+- api: is_business_confirmation_p__c
+  label: 是否业务确认政策
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: lowPriceList__c
+  label: 可用最惠价格表
+- api: out_tenant_id
+  label: 外部企业
+- api: opportunity_id_in_salesfor__c
+  label: 商机销售易ID
+- api: account_id
+  label: 客户名称
+- api: effectiveDate__c
+  label: 生效日期
+- api: is_policy_application_need__c
+  label: 是否需要申请特殊政策
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: is_approved__c
+  label: 是否审批
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: is_data_updated__c
+  label: 是否完成数据更新
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: id__c
+  label: 报价单ID
+- api: quoteFile__c
+  label: 报价单附件
+- api: CSM_customer__c
+  label: CSM客户
+- api: syncId__c
+  label: 接口使用数据ID
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: communication_record__c
+  label: 沟通记录或审批结果
+- api: is_approved_price__c
+  label: 是否审批_价格
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: isApprovalTravel__c
+  label: 停用_商旅是否审批
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: quotationStatus__c
+  label: 报价单状态
+  options:
+  - label: 待生效
+    value: '10'
+  - label: 生效中
+    value: '20'
+  - label: 已失效
+    value: '30'
+  - label: 其他
+    value: other
+- api: owner_department
+  label: 负责人所在部门
+- api: incremental_flag__c
+  label: 增量标记
+- api: detail_quantity__c
+  label: 明细数量
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: attachment__c
+  label: 政策申请沟通记录
+- api: is_use_special_policy__c
+  label: 本次申请特殊政策是否应用于报价单
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: quote_amount
+  label: 报价单金额
+- api: is_contract__c
+  label: 是否常规报价
+  options:
+  - label: 常规报价
+    value: '1'
+  - label: 多主体合并签约接受税损
+    value: '2'
+  - label: 多主体合并签约不接受税损
+    value: '3'
+  - label: 其他
+    value: other
+- api: quote_discount
+  label: 整单折扣
+- api: data_own_department
+  label: 归属部门
+- api: row__c
+  label: 费用产品数
+- api: lossSituation__c
+  label: 用车流失情况
+- api: didiId__c
+  label: 滴滴客户ID
+- api: name
+  label: 报价单编号
+- api: PolicyCostEstimation__c
+  label: 政策成本测算
+- api: quote_product_sum
+  label: 产品合计
+- api: _id
+  label: _id
+- api: admin_data_processing_flag__c
+  label: 管理员数据处理标记
+- api: approvalYN__c
+  label: 停用_网约车是否审批
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: isApprovalDriving__c
+  label: 停用_代驾是否审批
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: quote_time
+  label: 报价日期
+- api: CustomerHistory__c
+  label: 客户历史情况
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 流水号
+- api: quotationRemarks__c
+  label: 备注
+- api: partner_id
+  label: 合作伙伴
+- api: is_deleted
+  label: is_deleted
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: business_travel_didi_poten__c
+  label: 商旅滴滴潜力月GMV预估（滴滴预算）
+- api: out_owner
+  label: 外部负责人
+- api: out_resources
+  label: 外部来源
+  options:
+  - label: 代理通
+    value: partner
+  - label: 自注册
+    value: self_registration
+  - label: 访销通
+    value: kx_fxt
+- api: is_fournons__c
+  label: 是否四非客户
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: owner
+  label: 负责人
+- api: address__c
+  label: 客户地址
+- api: credit_applied_status__c
+  label: 授信是否已申请
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: collaborative_rich_text__c
+  label: 协同富文本
+- api: last_modified_by
+  label: 最后修改人
+- api: settlement_method__c
+  label: 结算方式
+  options:
+  - label: 月结
+    value: '1'
+  - label: 预存
+    value: '2'
+  - label: 其他
+    value: other
+- api: xsyId__c
+  label: 销售易数据ID
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 网约车报价单
+    value: ''
+  - label: 商旅报价单
+    value: ''
+  - label: 出租车报价单
+    value: ''
+  - label: 代驾报价单
+    value: ''
+  - label: 跨境用车报价单
+    value: ''
+- api: PolicyApplicationReason__c
+  label: 政策申请原因
+- api: versionDiscount__c
+  label: 版本有无优惠
+  options:
+  - label: 无
+    value: '1'
+  - label: 有
+    value: '2'
+  - label: 其他
+    value: other
+- api: Attachments__c
+  label: 附件

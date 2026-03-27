@@ -1,0 +1,49 @@
+[批量] 找到 3 条待执行记录
+
+[批量] [dry-run] 第 1/3 条:
+requirement: |
+  任务明细.本次联系人的可选范围：
+  ①联系人.客户姓名=任务明细.客户 且 联系人.联系人类型=客户联系人 
+  ②任务明细.客户.代理商=联系人.代理商 且 联系人类型=代理商
+object_api: "task_detail__c"
+object_label: "任务明细"
+function_type: 范围规则
+namespace: 范围规则
+code_name: 【范围规则】任务明细.本次联系人
+output_file: 【范围规则】任务明细.本次联系人
+author: 纷享实施人员
+
+
+[批量] [dry-run] 第 2/3 条:
+requirement: |
+  通过销售线索.最终客户查询客户.公司名称，如果匹配到客户赋值销售线索.客户，并更新销售线索.客户创建结果=已关联老客户
+object_api: "LeadsObj"
+object_label: "销售线索"
+function_type: 流程函数
+namespace: 流程
+code_name: 【流程】关联客户
+output_file: 【流程】关联客户
+author: 纷享实施人员
+
+
+[批量] [dry-run] 第 3/3 条:
+requirement: |
+  通过线索创建客户，赋值以下字段
+  销售线索.最终客户=客户.公司名称
+  销售线索.负责人=客户.负责人
+  客户创建后，销售线索.客户 关联 新创建的客户数据，销售线索.客户创建结果=已新建客户
+object_api: "LeadsObj"
+object_label: "销售线索"
+function_type: 流程函数
+namespace: 流程
+code_name: 【流程】关联客户
+output_file: 【流程】关联客户
+author: 纷享实施人员
+
+批量执行完成，共 3 条人次（含重试轮次）：
+
+  📋 [dry-run] recveceedbCp1C
+  📋 [dry-run] recvecflIrawNd
+  📋 [dry-run] recvecEqYmnKin
+
+成功 0 / 失败 0 / 共 3 条人次

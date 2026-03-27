@@ -1,0 +1,105 @@
+fields:
+- api: renewal_config__c
+  label: 续签配置
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: single_choice__c
+  label: 税点方案
+  options:
+  - label: 税点前置
+    value: '1'
+  - label: 税点后置
+    value: '2'
+  - label: 其他
+    value: other
+- api: product__c
+  label: 产品
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: hotel_tax_post_scheme_view__c
+  label: 酒店税点后置方案（仅查看）
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: data_own_department
+  label: 归属部门
+- api: name
+  label: 主属性
+- api: tax_rate__c
+  label: 税点比例
+  options:
+  - label: '0'
+    value: '0'
+  - label: '1'
+    value: '1'
+  - label: '2'
+    value: '2'
+  - label: '3'
+    value: '3'
+  - label: '4'
+    value: '4'
+  - label: '5'
+    value: '5'
+  - label: '6'
+    value: '6'
+  - label: 其他
+    value: other
+- api: _id
+  label: _id

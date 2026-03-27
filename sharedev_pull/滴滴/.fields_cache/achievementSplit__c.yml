@@ -1,0 +1,203 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: delYN__c
+  label: 是否删除
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: accountId__c
+  label: 客户的接口使用数据ID
+- api: xsy_name__c
+  label: 销售易业绩拆分编号
+- api: syncId__c
+  label: 接口使用数据ID
+- api: xsy_opportunity__c
+  label: 销售易商机ID
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: owner_department
+  label: 负责人主属部门
+- api: stage__c
+  label: 商机阶段
+- api: gmvCheck__c
+  label: 客户+销售+品类
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: monthlyGMVCar__c
+  label: 用车潜力月GMV预估
+- api: splitRatio__c
+  label: 拆分比例
+- api: customerLevel__c
+  label: 客户等级
+- api: endDate__c
+  label: 结束时间
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: entityType__c
+  label: 商机业务类型
+- api: monthlyGMVTravel__c
+  label: 商旅潜力月GMV预估
+- api: data_own_department
+  label: 归属部门
+- api: qrCodeOpportunity__c
+  label: QRCodeId
+- api: didiId__c
+  label: 滴滴客户ID
+- api: name
+  label: 业绩拆分编号
+- api: deactivateYN__c
+  label: 是否停用
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: _id
+  label: _id
+- api: interested_product_categor__c
+  label: 感兴趣品类（商机）
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '2'
+  - label: 代驾
+    value: '4'
+  - label: 出租车
+    value: '5'
+  - label: 聚合
+    value: '6'
+  - label: 费控
+    value: '3'
+  - label: 跨境用车
+    value: '8'
+  - label: 其他
+    value: other
+- api: categoryInterest__c
+  label: 感兴趣品类
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '2'
+  - label: 代驾
+    value: '4'
+  - label: 出租车
+    value: '5'
+  - label: 聚合
+    value: '6'
+  - label: 费控
+    value: '3'
+  - label: 跨境用车
+    value: '8'
+  - label: 其他
+    value: other
+- api: tenant_id
+  label: tenant_id
+- api: accountName__c
+  label: 客户名称（引用）
+- api: belongingName__c
+  label: 归属人名称
+- api: status__c
+  label: 商机状态
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 流水号
+- api: batch_number__c
+  label: 批次号
+- api: startDate__c
+  label: 开始时间
+- api: belonging__c
+  label: 归属人
+- api: opportunityId__c
+  label: 商机的接口使用数据ID
+- api: is_deleted
+  label: is_deleted
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: out_owner
+  label: 外部负责人
+- api: performance_split__c
+  label: 所属业绩拆分（渠道分润用）
+- api: role__c
+  label: 业绩归属人角色
+  options:
+  - label: 客户归属人
+    value: '1'
+  - label: 商机归属人
+    value: '2'
+  - label: 其他
+    value: '3'
+  - label: 其他（废）
+    value: other
+- api: owner
+  label: 负责人
+- api: last_modified_time
+  label: 最后修改时间
+- api: opportunity__c
+  label: 商机名称
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: sxy_performance_split__c
+  label: 业绩拆分销售易ID
+- api: xsyId__c
+  label: 销售易数据ID
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 业绩拆分
+    value: ''
+  - label: 渠道分润
+    value: ''
+- api: account_id__c
+  label: 客户名称
+- api: enable__c
+  label: 业绩拆分是否已失效
+  options:
+  - label: 未生效
+    value: '0'
+  - label: 生效中
+    value: '1'
+  - label: 已失效
+    value: '2'
+  - label: 其他
+    value: other
+- api: sync_trigger_same__c
+  label: 同步触发用

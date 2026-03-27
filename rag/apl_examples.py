@@ -4,52 +4,11 @@ APL 示例 RAG 检索，供 generator 使用。
 from __future__ import annotations
 
 import json
-import os
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).parent.parent.parent
-_TOOLS_ROOT = Path(__file__).parent.parent
-EXAMPLES_DIR = _TOOLS_ROOT / "generator" / "examples"
-SHAREDEV_PULL_DIR = _TOOLS_ROOT / "sharedev_pull"
+from generator.example_index import load_reference_entries
+
 CONTENT_STORE = Path(__file__).parent.parent / ".rag_index" / "apl_examples" / "content_store.json"
-
-_SKIP_DIRS = {".git", ".cursor", ".trae", "_tools", "node_modules", "__pycache__", "插件"}
-_APL_SIGNATURES = [
-    "Fx.object.", "FQLAttribute", "QueryTemplate", "context.data",
-    "UIEvent", "syncArg", "log.error", "log.info", "Fx.global.",
-    "UpdateAttribute", "CreateAttribute", "SelectAttribute",
-]
-
-
-def _is_apl_file(path: Path) -> bool:
-    if path.suffix.lower() != ".apl":
-        return False
-    try:
-        head = path.read_bytes()[:2048].decode("utf-8", errors="ignore")
-        return any(sig in head for sig in _APL_SIGNATURES)
-    except Exception:
-        return False
-
-
-def _scan_apl_files() -> list[Path]:
-    builtin = list(EXAMPLES_DIR.glob("*.apl")) if EXAMPLES_DIR.exists() else []
-    sharedev_files = []
-    if SHAREDEV_PULL_DIR.is_dir():
-        sharedev_files = [p for p in SHAREDEV_PULL_DIR.rglob("*.apl") if p.is_file()]
-    project_files = []
-    for root, dirs, files in os.walk(PROJECT_ROOT):
-        root_path = Path(root)
-        dirs[:] = [d for d in dirs if d not in _SKIP_DIRS and not d.startswith(".")]
-        for fname in files:
-            fpath = root_path / fname
-            if _is_apl_file(fpath):
-                project_files.append(fpath)
-    builtin_names = {f.stem for f in builtin}
-    sharedev_files = [f for f in sharedev_files if f.stem not in builtin_names]
-    project_files = [f for f in project_files if f.stem not in builtin_names]
-    known_res = {f.resolve() for f in builtin + sharedev_files}
-    project_files = [f for f in project_files if f.resolve() not in known_res]
-    return list(builtin) + sharedev_files + project_files
 
 
 def _load_content_store() -> dict:
@@ -63,11 +22,11 @@ def _load_content_store() -> dict:
 
 def _save_content_store(store: dict):
     CONTENT_STORE.parent.mkdir(parents=True, exist_ok=True)
-    CONTENT_STORE.write_text(json.dumps(store, ensure_ascii=False, indent=0), encoding="utf-8")
+    CONTENT_STORE.write_text(json.dumps(store, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
 def build_apl_index(cfg: dict) -> int:
-    """构建 APL 示例向量索引。返回索引的文档数量。"""
+    """基于本地参考函数索引构建 APL 向量索引。"""
     from rag.retriever import RAGRetriever
 
     retriever = RAGRetriever("apl_examples", cfg)
@@ -79,25 +38,34 @@ def build_apl_index(cfg: dict) -> int:
     retriever._collection = None
     retriever._ensure_client()
 
-    files = _scan_apl_files()
-    documents, ids, content_store = [], [], {}
-    for fpath in files:
-        try:
-            content = fpath.read_text(encoding="utf-8")
-            if len(content) < 100 or len(content) > 8000:
-                continue
-            search_text = f"{fpath.stem}\n{content[:2000]}"
-            doc_id = fpath.stem
-            if doc_id in ids:
-                doc_id = f"{fpath.parent.name}_{fpath.stem}"
-            documents.append(search_text)
-            ids.append(doc_id)
-            content_store[doc_id] = {"filename": fpath.stem, "content": content, "path": str(fpath)}
-        except Exception:
+    entries = load_reference_entries(force_refresh=False)
+    documents, ids, metadatas, content_store = [], [], [], {}
+    seen_ids: set[str] = set()
+    for entry in entries:
+        content = (entry.get("content") or "").strip()
+        if len(content) < 100 or len(content) > 12000:
             continue
+        doc_id = str(entry.get("source_key") or entry.get("filename") or "unknown")
+        if doc_id in seen_ids:
+            continue
+        seen_ids.add(doc_id)
+        documents.append(entry.get("search_text") or f"{entry.get('filename')}\n{content[:2500]}")
+        ids.append(doc_id)
+        metadatas.append({
+            "project_name": entry.get("project_name") or "",
+            "source_kind": entry.get("source_kind") or "",
+            "filename": entry.get("filename") or doc_id,
+        })
+        content_store[doc_id] = {
+            "filename": entry.get("filename") or doc_id,
+            "content": content,
+            "path": entry.get("path") or "",
+            "project_name": entry.get("project_name") or "",
+            "source_kind": entry.get("source_kind") or "",
+        }
 
     if documents:
-        retriever.add_documents(documents, ids=ids)
+        retriever.add_documents(documents, ids=ids, metadatas=metadatas)
         _save_content_store(content_store)
     return len(documents)
 
@@ -110,7 +78,7 @@ def retrieve_apl_examples(
     project_name: str | None = None,
     req_path: str | Path | None = None,
 ) -> list[dict]:
-    """先按项目分层取示例，再用 RAG 补足槽位。返回项含 tier_label。"""
+    """先按结构化索引分层取示例，再用 RAG 补足槽位。"""
     from generator.prompt import load_examples
 
     tiered = load_examples(
@@ -120,7 +88,7 @@ def retrieve_apl_examples(
         project_name=project_name,
         req_path=req_path,
     )
-    seen_names = {e["filename"] for e in tiered}
+    seen_keys = {f"{e.get('tier_label')}::{e['filename']}" for e in tiered}
     if len(tiered) >= num:
         return tiered[:num]
 
@@ -132,13 +100,11 @@ def retrieve_apl_examples(
         build_apl_index(cfg)
 
     query = f"{function_type}\n{requirement}"
-    hits = retriever.search(query, k=max(num * 3, 12))
+    hits = retriever.search(query, k=max(num * 4, 16))
     store = _load_content_store()
     merged = list(tiered)
-    seen_dirs: dict = {}
-
-    def _dir_key(path_str: str, filename: str) -> str:
-        return Path(path_str).parent.name if path_str else filename
+    seen_projects: dict = {}
+    target_project = (project_name or "").strip()
 
     for h in hits:
         if len(merged) >= num:
@@ -147,20 +113,25 @@ def retrieve_apl_examples(
         info = store.get(doc_id, {})
         content = info.get("content", h.get("document", ""))
         filename = info.get("filename", doc_id)
-        if filename in seen_names:
-            continue
-        path_str = info.get("path", "") or ""
-        dk = _dir_key(path_str, filename)
-        if seen_dirs.get(dk, 0) >= 2:
-            continue
-        seen_dirs[dk] = seen_dirs.get(dk, 0) + 1
-        norm = path_str.replace("\\", "/")
-        label = "【语义检索】"
-        pn = (project_name or "").strip()
-        if pn and f"sharedev_pull/{pn}/" in norm:
+        proj = (info.get("project_name") or "").strip()
+        source_kind = info.get("source_kind") or ""
+        label = "【其他项目·语义检索】"
+        if target_project and proj == target_project:
             label = "【当前项目·语义检索】"
-        merged.append({"filename": filename, "content": content, "tier_label": label})
-        seen_names.add(filename)
+        elif source_kind == "workspace_apl":
+            label = "【历史代码·语义检索】"
+        dedupe_key = f"{label}::{filename}"
+        if dedupe_key in seen_keys:
+            continue
+        if seen_projects.get(proj or source_kind, 0) >= 2:
+            continue
+        seen_projects[proj or source_kind] = seen_projects.get(proj or source_kind, 0) + 1
+        merged.append({
+            "filename": filename,
+            "content": content,
+            "tier_label": label,
+        })
+        seen_keys.add(dedupe_key)
 
     for e in merged:
         e.setdefault("tier_label", "【语义检索】")

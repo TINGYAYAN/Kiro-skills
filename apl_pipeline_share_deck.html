@@ -1,0 +1,2475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APL 自动化工作流分享</title>
+  <style>
+    :root {
+      --bg: #f6f2e9;
+      --paper: rgba(255, 255, 255, 0.97);
+      --paper-strong: #ffffff;
+      --ink: #16181b;
+      --subtle: #5c6470;
+      --line: rgba(22, 24, 27, 0.09);
+      --line-strong: rgba(22, 24, 27, 0.16);
+      --brand: #ffa200;
+      --brand-soft: rgba(255, 162, 0, 0.18);
+      --brand-deep: #ea8800;
+      --muted-bg: #f1eee7;
+      --planned: #a2a8b1;
+      --shadow: 0 30px 84px rgba(16, 18, 20, 0.08);
+      --shadow-soft: 0 18px 48px rgba(20, 22, 24, 0.06);
+      --radius: 32px;
+      --bee-logo: url("file:///Users/yanye/Downloads/公司logo（确定版）2025年4月/8.png");
+      --fx-brand-wide: url("file:///Users/yanye/Downloads/公司logo（确定版）2025年4月/纷享销客墨稿logo-横版-05.png");
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(255, 162, 0, 0.14), transparent 20%),
+        radial-gradient(circle at 10% 0%, rgba(255, 214, 153, 0.28), transparent 24%),
+        linear-gradient(180deg, #fdf9f1 0%, #f2eee5 54%, #ece7dc 100%);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(22, 24, 27, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(22, 24, 27, 0.018) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.22), transparent 82%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      right: -9vw;
+      bottom: -3vh;
+      width: min(54vw, 720px);
+      height: min(30vw, 360px);
+      pointer-events: none;
+      opacity: 0.04;
+      background-image: var(--fx-brand-wide);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      filter: saturate(0) contrast(1.04);
+      mix-blend-mode: multiply;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .deck {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-rows: 76px 1fr 92px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 30px 14px max(40px, calc(env(safe-area-inset-left) + 34px));
+      background: linear-gradient(180deg, rgba(255, 252, 245, 0.9), rgba(248, 242, 231, 0.7));
+      backdrop-filter: blur(30px);
+      border-bottom: 1px solid rgba(22, 24, 27, 0.05);
+      box-shadow: 0 10px 34px rgba(16, 18, 20, 0.025);
+      overflow: visible;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 52px;
+      height: 52px;
+      border-radius: 20px;
+      position: relative;
+      display: block;
+      background: #f7f7f4;
+      border: 1px solid rgba(22, 24, 27, 0.08);
+      box-shadow: 0 12px 30px rgba(18, 20, 24, 0.07), inset 0 1px 0 rgba(255,255,255,0.78);
+      overflow: hidden;
+    }
+
+    .brand-mark svg {
+      display: none;
+    }
+
+    .brand-mark::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      background-image: var(--bee-logo);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 3px;
+    }
+
+    .brand-copy strong {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .brand-copy span {
+      font-size: 12px;
+      color: var(--subtle);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .progress {
+      width: 220px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(22, 24, 27, 0.08);
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ffc337 0%, #ffa200 58%, #ef8d00 100%);
+      transition: width 280ms ease;
+    }
+
+    .page-indicator {
+      min-width: 90px;
+      text-align: right;
+      font-size: 13px;
+      color: var(--subtle);
+    }
+
+    .viewport {
+      overflow: hidden;
+      padding: 18px 18px 10px;
+    }
+
+    .track {
+      height: 100%;
+      display: flex;
+      transition: transform 420ms cubic-bezier(.2, .8, .2, 1);
+      will-change: transform;
+    }
+
+    .slide {
+      width: 100%;
+      flex: 0 0 100%;
+      padding: 20px 24px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide .page {
+      opacity: 0.42;
+      transform: scale(0.968);
+      transition: opacity 420ms cubic-bezier(.23,1,.32,1), transform 420ms cubic-bezier(.23,1,.32,1), box-shadow 420ms ease;
+    }
+
+    .slide.active .page {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .slide::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .slide::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: rgba(22, 24, 27, 0.14);
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1180px;
+      max-height: calc(100vh - 170px);
+      min-height: 100%;
+      display: grid;
+      gap: 24px;
+      padding: 36px 40px 32px;
+      border-radius: 36px;
+      background:
+        radial-gradient(circle at 14% 4%, rgba(255, 255, 255, 0.94), transparent 20%),
+        radial-gradient(circle at top right, rgba(255, 162, 0, 0.1), transparent 22%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(247, 241, 231, 0.7));
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(36px) saturate(140%);
+      box-shadow: 0 30px 70px rgba(15, 17, 20, 0.06), inset 0 1px 0 rgba(255,255,255,0.72);
+      overflow: auto;
+    }
+
+    .page::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .page::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.12);
+      border-radius: 999px;
+    }
+
+    .page.hero {
+      grid-template-columns: 1.12fr 0.88fr;
+      align-items: stretch;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #7a818c;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      letter-spacing: -0.045em;
+    }
+
+    h1 {
+      font-size: clamp(40px, 4.6vw, 66px);
+      line-height: 1.02;
+      font-weight: 620;
+      max-width: 10.2em;
+    }
+
+    h2 {
+      font-size: clamp(32px, 3.1vw, 44px);
+      line-height: 1.06;
+      font-weight: 620;
+      max-width: 12.5em;
+    }
+
+    h3 {
+      font-size: 21px;
+      line-height: 1.38;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.76;
+      color: #5f6670;
+    }
+
+    .hero-main,
+    .hero-side,
+    .page-head,
+    .grid-2,
+    .grid-3,
+    .logic-grid,
+    .stack-list,
+    .flow,
+    .summary-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .hero-main {
+      align-content: center;
+      gap: 22px;
+      padding-right: 24px;
+    }
+
+    .slide.arch-slide .page-head h2 {
+      max-width: none;
+      white-space: nowrap;
+    }
+
+    .slide.capability-slide .page-head {
+      justify-items: center;
+      text-align: center;
+      gap: 10px;
+    }
+
+    .slide.capability-slide .page-head h2 {
+      max-width: 14em;
+      text-wrap: balance;
+    }
+
+    .slide.capability-slide .capability-stage {
+      gap: 22px;
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .slide.capability-slide .capability-sections {
+      gap: 18px;
+    }
+
+    .slide.capability-slide .capability-group {
+      position: relative;
+      overflow: hidden;
+      padding: 22px 22px 20px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at top right, rgba(255,162,0,0.16), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.84), rgba(247,240,229,0.72));
+      box-shadow: 0 20px 40px rgba(18,20,24,0.042);
+    }
+
+    .slide.capability-slide .capability-group::after {
+      content: "";
+      position: absolute;
+      inset: auto 22px 0 22px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(255,162,0,0.72), rgba(255,162,0,0.05));
+      opacity: 0.8;
+    }
+
+    .slide.capability-slide .capability-group .group-label {
+      color: #986000;
+      letter-spacing: 0.16em;
+    }
+
+    .slide.capability-slide .capability-group h3 {
+      font-size: 26px;
+      margin-bottom: 4px;
+    }
+
+    .slide.capability-slide .capability-item {
+      padding: 14px 15px 14px 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(249,243,234,0.78));
+    }
+
+    .slide.mechanism-slide .page-head {
+      justify-items: center;
+      text-align: center;
+      gap: 10px;
+    }
+
+    .slide.mechanism-slide .page-head h2 {
+      max-width: 14em;
+      font-size: clamp(30px, 3vw, 42px);
+      text-wrap: balance;
+    }
+
+    .slide.mechanism-slide .mechanism-map {
+      width: min(1140px, 100%);
+      margin: 8px auto 0;
+    }
+
+    .slide.mechanism-slide .mechanism-chain {
+      position: relative;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 18px;
+      justify-content: center;
+      align-items: start;
+      padding-top: 10px;
+    }
+
+    .slide.mechanism-slide .mechanism-chain::before {
+      content: "";
+      position: absolute;
+      left: 9%;
+      right: 9%;
+      top: 62px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255,162,0,0.12), rgba(255,162,0,0.84), rgba(255,162,0,0.12));
+      box-shadow: 0 0 24px rgba(255, 162, 0, 0.2);
+      z-index: 0;
+    }
+
+    .slide.mechanism-slide .mechanism-step {
+      justify-items: center;
+      gap: 16px;
+      z-index: 1;
+    }
+
+    .slide.mechanism-slide .mechanism-step::after {
+      display: none;
+    }
+
+    .slide.mechanism-slide .mechanism-node {
+      min-height: 130px;
+      width: 100%;
+      max-width: 182px;
+      padding: 20px 18px 18px;
+      gap: 10px;
+      text-align: center;
+      justify-items: center;
+      border-radius: 28px;
+      box-shadow: 0 18px 34px rgba(18,20,24,0.045);
+    }
+
+    .slide.mechanism-slide .mechanism-node::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -18px;
+      width: 2px;
+      height: 18px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, rgba(255,162,0,0.58), rgba(255,162,0,0.08));
+      z-index: 1;
+    }
+
+    .slide.mechanism-slide .mechanism-node.primary {
+      background:
+        radial-gradient(circle at top center, rgba(255,162,0,0.24), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(249,242,232,0.84));
+    }
+
+    .slide.mechanism-slide .mechanism-node .node-kicker,
+    .slide.mechanism-slide .mechanism-node p,
+    .slide.mechanism-slide .branch-tag {
+      display: none;
+    }
+
+    .slide.mechanism-slide .mechanism-node .node-no {
+      position: relative;
+      z-index: 2;
+      width: 36px;
+      height: 36px;
+      box-shadow: 0 8px 16px rgba(255, 162, 0, 0.16);
+    }
+
+    .slide.mechanism-slide .mechanism-node h3 {
+      font-size: 17px;
+      line-height: 1.26;
+      max-width: 8em;
+    }
+
+    .slide.mechanism-slide .mechanism-branch-list {
+      position: relative;
+      width: 100%;
+      max-width: 194px;
+      gap: 10px;
+      padding-top: 22px;
+      justify-self: center;
+    }
+
+    .slide.mechanism-slide .mechanism-branch-list::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 1px;
+      height: 22px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, rgba(255,162,0,0.62), rgba(255,162,0,0.08));
+    }
+
+    .slide.mechanism-slide .branch-card {
+      gap: 6px;
+      padding: 14px 14px 13px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 214, 158, 0.98);
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(252,245,235,0.92));
+      box-shadow: 0 14px 24px rgba(18,20,24,0.038);
+    }
+
+    .slide.mechanism-slide .branch-card::before {
+      display: none;
+    }
+
+    .slide.mechanism-slide .branch-card strong {
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .slide.mechanism-slide .branch-card span:not(.branch-tag) {
+      font-size: 11px;
+      line-height: 1.55;
+      color: #676f7c;
+    }
+
+    .page.hero .hero-main {
+      padding-top: 20px;
+    }
+
+    .page.hero .hero-main h1 {
+      font-size: clamp(30px, 3.3vw, 48px);
+      max-width: 11.8em;
+    }
+
+    .hero-main h1::after {
+      content: "";
+      display: block;
+      width: 120px;
+      height: 4px;
+      margin-top: 22px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255,162,0,0.96), rgba(255,162,0,0.16));
+    }
+
+    .page-head {
+      gap: 12px;
+      max-width: 980px;
+    }
+
+    .grid-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .capability-stage {
+      display: grid;
+      gap: 18px;
+    }
+
+    .capability-hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .capability-main {
+      padding: 28px 30px;
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      background:
+        radial-gradient(circle at top right, rgba(255, 162, 0, 0.2), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(248,240,226,0.72));
+      backdrop-filter: blur(26px);
+      box-shadow: 0 20px 42px rgba(18,20,24,0.05);
+    }
+
+    .capability-main .eyeline {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #8a5400;
+      background: rgba(255, 237, 204, 0.98);
+    }
+
+    .capability-main h3 {
+      font-size: 30px;
+      line-height: 1.08;
+      margin-bottom: 12px;
+      letter-spacing: -0.045em;
+    }
+
+    .capability-main p {
+      max-width: 46em;
+      font-size: 15px;
+      line-height: 1.82;
+    }
+
+    .capability-stats {
+      display: grid;
+      gap: 12px;
+    }
+
+    .stat-card {
+      padding: 18px 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.76);
+      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(251,244,233,0.72));
+      backdrop-filter: blur(18px);
+      box-shadow: 0 16px 34px rgba(18,20,24,0.04);
+    }
+
+    .stat-card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 24px;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .stat-card span {
+      display: block;
+      font-size: 13px;
+      line-height: 1.68;
+      color: var(--subtle);
+    }
+
+    .capability-sections {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .capability-group {
+      padding: 20px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.76);
+      background: linear-gradient(180deg, rgba(255,255,255,0.74), rgba(248,241,231,0.64));
+      backdrop-filter: blur(22px);
+      box-shadow: 0 18px 36px rgba(18,20,24,0.04);
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .capability-group .group-label {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #7b828c;
+      font-weight: 600;
+    }
+
+    .capability-group h3 {
+      font-size: 22px;
+      line-height: 1.16;
+      margin-top: -2px;
+    }
+
+    .capability-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .capability-item {
+      padding: 14px 14px 14px 16px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,250,242,0.86), rgba(248,242,234,0.78));
+      border: 1px solid rgba(255,255,255,0.72);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.82);
+    }
+
+    .capability-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 15px;
+      color: var(--ink);
+      font-weight: 620;
+    }
+
+    .capability-item span {
+      display: block;
+      font-size: 13px;
+      line-height: 1.68;
+      color: var(--subtle);
+    }
+
+    .capability-item.planned {
+      background: rgba(244,245,247,0.78);
+      border-style: dashed;
+      border-color: rgba(205,210,216,0.65);
+    }
+
+    .value-stage {
+      display: grid;
+      gap: 18px;
+    }
+
+    .value-timeline {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1.12fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .value-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: rgba(234, 136, 0, 0.46);
+      font-weight: 700;
+    }
+
+    .value-group {
+      padding: 22px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.74);
+      background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(249,242,232,0.62));
+      backdrop-filter: blur(22px);
+      box-shadow: 0 18px 34px rgba(18,20,24,0.04);
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .value-group.before,
+    .value-group.assisted {
+      opacity: 0.82;
+    }
+
+    .value-group.current {
+      position: relative;
+      background:
+        radial-gradient(circle at top right, rgba(255,162,0,0.22), transparent 22%),
+        linear-gradient(180deg, rgba(255,252,244,0.92), rgba(249,240,226,0.76));
+      border-color: rgba(255, 228, 176, 0.96);
+      box-shadow: 0 24px 46px rgba(255, 162, 0, 0.14), 0 18px 34px rgba(18,20,24,0.04);
+      transform: translateY(-10px);
+    }
+
+    .value-group.current::before {
+      content: "Current";
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #884f00;
+      background: rgba(255,237,202,0.98);
+    }
+
+    .value-group .group-label {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #7b828c;
+      font-weight: 600;
+    }
+
+    .value-group h3 {
+      font-size: 24px;
+      line-height: 1.14;
+      letter-spacing: -0.03em;
+      margin-top: -2px;
+    }
+
+    .value-summary {
+      padding: 16px 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.76);
+      background: rgba(247,247,243,0.7);
+      font-size: 14px;
+      line-height: 1.72;
+      color: var(--subtle);
+    }
+
+    .logic-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+
+    .flow {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .summary-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .mindmap {
+      margin-top: 6px;
+      padding: 28px 28px 30px;
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      background:
+        radial-gradient(circle at top center, rgba(255, 162, 0, 0.14), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.78), rgba(247,240,230,0.62));
+      backdrop-filter: blur(28px);
+      box-shadow: 0 24px 50px rgba(18,20,24,0.05);
+    }
+
+    .architecture-map {
+      position: relative;
+      min-height: 560px;
+      padding: 30px;
+      border-radius: 36px;
+      border: 1px solid rgba(255, 232, 198, 0.9);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255, 162, 0, 0.18), transparent 20%),
+        radial-gradient(circle at 50% 50%, rgba(255, 218, 148, 0.14), transparent 34%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.78), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.9), rgba(247,240,230,0.74));
+      backdrop-filter: blur(28px);
+      box-shadow: 0 28px 62px rgba(18,20,24,0.06), inset 0 1px 0 rgba(255,255,255,0.9);
+      overflow: hidden;
+    }
+
+    .architecture-map::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(22, 24, 27, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(22, 24, 27, 0.03) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,0.34), transparent 80%);
+      pointer-events: none;
+    }
+
+    .architecture-map::after {
+      content: "";
+      position: absolute;
+      inset: 72px 150px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 186, 66, 0.18);
+      box-shadow:
+        0 0 0 36px rgba(255, 186, 66, 0.04),
+        0 0 0 76px rgba(255, 186, 66, 0.025);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .arch-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 340px;
+      transform: translate(-50%, -50%);
+      padding: 30px 32px;
+      border-radius: 34px;
+      border: 1px solid rgba(255, 224, 176, 0.92);
+      background:
+        radial-gradient(circle at top center, rgba(255,162,0,0.3), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(249,241,228,0.86));
+      box-shadow:
+        0 24px 50px rgba(18,20,24,0.08),
+        0 0 0 1px rgba(255,255,255,0.72),
+        0 0 44px rgba(255, 172, 0, 0.12);
+      text-align: center;
+      z-index: 2;
+    }
+
+    .arch-core .arch-kicker {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #8a5400;
+      background: rgba(255, 236, 200, 0.96);
+    }
+
+    .arch-core strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 30px;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+    }
+
+    .arch-core span {
+      display: block;
+      font-size: 13px;
+      line-height: 1.76;
+      color: var(--subtle);
+    }
+
+    .arch-node {
+      position: absolute;
+      width: 252px;
+      padding: 20px 20px 22px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 234, 206, 0.92);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(249,242,232,0.76));
+      backdrop-filter: blur(18px);
+      box-shadow:
+        0 18px 38px rgba(18,20,24,0.05),
+        inset 0 1px 0 rgba(255,255,255,0.88);
+      z-index: 2;
+    }
+
+    .arch-node::before {
+      content: "";
+      display: block;
+      width: 30px;
+      height: 2px;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255,162,0,0.95), rgba(255,162,0,0.18));
+    }
+
+    .arch-node strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+      font-weight: 620;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+
+    .arch-node span {
+      display: block;
+      font-size: 13px;
+      line-height: 1.76;
+      color: var(--subtle);
+    }
+
+    .arch-node.top-left { left: 54px; top: 60px; }
+    .arch-node.top-right { right: 54px; top: 60px; }
+    .arch-node.bottom-left { left: 54px; bottom: 58px; }
+    .arch-node.bottom-right { right: 54px; bottom: 58px; }
+
+    .arch-line {
+      position: absolute;
+      background: linear-gradient(180deg, rgba(255,162,0,0.62), rgba(255,162,0,0.08));
+      z-index: 1;
+      opacity: 0.9;
+      box-shadow: 0 0 14px rgba(255, 162, 0, 0.14);
+    }
+
+    .arch-line.h {
+      height: 2px;
+      background: linear-gradient(90deg, rgba(255,162,0,0.54), rgba(255,162,0,0.08));
+    }
+
+    .arch-line.v {
+      width: 2px;
+    }
+
+    .arch-line.top-left-v { left: 240px; top: 185px; height: 92px; }
+    .arch-line.top-left-h { left: 240px; top: 277px; width: 210px; }
+    .arch-line.top-right-v { right: 240px; top: 185px; height: 92px; }
+    .arch-line.top-right-h { right: 240px; top: 277px; width: 210px; }
+    .arch-line.bottom-left-v { left: 240px; bottom: 183px; height: 92px; }
+    .arch-line.bottom-left-h { left: 240px; bottom: 275px; width: 210px; }
+    .arch-line.bottom-right-v { right: 240px; bottom: 183px; height: 92px; }
+    .arch-line.bottom-right-h { right: 240px; bottom: 275px; width: 210px; }
+
+    .arch-caption {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: #747c87;
+      text-align: center;
+      max-width: 760px;
+      z-index: 2;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.68);
+      border: 1px solid rgba(255, 238, 214, 0.9);
+    }
+
+    .mechanism-map {
+      display: grid;
+      gap: 18px;
+    }
+
+    .mechanism-chain {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+
+    .mechanism-step {
+      position: relative;
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .mechanism-step::after {
+      content: "→";
+      position: absolute;
+      top: 80px;
+      right: -13px;
+      font-size: 18px;
+      color: rgba(234, 136, 0, 0.52);
+      z-index: 3;
+    }
+
+    .mechanism-step:last-child::after {
+      display: none;
+    }
+
+    .mechanism-node {
+      position: relative;
+      padding: 18px 16px 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.78);
+      background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(248,241,231,0.68));
+      backdrop-filter: blur(18px);
+      box-shadow: 0 16px 30px rgba(18,20,24,0.04);
+      display: grid;
+      gap: 8px;
+      align-content: start;
+      min-height: 208px;
+    }
+
+    .mechanism-node.primary {
+      background:
+        radial-gradient(circle at top right, rgba(255,162,0,0.18), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(248,240,228,0.7));
+    }
+
+    .mechanism-node .node-no {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #9a5a00;
+      background: rgba(255,236,200,0.98);
+    }
+
+    .mechanism-node .node-kicker {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #7a818c;
+      font-weight: 600;
+    }
+
+    .mechanism-node h3 {
+      font-size: 20px;
+      line-height: 1.18;
+    }
+
+    .mechanism-node p {
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .mechanism-branch-list {
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+
+    .branch-card {
+      padding: 14px 14px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.74);
+      background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(249,242,233,0.6));
+      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 24px rgba(18,20,24,0.03);
+      display: grid;
+      gap: 8px;
+      position: relative;
+    }
+
+    .branch-card::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: -11px;
+      width: 2px;
+      height: 12px;
+      background: linear-gradient(180deg, rgba(255,162,0,0.5), rgba(22,24,27,0.08));
+    }
+
+    .branch-card strong {
+      display: block;
+      font-size: 14px;
+      color: var(--ink);
+      font-weight: 620;
+    }
+
+    .branch-card span {
+      display: block;
+      font-size: 12px;
+      line-height: 1.66;
+      color: var(--subtle);
+    }
+
+    .branch-card .branch-tag {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7b828c;
+      background: rgba(247,247,243,0.96);
+    }
+
+    .pattern-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .pattern-node {
+      position: relative;
+      padding: 20px 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(22, 24, 27, 0.07);
+      background: rgba(255,255,255,0.94);
+      box-shadow: 0 12px 28px rgba(18,20,24,0.035), inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .pattern-node::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -17px;
+      width: 2px;
+      height: 18px;
+      margin-left: -1px;
+      background: linear-gradient(180deg, rgba(255,162,0,0.46), rgba(22,24,27,0.08));
+    }
+
+    .pattern-node:last-child::after {
+      display: none;
+    }
+
+    .pattern-node.lead {
+      text-align: center;
+      background:
+        radial-gradient(circle at top center, rgba(255,162,0,0.22), transparent 54%),
+        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,241,230,0.96));
+      border-color: rgba(255, 162, 0, 0.28);
+    }
+
+    .pattern-node.lead strong {
+      display: block;
+      font-size: 20px;
+      font-weight: 640;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .pattern-node.lead span {
+      display: block;
+      max-width: 34em;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.76;
+      color: var(--subtle);
+    }
+
+    .pattern-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .pattern-card {
+      position: relative;
+      padding: 18px 18px 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.78);
+      background: rgba(255,255,255,0.58);
+      backdrop-filter: blur(18px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.82), 0 16px 30px rgba(18,20,24,0.035);
+    }
+
+    .pattern-card::before {
+      content: "";
+      position: absolute;
+      top: -9px;
+      left: 18px;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,180,0,0.86), rgba(255,180,0,0.42));
+      box-shadow: 0 0 0 5px rgba(255,180,0,0.08);
+    }
+
+    .pattern-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+      font-weight: 620;
+      color: var(--ink);
+    }
+
+    .pattern-card span {
+      display: block;
+      font-size: 13px;
+      line-height: 1.72;
+      color: var(--subtle);
+    }
+
+    .pattern-footer {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+    }
+
+    .pattern-note {
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.76);
+      background: rgba(247,247,243,0.64);
+      backdrop-filter: blur(18px);
+    }
+
+    .pattern-note strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 620;
+      color: var(--ink);
+    }
+
+    .pattern-note span {
+      display: block;
+      font-size: 13px;
+      line-height: 1.72;
+      color: var(--subtle);
+    }
+
+    .status-row,
+    .chip-row,
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .status-pill,
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(249,242,231,0.66));
+      font-size: 12px;
+      color: var(--subtle);
+      backdrop-filter: blur(18px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.82), 0 8px 20px rgba(18,20,24,0.03);
+    }
+
+    .status-pill::before,
+    .chip::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand);
+      flex: 0 0 auto;
+    }
+
+    .status-pill.live {
+      color: var(--ink);
+      border-color: rgba(255, 162, 0, 0.28);
+      background: var(--brand-soft);
+    }
+
+    .status-pill.planned {
+      color: #7f8791;
+      background: rgba(162, 168, 177, 0.08);
+      border-color: rgba(162, 168, 177, 0.24);
+    }
+
+    .status-pill.planned::before {
+      background: var(--planned);
+    }
+
+    .hero-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .hero-feature {
+      padding: 14px 16px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 229, 189, 0.9);
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(250,242,230,0.76));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.88), 0 12px 28px rgba(255,162,0,0.06);
+      display: grid;
+      gap: 6px;
+    }
+
+    .hero-feature.planned {
+      border-color: rgba(210, 214, 220, 0.72);
+      background: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(243,244,246,0.82));
+    }
+
+    .hero-feature strong {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      line-height: 1.35;
+      color: var(--ink);
+      font-weight: 620;
+    }
+
+    .hero-feature strong::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--brand);
+      flex: 0 0 auto;
+    }
+
+    .hero-feature.planned strong::before {
+      background: var(--planned);
+    }
+
+    .hero-feature span {
+      display: block;
+      padding-left: 17px;
+      font-size: 12px;
+      line-height: 1.62;
+      color: var(--subtle);
+    }
+
+    .hero-poster,
+    .panel,
+    .step-card,
+    .fact-card,
+    .summary-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(249,242,231,0.66));
+      backdrop-filter: blur(28px);
+      box-shadow: 0 20px 48px rgba(18,20,24,0.045), inset 0 1px 0 rgba(255,255,255,0.72);
+      transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease, background 260ms ease;
+    }
+
+    .hero-poster:hover,
+    .panel:hover,
+    .step-card:hover,
+    .fact-card:hover,
+    .summary-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 28px 60px rgba(20, 22, 24, 0.055);
+      border-color: rgba(255, 255, 255, 0.9);
+      background: linear-gradient(180deg, rgba(255,255,255,0.84), rgba(250,243,232,0.72));
+    }
+
+    .hero-poster {
+      min-height: 100%;
+      padding: 32px;
+      background:
+        radial-gradient(circle at top right, rgba(255,162,0,0.16), transparent 24%),
+        radial-gradient(circle at 75% 28%, rgba(255,255,255,0.72), transparent 20%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(248, 241, 229, 0.72));
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 22px;
+    }
+
+    .hero-poster::after {
+      content: "";
+      position: absolute;
+      right: 22px;
+      top: 24px;
+      width: 260px;
+      height: 260px;
+      opacity: 0.09;
+      background-image: var(--bee-logo);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+
+    .hero-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-logo strong {
+      display: block;
+      font-size: 26px;
+      font-weight: 620;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-logo span {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: var(--subtle);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .poster-note {
+      display: grid;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .poster-note .lead {
+      max-width: 19em;
+      font-size: 15px;
+      line-height: 1.66;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .poster-shot {
+      position: relative;
+      z-index: 1;
+      min-height: 300px;
+      aspect-ratio: 954 / 818;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 224, 178, 0.95);
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,241,231,0.82));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.88), 0 18px 38px rgba(255,162,0,0.08);
+      overflow: hidden;
+    }
+
+    .poster-shot img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      background: #fff;
+    }
+
+    .poster-foot {
+      display: grid;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mini-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(22, 24, 27, 0.06);
+      font-size: 13px;
+      color: #737a85;
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .panel.highlight {
+      background:
+        radial-gradient(circle at top right, rgba(255, 162, 0, 0.18), transparent 24%),
+        linear-gradient(180deg, rgba(255, 245, 221, 0.88), rgba(255, 255, 255, 0.72));
+      border-color: rgba(255, 226, 164, 0.95);
+    }
+
+    .panel.planned {
+      background: linear-gradient(180deg, rgba(242, 243, 245, 0.68), rgba(255, 255, 255, 0.58));
+      border-style: dashed;
+      border-color: rgba(205, 210, 216, 0.55);
+    }
+
+    .panel.planned h3,
+    .panel.planned p,
+    .panel.planned .tag {
+      color: #7f8791;
+    }
+
+    .tag {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7b828c;
+      font-weight: 600;
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .list-item {
+      padding: 15px 17px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,251,245,0.9), rgba(248,242,232,0.8));
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 10px 24px rgba(18,20,24,0.03);
+    }
+
+    .list-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 15px;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .list-item span {
+      display: block;
+      font-size: 14px;
+      line-height: 1.72;
+      color: var(--subtle);
+    }
+
+    .structure-board {
+      display: grid;
+      gap: 16px;
+      padding: 4px 0 0;
+    }
+
+    .control-node {
+      padding: 18px 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      background: linear-gradient(180deg, rgba(255, 244, 217, 0.9), rgba(255, 255, 255, 0.7));
+      box-shadow: 0 18px 42px rgba(18,20,24,0.04);
+    }
+
+    .control-node strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 19px;
+      color: var(--ink);
+      font-weight: 620;
+    }
+
+    .lanes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .lane {
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(248,241,231,0.64));
+      backdrop-filter: blur(20px);
+    }
+
+    .lane strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .lane span {
+      display: block;
+      font-size: 14px;
+      line-height: 1.72;
+      color: var(--subtle);
+    }
+
+    .fact-card,
+    .summary-card {
+      padding: 22px 22px 20px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.8), rgba(249,242,231,0.64)),
+        #fff;
+    }
+
+    .fact-card .index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      background: rgba(255, 237, 202, 0.98);
+      color: #a35d00;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .fact-card.planned .index {
+      background: rgba(162, 168, 177, 0.12);
+      color: #7f8791;
+    }
+
+    .fact-card h3 {
+      margin-bottom: 8px;
+      font-size: 19px;
+    }
+
+    .step-card {
+      padding: 22px 20px 20px;
+      min-height: 260px;
+      display: grid;
+      align-content: start;
+      gap: 10px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.8), rgba(249,242,231,0.64)),
+        #fff;
+    }
+
+    .step-card .step-no {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.76);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .step-card.key .step-no {
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+    }
+
+    .step-card .meta {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: var(--subtle);
+      text-transform: uppercase;
+      font-weight: 520;
+    }
+
+    .callout {
+      padding: 20px 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      background:
+        radial-gradient(circle at top right, rgba(255,162,0,0.16), transparent 28%),
+        linear-gradient(180deg, rgba(255, 248, 232, 0.84), rgba(255, 255, 255, 0.64));
+      backdrop-filter: blur(24px);
+      display: grid;
+      gap: 8px;
+    }
+
+    .callout.muted {
+      border-color: rgba(255, 255, 255, 0.76);
+      background: linear-gradient(180deg, rgba(244,245,247,0.68), rgba(255, 255, 255, 0.56));
+    }
+
+    .callout strong {
+      font-size: 16px;
+      font-weight: 620;
+    }
+
+    .footerbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      width: fit-content;
+      max-width: calc(100% - 32px);
+      margin: 0 auto 12px;
+      padding: 8px 10px;
+      flex-wrap: nowrap;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(247,240,229,0.76));
+      border: 1px solid rgba(255, 239, 210, 0.9);
+      backdrop-filter: blur(28px) saturate(150%);
+      box-shadow: 0 20px 44px rgba(15,17,20,0.055), 0 10px 30px rgba(255,162,0,0.09), inset 0 1px 0 rgba(255,255,255,0.82);
+    }
+
+    .nav-btns {
+      display: flex;
+      gap: 10px;
+      flex: 0 0 auto;
+    }
+
+    .nav-btn {
+      min-width: 108px;
+      border: 1px solid rgba(255, 220, 165, 0.78);
+      border-radius: 999px;
+      padding: 12px 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,248,236,0.94));
+      cursor: pointer;
+      color: var(--ink);
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 500;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+      box-shadow: 0 8px 18px rgba(18,20,24,0.05), inset 0 1px 0 rgba(255,255,255,0.86);
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      border-color: rgba(255, 162, 0, 0.32);
+      background: linear-gradient(180deg, rgba(255,249,235,0.98), rgba(255,242,218,0.96));
+      box-shadow: 0 10px 22px rgba(255, 162, 0, 0.16);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.42;
+      cursor: default;
+    }
+
+    .thumbs {
+      display: flex;
+      gap: 10px;
+      overflow: auto;
+      padding: 2px 6px;
+      scrollbar-width: none;
+      justify-content: center;
+      flex: 0 1 auto;
+      max-width: min(980px, 68vw);
+    }
+
+    .thumbs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .thumb {
+      min-width: 120px;
+      text-align: left;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
+      cursor: pointer;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+      box-shadow: none;
+    }
+
+    .thumb:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 245, 225, 0.52);
+    }
+
+    .thumb.active {
+      border-color: rgba(255,255,255,0.76);
+      background:
+        linear-gradient(180deg, rgba(255,241,210,0.98), rgba(255,255,255,0.98)),
+        #fff;
+      box-shadow: 0 12px 24px rgba(255, 162, 0, 0.16);
+    }
+
+    .thumb strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      color: var(--subtle);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 520;
+    }
+
+    .thumb span {
+      display: block;
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--ink);
+    }
+
+    @media (max-width: 1240px) {
+      .page.hero,
+      .grid-2,
+      .grid-3,
+      .logic-grid,
+      .summary-grid,
+      .capability-hero,
+      .capability-sections,
+      .mechanism-chain,
+      .value-timeline,
+      .pattern-row,
+      .pattern-footer,
+      .flow,
+      .lanes {
+        grid-template-columns: 1fr;
+      }
+
+      .step-card {
+        min-height: auto;
+      }
+
+      .pattern-node::after {
+        display: none;
+      }
+
+      .architecture-map {
+        min-height: auto;
+        display: grid;
+        gap: 14px;
+      }
+
+      .arch-core,
+      .arch-node,
+      .arch-caption,
+      .arch-line {
+        position: static;
+        transform: none;
+        width: auto;
+      }
+
+      .arch-line {
+        display: none;
+      }
+
+      .slide.mechanism-slide .mechanism-chain {
+        grid-template-columns: 1fr;
+      }
+
+      .slide.mechanism-slide .mechanism-chain::before {
+        display: none;
+      }
+
+      .slide.mechanism-slide .mechanism-step {
+        justify-items: stretch;
+      }
+
+      .slide.mechanism-slide .mechanism-node,
+      .slide.mechanism-slide .mechanism-branch-list {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .deck {
+        grid-template-rows: 76px 1fr 106px;
+      }
+
+      .topbar {
+        padding: 14px 18px 14px max(22px, calc(env(safe-area-inset-left) + 18px));
+      }
+
+      .viewport {
+        padding: 12px 12px 8px;
+      }
+
+      .page {
+        padding: 24px 22px 22px;
+        max-height: calc(100vh - 190px);
+      }
+
+      .footerbar {
+        flex-direction: column;
+        gap: 12px;
+        width: calc(100% - 20px);
+        border-radius: 28px;
+      }
+
+      .thumbs {
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+      }
+
+      .progress {
+        width: 130px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 80 80" fill="none">
+            <rect x="4" y="4" width="72" height="72" rx="24" fill="white"/>
+            <rect x="16" y="22" width="43" height="30" rx="15" transform="rotate(-18 16 22)" fill="#FFB400"/>
+            <path d="M28 12 20 3" stroke="#353537" stroke-width="4.6" stroke-linecap="round"/>
+            <path d="M48 8l.4-11" stroke="#353537" stroke-width="4.6" stroke-linecap="round"/>
+            <ellipse cx="34" cy="42" rx="11.5" ry="9" fill="white"/>
+            <ellipse cx="51" cy="35" rx="11.5" ry="9" fill="white"/>
+            <circle cx="35" cy="42" r="4" fill="#353537"/>
+            <circle cx="50" cy="35" r="4" fill="#353537"/>
+            <path d="M44 52c4.5 5.3 10.8 5.1 15.5-1.2" stroke="#353537" stroke-width="4.2" stroke-linecap="round"/>
+            <path d="m45 58 18-6 11 13-11-3 3 19-6 2-7-4-2 7-6-3-1-25z" fill="#FFB400"/>
+            <path d="M51 72 69 65" stroke="#353537" stroke-width="4.2" stroke-linecap="round"/>
+            <path d="M53 80l17-7" stroke="#353537" stroke-width="4.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="brand-copy">
+          <strong>APL 自动化工作流</strong>
+          <span>Internal Share Deck</span>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="page-indicator" id="pageIndicator">01 / 06</div>
+      </div>
+    </header>
+
+    <main class="viewport">
+      <div class="track" id="track">
+        <!-- 讲解提示-第1页：
+             开场先不要直接讲功能，先讲角色设定。
+             可以说：这次分享想介绍一个已经开始参与 APL 开发流程的新“员工”Kiro，它的价值不是替人写一段代码，而是把原来分散的交付动作组织成连续主链。
+             这一页重点带出三个词：主链、协作入口、系统能力。 -->
+        <section class="slide active">
+          <div class="page hero">
+            <div class="hero-main">
+              <div>
+                <span class="eyebrow">Slide 01</span>
+                <h1>新晋员工“Kiro”，让 APL 开发进入“自动驾驶”时代</h1>
+              </div>
+
+              <div class="hero-feature-grid">
+                <div class="hero-feature">
+                  <strong>需求分析自动推进</strong>
+                  <span>飞书群聊与多维表格接入后，可继续自动整理需求并进入后续主链。</span>
+                </div>
+                <div class="hero-feature">
+                  <strong>代码开发自动完成</strong>
+                  <span>对象字段自动拉取、参考校准和代码开发已经能够连续推进。</span>
+                </div>
+                <div class="hero-feature">
+                  <strong>自动登录系统运行</strong>
+                  <span>从需求输入到自动发布已形成连续流程，并支持多项目会话切换。</span>
+                </div>
+                <div class="hero-feature planned">
+                  <strong>自动测试持续补强</strong>
+                  <span>测试骨架已经接入，后续会继续提升覆盖范围与稳定性。</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-side">
+              <div class="hero-poster">
+                <div class="hero-logo">
+                  <div class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 80 80" fill="none">
+                      <rect x="4" y="4" width="72" height="72" rx="24" fill="white"/>
+                      <rect x="16" y="22" width="43" height="30" rx="15" transform="rotate(-18 16 22)" fill="#FFB400"/>
+                      <path d="M28 12 20 3" stroke="#353537" stroke-width="4.6" stroke-linecap="round"/>
+                      <path d="M48 8l.4-11" stroke="#353537" stroke-width="4.6" stroke-linecap="round"/>
+                      <ellipse cx="34" cy="42" rx="11.5" ry="9" fill="white"/>
+                      <ellipse cx="51" cy="35" rx="11.5" ry="9" fill="white"/>
+                      <circle cx="35" cy="42" r="4" fill="#353537"/>
+                      <circle cx="50" cy="35" r="4" fill="#353537"/>
+                      <path d="M44 52c4.5 5.3 10.8 5.1 15.5-1.2" stroke="#353537" stroke-width="4.2" stroke-linecap="round"/>
+                      <path d="m45 58 18-6 11 13-11-3 3 19-6 2-7-4-2 7-6-3-1-25z" fill="#FFB400"/>
+                      <path d="M51 72 69 65" stroke="#353537" stroke-width="4.2" stroke-linecap="round"/>
+                      <path d="M53 80l17-7" stroke="#353537" stroke-width="4.2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <strong>APL 自动化工作流</strong>
+                    <span>delivery workflow system</span>
+                  </div>
+                </div>
+
+                <div class="poster-note">
+                  <p class="lead">它要解决的核心，是让 APL 开发从“人工串联各个环节”走向“需求输入后全自动推进”，把需求分析、代码开发、自动测试、自动发布和结果回填串成一条连续流程。</p>
+                </div>
+
+                <div class="poster-shot" aria-label="桌面截图展示">
+                  <img src="./assets/hero_wechat_shot.png" alt="APL 自动化工作流桌面截图">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 讲解提示-第2页：
+             这一页重点回答“它到底是什么”。
+             可以说：不要把它理解成一个单独的 skill 或 agent，更适合把它理解成一个面向 APL 交付的数字员工。
+             讲图的时候按“人”的比喻来讲：中间是 Kiro，本体周围分别是大脑、眼睛、双手和记忆。 -->
+        <section class="slide arch-slide">
+          <div class="page">
+            <div class="page-head">
+              <span class="eyebrow">Slide 02</span>
+              <h2>智能体架构：感知、决策、执行与沉淀</h2></div>
+
+            <div class="architecture-map">
+              <div class="arch-line v top-left-v"></div>
+              <div class="arch-line h top-left-h"></div>
+              <div class="arch-line v top-right-v"></div>
+              <div class="arch-line h top-right-h"></div>
+              <div class="arch-line v bottom-left-v"></div>
+              <div class="arch-line h bottom-left-h"></div>
+              <div class="arch-line v bottom-right-v"></div>
+              <div class="arch-line h bottom-right-h"></div>
+
+              <div class="arch-core">
+                <span class="arch-kicker">Core</span>
+                <strong>Kiro</strong>
+                <span>作为统一工作中枢，持续接住 APL 开发任务，再调动不同能力模块协同推进整条交付链路。</span>
+              </div>
+
+              <div class="arch-node top-left">
+                <strong>决策中枢</strong>
+                <span>负责任务判断、阶段识别与流程编排，决定当前应进入需求分析、代码开发、测试发布还是经验沉淀。</span>
+              </div>
+
+              <div class="arch-node top-right">
+                <strong>感知系统</strong>
+                <span>围绕对象、字段、项目资料、项目配置和会话状态进行信息获取与上下文构建，保证输入信息完整可用。</span>
+              </div>
+
+              <div class="arch-node bottom-left">
+                <strong>执行系统</strong>
+                <span>在官方文档、项目函数与历史经验的约束下完成代码开发，并继续推进自动测试、自动发布等执行动作。</span>
+              </div>
+
+              <div class="arch-node bottom-right">
+                <strong>记忆系统</strong>
+                <span>把结果、耗时、失败与修复经验回填并沉淀下来，形成后续可复用的长期资产与多项目会话基础。</span>
+              </div>
+
+              <div class="arch-caption">面向 APL 开发的智能体架构</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 讲解提示-第3页：
+             这一页和第2页要明确区分：
+             第2页讲 Kiro 的内部智能体架构；第3页讲它已经落地到哪些交付现场。
+             重点不是“层”本身，而是协作入口、项目空间、参考治理、反馈闭环四个外部工作面。 -->
+        <section class="slide capability-slide">
+          <div class="page">
+            <div class="page-head">
+              <span class="eyebrow">Slide 03</span>
+              <h2>能力矩阵</h2>
+              <p>落地的交付范围</p>
+            </div>
+
+            <div class="capability-stage">
+              <div class="capability-sections">
+                <div class="capability-group">
+                  <span class="group-label">协作入口</span>
+                  <h3>需求进入系统的工作面</h3>
+                  <div class="capability-list">
+                    <div class="capability-item">
+                      <strong>飞书群聊直接承接需求</strong>
+                      <span>需求发起、执行确认与结果同步已能在群聊中完成。</span>
+                    </div>
+                    <div class="capability-item">
+                      <strong>多维表格接入批量入口</strong>
+                      <span>批量生成已打通，当前基于约定模板运行。</span>
+                    </div>
+                    <div class="capability-item">
+                      <strong>纷享销客平台侧已衔接</strong>
+                      <span>对象字段获取、项目空间与结果发布已接到平台侧。</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="capability-group">
+                  <span class="group-label">项目空间</span>
+                  <h3>多项目切换的工作面</h3>
+                  <div class="capability-list">
+                    <div class="capability-item">
+                      <strong>项目配置按项目独立保存</strong>
+                      <span>切换项目时可直接复用该项目的配置与上下文。</span>
+                    </div>
+                    <div class="capability-item">
+                      <strong>会话状态可按项目切换</strong>
+                      <span>ShareDev 资产与 session 已按项目隔离管理。</span>
+                    </div>
+                    <div class="capability-item">
+                      <strong>多项目并行已有落点</strong>
+                      <span>后续演进为“每个项目一个群聊 / 一个会话”已有明确基础。</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="capability-group">
+                  <span class="group-label">参考治理</span>
+                  <h3>生成前参考校准的工作面</h3>
+                  <div class="capability-list">
+                    <div class="capability-item">
+                      <strong>官方文档作为第一优先级</strong>
+                      <span>先依据规范与系统约束校准边界，再进入生成。</span>
+                    </div>
+                    <div class="capability-item">
+                      <strong>项目资产作为第二层参考</strong>
+                      <span>优先复用本项目成功函数、对象与字段语境。</span>
+                    </div>
+                    <div class="capability-item">
+                      <strong>历史经验作为补充知识</strong>
+                      <span>样例、修复报告与经验记忆用于补齐相似实现。</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="capability-group">
+                  <span class="group-label">反馈闭环</span>
+                  <h3>结果回写与过程留痕的工作面</h3>
+                  <div class="capability-list">
+                    <div class="capability-item">
+                      <strong>飞书回填已接上</strong>
+                      <span>函数名、系统 API、状态与反馈可回到协作面。</span>
+                    </div>
+                    <div class="capability-item">
+                      <strong>步骤级耗时已可输出</strong>
+                      <span>关键阶段已开始独立记录耗时，便于识别瓶颈。</span>
+                    </div>
+                    <div class="capability-item">
+                      <strong>发布前本地编译预检已接入</strong>
+                      <span>通过 sharedev runtime debug 接口先做本地编译检查，再进入正式发布链路。</span>
+                    </div>
+                    <div class="capability-item planned">
+                      <strong>自动化测试仍处于骨架阶段</strong>
+                      <span>测试已接入结构，但当前仍属于持续补强部分。</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 讲解提示-第4页：
+             这一页只讲运行链路。
+             建议顺着 01 到 05 讲，不要发散。
+             重点说明三个位置：登录与会话如何兜底、需求分析及代码开发如何自动完成、自动修复/自动测试/自动发布如何形成连续推进。
+             最后落到经验沉淀，说明为什么这套系统会越用越稳。 -->
+        <section class="slide mechanism-slide">
+          <div class="page">
+            <div class="page-head">
+              <span class="eyebrow">Slide 04</span>
+              <h2>运行机制：5 步主链与关键分支</h2>
+            </div>
+
+            <div class="mechanism-map">
+              <div class="mechanism-chain">
+                <div class="mechanism-step">
+                  <div class="mechanism-node primary">
+                    <span class="node-no">01</span>
+                    <h3>入口</h3>
+                  </div>
+                  <div class="mechanism-branch-list">
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch A</span>
+                      <strong>飞书协作入口</strong>
+                      <span>群聊与多维表格统一接入。</span>
+                    </div>
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch B</span>
+                      <strong>纷享销客平台入口</strong>
+                      <span>项目空间与发布动作统一承接。</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mechanism-step">
+                  <div class="mechanism-node primary">
+                    <span class="node-no">02</span>
+                    <h3>登录与项目会话</h3>
+                  </div>
+                  <div class="mechanism-branch-list">
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch C</span>
+                      <strong>代理登录</strong>
+                      <span>优先自动恢复登录态。</span>
+                    </div>
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch D</span>
+                      <strong>账号密码登录</strong>
+                      <span>支持聊天与参数配置。</span>
+                    </div>
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch E</span>
+                      <strong>手动登录与人工干预</strong>
+                      <span>异常场景人工接管。</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mechanism-step">
+                  <div class="mechanism-node primary">
+                    <span class="node-no">03</span>
+                    <h3>APL 需求分析及代码开发</h3>
+                  </div>
+                  <div class="mechanism-branch-list">
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch F</span>
+                      <strong>需求分析与重组</strong>
+                      <span>自动整理需求结构。</span>
+                    </div>
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch G</span>
+                      <strong>对象与字段自动拉取</strong>
+                      <span>自动补齐对象字段上下文。</span>
+                    </div>
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch H</span>
+                      <strong>代码开发</strong>
+                      <span>参考约束后自动开发。</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mechanism-step">
+                  <div class="mechanism-node primary">
+                    <span class="node-no">04</span>
+                    <h3>本地预检、修复、测试与发布</h3>
+                  </div>
+                  <div class="mechanism-branch-list">
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch I</span>
+                      <strong>sharedev 接口本地预检</strong>
+                      <span>发布前先调用 runtime debug 做本地编译检查。</span>
+                    </div>
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch J</span>
+                      <strong>预检发现问题先修复</strong>
+                      <span>编译问题先规则修复，业务日志异常再进入 LLM 修复与重试。</span>
+                    </div>
+                    <!-- 暂时注释：
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch J2</span>
+                      <strong>编译通过但保存阻断</strong>
+                      <span>进入第二层修复分支，处理扫描 warning、未使用变量、循环内逐条更新或平台治理拦截。</span>
+                    </div>
+                    -->
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch K</span>
+                      <strong>浏览器脚本运行日志</strong>
+                      <span>通过日志判断是否继续发布，异常则回到修复链路。</span>
+                    </div>
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch M</span>
+                      <strong>自动发布</strong>
+                      <span>测试通过后自动推进。</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mechanism-step">
+                  <div class="mechanism-node primary">
+                    <span class="node-no">05</span>
+                    <h3>经验沉淀</h3>
+                  </div>
+                  <div class="mechanism-branch-list">
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch N</span>
+                      <strong>飞书回填与状态同步</strong>
+                      <span>结果自动回填飞书。</span>
+                    </div>
+                    <div class="branch-card">
+                      <span class="branch-tag">Branch O</span>
+                      <strong>耗时记录与经验积累</strong>
+                      <span>耗时与经验持续沉淀。</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 讲解提示-第5页：
+             这一页不要再讲结构，直接讲收益。
+             可以按四个方面讲：沟通成本降低、开发效率提升、交付协作更顺畅、经验复用能力增强。
+             每个点都尽量落到一线真实感受，比如减少往返沟通、减少手工准备、减少重复踩坑。 -->
+        <section class="slide">
+          <div class="page">
+            <div class="page-head">
+              <span class="eyebrow">Slide 05</span>
+              <h2>业务价值：对交付方式的实际改善</h2>
+              <p>通过使用 APL 自动化工作流，价值不只体现在“代码生成更快”，而是体现在沟通、开发、协作和经验沉淀等多个环节的降本增效，逐步把原来依赖人串联的交付方式转成由系统持续推进的交付方式。</p>
+            </div>
+
+            <div class="value-stage">
+              <div class="grid-2">
+                <div class="panel highlight">
+                  <span class="tag">01</span>
+                  <h3>沟通成本降低</h3>
+                  <div class="list">
+                    <div class="list-item">
+                      <strong>需求表达路径更短</strong>
+                      <span>实施顾问不必先把需求反复整理成多轮文档，再转交技术顾问拆解，飞书群聊和多维表格可以直接作为统一输入入口。</span>
+                    </div>
+                    <div class="list-item">
+                      <strong>中间确认次数减少</strong>
+                      <span>系统会自动做需求整理、对象字段补齐和结果回填，减少“你补一点、我再看一眼”的往返沟通成本。</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel highlight">
+                  <span class="tag">02</span>
+                  <h3>开发效率提升</h3>
+                  <div class="list">
+                    <div class="list-item">
+                      <strong>从需求到代码的链路被压缩</strong>
+                      <span>需求分析、对象字段拉取、参考校准、代码开发、自动修复、自动测试与自动发布已经能连续推进，减少人工串联步骤。</span>
+                    </div>
+                    <div class="list-item">
+                      <strong>问题定位更快</strong>
+                      <span>步骤级耗时、编译报错、保存阻断和测试结果都能被记录下来，定位瓶颈和失败点不再完全靠人工回忆。</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel">
+                  <span class="tag">03</span>
+                  <h3>交付协作更顺畅</h3>
+                  <div class="list">
+                    <div class="list-item">
+                      <strong>人机分工更清晰</strong>
+                      <span>人工重点逐步转向提出需求和最终校验，中间的上下文准备、生成、修复、发布等动作由系统持续推进。</span>
+                    </div>
+                    <div class="list-item">
+                      <strong>多项目切换成本降低</strong>
+                      <span>项目配置、ShareDev 资产和 session 已按项目隔离，切换项目时可以复用现有上下文，不必每次从头准备。</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel">
+                  <span class="tag">04</span>
+                  <h3>经验复用能力增强</h3>
+                  <div class="list">
+                    <div class="list-item">
+                      <strong>结果能回填，经验能沉淀</strong>
+                      <span>函数名、系统 API、状态、反馈、阶段耗时都可以回填到飞书侧，交付结果不再散落在聊天记录和个人电脑里。</span>
+                    </div>
+                    <div class="list-item">
+                      <strong>典型问题不再重复踩坑</strong>
+                      <span>修复报告和经验记忆会持续积累，常见报错和处理方式可以复用，减少重复试错带来的时间浪费。</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="callout muted">
+                <strong>这套工作流带来的核心价值，是把原本分散在多人、多工具、多轮次之间的交付动作重新组织起来</strong>
+                <p>结果就是四个方面同时受益：沟通成本更低、开发效率更高、协作衔接更顺、经验沉淀更稳。对一线来说，这比单纯“会写代码”更有实际意义。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 讲解提示-第6页：
+             收尾时不要讲得太虚。
+             可以说：今天不是讲一个未来概念，而是讲一个已经开始改变交付方式的现状。
+             最后把结论收成三点：主链已经接起来、人工开始从中间步骤退出、后续继续补强测试和多项目协作。 -->
+        <section class="slide">
+          <div class="page">
+            <div class="page-head">
+              <span class="eyebrow">Slide 06</span>
+              <h2>现阶段的核心</h2>
+            </div>
+
+            <div class="summary-grid">
+              <div class="summary-card">
+                <span class="tag">01</span>
+                <h3>已形成 APL 交付主链的系统化承接能力</h3>
+                <p>需求接入、需求分析、代码开发、发布前本地编译预检、自动发布与结果回填已经能够连续衔接，不再只是停留在单次代码生成。</p>
+              </div>
+
+              <div class="summary-card">
+                <span class="tag">02</span>
+                <h3>高频重复劳动已开始由系统承担</h3>
+                <p>对象字段准备、参考校准、生成执行、状态回填与耗时记录等环节已开始由系统接管，人工重心转向业务确认与结果校验。</p>
+              </div>
+
+              <div class="summary-card">
+                <span class="tag">03</span>
+                <h3>这套方法具备继续扩展的价值</h3>
+                <p>自动化测试、项目级独立会话与多项目并行协同仍在持续补强，也说明这套方法后续可以继续扩展到更多交付动作，而不只局限在代码开发本身。</p>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>更重要的是，这条路径已经证明，AI 可以从单点能力继续走向更完整的业务工作流承接，后续并不只限于 APL 开发本身。</strong>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footerbar">
+      <div class="nav-btns">
+        <button class="nav-btn" id="prevBtn" aria-label="上一页">&lt;</button>
+        <button class="nav-btn" id="nextBtn" aria-label="下一页">&gt;</button>
+      </div>
+
+      <div class="thumbs">
+        <button class="thumb active" data-index="0"><strong>01</strong><span>介绍</span></button>
+        <button class="thumb" data-index="1"><strong>02</strong><span>设计结构</span></button>
+        <button class="thumb" data-index="2"><strong>03</strong><span>能力矩阵</span></button>
+        <button class="thumb" data-index="3"><strong>04</strong><span>运行机制</span></button>
+        <button class="thumb" data-index="4"><strong>05</strong><span>业务价值</span></button>
+        <button class="thumb" data-index="5"><strong>06</strong><span>总结</span></button>
+      </div>
+
+    </footer>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const track = document.getElementById("track");
+    const progressBar = document.getElementById("progressBar");
+    const pageIndicator = document.getElementById("pageIndicator");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const thumbs = Array.from(document.querySelectorAll(".thumb"));
+    let index = 0;
+
+    function pad(n) {
+      return String(n).padStart(2, "0");
+    }
+
+    function go(nextIndex) {
+      index = Math.max(0, Math.min(slides.length - 1, nextIndex));
+      track.style.transform = `translateX(-${index * 100}%)`;
+      progressBar.style.width = `${((index + 1) / slides.length) * 100}%`;
+      pageIndicator.textContent = `${pad(index + 1)} / ${pad(slides.length)}`;
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === slides.length - 1;
+      thumbs.forEach((thumb, i) => thumb.classList.toggle("active", i === index));
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === index));
+      slides[index].scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    prevBtn.addEventListener("click", () => go(index - 1));
+    nextBtn.addEventListener("click", () => go(index + 1));
+
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener("click", () => go(Number(thumb.dataset.index)));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
+        event.preventDefault();
+        go(index + 1);
+      }
+      if (event.key === "ArrowLeft" || event.key === "PageUp") {
+        event.preventDefault();
+        go(index - 1);
+      }
+    });
+
+    go(0);
+  </script>
+</body>
+</html>

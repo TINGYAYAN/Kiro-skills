@@ -1,0 +1,175 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: mapping_show_name__c
+  label: 第三方系统映射字段APIName
+- api: system_name__c
+  label: 集成系统
+  options:
+  - label: 主数据平台
+    value: eos
+  - label: ZEUS
+    value: zeus
+  - label: DMS系统
+    value: dms
+  - label: 网关
+    value: gateway
+  - label: 桔契
+    value: juqi
+  - label: BPM
+    value: bpm
+  - label: 桔宝盆
+    value: jbp
+  - label: 财税系统
+    value: cs
+  - label: MIS
+    value: mis
+  - label: 云影系统
+    value: yunying
+  - label: 其他
+    value: other
+- api: field_apiname__c
+  label: 字段APIName
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: remark__c
+  label: 备注
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: object_apiname__c
+  label: 对象APIName
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: related_object__c
+  label: 关联对象APIName
+- api: is_enabled__c
+  label: 是否启用
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: owner
+  label: 负责人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: field_name__c
+  label: 字段名称
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: mapping_show_desc__c
+  label: 第三方系统映射字段名称
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: object_name__c
+  label: 对象名称
+- api: type__c
+  label: 映射类型
+  options:
+  - label: 文本
+    value: '1'
+  - label: 单选
+    value: '2'
+  - label: 多选
+    value: '3'
+  - label: 日期（时间戳）
+    value: '4'
+  - label: 查找关联
+    value: '5'
+  - label: 金额
+    value: '6'
+  - label: 数字
+    value: '7'
+  - label: 人员
+    value: '8'
+  - label: 日期时间
+    value: '9'
+  - label: 单选引用
+    value: '10'
+  - label: 百分数
+    value: '11'
+  - label: 附件
+    value: '12'
+  - label: 映射字典
+    value: '13'
+  - label: 部门
+    value: '14'
+  - label: 系统填充__r
+    value: fill
+  - label: 多选（文本逗号分割）
+    value: '3_1'
+  - label: 日期（YYYY-MM-DD）
+    value: '4_1'
+  - label: 其他
+    value: other
+- api: data_own_department
+  label: 归属部门
+- api: related_field__c
+  label: 关联字段APIName
+- api: name
+  label: 编码
+- api: _id
+  label: _id
+- api: field_type__c
+  label: 接口字段类型
+  options:
+  - label: 文本
+    value: String
+  - label: 数字
+    value: Integer
+  - label: 金额
+    value: BigDecimal
+  - label: 查找关联字典
+    value: Dictionary
+  - label: 布尔值
+    value: Boolean
+  - label: 其他
+    value: other

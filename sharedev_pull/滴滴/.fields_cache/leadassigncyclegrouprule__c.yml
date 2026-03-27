@@ -1,0 +1,212 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: Traffictype__c
+  label: 流量分类
+  options:
+  - label: 主动流量
+    value: '1'
+  - label: 被动流量
+    value: '2'
+  - label: 特殊流量
+    value: '6'
+  - label: 特殊流量一
+    value: '3'
+  - label: 特殊流量二
+    value: '4'
+  - label: 特殊流量三
+    value: '5'
+  - label: 无
+    value: '0'
+  - label: 其他
+    value: other
+- api: is_deleted
+  label: is_deleted
+- api: groupName__c
+  label: 线索分配轮循组编号
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: area__c
+  label: 小组所在区域
+  options:
+  - label: 安徽省
+    value: '1'
+  - label: 北京市
+    value: '2'
+  - label: 福建省
+    value: '3'
+  - label: 甘肃省
+    value: '4'
+  - label: 广东省
+    value: '5'
+  - label: 广西壮族自治区
+    value: '6'
+  - label: 贵州省
+    value: '7'
+  - label: 海南省
+    value: '8'
+  - label: 河北省
+    value: '9'
+  - label: 河南省
+    value: '10'
+  - label: 黑龙江省
+    value: '11'
+  - label: 湖北省
+    value: '12'
+  - label: 湖南省
+    value: '13'
+  - label: 吉林省
+    value: '14'
+  - label: 江苏省
+    value: '15'
+  - label: 江西省
+    value: '16'
+  - label: 辽宁省
+    value: '17'
+  - label: 内蒙古自治区
+    value: '18'
+  - label: 宁夏回族自治区
+    value: '19'
+  - label: 青海省
+    value: '20'
+  - label: 山东省
+    value: '21'
+  - label: 山西省
+    value: '22'
+  - label: 陕西省
+    value: '23'
+  - label: 上海市
+    value: '24'
+  - label: 四川省
+    value: '25'
+  - label: 天津市
+    value: '26'
+  - label: 西藏自治区
+    value: '27'
+  - label: 新疆维吾尔自治区
+    value: '28'
+  - label: 云南省
+    value: '29'
+  - label: 浙江省
+    value: '30'
+  - label: 重庆市
+    value: '31'
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: interestCategoryNew__c
+  label: 感兴趣品类类型
+  options:
+  - label: 仅出行
+    value: '1'
+  - label: 仅商旅
+    value: '2'
+  - label: 商旅+出行
+    value: '3'
+  - label: 其他
+    value: other
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: whetherleader__c
+  label: 是否销售leader组
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: teamType__c
+  label: 轮循组类型
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: xsyId__c
+  label: 销售易数据ID
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: travelScale__c
+  label: 商旅规模
+  options:
+  - label: 不确定
+    value: '1'
+  - label: 小于等于1W
+    value: '2'
+  - label: 大于1W-小于等于10W
+    value: '3'
+  - label: 大于10W至小于20W
+    value: '4'
+  - label: 大于等于20W
+    value: '5'
+  - label: 空
+    value: '6'
+- api: data_own_department
+  label: 归属部门
+- api: scopeOfCompanySize__c
+  label: 公司规模范围
+  options:
+  - label: 1-10人
+    value: '1'
+  - label: 11-30人
+    value: '2'
+  - label: 31-50人
+    value: '3'
+  - label: 51-100人
+    value: '4'
+  - label: 101-200人
+    value: '5'
+  - label: 201-500人
+    value: '6'
+  - label: 501-1000人
+    value: '7'
+  - label: 1001-3000人
+    value: '8'
+  - label: 3000以上
+    value: '9'
+- api: leadassigncyclegroup__c
+  label: 线索分配轮循组
+- api: name
+  label: 线索轮循组规则编号
+- api: _id
+  label: _id

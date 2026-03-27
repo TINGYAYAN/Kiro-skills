@@ -1,0 +1,236 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: service_tag
+  label: 标签
+  options:
+  - label: 投诉建议
+    value: '1001'
+  - label: 咨询
+    value: '1002'
+  - label: 其他
+    value: other
+- api: connectStatus__c
+  label: 是否接听
+- api: ring_time
+  label: 响铃时间
+- api: authorization_situation_de__c
+  label: 授权情况说明
+  options:
+  - label: 现在不方便，需要再联系
+    value: '1'
+  - label: 需要销售再次介绍
+    value: '2'
+  - label: 用户语音助手接通
+    value: '3'
+  - label: 客户再次咨询
+    value: '4'
+  - label: 通路在授权范围内
+    value: '5'
+  - label: 历史数据已授权
+    value: '6'
+  - label: 商机阶段
+    value: '7'
+  - label: 其他
+    value: other
+- api: syncId__c
+  label: 接口使用数据ID
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: owner_department
+  label: 负责人主属部门
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: authorization_id__c
+  label: 外呼授权ID
+- api: create_time
+  label: 创建时间
+- api: authorization_info__c
+  label: 授权原因
+  options:
+  - label: 现在不方便，需要再联系
+    value: '1'
+  - label: 需要销售再次介绍
+    value: '2'
+  - label: 用户语音助手接通
+    value: '3'
+  - label: 客户再次咨询
+    value: '4'
+  - label: 通路在授权范围内
+    value: '5'
+  - label: 历史数据已授权
+    value: '6'
+  - label: 商机阶段
+    value: '7'
+  - label: 其他
+    value: other
+- api: call_frequencyID__c
+  label: 外呼频控唯一ID
+- api: record_file
+  label: 录音文件
+- api: contact_obj_id
+  label: 关联联系人
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: call_id
+  label: 通话记录ID
+- api: endReason__c
+  label: 结束原因
+- api: data_own_department
+  label: 归属部门
+- api: ref_obj_id1
+  label: 关联商机
+- api: kf_number
+  label: 客服电话
+- api: account_obj_id
+  label: 关联客户
+- api: customer_hangup
+  label: 是否客户主动挂断
+  options:
+  - label: 是
+    value: 'yes'
+  - label: 否
+    value: 'no'
+- api: name
+  label: 通话记录编号
+- api: queue_no
+  label: 队列号
+- api: _id
+  label: _id
+- api: call_start_time
+  label: 通话开始时间
+- api: tenant_id
+  label: tenant_id
+- api: callback_status__c
+  label: 回调状态
+  options:
+  - label: 成功
+    value: '1'
+  - label: 失败
+    value: '2'
+  - label: 其他
+    value: other
+- api: call_end_time
+  label: 通话结束时间
+- api: record_file__c
+  label: 录音文件（计算字段）
+- api: bridgeTime__c
+  label: 坐席接听时间
+- api: customer_number
+  label: 通话号码
+- api: seat_id
+  label: 坐席号
+- api: origin
+  label: 记录来源
+  options:
+  - label: 呼叫中心
+    value: '1'
+  - label: CRM
+    value: '2'
+- api: callType__c
+  label: 拨号类型
+  options:
+  - label: 授权拨号
+    value: authorization
+  - label: 正常拨号
+    value: normal
+  - label: 其他
+    value: other
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 流水号
+- api: answer_status
+  label: 通话状态
+  options:
+  - label: 未接听
+    value: '0'
+  - label: 通话中
+    value: '1'
+  - label: 已接听
+    value: '2'
+- api: service_note
+  label: 通话备注
+- api: callback_time__c
+  label: 回调时间
+- api: service_record_id
+  label: 关联通话记录
+- api: is_deleted
+  label: is_deleted
+- api: is_saved
+  label: 是否保存过通话备注
+- api: callback_reason__c
+  label: 回调失败原因
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: leads_obj_id
+  label: 关联线索
+- api: out_owner
+  label: 外部负责人
+- api: call_type
+  label: 通话类型
+  options:
+  - label: 呼入
+    value: '0'
+  - label: 呼出
+    value: '1'
+- api: record_text
+  label: 录音文字
+- api: owner
+  label: 负责人
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: service_request_id
+  label: 服务请求
+- api: uniqueId__c
+  label: 第三方电话标识
+- api: last_modified_by
+  label: 最后修改人
+- api: callStatus__c
+  label: 接听状态
+- api: out_tenant_id
+  label: 外部企业
+- api: xsyId__c
+  label: 销售易数据ID
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: account_id
+  label: 企业编号
+- api: bridge_time
+  label: 通话时长
+- api: answerTime__c
+  label: 客户接听时间

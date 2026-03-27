@@ -959,7 +959,7 @@ def fetch_fields_for_req(req: dict, cfg: dict, force_refresh: bool = False, page
     related_list = req.get("related_objects") or []
     if not related_list and req.get("requirement"):
         inferred = infer_related_objects_from_requirement(
-            req["requirement"], obj_api, obj_label
+            req["requirement"], obj_api, obj_label, project_name=proj
         )
         if inferred:
             related_list = inferred
@@ -976,6 +976,83 @@ def fetch_fields_for_req(req: dict, cfg: dict, force_refresh: bool = False, page
                 result[r_api] = fields
 
     return result
+
+
+def collect_req_object_targets(req: dict, cfg: dict) -> list[dict]:
+    """从 req 中解析本次需要的对象列表（主对象 + 关联对象），返回 [{api, label}]。"""
+    namespace = req.get("namespace", "流程")
+    proj = req.get("project") or _project_from_cfg(cfg) or None
+    result: list[dict] = []
+    seen_api: set[str] = set()
+
+    obj_api = (req.get("object_api") or "").strip()
+    obj_label = (req.get("object_label") or "").strip()
+    if obj_api and obj_label and obj_api not in seen_api:
+        result.append({"api": obj_api, "label": obj_label, "namespace": namespace})
+        seen_api.add(obj_api)
+
+    related_list = req.get("related_objects") or []
+    if not related_list and req.get("requirement"):
+        inferred = infer_related_objects_from_requirement(
+            req["requirement"], obj_api, obj_label, project_name=proj
+        )
+        if inferred:
+            related_list = inferred
+
+    for related in related_list:
+        r_api = (related.get("api") or "").strip()
+        r_label = (related.get("label") or "").strip()
+        if not r_api or not r_label or r_api in seen_api:
+            continue
+        result.append({"api": r_api, "label": r_label, "namespace": namespace})
+        seen_api.add(r_api)
+
+    return result
+
+
+def find_incomplete_option_values(fields_map: dict, req: dict) -> list[dict]:
+    """检查需求里显式提到的选项标签是否存在空 value，返回问题列表。"""
+    if not fields_map or not req:
+        return []
+
+    req_text = str(req.get("requirement") or "")
+    if not req_text.strip():
+        return []
+
+    obj_labels = {req.get("object_api", ""): req.get("object_label", "")}
+    for related in req.get("related_objects", []) or []:
+        obj_labels[related.get("api", "")] = related.get("label", "")
+
+    issues: list[dict] = []
+    for obj_api, fields in fields_map.items():
+        obj_label = obj_labels.get(obj_api, obj_api)
+        for field in fields or []:
+            options = field.get("options") or []
+            if not options:
+                continue
+            field_label = str(field.get("label") or "")
+            field_api = str(field.get("api") or "")
+            mentioned_labels = []
+            for opt in options:
+                label = str(opt.get("label") or "").strip()
+                value = opt.get("value")
+                if label and label in req_text and (value is None or str(value).strip() == ""):
+                    mentioned_labels.append(label)
+            if not mentioned_labels:
+                continue
+            field_mentioned = bool(field_label and field_label in req_text) or bool(field_api and field_api in req_text)
+            multi_option_branch = len(set(mentioned_labels)) >= 2
+            likely_enum_context = any(kw in req_text for kw in ("等于", "为“", "为\"", "仅能显示", "只能显示", "状态", "类型", "阶段"))
+            if not (field_mentioned or multi_option_branch or likely_enum_context):
+                continue
+            issues.append({
+                "object_api": obj_api,
+                "object_label": obj_label,
+                "field_api": field_api,
+                "field_label": field_label,
+                "option_labels": sorted(set(mentioned_labels)),
+            })
+    return issues
 
 
 def _prioritize_fields_for_prompt(fields: list, requirement: str, max_n: int) -> tuple[list, bool]:

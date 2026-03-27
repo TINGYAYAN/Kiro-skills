@@ -1,0 +1,223 @@
+fields:
+- api: is_branch
+  label: 是否分支机构
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: lock_rule
+  label: 锁定规则
+- api: extend_obj_data_id
+  label: 扩展字段在mt_data中的记录ID
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: owner_department
+  label: 负责人主属部门
+- api: pre_root_account_id
+  label: 根节点客户（变更前）
+- api: pre_is_auto_update
+  label: 是否自动化更新（变更前）
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: pre_account_tree_relation_id
+  label: 节点名称（变更前）
+- api: pre_is_manual_add
+  label: 是否手动调整（变更前）
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: pre_level
+  label: 当前层级（变更前）
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: level
+  label: 当前层级
+- api: pre_root_enterprise_id
+  label: 根节点企业名称（变更前）
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: account_tree_relation_id
+  label: 节点名称
+- api: data_own_department
+  label: 归属部门
+- api: parent_account_id
+  label: 上级客户
+- api: parent_id
+  label: 上级节点名称
+- api: name
+  label: 节点名称-1
+- api: is_statistics_include
+  label: 是否纳入统计
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: _id
+  label: _id
+- api: root_account_id
+  label: 根节点客户
+- api: tree_path
+  label: 路径
+- api: tenant_id
+  label: tenant_id
+- api: is_auto_update
+  label: 是否自动化更新
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: is_leaf
+  label: 是否叶子节点
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: is_root
+  label: 是否根节点
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: log_type
+  label: 日志类型
+  options:
+  - label: 变更根节点
+    value: change_root
+  - label: 变更上级节点
+    value: change_parent
+  - label: 编辑
+    value: edit
+  - label: 生成客户树冲突
+    value: generate_tree
+  - label: 移除孩子节点
+    value: remove_children
+- api: is_deleted
+  label: is_deleted
+- api: pre_is_root
+  label: 是否根节点（变更前）
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: pre_is_statistics_include
+  label: 是否纳入统计（变更前）
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: pre_tree_path
+  label: 路径（变更前）
+- api: root_id
+  label: 根节点名称
+- api: out_owner
+  label: 外部负责人
+- api: pre_is_leaf
+  label: 是否叶子节点（变更前）
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: pre_parent_enterprise_id
+  label: 上级企业名称（变更前）
+- api: owner
+  label: 负责人
+- api: last_modified_time
+  label: 最后修改时间
+- api: pre_parent_id
+  label: 上级节点名称（变更前）
+- api: is_manual_add
+  label: 是否手动调整
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: conflict_type
+  label: 冲突类型
+  options:
+  - label: 与其它树股权相同
+    value: same_with_other
+  - label: 本树内股权相同
+    value: same_with_self
+  - label: 比其它树股权占比大
+    value: larger_than_other
+- api: pre_enterprise_id
+  label: 节点企业名称（变更前）
+- api: pre_root_id
+  label: 根节点名称（变更前）
+- api: pre_parent_account_id
+  label: 上级客户（变更前）
+- api: last_modified_by
+  label: 最后修改人
+- api: enterprise_id
+  label: 节点企业名称
+- api: out_tenant_id
+  label: 外部企业
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: parent_enterprise_id
+  label: 上级企业名称
+- api: root_enterprise_id
+  label: 根节点企业名称
+- api: account_id
+  label: 节点客户
+- api: pre_account_id
+  label: 节点客户（变更前）
+- api: pre_is_branch
+  label: 是否分支机构（变更前）
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'

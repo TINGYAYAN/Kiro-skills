@@ -1,0 +1,165 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: contact_tel
+  label: 联系方式
+- api: account_bank
+  label: 开户行
+- api: title_type
+  label: 抬头类型
+  options:
+  - label: 个人
+    value: '1'
+  - label: 单位
+    value: '2'
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: owner_department
+  label: 负责人主属部门
+- api: biz_status
+  label: 状态
+  options:
+  - label: 未开票
+    value: un_billed
+  - label: 已开票
+    value: invoiced
+- api: finance_confirm_time
+  label: 财务确认时间
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: submit_time
+  label: 提交时间
+- api: tax_amount_sum
+  label: 税金
+- api: invoice_tel
+  label: 电话
+- api: invoice_add
+  label: 开票地址
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: tax_id
+  label: 纳税识别号
+- api: data_own_department
+  label: 归属部门
+- api: name
+  label: 开票申请编号
+- api: account_bank_no
+  label: 开户账号
+- api: _id
+  label: _id
+- api: order_id
+  label: 销售订单编号
+- api: status
+  label: 状态（原）
+  options:
+  - label: 未开票
+    value: '1'
+  - label: 已开票
+    value: '3'
+  - label: 已驳回
+    value: '4'
+  - label: 已作废
+    value: '99'
+- api: tenant_id
+  label: tenant_id
+- api: finance_employee_id
+  label: 财务确认人姓名
+- api: invoice_title
+  label: 开票抬头
+- api: remark
+  label: 备注
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: invoice_date
+  label: 开票日期
+- api: partner_id
+  label: 合作伙伴
+- api: is_deleted
+  label: is_deleted
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: invoice_type
+  label: 开票类型
+  options:
+  - label: 增值税专用发票
+    value: '1'
+  - label: 增值税普通发票
+    value: '2'
+  - label: 收据
+    value: '3'
+- api: out_owner
+  label: 外部负责人
+- api: attach
+  label: 附件
+- api: out_resources
+  label: 外部来源
+  options:
+  - label: 代理通
+    value: partner
+  - label: 自注册
+    value: self_registration
+  - label: 访销通
+    value: kx_fxt
+- api: owner
+  label: 负责人
+- api: is_fixed_flow
+  label: 是否混合审批流
+  options:
+  - label: 否
+    value: 'False'
+  - label: 是
+    value: 'True'
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: invoice_no
+  label: 发票号码
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: account_id
+  label: 客户名称
+- api: contact_add
+  label: 寄送地址
+- api: invoice_applied_amount
+  label: 开票金额（元）
+- api: recipient
+  label: 联系人

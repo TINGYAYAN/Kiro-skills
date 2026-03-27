@@ -1,0 +1,925 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: is_split_by_category__c
+  label: 是否by品类拆分
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: h_offline_reimbursement_travel__c
+  label: 商旅是否存在线下报销
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 暂无
+    value: '3'
+  - label: 其他
+    value: other
+- api: monthlyHotel__c
+  label: 停用_滴滴月度差旅酒店GMV预估
+- api: untrained_reason__c
+  label: 未培训理由
+- api: xsy_name__c
+  label: 销售易实施-CRM交接单名称
+- api: employee_number__c
+  label: 员工人数
+  options:
+  - label: 1-10人
+    value: '1'
+  - label: 11-30人
+    value: '2'
+  - label: 31-50人
+    value: '3'
+  - label: 51-100人
+    value: '4'
+  - label: 101-200人
+    value: '5'
+  - label: 201-500人
+    value: '6'
+  - label: 501-1000人
+    value: '7'
+  - label: 1001-3000人
+    value: '8'
+  - label: 3000以上
+    value: '9'
+- api: parallelSupplier__c
+  label: 停用_用车是否有并行供应商
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: actual_line_date__c
+  label: 正式上线日期
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: hotel_supplier__c
+  label: 酒店并行供应商
+  options:
+  - label: 无专业差旅公司服务
+    value: '1'
+  - label: 携程商旅
+    value: '2'
+  - label: 阿里商旅
+    value: '3'
+  - label: 中航服
+    value: '4'
+  - label: 同程商旅
+    value: '5'
+  - label: 差旅壹号
+    value: '6'
+  - label: 在路上
+    value: '7'
+  - label: 美亚商旅
+    value: '8'
+  - label: 分贝通
+    value: '9'
+  - label: 美国运通
+    value: '10'
+  - label: 中航嘉信
+    value: '11'
+  - label: BCD
+    value: '12'
+  - label: 汇联易
+    value: '14'
+  - label: 甄选
+    value: '15'
+  - label: 合思
+    value: '16'
+  - label: 无
+    value: '17'
+  - label: 其他
+    value: '13'
+  - label: 其他（标准）
+    value: other
+- api: is_hu_di_customer__c
+  label: 是否华滴客户
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: monthlyTrain__c
+  label: 停用_滴滴月度差旅火车票GMV预估
+- api: monthlyGMVCar__c
+  label: 停用_用车滴滴潜力月GMV预估（滴滴预算）
+- api: business_travel_and_parall__c
+  label: 商旅并行供应商
+  options:
+  - label: 无专业差旅公司服务
+    value: '1'
+  - label: 携程商旅
+    value: '2'
+  - label: 阿里商旅
+    value: '3'
+  - label: 中航服
+    value: '4'
+  - label: 同程商旅
+    value: '5'
+  - label: 差旅壹号
+    value: '6'
+  - label: 在路上
+    value: '7'
+  - label: 美亚商旅
+    value: '8'
+  - label: 分贝通
+    value: '9'
+  - label: 美国运通
+    value: '10'
+  - label: 中航嘉信
+    value: '11'
+  - label: BCD
+    value: '12'
+  - label: 汇联易
+    value: '14'
+  - label: 甄选
+    value: '15'
+  - label: 合思
+    value: '16'
+  - label: 无
+    value: '17'
+  - label: 其他
+    value: '13'
+  - label: 其他（标准）
+    value: other
+- api: customer_didi_wallet_perme__c
+  label: 客户的滴滴钱包渗透率大于10%
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: h_offline_reimbursement_share_travel__c
+  label: 商旅线下报销占比
+- api: other_car_supplier_name__c
+  label: 停用_用车其他供应商名称
+- api: version
+  label: version
+- api: csm_customer__c
+  label: CSM客户
+- api: is_one_stop_customer__c
+  label: 是否商旅一站式客户
+  options:
+  - label: 否
+    value: '1'
+  - label: 是
+    value: '2'
+  - label: 其他
+    value: other
+- api: monthlyGMVTravel__c
+  label: 停用_商旅滴滴潜力月GMV预估（滴滴预算）
+- api: didi_share_travel__c
+  label: 停用_商旅滴滴可获取份额占比
+- api: h_monthlyHotel__c
+  label: 滴滴月度差旅酒店GMV预估
+- api: industry__c
+  label: 所属行业
+- api: tenant_id
+  label: tenant_id
+- api: h_offline_reimbursement_car__c
+  label: 用车是否存在线下报销
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 暂无
+    value: '3'
+  - label: 其他
+    value: other
+- api: implementationer__c
+  label: 实施负责人
+- api: competition_situation__c
+  label: 竞争情况
+  options:
+  - label: 独供
+    value: '1'
+  - label: 并行
+    value: '2'
+  - label: 其他
+    value: other
+- api: h_supplier_share_travel__c
+  label: 商旅并行供应商总份额
+- api: is_csm_leader_csm_departme__c
+  label: CSM负责人是否为CSM部门
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: is_first_remittance_comple__c
+  label: 是否完成首笔回款
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: if_there_is_an_implementat__c
+  label: 商机下是否存在实施项目
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: project_plan_table__c
+  label: 项目计划表
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: h_didi_share_travel__c
+  label: 商旅滴滴可获取份额占比（原）
+- api: h_monthlyAirfare__c
+  label: 滴滴月度差旅机票GMV预估
+- api: opportunity_type__c
+  label: 商机类型
+- api: csm_responsible_id__c
+  label: CSM负责人ID
+- api: h_supplier_name_travel__c
+  label: 商旅并行供应商名称
+  options:
+  - label: 无专业差旅公司服务
+    value: '1'
+  - label: 携程商旅
+    value: '2'
+  - label: 阿里商旅
+    value: '3'
+  - label: 中航服
+    value: '4'
+  - label: 同程商旅
+    value: '5'
+  - label: 差旅壹号
+    value: '6'
+  - label: 在路上
+    value: '7'
+  - label: 美亚商旅
+    value: '8'
+  - label: 分贝通
+    value: '9'
+  - label: 美国运通
+    value: '10'
+  - label: 中航嘉信
+    value: '11'
+  - label: BCD
+    value: '12'
+  - label: 汇联易
+    value: '14'
+  - label: 甄选
+    value: '15'
+  - label: 合思
+    value: '16'
+  - label: 无
+    value: '17'
+  - label: 其他
+    value: '13'
+  - label: 其他（标准）
+    value: other
+- api: requirement_research_form__c
+  label: 需求调研表
+- api: h_does_customer_need_travel__c
+  label: 客户是否需要试用后方可切换（商旅）
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: h_didi_share_car__c
+  label: 用车滴滴可获取份额占比（原）
+- api: handover_method__c
+  label: 交接方式
+  options:
+  - label: 线上交接(内部)
+    value: '1'
+  - label: 线上交接(有客户)
+    value: '2'
+  - label: 线下交接(内部)
+    value: '3'
+  - label: 线下交接(有客户)
+    value: '4'
+  - label: 其他
+    value: other
+- api: authorized_number__c
+  label: 有权限人数
+- api: h_travelBudget__c
+  label: 商旅客户全量月GMV预估（客户总预算）
+- api: sales_handover_link__c
+  label: 销售交接内容（链接）
+- api: internal_publicity_label__c
+  label: 是否已内宣
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: project__c
+  label: 实施项目
+- api: supplier_share_car__c
+  label: 停用_用车并行供应商总份额
+- api: train_ticket_supplier__c
+  label: 火车票并行供应商
+  options:
+  - label: 无专业差旅公司服务
+    value: '1'
+  - label: 携程商旅
+    value: '2'
+  - label: 阿里商旅
+    value: '3'
+  - label: 中航服
+    value: '4'
+  - label: 同程商旅
+    value: '5'
+  - label: 差旅壹号
+    value: '6'
+  - label: 在路上
+    value: '7'
+  - label: 美亚商旅
+    value: '8'
+  - label: 分贝通
+    value: '9'
+  - label: 美国运通
+    value: '10'
+  - label: 中航嘉信
+    value: '11'
+  - label: BCD
+    value: '12'
+  - label: 汇联易
+    value: '14'
+  - label: 甄选
+    value: '15'
+  - label: 合思
+    value: '16'
+  - label: 无
+    value: '17'
+  - label: 其他
+    value: '13'
+  - label: 其他（标准）
+    value: other
+- api: last_modified_time
+  label: 最后修改时间
+- api: opportunity__c
+  label: 商机
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: out_tenant_id
+  label: 外部企业
+- api: is_supplier_travel__c
+  label: 停用_商旅是否有并行供应商
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 暂无
+    value: '3'
+  - label: 其他
+    value: other
+- api: contact_number__c
+  label: 客户对接人数量
+- api: supplier_name_car__c
+  label: 停用_用车并行供应商名称
+  options:
+  - label: 高德
+    value: '1'
+  - label: 畅行
+    value: '2'
+  - label: T3
+    value: '3'
+  - label: 曹操
+    value: '4'
+  - label: 神州
+    value: '5'
+  - label: 分贝通
+    value: '6'
+  - label: 在途
+    value: '7'
+  - label: 如祺
+    value: '8'
+  - label: 差旅管家
+    value: '9'
+  - label: 易企出行
+    value: '10'
+  - label: 易快报
+    value: '11'
+  - label: 合思
+    value: '12'
+  - label: 百度出行
+    value: '13'
+  - label: 美团
+    value: '14'
+  - label: 胜意
+    value: '15'
+  - label: 途径
+    value: '16'
+  - label: 首汽
+    value: '17'
+  - label: Petal
+    value: '18'
+  - label: 其他
+    value: '19'
+  - label: 其他（标准）
+    value: other
+- api: HotelAgreeNo__c
+  label: 协议酒店数量
+- api: project_contact_list__c
+  label: 项目通讯录
+- api: h_monthlyTrain__c
+  label: 滴滴月度差旅火车票GMV预估
+- api: h_supplier_share_car__c
+  label: 用车并行供应商总份额
+- api: sales__c
+  label: 销售负责人
+- api: customer__c
+  label: 客户名称
+- api: is_modify_budget__c
+  label: 停用_是否修改预算
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: supplier_share_travel__c
+  label: 停用_商旅并行供应商总份额
+- api: h_does_customer_need_to_tria__c
+  label: 客户是否需要试用后方可切换（用车）
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: h_monthlyGMVTravel__c
+  label: 商旅滴滴潜力月GMV预估（滴滴预算）
+- api: h_monthlyGMVCar__c
+  label: 用车滴滴潜力月GMV预估（滴滴预算）
+- api: proposal_type__c
+  label: 方案类型
+  options:
+  - label: 标准方案（企业版APP+ES后台）
+    value: '1'
+  - label: 非标方案
+    value: '2'
+  - label: 其他
+    value: other
+- api: account_manager_key_follow__c
+  label: 客户经理重点需跟进事项
+- api: fileLink__c
+  label: 实施交接内容（链接）
+- api: project_type__c
+  label: 项目类型
+  options:
+  - label: 实施交付
+    value: default__c
+  - label: 二次对接
+    value: record_wg24M__c
+  - label: 其他
+    value: other
+- api: owner_department
+  label: 负责人主属部门
+- api: offline_reimbursement_travel__c
+  label: 停用_商旅是否存在线下报销
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 暂无
+    value: '3'
+  - label: 其他
+    value: other
+- api: csmer__c
+  label: CSM负责人
+- api: h_is_supplier_travel__c
+  label: 商旅是否有并行供应商
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 暂无
+    value: '3'
+  - label: 其他
+    value: other
+- api: air_ticket_supplier__c
+  label: 机票并行供应商
+  options:
+  - label: 无专业差旅公司服务
+    value: '1'
+  - label: 携程商旅
+    value: '2'
+  - label: 阿里商旅
+    value: '3'
+  - label: 中航服
+    value: '4'
+  - label: 同程商旅
+    value: '5'
+  - label: 差旅壹号
+    value: '6'
+  - label: 在路上
+    value: '7'
+  - label: 美亚商旅
+    value: '8'
+  - label: 分贝通
+    value: '9'
+  - label: 美国运通
+    value: '10'
+  - label: 中航嘉信
+    value: '11'
+  - label: BCD
+    value: '12'
+  - label: 汇联易
+    value: '14'
+  - label: 甄选
+    value: '15'
+  - label: 合思
+    value: '16'
+  - label: 无
+    value: '17'
+  - label: 其他
+    value: '13'
+  - label: 其他（标准）
+    value: other
+- api: does_customer_need_travel__c
+  label: 停用_客户是否需要试用后方可切换（商旅）
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: didi_share_car__c
+  label: 停用_用车滴滴可获取份额占比
+- api: supplier_name_travel__c
+  label: 停用_商旅并行供应商名称
+  options:
+  - label: 无专业差旅公司服务
+    value: '1'
+  - label: 携程商旅
+    value: '2'
+  - label: 阿里商旅
+    value: '3'
+  - label: 中航服
+    value: '4'
+  - label: 同程商旅
+    value: '5'
+  - label: 差旅壹号
+    value: '6'
+  - label: 在路上
+    value: '7'
+  - label: 美亚商旅
+    value: '8'
+  - label: 分贝通
+    value: '9'
+  - label: 美国运通
+    value: '10'
+  - label: 中航嘉信
+    value: '11'
+  - label: BCD
+    value: '12'
+  - label: 汇联易
+    value: '14'
+  - label: 甄选
+    value: '15'
+  - label: 合思
+    value: '16'
+  - label: 无
+    value: '17'
+  - label: 其他
+    value: '13'
+  - label: 其他（标准）
+    value: other
+- api: h_offline_reimbursement_share_car__c
+  label: 用车线下报销占比
+- api: didiID__c
+  label: 滴滴客户ID
+- api: h_parallelSupplier__c
+  label: 用车是否有并行供应商
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: monthlyAirfare__c
+  label: 停用_滴滴月度差旅机票GMV预估
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: attachment__c
+  label: 交接文档附件
+- api: offline_reimbursement_car__c
+  label: 停用_用车是否存在线下报销
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 暂无
+    value: '3'
+  - label: 其他
+    value: other
+- api: other_business_travel_supp__c
+  label: 其他商旅供应商
+- api: car_supplier__c
+  label: 用车并行供应商
+  options:
+  - label: 高德
+    value: '1'
+  - label: 畅行
+    value: '2'
+  - label: T3
+    value: '3'
+  - label: 曹操
+    value: '4'
+  - label: 神州
+    value: '5'
+  - label: 分贝通
+    value: '6'
+  - label: 在途
+    value: '7'
+  - label: 如祺
+    value: '8'
+  - label: 差旅管家
+    value: '9'
+  - label: 易企出行
+    value: '10'
+  - label: 易快报
+    value: '11'
+  - label: 合思
+    value: '12'
+  - label: 百度出行
+    value: '13'
+  - label: 美团
+    value: '14'
+  - label: 胜意
+    value: '15'
+  - label: 途径
+    value: '16'
+  - label: 首汽
+    value: '17'
+  - label: Petal
+    value: '18'
+  - label: 其他
+    value: '19'
+  - label: 其他（标准）
+    value: other
+- api: offline_reimbursement_share_travel__c
+  label: 停用_商旅线下报销占比
+- api: data_own_department
+  label: 归属部门
+- api: customerId__c
+  label: 客户
+- api: name
+  label: 交接单编号
+- api: car_scene__c
+  label: 企业用车场景
+  options:
+  - label: 日常用车
+    value: '1'
+  - label: 差旅用车
+    value: '2'
+  - label: 加班用车
+    value: '3'
+  - label: 周末用车
+    value: '4'
+  - label: 接送机
+    value: '5'
+  - label: 销售 & 业务人员用车
+    value: '6'
+  - label: 客户用车 - 大规模集中用车
+    value: '7'
+  - label: 商务出行
+    value: '9'
+  - label: 其他用车需求
+    value: '8'
+  - label: 代叫车
+    value: '10'
+  - label: 福利用车
+    value: '11'
+  - label: 营销用车
+    value: '12'
+  - label: 办公地点通勤
+    value: '13'
+- api: AirAgreeNo__c
+  label: 航空协议数量
+- api: _id
+  label: _id
+- api: carBudget__c
+  label: 停用_用车客户全量月GMV预估（客户总预算）
+- api: unadvertised_reason__c
+  label: 未宣广原因
+- api: other_hotel_parallel_suppl__c
+  label: 其他酒店并行供应商
+- api: solution_blueprint__c
+  label: 方案蓝图
+- api: lock_user
+  label: 加锁人
+- api: risk_assessment__c
+  label: 风险评估
+- api: offline_reimbursement_share_car__c
+  label: 停用_用车线下报销占比
+- api: is_deleted
+  label: is_deleted
+- api: mirror_system__c
+  label: 是否有镜像系统
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: online_issue_follow_up_for__c
+  label: 线上问题跟进表
+- api: travelBudget__c
+  label: 停用_商旅客户全量月GMV预估（客户总预算）
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: out_owner
+  label: 外部负责人
+- api: es_backend_account_passwor__c
+  label: ES后台账号密码（如有）
+- api: exit_time__c
+  label: 退场时间
+- api: owner
+  label: 负责人
+- api: h_other_car_supplier_name__c
+  label: 用车其他供应商名称
+- api: training_manual__c
+  label: 培训手册
+- api: upload_business_license__c
+  label: 上传营业执照
+- api: customer_level__c
+  label: 客户等级
+- api: business_opportunity_owner__c
+  label: 停用_商机负责人审批意见
+- api: usage_category__c
+  label: 已合作品类
+  options:
+  - label: 机票
+    value: '1'
+  - label: 酒店
+    value: '2'
+  - label: 火车票
+    value: '3'
+  - label: 用车
+    value: '4'
+  - label: 其他
+    value: other
+- api: upload_photo__c
+  label: 上传照片
+- api: business_travel_other_supp__c
+  label: 停用_商旅其他供应商名称
+- api: last_modified_by
+  label: 最后修改人
+- api: is_trained__c
+  label: 是否已培训
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: settlement_method__c
+  label: 结算方式
+  options:
+  - label: 授信
+    value: '1'
+  - label: 预存
+    value: '2'
+  - label: 个垫
+    value: '3'
+  - label: 其他
+    value: other
+- api: xsyId__c
+  label: 销售易数据ID
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: h_carBudget__c
+  label: 用车客户全量月GMV预估（客户总预算）
+- api: solutionType__c
+  label: 产品方案
+  options:
+  - label: 管理API+企业版APP
+    value: '1'
+  - label: 管理API+H5
+    value: '2'
+  - label: webapp
+    value: '3'
+  - label: 平台对接
+    value: '4'
+  - label: H5单点对接
+    value: '5'
+  - label: 企业版APP+企业版H5+管理API
+    value: '6'
+  - label: 企业版APP+管理API
+    value: '7'
+  - label: 企业版H5+管理API
+    value: '8'
+  - label: 企业版H5单点对接
+    value: '9'
+  - label: 其他
+    value: other
+- api: other_train_ticket_paralle__c
+  label: 其他火车票并行供应商
+- api: does_customer_need_to_tria__c
+  label: 停用_客户是否需要试用后方可切换（用车）
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: business_opportunity_type__c
+  label: 商机业务类型
+  options:
+  - label: 用车拉新商机
+    value: default__c
+  - label: 用车渗透商机
+    value: businessType10__c
+  - label: 用车续约商机
+    value: businessType9__c
+  - label: 商旅拉新商机
+    value: businessType13__c
+  - label: 商旅渗透商机
+    value: enduser_osOpp__c
+  - label: 商旅续约商机
+    value: businessType14__c
+  - label: 拓展代理商商机
+    value: opp_channel__c
+  - label: 拓展生态平台商机
+    value: opp_es__c
+  - label: 其他
+    value: other
+- api: launch_time_axis__c
+  label: 上线时间轴
+- api: other_parallel_air_ticket__c
+  label: 其他机票并行供应商
+- api: h_business_travel_other_supp__c
+  label: 商旅其他供应商名称
+- api: h_supplier_name_car__c
+  label: 用车并行供应商名称
+  options:
+  - label: 高德
+    value: '1'
+  - label: 畅行
+    value: '2'
+  - label: T3
+    value: '3'
+  - label: 曹操
+    value: '4'
+  - label: 神州
+    value: '5'
+  - label: 分贝通
+    value: '6'
+  - label: 在途
+    value: '7'
+  - label: 如祺
+    value: '8'
+  - label: 差旅管家
+    value: '9'
+  - label: 易企出行
+    value: '10'
+  - label: 易快报
+    value: '11'
+  - label: 合思
+    value: '12'
+  - label: 百度出行
+    value: '13'
+  - label: 美团
+    value: '14'
+  - label: 胜意
+    value: '15'
+  - label: 途径
+    value: '16'
+  - label: 首汽
+    value: '17'
+  - label: Petal
+    value: '18'
+  - label: 其他
+    value: '19'
+  - label: 其他（标准）
+    value: other

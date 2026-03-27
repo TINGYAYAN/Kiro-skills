@@ -1,0 +1,389 @@
+fields:
+- api: AccountManagement__c
+  label: 账户管理方式
+- api: lock_rule
+  label: 锁定规则
+- api: Theindustry__c
+  label: 行业
+- api: Trainticket__c
+  label: 火车票
+  options:
+  - label: 代打
+    value: '1'
+  - label: 非代打
+    value: '2'
+  - label: 其他
+    value: other
+- api: Periodofaccount__c
+  label: 账期
+- api: Protocoltemplate__c
+  label: 协议模板
+  options:
+  - label: 标准模板
+    value: '1'
+  - label: 非标模板
+    value: '2'
+  - label: 其他
+    value: other
+- api: customItem67__c
+  label: 企业用车场景
+- api: xsy_name__c
+  label: 销售易客户对接人编号
+- api: ContactPerson1__c
+  label: 联系人2
+- api: Cooperation1__c
+  label: 是否集团合作
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: Customer__c
+  label: 用车商机
+- api: Dayofbill__c
+  label: 账单日
+- api: Types__c
+  label: 高潜类型
+  options:
+  - label: 账户放量
+    value: '1'
+  - label: 分子公司
+    value: '2'
+  - label: 场景渗透
+    value: '3'
+  - label: 其他
+    value: '4'
+  - label: 其他（标准）
+    value: other
+- api: Dockingsystem1__c
+  label: 商旅对接系统
+- api: Dockinganddocking1__c
+  label: 对接方案
+  options:
+  - label: 企业版APP
+    value: '1'
+  - label: H5
+    value: '2'
+  - label: 管理API
+    value: '3'
+  - label: 用车API
+    value: '4'
+  - label: Webapp
+    value: '5'
+  - label: 其他
+    value: other
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: Methodofbilling__c
+  label: 开票方式
+  options:
+  - label: 集团统一开票
+    value: '1'
+  - label: 拆分账单开票
+    value: '2'
+  - label: 其他
+    value: other
+- api: owner_department
+  label: 负责人主属部门
+- api: Travelpolicy__c
+  label: 客户差旅政策
+- api: Protocol2__c
+  label: 酒店协议
+- api: quota__c
+  label: 授信额度
+- api: Valueaddedbygift__c
+  label: 是否赠送增值服务
+  options:
+  - label: 平台服务费
+    value: '1'
+  - label: 保险
+    value: '2'
+  - label: 用车报告
+    value: '3'
+  - label: VIP客服
+    value: '4'
+  - label: 非随单收入（如一次性API对接费）
+    value: '5'
+  - label: 无
+    value: '6'
+  - label: 其他
+    value: other
+- api: Betagainsteachother__c
+  label: 是否有对赌条约
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: customItem72__c
+  label: 用车潜力月GMV预估（滴滴预算）
+- api: Typeofscheme__c
+  label: 方案类型
+- api: Twoplaceapproach1__c
+  label: 联系方式2
+- api: Twoplaceapproach__c
+  label: 联系方式1
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: Continuousbusiness__c
+  label: 是否有持续性商务政策
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: data_own_department
+  label: 归属部门
+- api: Highdive__c
+  label: 是否高潜
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: travelPlanSuccessor__c
+  label: 商旅计划交接人
+- api: name
+  label: 主属性
+- api: Protocol__c
+  label: 航司协议
+- api: Minutesofmeeting__c
+  label: 决策人沟通会议纪要
+- api: _id
+  label: _id
+- api: carBudget__c
+  label: 用车客户总预算（月度）
+- api: ContactPerson__c
+  label: 联系人1
+- api: Dockingsystem__c
+  label: 对接系统
+- api: Numberofpeople__c
+  label: 用车人数
+- api: tenant_id
+  label: tenant_id
+- api: isTransferTravelOpp__c
+  label: 是否划转商旅商机
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: Valueaddedrevenue__c
+  label: 年化增值收入
+- api: Raceinformation__c
+  label: 竞对信息
+- api: customItem69__c
+  label: 用车计划交接人
+- api: Dockingscheme2__c
+  label: 商旅对接方案
+  options:
+  - label: 机票
+    value: '1'
+  - label: 酒店
+    value: '2'
+  - label: 火车票
+    value: '3'
+  - label: 其他
+    value: other
+- api: expiration__c
+  label: 合同到期日
+- api: Interestedinothercategories__c
+  label: 其他感兴趣品类
+  options:
+  - label: 商旅
+    value: '1'
+  - label: 代驾
+    value: '2'
+  - label: 费控
+    value: '3'
+  - label: 无
+    value: '4'
+  - label: 其他
+    value: other
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: Hotel1__c
+  label: 酒店
+  options:
+  - label: 单体协议
+    value: '1'
+  - label: 酒店集团
+    value: '2'
+  - label: 其他
+    value: other
+- api: Airticket__c
+  label: 机票
+  options:
+  - label: 航线
+    value: '1'
+  - label: 百分比
+    value: '2'
+  - label: 保险
+    value: '3'
+  - label: 订单
+    value: '4'
+  - label: 其他
+    value: other
+- api: Demandforcooperation__c
+  label: 合作诉求
+- api: is_deleted
+  label: is_deleted
+- api: Grantofcredit__c
+  label: 是否授信
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: Scaleofscale__c
+  label: 员工规模
+  options:
+  - label: 1-200人
+    value: '1'
+  - label: 200-500人
+    value: '2'
+  - label: 500-1000人
+    value: '3'
+  - label: 1000人以上
+    value: '4'
+  - label: 其他
+    value: other
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: approval__c
+  label: 审批方式
+  options:
+  - label: 行前审批
+    value: '1'
+  - label: 行后审批
+    value: '2'
+  - label: 无审批
+    value: '3'
+  - label: 其他
+    value: other
+- api: out_owner
+  label: 外部负责人
+- api: GMV__c
+  label: 年化GMV
+- api: owner
+  label: 负责人
+- api: Splitting__c
+  label: 账单拆分
+  options:
+  - label: 示例选项
+    value: option1
+  - label: 成本中心拆账
+    value: '1'
+  - label: 部门拆账
+    value: '2'
+  - label: 其他
+    value: other
+- api: Raceinformation1__c
+  label: 商旅竞对信息
+- api: last_modified_time
+  label: 最后修改时间
+- api: Customerpainpoints__c
+  label: 客户痛点
+- api: customItem70__c
+  label: 预计交接时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: customItem66__c
+  label: 用车城市
+- api: travelOpportunity__c
+  label: 商旅商机
+- api: ContentofService__c
+  label: 日常服务内容
+- api: Methodofcharge__c
+  label: 增值收费方式
+  options:
+  - label: 平台服务费
+    value: '1'
+  - label: 保险
+    value: '2'
+  - label: 用车报告
+    value: '3'
+  - label: VIP客服
+    value: '4'
+  - label: 非随单收入（如一次性API对接费）
+    value: '5'
+  - label: 其他
+    value: other
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: Theoriginal__c
+  label: 原有用车管控方式
+- api: xsyId__c
+  label: 销售易数据ID
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: Renewalofcontract__c
+  label: 合同续签
+  options:
+  - label: 自动续签
+    value: '1'
+  - label: 不自动续签
+    value: '2'
+  - label: 多年签约
+    value: '3'
+  - label: 其他
+    value: other
+- api: Address__c
+  label: 公司地址
+- api: OtherConfigurations__c
+  label: 其他功能配置
+  options:
+  - label: 成本中心
+    value: '1'
+  - label: 敏感订单
+    value: '2'
+  - label: 升舱
+    value: '3'
+  - label: 远途调度
+    value: '4'
+  - label: 拼车
+    value: '5'
+  - label: 同时呼叫
+    value: '6'
+  - label: 无
+    value: '7'
+  - label: 其他
+    value: other
+- api: TheGroup__c
+  label: 集团名称（中文）

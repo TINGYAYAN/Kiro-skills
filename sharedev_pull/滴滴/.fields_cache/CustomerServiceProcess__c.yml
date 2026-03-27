@@ -1,0 +1,1885 @@
+fields:
+- api: customItem29__c
+  label: 差旅申请入口
+  options:
+  - label: 请按需选择
+    value: '1'
+  - label: 开
+    value: '2'
+  - label: 关
+    value: '3'
+  - label: 其他
+    value: other
+- api: addStaffNotice__c
+  label: 添加员工自动发送短信
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 请按需选择
+    value: '3'
+  - label: 其他
+    value: other
+- api: businessLicense__c
+  label: 加盖公章营业执照
+- api: show_supplement_box_for_5__c
+  label: 改签是否展示员工补充框5
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: current_company_admin_agre2__c
+  label: 当前企业管理员同意证明2
+- api: customItem41__c
+  label: 备注
+- api: international_route__c
+  label: 国际航线
+  options:
+  - label: 隐藏
+    value: '1'
+  - label: 展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: business_type_name__c
+  label: 业务类型名称
+- api: unlimited_enterprise_depar__c
+  label: 企业部门/项目数量不受限制
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: employee_side_extension_1__c
+  label: 员工侧的填单页、订单详情页展示扩展字段1
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: customIername__c
+  label: 修改后名称
+- api: batch_recommend_low_price__c
+  label: 批量推荐低价火车票
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: customItem47__c
+  label: 注意事项
+- api: application_description_1__c
+  label: 申请说明1
+- api: businessLicenseA__c
+  label: 加盖公章的A公司营业执照
+- api: show_supplement_box1__c
+  label: 退票是否展示员工补充框1
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: show_supplement_box_for_10__c
+  label: 改签是否展示员工补充框10
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: paymentMethod__c
+  label: 支付方式
+  options:
+  - label: 请按需选择
+    value: '1'
+  - label: 企业支付
+    value: '2'
+  - label: 个垫
+    value: '3'
+  - label: 企业支付+个垫
+    value: '4'
+  - label: 其他
+    value: other
+- api: pending_confirmation_sms_count2__c
+  label: 待确认员工自动发送短信 - 短信数量2
+  options:
+  - label: '1'
+    value: '1'
+  - label: '2'
+    value: '2'
+  - label: '3'
+    value: '3'
+  - label: '4'
+    value: '4'
+  - label: '5'
+    value: '5'
+  - label: '6'
+    value: '6'
+  - label: '7'
+    value: '7'
+  - label: '8'
+    value: '8'
+  - label: '9'
+    value: '9'
+  - label: '10'
+    value: '10'
+  - label: '11'
+    value: '11'
+  - label: '12'
+    value: '12'
+  - label: '13'
+    value: '13'
+  - label: '14'
+    value: '14'
+  - label: '15'
+    value: '15'
+  - label: '16'
+    value: '16'
+  - label: '17'
+    value: '17'
+  - label: '18'
+    value: '18'
+  - label: '19'
+    value: '19'
+  - label: '20'
+    value: '20'
+  - label: '21'
+    value: '21'
+  - label: '22'
+    value: '22'
+  - label: '23'
+    value: '23'
+  - label: '24'
+    value: '24'
+  - label: '25'
+    value: '25'
+  - label: '26'
+    value: '26'
+  - label: '27'
+    value: '27'
+  - label: '28'
+    value: '28'
+  - label: '29'
+    value: '29'
+  - label: '30'
+    value: '30'
+  - label: '31'
+    value: '31'
+  - label: '32'
+    value: '32'
+  - label: '33'
+    value: '33'
+  - label: '34'
+    value: '34'
+  - label: '35'
+    value: '35'
+  - label: '36'
+    value: '36'
+  - label: '37'
+    value: '37'
+  - label: '38'
+    value: '38'
+  - label: '39'
+    value: '39'
+  - label: '40'
+    value: '40'
+  - label: '41'
+    value: '41'
+  - label: '42'
+    value: '42'
+  - label: '43'
+    value: '43'
+  - label: '44'
+    value: '44'
+  - label: '45'
+    value: '45'
+  - label: '46'
+    value: '46'
+  - label: '47'
+    value: '47'
+  - label: '48'
+    value: '48'
+  - label: '49'
+    value: '49'
+  - label: '50'
+    value: '50'
+  - label: '51'
+    value: '51'
+  - label: '52'
+    value: '52'
+  - label: '53'
+    value: '53'
+  - label: '54'
+    value: '54'
+  - label: '55'
+    value: '55'
+  - label: '56'
+    value: '56'
+  - label: '57'
+    value: '57'
+  - label: '58'
+    value: '58'
+  - label: '59'
+    value: '59'
+  - label: '60'
+    value: '60'
+  - label: '61'
+    value: '61'
+  - label: '62'
+    value: '62'
+  - label: '63'
+    value: '63'
+  - label: '64'
+    value: '64'
+  - label: '65'
+    value: '65'
+  - label: '66'
+    value: '66'
+  - label: '67'
+    value: '67'
+  - label: '68'
+    value: '68'
+  - label: '69'
+    value: '69'
+  - label: '70'
+    value: '70'
+  - label: '71'
+    value: '71'
+  - label: '72'
+    value: '72'
+  - label: '73'
+    value: '73'
+  - label: '74'
+    value: '74'
+  - label: '75'
+    value: '75'
+  - label: '76'
+    value: '76'
+  - label: '77'
+    value: '77'
+  - label: '78'
+    value: '78'
+  - label: '79'
+    value: '79'
+  - label: '80'
+    value: '80'
+  - label: '81'
+    value: '81'
+  - label: '82'
+    value: '82'
+  - label: '83'
+    value: '83'
+  - label: '84'
+    value: '84'
+  - label: '85'
+    value: '85'
+  - label: '86'
+    value: '86'
+  - label: '87'
+    value: '87'
+  - label: '88'
+    value: '88'
+  - label: '89'
+    value: '89'
+  - label: '90'
+    value: '90'
+  - label: '91'
+    value: '91'
+  - label: '92'
+    value: '92'
+  - label: '93'
+    value: '93'
+  - label: '94'
+    value: '94'
+  - label: '95'
+    value: '95'
+  - label: '96'
+    value: '96'
+  - label: '97'
+    value: '97'
+  - label: '98'
+    value: '98'
+  - label: '99'
+    value: '99'
+  - label: '100'
+    value: '100'
+  - label: 无限
+    value: '101'
+  - label: 其他
+    value: other
+- api: ticket_refund_sms_block_am__c
+  label: 退票短信、确认单屏蔽退还金额
+  options:
+  - label: 屏蔽
+    value: '1'
+  - label: 不屏蔽
+    value: '2'
+  - label: 其他
+    value: other
+- api: version
+  label: version
+- api: custom_reissue_reason_8__c
+  label: 改签原因自定义文案8
+- api: ticket_refund_reason_custo7__c
+  label: 退票原因自定义文案7
+- api: custom_reissue_reason_2__c
+  label: 改签原因自定义文案2
+- api: international_flight__c
+  label: 国际机票
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: customItem46__c
+  label: 第三方运力服务（聚合运力）
+  options:
+  - label: 关
+    value: '1'
+  - label: 其他
+    value: other
+- api: cancellationInstructions__c
+  label: 加盖公章注销说明
+- api: businessLicenseB__c
+  label: 加盖公章的B公司营业执照
+- api: cancel_reason__c
+  label: 注销原因
+- api: show_supplement_box7_for_r__c
+  label: 退票是否展示员工补充框7
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: two_category_new_customer__c
+  label: 两个品类拉新商机owner是否为同一人
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: ticket_refund_reason_custo6__c
+  label: 退票原因自定义文案6
+- api: multi_cost_center_selectio__c
+  label: 多成本中心选择页的展示方案
+  options:
+  - label: 平铺展示
+    value: '1'
+  - label: 树状结构展示
+    value: '2'
+  - label: 不展示数据，仅支持精确搜索
+    value: '3'
+  - label: 其他
+    value: other
+- api: youxiuurl__c
+  label: 注销说明模版下载地址(优秀)
+- api: show_supplement_box5_for_r__c
+  label: 退票是否展示员工补充框5
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: custom_reissue_reason_7__c
+  label: 改签原因自定义文案7
+- api: sharedMode__c
+  label: 国内酒店合住模式
+  options:
+  - label: 请按需选择
+    value: '1'
+  - label: 公司维护设置合住上浮规则
+    value: '2'
+  - label: 制度维度设置合住差标金额
+    value: '3'
+  - label: 其他
+    value: other
+- api: personal_booking_unauthori__c
+  label: 本人预订未授权取票拦截下单
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: out_tenant_id
+  label: 外部企业
+- api: add_employee_auto_send_sms_api__c
+  label: 添加员工自动发送短信 - API添加已传参为准
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: specialInstructions__c
+  label: 特殊说明
+- api: ssc_review_pass_time__c
+  label: SSC审核通过时间
+- api: customItem35__c
+  label: 拼车范围
+  options:
+  - label: 请按需选择
+    value: '1'
+  - label: 企业内部拼车
+    value: '2'
+  - label: 普通拼车
+    value: '3'
+  - label: 其他
+    value: other
+- api: employee_side_extension_2__c
+  label: 员工侧的填单页、订单详情页展示扩展字段2
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: contract_attachment__c
+  label: 合同附件
+- api: domestic_hotel_service__c
+  label: 国内酒店-服务费纳入差标的展示
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: station_status_real_ticket__c
+  label: 已进站/出站真实票状态
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: application_description_2__c
+  label: 申请说明2
+- api: unlimited_employee_count__c
+  label: 不限制企业员工人数
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: customItem48__c
+  label: 企业版包车功能开关
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: multi_cost_center_cascadin__c
+  label: 多成本中心支持级联能力
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: single_choice__c
+  label: 角色内展示允许企业按照其他维度管理数据权限
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: multi_cost_center_support__c
+  label: 多成本中心支持配置启用范围
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: custom_reissue_reason_4__c
+  label: 改签原因自定义文案4
+- api: long_distance_mileage_cont__c
+  label: 长途里程管控
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: private_block__c
+  label: 因私屏蔽
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: block_reassignment_in_priv__c
+  label: 屏蔽因私场景下的改派能力
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: show_supplement_box10_for_r__c
+  label: 退票是否展示员工补充框10
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: customItem31__c
+  label: 个垫行程保护关闭申请模版下载地址
+- api: travel_day_limit_accumulat__c
+  label: 差旅日限额是否累计
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: application_form_extension__c
+  label: 申请单拓展字段名称配置
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: campaign_audience_package__c
+  label: 开通人群包
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: add_employee_auto_send_sms__c
+  label: 添加员工自动发送短信说明
+- api: send_sms_to_all_occupants__c
+  label: 向所有入住人发送短信通知
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: additional_category_owner__c
+  label: 另外品类拉新商机负责人
+- api: owner_department
+  label: 负责人主属部门
+- api: feature_config__c
+  label: 功能配置项
+  options:
+  - label: 短信别名修改申请
+    value: '1'
+  - label: 企业账户初始管理员变更申请
+    value: '2'
+  - label: 增删员工短信通知申请
+    value: '3'
+  - label: 个垫行程保护关闭申请
+    value: '4'
+  - label: 账户注销申请
+    value: '5'
+  - label: 企业名称变更申请—工商局（市场监督管理局）注册公司名称变更
+    value: '6'
+  - label: 企业名称变更申请—A、B公司账户权利与义务转移
+    value: '7'
+  - label: 用车途经点功能开通
+    value: '8'
+  - label: 用车车型管控入口开通
+    value: '9'
+  - label: 申请出差/申请用车开关
+    value: '10'
+  - label: 机票火车票退票次数释放申请
+    value: '11'
+  - label: 企业拼车功能开通申请
+    value: '12'
+  - label: 用车凭证（叫车凭证）功能开通
+    value: '13'
+  - label: 酒店合住开关申请
+    value: '14'
+  - label: 新审批流开通
+    value: '15'
+  - label: 第三方运力服务（聚合运力）关闭
+    value: '16'
+  - label: 开通企业版包车功能
+    value: '17'
+  - label: 人员、部门/项目数量限制放开
+    value: '18'
+  - label: 多成本中心
+    value: '19'
+  - label: 申请单强制取消/任意修改
+    value: '20'
+  - label: 一人多企
+    value: '21'
+  - label: 开通人群包
+    value: '22'
+  - label: 多人多差标开通
+    value: '23'
+  - label: 差标优先级
+    value: '24'
+  - label: 角色内展示允许企业按照其他维度管理数据权限
+    value: '25'
+  - label: 机票改签可选日期范围控制
+    value: '26'
+  - label: 机票改签差价&手续费承担方
+    value: '27'
+  - label: 机票改签升舱规则
+    value: '28'
+  - label: 国内机票退改签原因管控
+    value: '29'
+  - label: 火车票改签可选日期范围控制
+    value: '30'
+  - label: 火车票退票/改签原因自定义
+    value: '31'
+  - label: 邮箱邀请员工时允许修改无手机号员工信息
+    value: '32'
+  - label: 支持无手机号员工为直属上级
+    value: '33'
+  - label: 差旅单瀑布流交互白名单
+    value: '34'
+  - label: 商旅因私入口开/关
+    value: '35'
+  - label: 国内机票工作时间管控
+    value: '36'
+  - label: 特殊城市用车效力
+    value: '37'
+  - label: 商旅个人垫付（员工开票报销/第三方费控报销）管控
+    value: '38'
+  - label: 用车个垫不合规发单拦截
+    value: '39'
+  - label: 申请单拓展字段名称配置
+    value: '40'
+  - label: 协议酒店及房型排序置顶开关
+    value: '41'
+  - label: 长途里程管控+长途里程超标管控方式
+    value: '42'
+  - label: 国内酒店-服务费纳入差标的展示
+    value: '43'
+  - label: 酒店预定发送短信通知
+    value: '44'
+  - label: 因公/因私设置预定酒店黑名单
+    value: '45'
+  - label: 机票按制度隐藏公务舱/头等舱
+    value: '46'
+  - label: 用车/差旅申请单-“取消申请”按钮隐藏
+    value: '47'
+  - label: 机票/火车票差旅申请单取消状态下支持订单改签
+    value: '48'
+  - label: ES后台制度名称长度校验放开
+    value: '49'
+  - label: 用车屏蔽因公/因私场景下的改派能力
+    value: '50'
+  - label: 机酒火超标原因自定义（RC自定义配置）
+    value: '51'
+  - label: 机票退票短信、确认单屏蔽退还金额
+    value: '52'
+  - label: 国内酒店-跨申请单合住的展示
+    value: '53'
+  - label: 火车票已进站/出站真实票状态（火车票验票能力）
+    value: '54'
+  - label: 用车差旅日限额是否累计
+    value: '55'
+  - label: 用车每单限额超标管控+用车每单限额支持设置特殊地点
+    value: '56'
+  - label: 派单策略开通
+    value: '57'
+  - label: 国内酒店-服务费/平台使用费纳入差标管控
+    value: '58'
+  - label: 机火同屏推荐开/关
+    value: '59'
+  - label: 国内机票不参与比价航司名单配置（国内航司资源屏蔽）
+    value: '60'
+  - label: 国内火车票本人预订未授权取票拦截下单开关
+    value: '61'
+  - label: 特殊注销
+    value: '62'
+  - label: 酒店屏蔽普票资源
+    value: '63'
+  - label: 其他
+    value: other
+- api: show_supplement_box8_for_r__c
+  label: 退票是否展示员工补充框8
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: switch__c
+  label: 用车途经点开关
+  options:
+  - label: 请按需选择
+    value: '1'
+  - label: 开
+    value: '2'
+  - label: 其他
+    value: other
+- api: create_time
+  label: 创建时间
+- api: hidden_cancel_button_in_ap__c
+  label: 申请单-取消申请按钮隐藏
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: created_by
+  label: 创建人
+- api: attachment__c
+  label: 上传变更说明
+- api: show_supplement_box_for_1__c
+  label: 改签是否展示员工补充框1
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: changedComponyName__c
+  label: 变更后公司名称
+- api: explanation__c
+  label: 说明
+- api: name
+  label: 单据编号
+- api: name__c
+  label: 销售易单据编号
+- api: es_backend_policy_name_len__c
+  label: ES后台制度名称长度校验放开
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: confirmStaffNotice__c
+  label: 待确认员工自动发送短信
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 请按需选择
+    value: '3'
+  - label: 其他
+    value: other
+- api: show_supplement_box4_for_r__c
+  label: 退票是否展示员工补充框4
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: lock_user
+  label: 加锁人
+- api: ticket_refund_fee_responsi__c
+  label: 机票改签混付差价&手续费承担方
+  options:
+  - label: 全额企业承担
+    value: '1'
+  - label: 全额个人承担
+    value: '2'
+  - label: 用户自行选择（企业承担or个人承担二选一）
+    value: '3'
+  - label: 其他
+    value: other
+- api: international_or_hongkong__c
+  label: 国际/中国港澳台酒店
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: custom_reissue_reason_9__c
+  label: 改签原因自定义文案9
+- api: out_owner
+  label: 外部负责人
+- api: support_employee_join_othe__c
+  label: 支持当前企业员工加入其他企业
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: support_no_mobile_employee__c
+  label: 支持无手机员工为直属上级
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: custom_reissue_reason_3__c
+  label: 改签原因自定义文案3
+- api: owner
+  label: 负责人
+- api: opportunity_name__c
+  label: 商机名称
+- api: show_supplement_box_for_6__c
+  label: 改签是否展示员工补充框6
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: xsyId__c
+  label: 销售易数据ID
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 账户管理配置申请
+    value: ''
+  - label: 短信别名修改申请（禁用）
+    value: ''
+  - label: 企业账户初始管理员变更申请（禁用）
+    value: ''
+  - label: 增删员工短信通知申请（禁用）
+    value: ''
+  - label: 个垫行程保护关闭申请（禁用）
+    value: ''
+  - label: 账户注销申请（禁用）
+    value: ''
+  - label: 企业名称变更申请—工商局（市场监督管理局）注册公司名称变更（禁用）
+    value: ''
+  - label: 企业名称变更申请—A、B公司账户权利与义务转移（禁用）
+    value: ''
+  - label: 用车途经点功能开通（禁用）
+    value: ''
+  - label: 用车车型管控入口开通（禁用）
+    value: ''
+  - label: 申请出差/申请用车开关（禁用）
+    value: ''
+  - label: 机票火车票退票次数释放申请（禁用）
+    value: ''
+  - label: 企业拼车功能开通申请（禁用）
+    value: ''
+  - label: 用车凭证（叫车凭证）功能开通（禁用）
+    value: ''
+  - label: 酒店合住开关申请（禁用）
+    value: ''
+  - label: 新审批流开通（禁用）
+    value: ''
+  - label: 第三方运力服务（聚合运力）关闭（禁用）
+    value: ''
+  - label: 开通企业版包车功能（禁用）
+    value: ''
+- api: work_related_blocked_conte__c
+  label: 屏蔽内容
+- api: special_city_vehicle_effec__c
+  label: 特殊城市用车效力
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: ticket_refund_reason_custo5__c
+  label: 退票原因自定义文案5
+- api: customItem50__c
+  label: 抄写内容
+- api: approval_status__c
+  label: 审核状态
+  options:
+  - label: 待提交
+    value: '1'
+  - label: 审批中
+    value: '2'
+  - label: 审批通过
+    value: '3'
+  - label: 审批拒绝
+    value: '4'
+  - label: 撤回
+    value: '5'
+  - label: 历史数据
+    value: '6'
+  - label: 其他
+    value: other
+- api: lock_rule
+  label: 锁定规则
+- api: pending_employee_auto_send_sms_api__c
+  label: 待确认员工自动发送短信 - API添加已传参为准
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: reasonForChange1__c
+  label: 变更原因说明
+- api: top_direct_plus_single_pro__c
+  label: 直连+单体协议房型置顶
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: customItem44__c
+  label: 功能说明
+- api: pending_confirmation_emplo__c
+  label: 待确认员工自动发送短信说明
+- api: sms_name_not_masked__c
+  label: 短信姓名不掩码
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: train_ticket_reschedule_da__c
+  label: 火车票改签可选日期范围控制
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: pending_confirmation_emplo1__c
+  label: 待确认员工自动发送短信 - 时间范围1
+  options:
+  - label: 24小时
+    value: '1'
+  - label: 3天
+    value: '2'
+  - label: 7天
+    value: '3'
+  - label: 1个月
+    value: '4'
+  - label: 其他
+    value: other
+- api: bureauCertificate__c
+  label: 市场监督管理局提供的变更通知（带市场监督管理局章）/国家企业信用信息公示系统名称变更截图
+- api: carInlet__c
+  label: 用车申请入口
+  options:
+  - label: 请按需选择
+    value: '1'
+  - label: 开
+    value: '2'
+  - label: 关
+    value: '3'
+  - label: 其他
+    value: other
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: delete_employee_auto_sms_t__c
+  label: 删除员工自动发送短信 - 时间范围
+  options:
+  - label: 24小时
+    value: ceYE3m9vq
+  - label: 3天
+    value: tw0MuhBC7
+  - label: 7天
+    value: 27Atc35Qp
+  - label: 1个月
+    value: dzG8epQk2
+  - label: 其他
+    value: other
+- api: travel_expense_waterfall_w__c
+  label: 差旅单瀑布流交互白名单
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: demand_background__c
+  label: 需求背景
+- api: ticket_refund_reason_custo4__c
+  label: 退票原因自定义文案4
+- api: travel_personal_advance_co__c
+  label: 商旅个人垫付管控
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: approvalProcess__c
+  label: 新审批流开通
+  options:
+  - label: 请按需选择
+    value: '1'
+  - label: 开
+    value: '2'
+  - label: 其他
+    value: other
+- api: customItem26__c
+  label: 注销说明模版下载地址
+- api: custom_reissue_reason_5__c
+  label: 改签原因自定义文案5
+- api: delete_employee_sms_descri__c
+  label: 删除员工自动发送短信说明
+- api: show_supplement_box_for_8__c
+  label: 改签是否展示员工补充框8
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: domestic_hotel__c
+  label: 国内酒店
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: sms_confirmation_refund_am__c
+  label: 短信、确认单屏蔽退还金额
+  options:
+  - label: 屏蔽
+    value: '1'
+  - label: 不屏蔽
+    value: '2'
+  - label: 其他
+    value: other
+- api: support_other_employees_jo__c
+  label: 支持其他企业员工加入当前企业
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: customItem33__c
+  label: 机票退票释放预定次数
+  options:
+  - label: 请按需选择
+    value: '1'
+  - label: 自愿/非自愿不释放
+    value: '2'
+  - label: 自愿退票不释放，非自愿退票释放
+    value: '3'
+  - label: 自愿/非自愿都释放
+    value: '5'
+  - label: 其他
+    value: other
+- api: tripartiteAgreement__c
+  label: 三方权利义务转让协议
+- api: domestic_air_routes__c
+  label: 国内航线
+  options:
+  - label: 隐藏
+    value: '1'
+  - label: 展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: ext_field1__c
+  label: 拓展字段1
+- api: cancellationReason__c
+  label: 注销原因说明
+- api: tenant_id
+  label: tenant_id
+- api: current_company_admin_agre__c
+  label: 当前企业管理员同意证明1
+- api: ticket_refund_reason_custo9__c
+  label: 退票原因自定义文案9
+- api: multi_cost_center_access__c
+  label: 多成本中心能力开通
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: show_supplement_box_for_7__c
+  label: 改签是否展示员工补充框7
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: single_order_limit_support__c
+  label: 每单限额支持设置特殊地点
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: allow_any_editing_of_appli__c
+  label: 申请单任意修改
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: newBusinessLicense__c
+  label: 加盖公章的新公司营业执照
+- api: customItem43__c
+  label: 审批流开通说明
+- api: ticket_refund_reason_custo10__c
+  label: 退票原因自定义文案10
+- api: order_dispatch_strategy_sw__c
+  label: 派单策略开关
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: ext_field2__c
+  label: 拓展字段2
+- api: customItem49__c
+  label: 注意事项：
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: application_cancellation_r__c
+  label: 申请单取消-改签
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: customItem32__c
+  label: 管理员变更模版下载地址
+- api: business_block__c
+  label: 因公屏蔽
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: show_supplement_box_for_2__c
+  label: 改签是否展示员工补充框2
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: demand_content__c
+  label: 需求内容
+- api: domestic_flight__c
+  label: 国内机票
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: pending_confirmation_emplo2__c
+  label: 待确认员工自动发送短信 - 时间范围2
+  options:
+  - label: 1个月
+    value: '1'
+  - label: 2个月
+    value: '2'
+  - label: 6个月
+    value: '3'
+  - label: 1年
+    value: '4'
+  - label: 其他
+    value: other
+- api: ticket_refund_reason_custo__c
+  label: 退票原因自定义文案1
+- api: custom_reissue_reason_10__c
+  label: 改签原因自定义文案10
+- api: generationTime2__c
+  label: 预约单生成凭证时间（秒）
+- api: auto_send_sms_time_range__c
+  label: 添加员工自动发送短信 - 时间范围
+  options:
+  - label: 24小时
+    value: '1'
+  - label: 3天
+    value: '2'
+  - label: 7天
+    value: '3'
+  - label: 1个月
+    value: '4'
+  - label: 其他
+    value: other
+- api: force_cancel_application__c
+  label: 申请单强制取消
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: deleteStaffNotice__c
+  label: 删除员工自动发送短信
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 请按需选择
+    value: '3'
+  - label: 其他
+    value: other
+- api: refund_change_cancellation__c
+  label: 退改签原因管控
+  options:
+  - label: 仅开启改签
+    value: '1'
+  - label: 仅开启退票
+    value: '2'
+  - label: 需开启改签+退票
+    value: '3'
+  - label: 其他
+    value: other
+- api: block_reassignment_for_off__c
+  label: 屏蔽因公场景下的改派能力
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: customer__c
+  label: 客户名称
+- api: current_customer_ticket__c
+  label: 当前客户票据方案
+- api: pending_confirmation_sms_count1__c
+  label: 待确认员工自动发送短信 - 短信数量1
+  options:
+  - label: '1'
+    value: '1'
+  - label: '2'
+    value: '2'
+  - label: '3'
+    value: '3'
+  - label: '4'
+    value: '4'
+  - label: '5'
+    value: '5'
+  - label: '6'
+    value: '6'
+  - label: '7'
+    value: '7'
+  - label: '8'
+    value: '8'
+  - label: '9'
+    value: '9'
+  - label: '10'
+    value: '10'
+  - label: '11'
+    value: '11'
+  - label: '12'
+    value: '12'
+  - label: '13'
+    value: '13'
+  - label: '14'
+    value: '14'
+  - label: '15'
+    value: '15'
+  - label: '16'
+    value: '16'
+  - label: '17'
+    value: '17'
+  - label: '18'
+    value: '18'
+  - label: '19'
+    value: '19'
+  - label: '20'
+    value: '20'
+  - label: '21'
+    value: '21'
+  - label: '22'
+    value: '22'
+  - label: '23'
+    value: '23'
+  - label: '24'
+    value: '24'
+  - label: '25'
+    value: '25'
+  - label: '26'
+    value: '26'
+  - label: '27'
+    value: '27'
+  - label: '28'
+    value: '28'
+  - label: '29'
+    value: '29'
+  - label: '30'
+    value: '30'
+  - label: 其他
+    value: other
+- api: show_supplement_box_for_9__c
+  label: 改签是否展示员工补充框9
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: priority_of_difference_sta__c
+  label: 差标优先级
+  options:
+  - label: 按最新分配的
+    value: '1'
+  - label: '按制度分配的优先级: 员工>人群包>职级>部门>项目>全员'
+    value: '2'
+  - label: 其他
+    value: other
+- api: customItem34__c
+  label: 火车票退票释放预订次数
+  options:
+  - label: 请按需选择
+    value: '1'
+  - label: 不释放
+    value: '2'
+  - label: 释放
+    value: '3'
+  - label: 其他
+    value: other
+- api: illustrate__c
+  label: 用车途径点功能说明
+- api: telephone__c
+  label: 变更后手机号
+- api: top_hotel_direct_plus_sing__c
+  label: 直连+单体协议酒店置顶
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: ticket_refund_reason_custo8__c
+  label: 退票原因自定义文案8
+- api: is_consequences_understood__c
+  label: 是否已明确知晓注销带来的后果并自愿承担注销带来的所有风险
+  options:
+  - label: 已明确知晓并自愿承担所有风险
+    value: '1'
+  - label: 其他
+    value: other
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: custom_reissue_reason_1__c
+  label: 改签原因自定义文案1
+- api: show_supplement_box2_for_r__c
+  label: 退票是否展示员工补充框2
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: customItem51__c
+  label: 抄写信息
+- api: travel_reimbursement_metho__c
+  label: 商旅报销方式
+  options:
+  - label: 商旅-员工开票报销
+    value: '1'
+  - label: 商旅-第三方费控报销
+    value: '2'
+  - label: 其他
+    value: other
+- api: relevant_team
+  label: 相关团队
+- api: show_supplement_box_for_4__c
+  label: 改签是否展示员工补充框4
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: show_supplement_box3_for_r__c
+  label: 退票是否展示员工补充框3
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: ticket_refund_reason_custo3__c
+  label: 退票原因自定义文案3
+- api: auto_send_sms_count_for_ad__c
+  label: 添加员工自动发送短信 - 短信条数
+- api: data_own_department
+  label: 归属部门
+- api: auto_send_sms_count__c
+  label: 添加员工自动发送短信 - 短信数量
+  options:
+  - label: '1'
+    value: '1'
+  - label: '2'
+    value: '2'
+  - label: '3'
+    value: '3'
+  - label: '4'
+    value: '4'
+  - label: '5'
+    value: '5'
+  - label: '6'
+    value: '6'
+  - label: '7'
+    value: '7'
+  - label: '8'
+    value: '8'
+  - label: '9'
+    value: '9'
+  - label: '10'
+    value: '10'
+  - label: '11'
+    value: '11'
+  - label: '12'
+    value: '12'
+  - label: '13'
+    value: '13'
+  - label: '14'
+    value: '14'
+  - label: '15'
+    value: '15'
+  - label: '16'
+    value: '16'
+  - label: '17'
+    value: '17'
+  - label: '18'
+    value: '18'
+  - label: '19'
+    value: '19'
+  - label: '20'
+    value: '20'
+  - label: '21'
+    value: '21'
+  - label: '22'
+    value: '22'
+  - label: '23'
+    value: '23'
+  - label: '24'
+    value: '24'
+  - label: '25'
+    value: '25'
+  - label: '26'
+    value: '26'
+  - label: '27'
+    value: '27'
+  - label: '28'
+    value: '28'
+  - label: '29'
+    value: '29'
+  - label: '30'
+    value: '30'
+  - label: 其他
+    value: other
+- api: carSwitch__c
+  label: 用车高级管理车型展示组件开关
+  options:
+  - label: 请按需选择
+    value: '1'
+  - label: 开
+    value: '2'
+  - label: 其他
+    value: other
+- api: show_supplement_box9_for_r__c
+  label: 退票是否展示员工补充框9
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: train_ticket_refund_custom__c
+  label: 火车票退票原因自定义
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: rc_custom_config__c
+  label: RC自定义配置
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: _id
+  label: _id
+- api: long_distance_mileage_over__c
+  label: 长途里程超标管控方式
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: upgrade_rule__c
+  label: 改签升舱规则
+  options:
+  - label: 允许升舱
+    value: '1'
+  - label: 只能改相同舱等
+    value: '2'
+  - label: 其他
+    value: other
+- api: domestic_flight_work_time__c
+  label: 国内机票-工作时间管控展示
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: private_block_content__c
+  label: 因私屏蔽内容
+- api: custom_reissue_reason_6__c
+  label: 改签原因自定义文案6
+- api: enterpriseID__c
+  label: 企业ID
+- api: show_supplement_box_for_3__c
+  label: 改签是否展示员工补充框3
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: ticket_refund_reason_custo2__c
+  label: 退票原因自定义文案2
+- api: employee_side_extension_3__c
+  label: 员工侧的填单页、订单详情页展示扩展字段3
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: non_compliance_order_inter__c
+  label: 不合规发单拦截
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: is_deleted
+  label: is_deleted
+- api: domestic_hotel_shared_room__c
+  label: 国内酒店-跨申请单合住的展示
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: generationTime1__c
+  label: 实时单生成凭证时间（秒）
+- api: blocked_airlines__c
+  label: 屏蔽航司
+  options:
+  - label: 3U-四川航空
+    value: '1'
+  - label: 8L-祥鹏航空
+    value: '2'
+  - label: 9C-春秋航空
+    value: '3'
+  - label: CN-大新华航空
+    value: '4'
+  - label: CZ-南方航空
+    value: '5'
+  - label: GJ-长龙航空
+    value: '6'
+  - label: GS-天津航空
+    value: '7'
+  - label: GT-桂林航空
+    value: '8'
+  - label: GX-北部湾航空
+    value: '9'
+  - label: KY-昆明航空
+    value: '10'
+  - label: PN-西部航空
+    value: '11'
+  - label: NS-河北航空
+    value: '12'
+  - label: Y8-金鹏航空
+    value: '13'
+  - label: ZH-深圳航空
+    value: '14'
+  - label: OQ-重庆航空
+    value: '15'
+  - label: 9D-天骄航空
+    value: '16'
+  - label: 9H-长安航空
+    value: '17'
+  - label: DR-瑞丽航空
+    value: '18'
+  - label: A6-湖南航空
+    value: '19'
+  - label: DZ-东海航空
+    value: '20'
+  - label: EU-成都航空
+    value: '21'
+  - label: AQ-九元航空
+    value: '22'
+  - label: G5-华夏航空
+    value: '23'
+  - label: FM-上海航空
+    value: '24'
+  - label: BK-奥凯航空
+    value: '25'
+  - label: CA-中国国航
+    value: '26'
+  - label: GY-多彩航空
+    value: '27'
+  - label: FU-福州航空
+    value: '28'
+  - label: HO-吉祥航空
+    value: '29'
+  - label: HU-海航航空
+    value: '30'
+  - label: JR-幸福航空
+    value: '31'
+  - label: JD-首都航空
+    value: '32'
+  - label: KN-中联航空
+    value: '33'
+  - label: QW-青岛航空
+    value: '34'
+  - label: RY-江西航空
+    value: '35'
+  - label: MU-东方航空
+    value: '36'
+  - label: UQ-乌鲁木齐航空
+    value: '37'
+  - label: TV-西藏航空
+    value: '38'
+  - label: MF-厦门航空
+    value: '39'
+  - label: LT-龙江航空
+    value: '40'
+  - label: SC-山东航空
+    value: '41'
+  - label: 其他
+    value: other
+- api: overseas_hongkong_taiwan_s__c
+  label: 海外/港澳台酒店合住
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: delete_employee_sms_count__c
+  label: 删除员工自动发送短信 - 短信数量
+  options:
+  - label: '1'
+    value: '1'
+  - label: '2'
+    value: '2'
+  - label: '3'
+    value: '3'
+  - label: '4'
+    value: '4'
+  - label: '5'
+    value: '5'
+  - label: '6'
+    value: '6'
+  - label: '7'
+    value: '7'
+  - label: '8'
+    value: '8'
+  - label: '9'
+    value: '9'
+  - label: '10'
+    value: '10'
+  - label: '11'
+    value: '11'
+  - label: '12'
+    value: '12'
+  - label: '13'
+    value: '13'
+  - label: '14'
+    value: '14'
+  - label: '15'
+    value: '15'
+  - label: '16'
+    value: '16'
+  - label: '17'
+    value: '17'
+  - label: '18'
+    value: '18'
+  - label: '19'
+    value: '19'
+  - label: '20'
+    value: '20'
+  - label: '21'
+    value: '21'
+  - label: '22'
+    value: '22'
+  - label: '23'
+    value: '23'
+  - label: '24'
+    value: '24'
+  - label: '25'
+    value: '25'
+  - label: '26'
+    value: '26'
+  - label: '27'
+    value: '27'
+  - label: '28'
+    value: '28'
+  - label: '29'
+    value: '29'
+  - label: '30'
+    value: '30'
+  - label: 其他
+    value: other
+- api: train_ticket_reschedule_re__c
+  label: 火车票改签原因自定义
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: hotelSharing__c
+  label: 国内酒店合住开关
+  options:
+  - label: 请按需选择
+    value: '1'
+  - label: 开
+    value: '2'
+  - label: 关
+    value: '3'
+  - label: 其他
+    value: other
+- api: last_modified_by
+  label: 最后修改人
+- api: illustrate2__c
+  label: 用车车型管控功能说明
+- api: attachment1__c
+  label: 上传关闭说明
+- api: show_supplement_box6_for_r__c
+  label: 退票是否展示员工补充框6
+  options:
+  - label: 展示（必填）
+    value: '1'
+  - label: 不展示
+    value: '2'
+  - label: 其他
+    value: other
+- api: allow_edit_employee_info_w__c
+  label: 邮箱邀请员工时允许修改无手机号员工信息
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: single_order_limit_exceed__c
+  label: 每单限额超标管控方案
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: domestic_hotel_service_fee__c
+  label: 国内酒店-服务费纳入差标的展示开关
+  options:
+  - label: 开
+    value: '1'
+  - label: 其他
+    value: other
+- api: multi_person_multi_standar__c
+  label: 多人多差标
+  options:
+  - label: 开
+    value: '1'
+  - label: 关
+    value: '2'
+  - label: 其他
+    value: other
+- api: ext_field3__c
+  label: 拓展字段3

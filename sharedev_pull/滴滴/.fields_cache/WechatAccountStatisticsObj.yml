@@ -1,0 +1,97 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: data_own_organization
+  label: 归属组织
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: is_deleted
+  label: is_deleted
+- api: statistical_start_time
+  label: 数据统计开始时间
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: crm_emp
+  label: CRM员工
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: qywx_emp
+  label: 企微员工
+- api: qywx_user_id
+  label: 企微员工ID
+- api: owner
+  label: 负责人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: chat_reply_rate
+  label: 已回复聊天占比
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: add_customer_num
+  label: 新增客户数
+- api: statistical_end_time
+  label: 数据统计结束时间
+- api: last_modified_by
+  label: 最后修改人
+- api: first_reply_avg_time
+  label: 平均首次回复时长
+- api: out_tenant_id
+  label: 外部企业
+- api: chat_num
+  label: 聊天总数
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: send_msg_num
+  label: 发送消息数
+- api: data_own_department
+  label: 归属部门
+- api: delete_customer_num
+  label: 删除/拉黑员工的客户数
+- api: name
+  label: 统计编号
+- api: apply_num
+  label: 发起申请数
+- api: _id
+  label: _id

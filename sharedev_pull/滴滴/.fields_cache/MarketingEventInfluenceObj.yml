@@ -1,0 +1,136 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: sales_order_amount
+  label: 销售订单金额
+- api: attribution_percent
+  label: 归因占比
+- api: create_type
+  label: 生成方式
+  options:
+  - label: 自动关联
+    value: '0'
+  - label: 人工关联
+    value: '1'
+- api: sales_order_created_by
+  label: 订单创建人
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: marketing_event_create_time
+  label: 活动创建时间
+- api: sales_order_id
+  label: 销售订单
+- api: owner_department
+  label: 负责人主属部门
+- api: new_opportunity_own_department
+  label: 商机归属部门
+- api: marketing_event_actual_cost
+  label: 活动实际成本
+- api: marketing_event_data_own_department
+  label: 活动归属部门
+- api: new_opportunity_created_by
+  label: 商机创建人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: marketing_attribution_id
+  label: 营销归因
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: new_opportunity_id
+  label: 商机名称
+- api: marketing_event_begin_time
+  label: 活动开始日期
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: new_opportunity_sales_stage
+  label: 商机阶段
+- api: sales_order_own_department
+  label: 订单归属部门
+- api: data_own_department
+  label: 归属部门
+- api: object_describe_id
+  label: object_describe_id
+- api: name
+  label: 编号
+- api: _id
+  label: _id
+- api: tenant_id
+  label: tenant_id
+- api: new_opportunity_stg_changed_time
+  label: 商机阶段变更时间
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: performance_contribution
+  label: 业绩贡献
+- api: leads_id
+  label: 销售线索
+- api: is_deleted
+  label: is_deleted
+- api: new_opportunity_sales_create_time
+  label: 商机创建时间
+- api: marketing_event_type
+  label: 活动类型
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: marketing_attribution_model
+  label: 营销归因模型
+- api: marketing_event_end_time
+  label: 活动结束日期
+- api: out_owner
+  label: 外部负责人
+- api: new_opportunity_sales_status
+  label: 商机阶段状态
+- api: new_opportunity_amount
+  label: 商机金额
+- api: owner
+  label: 负责人
+- api: marketing_event_biz_status
+  label: 活动状态
+- api: sales_order_create_time
+  label: 订单创建时间
+- api: campaign_members_id
+  label: 活动成员
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: marketing_event_created_by
+  label: 活动创建人
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: marketing_event_id
+  label: 市场活动名称

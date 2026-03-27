@@ -1,0 +1,546 @@
+fields:
+- api: cta_name
+  label: CTA组件名称
+- api: lock_rule
+  label: 锁定规则
+- api: user_marketing_id
+  label: 用户编号
+- api: aggregate_key
+  label: 聚合key
+- api: spread_type
+  label: 推广方式
+- api: from_user_marketing_name
+  label: 推广用户
+- api: channel_account_platform
+  label: 渠道平台
+- api: extend_obj_data_id
+  label: 扩展字段在mt_data中的记录ID
+- api: cta_object_name
+  label: CTA关联对象名称
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: marketing_scene
+  label: 营销场景
+  options:
+  - label: 直播营销
+    value: live
+  - label: 会议营销
+    value: conference
+  - label: 活动营销
+    value: activity
+  - label: 广告营销
+    value: advertise
+  - label: 企微营销
+    value: qywx
+  - label: 公众号营销
+    value: official_account
+  - label: 官网营销
+    value: official_website
+  - label: 内容营销
+    value: content
+  - label: 其他
+    value: other
+- api: marketing_activity_id
+  label: 推广活动
+- api: owner_department
+  label: 负责人主属部门
+- api: marketing_content_id
+  label: 营销内容
+- api: channel_account
+  label: 渠道账号
+- api: spread_partner_user_id
+  label: 推广伙伴员工
+- api: action_category
+  label: 行为分类
+  options:
+  - label: 用户动态
+    value: user_action
+  - label: 主动触达
+    value: active_reach
+  - label: 其他
+    value: other
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: action_count
+  label: 行为次数
+- api: object_id
+  label: 对象ID
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: aggregate_time_identification
+  label: 聚合时间标识
+- api: data_own_department
+  label: 归属部门
+- api: name
+  label: 记录编号
+- api: _id
+  label: _id
+- api: cta_object_type
+  label: CTA关联对象类型
+- api: tenant_id
+  label: tenant_id
+- api: spread_channel
+  label: 互动渠道
+  options:
+  - label: 公众号
+    value: official_account
+  - label: 企业微信
+    value: qywx
+  - label: 微信
+    value: wechat
+  - label: 官网
+    value: official_website
+  - label: 广告
+    value: advertise
+  - label: 邮件
+    value: email
+  - label: 短信
+    value: sms
+  - label: 客服
+    value: online_service
+  - label: 其他
+    value: other
+  - label: 员工推广
+    value: employee_spread
+  - label: 会员推广
+    value: member_spread
+  - label: 伙伴推广
+    value: partner_spread
+- api: action_type
+  label: 行为动作
+  options:
+  - label: 复制邮箱
+    value: copy_email
+  - label: 复制微信
+    value: copy_wechat
+  - label: 点击手机号
+    value: click_phone
+  - label: 复制公司名称
+    value: copy_company_name
+  - label: 复制公司地址
+    value: copy_company_address
+  - label: 转发名片
+    value: forward_card
+  - label: 保存名片
+    value: save_card
+  - label: 浏览名片
+    value: lookup_card
+  - label: 关注
+    value: follow_up
+  - label: 浏览产品
+    value: look_up_product
+  - label: 查看产品列表
+    value: look_up_product_list
+  - label: 转发产品
+    value: forward_product
+  - label: 浏览文章
+    value: look_up_article
+  - label: 浏览图片
+    value: look_up_image
+  - label: 添加标签
+    value: add_tag
+  - label: 转发文章
+    value: forward_article
+  - label: 浏览文件
+    value: look_up_file
+  - label: 预览文件
+    value: preview_file
+  - label: 下载文件
+    value: download_file
+  - label: 转发文件
+    value: forward_file
+  - label: 浏览动态
+    value: look_up_feed
+  - label: 评论动态
+    value: comment_feed
+  - label: 转发图片
+    value: forward_image
+  - label: 私信互动
+    value: send_message
+  - label: 发送消息
+    value: fe_send_message
+  - label: 粉丝发送消息
+    value: fe_follower_send_message
+  - label: 同意交换名片
+    value: accept_exchange_card
+  - label: 查看转发的产品
+    value: look_up_forwarded_card
+  - label: 查看转发的产品
+    value: look_up_forwarded_product
+  - label: 查看转发的图片
+    value: look_up_forwarded_image
+  - label: 查看转发的文件
+    value: look_up_forwarded_file
+  - label: 完善客脉信息
+    value: update_customer_detail
+  - label: 邀请交换名片
+    value: invite_exchange_card
+  - label: 转换为客脉
+    value: customer_upgrade_mankeep
+  - label: 转换为客户
+    value: customer_upgrade_customer
+  - label: 存入CRM
+    value: save_customer_to_crm
+  - label: 查看活动
+    value: look_up_activity
+  - label: 转发活动
+    value: forward_activity
+  - label: 报名活动
+    value: enroll_activity
+  - label: 查看转发的活动
+    value: look_up_forwarded_activity
+  - label: 存入CRM线索
+    value: save_lead_to_crm
+  - label: 创建账号
+    value: create_account
+  - label: 绑定企业
+    value: bind_enterprise
+  - label: 解绑企业
+    value: unbind_enterprise
+  - label: 修改号码
+    value: change_phone
+  - label: 添加线索
+    value: add_lead
+  - label: 添加产品
+    value: add_product
+  - label: 添加文章
+    value: add_article
+  - label: 添加通知消息
+    value: add_notice_message
+  - label: 获取消息列表
+    value: get_message_list
+  - label: 登录客脉
+    value: login_mankeep
+  - label: 激活用户
+    value: user_activity
+  - label: 查看产品试用
+    value: look_up_form
+  - label: 提交产品试用
+    value: enroll_form
+  - label: 提交文章表单
+    value: article_form
+  - label: 转发海报
+    value: forward_qr_poster
+  - label: 浏览海报
+    value: look_up_qr_poster
+  - label: 转发邀请函
+    value: forward_invitation
+  - label: 浏览邀请函
+    value: look_up_invitation
+  - label: 提交表单
+    value: enroll_form_new
+  - label: 浏览表单
+    value: look_up_form_new
+  - label: 转发表单
+    value: forward_form_new
+  - label: 浏览微页面
+    value: look_up_hexagon_site
+  - label: 转发微页面
+    value: forward_hexagon_site
+  - label: 会议签到
+    value: conference_check_in
+  - label: 报名会议
+    value: conference_enroll
+  - label: 领取名片红包
+    value: obtain_card_lucky_money
+  - label: 领取文章红包
+    value: obtain_article_lucky_money
+  - label: 领取微信红包
+    value: obtain_product_lucky_money
+  - label: 分销人员提交线索
+    value: distributor_add_clue
+  - label: 添加分销人员
+    value: add_distributor
+  - label: 增加企业社群
+    value: add_enterprise_social_group
+  - label: 短信开通企业
+    value: sms_apply_pass
+  - label: 短息购买条数
+    value: sms_quota_buy
+  - label: 短息消耗条数
+    value: sms_quota_cost
+  - label: 移动营销通访问
+    value: app_marketing_record
+  - label: 浏览网页
+    value: look_up_website
+  - label: 触发官网事件/属性
+    value: trigger_website_event
+  - label: 通过手机号浏览短信下的链接
+    value: look_up_sms_url_with_phone
+  - label: 收到服务号模板消息
+    value: wx_service_template_message
+  - label: 收到服务号图文消息
+    value: wechat_service_send_message
+  - label: 查看外部链接
+    value: look_up_out_link
+  - label: 转发外部链接
+    value: forward_out_link
+  - label: 查看视频号主页
+    value: look_up_channel_home
+  - label: 查看视频号视频
+    value: look_up_channel_name
+  - label: 查看视频号直播
+    value: look_up_channel_live
+  - label: 查看视频
+    value: look_up_video
+  - label: 转发视频
+    value: forward_video
+  - label: 访问直播校验页
+    value: look_up_live_check_page
+  - label: 在线客服
+    value: chat_online
+  - label: 观看直播
+    value: look_up_live
+  - label: 报名/预约直播
+    value: enroll_live
+  - label: 直播互动
+    value: live_chat
+  - label: 观看回放
+    value: look_up_record
+  - label: 关注公众号
+    value: follow_wx_service
+  - label: 取消关注公众号
+    value: un_follow_wx_service
+  - label: 点击公众号菜单
+    value: click_wx_service_menu
+  - label: 点击链接
+    value: click_wx_service_link
+  - label: 发送服务号消息
+    value: send_wx_service_message
+  - label: 扫描二维码
+    value: scan_wx_service_qr_code
+  - label: 邮件发送
+    value: mail_deliver
+  - label: 邮件打开
+    value: mail_open
+  - label: 邮件点击
+    value: mail_click
+  - label: 邮件取消订阅
+    value: mail_unsubscribe
+  - label: 邮件垃圾举报
+    value: mail_report_spam
+  - label: 无效邮件
+    value: mail_invalid
+  - label: 邮件软退回
+    value: mail_soft_bounce
+  - label: 回复邮件
+    value: mail_response
+  - label: 收到短信
+    value: sms_received
+  - label: 访问广告落地页
+    value: look_up_ad_landing_page
+  - label: 点击关键词
+    value: click_keyword
+  - label: 搜索关键词
+    value: search_keyword
+  - label: 添加企微员工
+    value: add_qywx_employee
+  - label: 删除企微员工
+    value: del_qywx_employee
+  - label: 加入群聊
+    value: join_wechat_group
+  - label: 退出群聊
+    value: quit_wechat_group
+  - label: 领取优惠券
+    value: receive_coupon
+  - label: 核销优惠券
+    value: verification_coupon
+  - label: 参加优惠券活动
+    value: attend_coupon_activity
+  - label: 拨打电话
+    value: making_call
+  - label: 获取员工企业微信
+    value: get_employee_qywx
+  - label: 点击联系员工按钮
+    value: click_contact_me
+  - label: 播放视频
+    value: play_video
+  - label: 点击保存手机
+    value: click_save_mobile
+  - label: 收到企微群发消息
+    value: recv_qywx_msg
+  - label: 朋友圈展现员工发布内容
+    value: recv_qywx_moment
+  - label: 自定义的行为类型
+    value: customize_action
+  - label: 其他
+    value: other
+  - label: 注册成为会员
+    value: register_member
+  - label: 登录会员账号
+    value: login_member_account
+  - label: 授权微信手机号
+    value: authorize_wechat_phone
+  - label: 授权微信头像昵称
+    value: authorize_wechat_nickname
+  - label: 触发CTA组件，展示引导留咨页
+    value: trigger_cta_display_lead_generation_page
+  - label: 发送文件到邮箱
+    value: send_file_mail
+  - label: 跳出网页
+    value: close_website_page
+  - label: 查看应用活动
+    value: look_up_application_activity
+  - label: 参加应用活动
+    value: join_application_activity
+- api: action_describe
+  label: 行为描述
+- api: action_proportion
+  label: 进度（%）
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: partner_tenant_id
+  label: 推广伙伴企业
+- api: action_time
+  label: 行为时间
+- api: is_deleted
+  label: is_deleted
+- api: cta_id
+  label: CTA组件ID
+- api: browser
+  label: 浏览器
+- api: object_name
+  label: 对象名称
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: client
+  label: 客户端
+  options:
+  - label: 微信小程序
+    value: mini_app
+  - label: H5
+    value: h5
+  - label: Web
+    value: web
+  - label: 其他
+    value: other
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: last_modified_time
+  label: 最后修改时间
+- api: cta_object_id
+  label: CTA关联对象ID
+- api: object_type
+  label: 对象类型
+  options:
+  - label: 文章
+    value: article
+  - label: 微页面
+    value: hexagon
+  - label: 产品
+    value: product
+  - label: 表单
+    value: form
+  - label: 直播
+    value: live
+  - label: 会议
+    value: conference
+  - label: 活动
+    value: activity
+  - label: 企微员工
+    value: qywx_employee
+  - label: 企微群
+    value: qywx_group
+  - label: 官网
+    value: official_website
+  - label: 关键词
+    value: keyword
+  - label: 邮件
+    value: email
+  - label: 官网事件
+    value: official_website_event
+  - label: 优惠券
+    value: coupon
+  - label: 落地页
+    value: landing_page
+  - label: 在线客服
+    value: chat_online
+  - label: 文件
+    value: marketing_file
+  - label: 公众号
+    value: official_account
+  - label: 其他
+    value: other
+  - label: 官网追踪页面
+    value: website_track
+  - label: 微信用户
+    value: wechat_fan
+  - label: 会员
+    value: member
+  - label: 互动应用
+    value: interactive_application
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: spread_user_id
+  label: 推广员工
+- api: ip_address
+  label: IP地址
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: operate_system
+  label: 操作系统
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: user_marketing_name
+  label: 用户名称
+- api: marketing_event_id
+  label: 市场活动
+- api: website_url
+  label: 访问网址
+- api: ip_q_cell_core
+  label: IP归属地
+- api: action_duration_time
+  label: 行为时长（分钟）
+- api: referrer_url
+  label: 来源网址
+- api: data_collect_source
+  label: 采集来源
+  options:
+  - label: 营销通
+    value: YXT
+  - label: 订货通
+    value: DHT
+  - label: 服务通
+    value: FWT
+  - label: CRM
+    value: CRM
+  - label: 其他
+    value: other
+- api: from_user_marketing_id
+  label: 推广用户ID

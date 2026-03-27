@@ -1,0 +1,265 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: send_platform
+  label: 发送平台
+- api: data_own_organization
+  label: 归属组织
+- api: send_node
+  label: 发送节点
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: node_type
+  label: 发送节点类型
+  options:
+  - label: 流程中节点
+    value: processing
+  - label: 流程结束
+    value: end
+  - label: 其他
+    value: other
+- api: is_deleted
+  label: is_deleted
+- api: sms_content
+  label: 短信内容
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: business_type
+  label: 发送业务
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: sms_template_id
+  label: 发送模板
+- api: send_status
+  label: 发送状态
+  options:
+  - label: 发送成功
+    value: success
+  - label: 发送失败
+    value: failure
+  - label: 待发送
+    value: waiting
+  - label: 其他
+    value: other
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: msg_id
+  label: 平台回执id
+- api: send_task_id
+  label: 发送任务ID
+- api: owner
+  label: 负责人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: receiver
+  label: 发送对象
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: failure_reason
+  label: 失败原因
+  options:
+  - label: 黑名单
+    value: black_list
+  - label: 停机
+    value: phone_down
+  - label: 账号无效
+    value: account_invalid
+  - label: 鉴权不通过
+    value: auth_fail
+  - label: 多次鉴权不通过
+    value: too_many_auth_fail
+  - label: 用户欠费
+    value: user_arrearage
+  - label: custid或者exdata字段填写不合法
+    value: field_error
+  - label: 号码不合法
+    value: phone_illegal
+  - label: 号码数量太多
+    value: too_money_phone
+  - label: 端口绑定失败
+    value: bind_port_error
+  - label: 连接数超限
+    value: too_money_conn
+  - label: IP错误
+    value: ip_error
+  - label: 内部错误
+    value: server_error
+  - label: 内容创建失败
+    value: create_error
+  - label: 成功
+    value: success
+  - label: 信息被拦截
+    value: intercepted
+  - label: 30秒重发拦截
+    value: tds_intercepted
+  - label: 条数控制拦截
+    value: num_intercepted
+  - label: 验证码防攻击拦截
+    value: ver_code_intercepted
+  - label: 无效号码
+    value: phone_invalid
+  - label: 短信超长
+    value: content_too_long
+  - label: http请求失败
+    value: http_error
+  - label: 空内容
+    value: content_empty
+  - label: 关键字拦截
+    value: kw_intercepted
+  - label: 触发拦截模板
+    value: tri_inter_model
+  - label: 非模板退回
+    value: not_tem_re
+  - label: 无可用通道
+    value: channel_invalid
+  - label: 端口停用
+    value: port_stop
+  - label: 扩展端口超长
+    value: ex_port_tl
+  - label: 端口错误
+    value: port_err
+  - label: 余额不足
+    value: balance_short
+  - label: 没有余额
+    value: no_balance
+  - label: 白名单失败
+    value: wh_list_err
+  - label: 移动黑名单
+    value: yd_black_list
+  - label: 移动全局黑名单
+    value: yd_gl_black_list
+  - label: 超流速
+    value: too_fast
+  - label: 广商黑名单
+    value: en_black_list
+  - label: 超出日发送量
+    value: beyond_daily
+  - label: 超出月发送量
+    value: beyond_monthly
+  - label: 没有模板
+    value: no_template
+  - label: 无法接通
+    value: cant_conn
+  - label: 关机
+    value: phone_close
+  - label: 空号
+    value: empty_phone
+  - label: 关机或空号
+    value: phone_cl_emp
+  - label: 不在服务区
+    value: not_in_server
+  - label: 电信黑名单
+    value: dx_black_list
+  - label: 杭电网关发送错误
+    value: hd_gw_err
+  - label: 非法关键字
+    value: illegal_kw
+  - label: 当地网关拦截
+    value: lc_gw_inter
+  - label: 网关负荷量过大
+    value: gw_bey_payload
+  - label: 信安平台审核拦截
+    value: xw_au_inter
+  - label: 运营商拦截
+    value: yys_inter
+  - label: 短信中心报错
+    value: ssm_ct_err
+  - label: 手机号码有误
+    value: phone_error
+  - label: 关机或者停机
+    value: phone_cl_do
+  - label: 关机或者停机或空号
+    value: phone_cl_do_em
+  - label: 没签名或不匹配
+    value: sign_error
+  - label: 签名不一致
+    value: sign_not_same
+  - label: 通道屏蔽
+    value: channel_shield
+  - label: 其他
+    value: other
+- api: sms_template
+  label: 短信模板
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: marketing_event_id
+  label: 市场活动
+- api: data_own_department
+  label: 归属部门
+- api: send_time
+  label: 发送时间
+- api: phone
+  label: 手机号码
+- api: sender
+  label: 发送方
+  options:
+  - label: 营销通
+    value: yxt
+  - label: 服务通
+    value: fwt
+  - label: PRM
+    value: prm
+  - label: 流程
+    value: flow
+  - label: 电子签章
+    value: ele_sign
+  - label: CRM验证码
+    value: verify_code
+  - label: 其他
+    value: other
+- api: send_detail_id
+  label: 短信发送详情ID
+- api: send_fail_reason
+  label: 发送失败原因
+- api: name
+  label: 记录编号
+- api: error_code
+  label: 错误码
+- api: _id
+  label: _id

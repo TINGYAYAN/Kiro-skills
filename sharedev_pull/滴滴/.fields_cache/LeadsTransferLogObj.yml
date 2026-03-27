@@ -1,0 +1,106 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: contact_id
+  label: 联系人
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: is_opportunity_source_clue
+  label: 是否是商机源线索
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: leads_create_time
+  label: 线索创建时间
+- api: leads_id
+  label: 线索
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: partner_id
+  label: 合作伙伴
+- api: is_deleted
+  label: is_deleted
+- api: leads_created_by
+  label: 线索创建人
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: company
+  label: 公司
+- api: out_owner
+  label: 外部负责人
+- api: leads_name
+  label: 姓名
+- api: owner
+  label: 负责人
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: is_contact_main_leads
+  label: 是否是联系人源线索
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: create_time
+  label: 创建时间
+- api: new_opportunity_id
+  label: 商机名称
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: is_new_opportunity_source_clue
+  label: 是否是商机源线索
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: opportunity_id
+  label: 商机名称
+- api: account_id
+  label: 客户
+- api: data_own_department
+  label: 归属部门
+- api: is_account_main_leads
+  label: 是否是客户源线索
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: object_describe_id
+  label: object_describe_id
+- api: name
+  label: 编码
+- api: _id
+  label: _id
+- api: is_partner_source_leads
+  label: 是否是合作伙伴源线索
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: leads_owner
+  label: 线索负责人
+- api: account_life_status
+  label: 客户生命状态

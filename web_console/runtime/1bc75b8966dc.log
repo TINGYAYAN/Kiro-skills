@@ -1,0 +1,11 @@
+[task] started_at=2026-03-26 18:56:41
+[task] cmd=python3 batch_runner.py --runtime-precheck --dry-run --no-notify --project 西门子
+
+usage: batch_runner.py [-h] [--dry-run] [--regenerate] [--headless] [--headed]
+                       [--no-refresh] [--no-retry] [--config CONFIG]
+                       [--bitable-app-token BITABLE_APP_TOKEN]
+                       [--bitable-table-id BITABLE_TABLE_ID] [--no-notify]
+                       [--runtime-precheck] [--web-create-api]
+batch_runner.py: error: unrecognized arguments: --project 西门子
+
+[task] finished_at=2026-03-26 18:56:41 exit_code=2

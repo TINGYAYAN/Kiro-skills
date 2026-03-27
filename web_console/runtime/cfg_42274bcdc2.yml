@@ -1,0 +1,59 @@
+feishu:
+  app_id: cli_a90ae5a42cb89bb3
+  app_secret: MUF4Ehe0dgufgdkME7a0lhYO4OUd6kh4
+  bitable_app_token: X4SzbtbsFa5Ik0soVi4csWCUngd
+  bitable_table_id: tbl0O4GjyWAv1MTD
+  notify_chat_id: oc_29e9bfc2a413ce6c5ca681474c09cc7a
+  notify_open_id: ou_7eeada837f0e80a3175acd3dfd0a9629
+  spreadsheet_token: ''
+  template_table_name: APL批量生成模板
+  template_table_url: https://scnesvfv2nul.feishu.cn/base/X4SzbtbsFa5Ik0soVi4csWCUngd?table=tbl0O4GjyWAv1MTD&view=vewammHaTR
+fxiaoke:
+  base_url: https://www.fxiaoke.com
+  bootstrap_token_url: https://www.fxiaoke.com/FHH/EM0HXUL/SSO/Login?token=c2647fd36af64e9ba3594005f2d29422
+  login_path: /proj/page/login
+  project_name: 朗润生物
+  sharedev_projects:
+    中电长城:
+      certificate: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKU1pYRjFaWE4wVkc5clpXNGlMQ0pwYzNNaU9pSkRSVkF0VTJWeWRtVnlJaXdpWlc1MFpYSndjbWx6WlVGalkyOTFiblFpT2lJNE1qYzROelJmYzJGdVpHSnZlQ0lzSW1WdWRHVnljSEpwYzJWSlpDSTZPREkzT0RjMExDSnpaWE56YVc5dVNXUWlPaUk1TmpVeE56TTFNQzAxTVRVM0xUUTNNR1V0T0dFMlpTMW1ObVl4WlRaaFpXSTVZbUVpTENKbGVIQWlPak00TmpRd09EUTJPRE1zSW5WelpYSkpaQ0k2TVRBd01Td2lhV0YwSWpveE56YzBNell5TURReWZRLjZPVmJLbmw1S3dZX2x6STMyV2J3UWgyUUtaZm45M1NZTzZ5VWItNnVTRnc=
+      domain: https://www.fxiaoke.com
+    朗润生物:
+      certificate: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKU1pYRjFaWE4wVkc5clpXNGlMQ0pwYzNNaU9pSkRSVkF0VTJWeWRtVnlJaXdpWlc1MFpYSndjbWx6WlVGalkyOTFiblFpT2lKaWFteHljMjBpTENKbGJuUmxjbkJ5YVhObFNXUWlPamd6TURFeE1Td2ljMlZ6YzJsdmJrbGtJam9pWXpGbU5EbGxPVE10TURObE55MDBPREpqTFRnMU5Ua3RZelV6TVRjM1pqSTFaamt3SWl3aVpYaHdJam96T0RZek9EZ3lNelF5TENKMWMyVnlTV1FpT2pFd01ERXNJbWxoZENJNk1UYzNOREkyTURnM01YMC5yamhHaFFGMnFyUndQaWtMV1RPaWlMTUNDbjlhNnFsY0Q4YXFjVGxqR3pz
+      domain: https://www.fxiaoke.com
+    滴滴:
+      certificate: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKU1pYRjFaWE4wVkc5clpXNGlMQ0pwYzNNaU9pSkRSVkF0VTJWeWRtVnlJaXdpWlc1MFpYSndjbWx6WlVGalkyOTFiblFpT2lJNE1qRXdORGxmYzJGdVpHSnZlQ0lzSW1WdWRHVnljSEpwYzJWSlpDSTZPREl4TURRNUxDSnpaWE56YVc5dVNXUWlPaUprTXpsaFl6Y3hOQzFoTUdRMkxUUmhPVEV0WVdGa09TMDFNekl3WldVMU5qVTVaaklpTENKbGVIQWlPak0xTlRFek1UYzFPRElzSW5WelpYSkpaQ0k2TXpJM01Td2lhV0YwSWpveE56YzBNell5TkRreGZRLll4MG5YVy02RG5ldl92ZllSdWhyWXJRaUZaVjB0Wno2MmVSWlZYZTg1TG8=
+      domain: https://www.fxiaoke.com
+    硅基流动:
+      certificate: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKU1pYRjFaWE4wVkc5clpXNGlMQ0pwYzNNaU9pSkRSVkF0VTJWeWRtVnlJaXdpWlc1MFpYSndjbWx6WlVGalkyOTFiblFpT2lKbmFteGthMm95TURJMUlpd2laVzUwWlhKd2NtbHpaVWxrSWpvNE1qY3lNVGdzSW5ObGMzTnBiMjVKWkNJNkltWm1NR0UwTVRnNExURm1NVEF0TkRFeE15MDVOVEZpTFRrM05EazJaREkzT0RFNFpDSXNJbVY0Y0NJNk16ZzJNemcyT0RnNU15d2lkWE5sY2tsa0lqb3hNREEwTENKcFlYUWlPakUzTnpReU5UUXhORFo5LmxzN0Jyc29LM1RzX0RuOFI0Uy1WVV9MWXBiOU1WeHhkQlVBSDJPazRsNGs=
+      domain: https://www.fxiaoke.com
+    西门子:
+      certificate: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKU1pYRjFaWE4wVkc5clpXNGlMQ0pwYzNNaU9pSkRSVkF0VTJWeWRtVnlJaXdpWlc1MFpYSndjbWx6WlVGalkyOTFiblFpT2lKbWVEZzRPRGc0T0RnNElpd2laVzUwWlhKd2NtbHpaVWxrSWpvNE1qazNOVFVzSW5ObGMzTnBiMjVKWkNJNklqQXhZemN4T1RWaUxXWXdObUl0TkRjNFlpMWlNakExTFdabE1tTmtaRFJsWWpJM1l5SXNJbVY0Y0NJNk16ZzJOREEyTkRRM01Dd2lkWE5sY2tsa0lqb3hNREV6TENKcFlYUWlPakUzTnpRek5URTVNelY5LmhycmJEYlRTNGUtLUdRWVpnZlJ3XzZsY0lyVmVnbEkzSGRHdkU0eE5veDA=
+      domain: https://www.fxiaoke.com
+  agent_login_employee_id: ''
+  username: ''
+generator:
+  default_author: 纷享实施人员
+  num_examples: 8
+  output_dir: .
+deployer:
+  runtime_debug_precheck: true
+  web_create_api: true
+llm:
+  api_key: sk-nj6smjvDqtOPnlkLsv2BAGfRCEt0tKoyHph3Mwxh0r86EUyx
+  base_url: http://1.95.142.151:3000/v1
+  max_tokens: 4096
+  model: claude-sonnet-4-6
+  provider: openai
+  temperature: 0.1
+  timeout: 120
+openapi:
+  app_id: FSAID_1323066
+  app_secret: c56004e331444dbdaa0b32dfec4db1e9
+  base_url: https://open.fxiaoke.com
+  corp_id: FSCID_A3B624A9F03888CA0F431A823D02AD2D
+  current_open_user_id: '1000'
+  permanent_code: A2A70742D2E865359FDCBB01399A86E1
+tester:
+  poll_interval_seconds: 2
+  poll_max_retries: 10
+  trigger_wait_seconds: 5

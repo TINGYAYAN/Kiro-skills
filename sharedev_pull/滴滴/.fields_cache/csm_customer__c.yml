@@ -1,0 +1,260 @@
+fields:
+- api: carCSM__c
+  label: 用车CSM支持人员
+- api: lock_rule
+  label: 锁定规则
+- api: isGroup__c
+  label: 商旅是否集团合作
+- api: latest_car_diagnosis__c
+  label: 最新用车诊断完成进度
+- api: customer_name__c
+  label: 客户名称
+- api: travel_authorized_number__c
+  label: 商旅有权限人数
+- api: travelLevel__c
+  label: 客户商旅等级
+- api: travelLossSituation__c
+  label: 商旅流失情况
+  options:
+  - label: 未流失
+    value: '1'
+  - label: 流失过
+    value: '2'
+  - label: 其他
+    value: other
+- api: latest_one_diagnosis__c
+  label: 最新一体化诊断完成进度
+- api: csm_customer_code__c
+  label: CSM客户编码
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: certificationAttch__c
+  label: 资质附件
+- api: hotel_supplier__c
+  label: 酒店并行供应商
+- api: travelCSM__c
+  label: 商旅CSM支持人员
+- api: owner_department
+  label: 负责人主属部门
+- api: travel_budget__c
+  label: 商旅客户全量月GMV预估（客户总预算）
+- api: groupAccount__c
+  label: 商旅集团名称（中文）
+- api: vehicle_referral_opportuni__c
+  label: 用车拉新商机所属部门
+- api: tmt__c
+  label: 行业
+- api: air_ticket_supplier__c
+  label: 机票并行供应商
+- api: retained_csm_customer_code__c
+  label: 合并后，要保留的CSM客户编码（请仔细核对！！！）
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: monthlyGMVCar__c
+  label: 用车潜力月GMV预估（滴滴预算）
+- api: latest_travel_diagnosis__c
+  label: 最新商旅诊断完成进度
+- api: carss__c
+  label: 用车实施支持人员
+- api: travelStatus__c
+  label: 商旅拉新商机状态
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: company_scale__c
+  label: 员工人数
+- api: isHotelAgree__c
+  label: 有无协议酒店
+  options:
+  - label: 无协议酒店
+    value: '1'
+  - label: 有协议酒店需要托管
+    value: '2'
+  - label: 其他
+    value: other
+- api: relevant_team
+  label: 相关团队
+- api: vehicle_settlement_support__c
+  label: 用车结算支持人员
+- api: car_supplier__c
+  label: 用车并行供应商
+- api: merged_csm_customer_code__c
+  label: 被合并的CSM客户编码
+- api: monthlyGMVTravel__c
+  label: 商旅潜力月GMV预估（滴滴预算）
+- api: data_own_department
+  label: 归属部门
+- api: travel_settlement_method__c
+  label: 商旅结算方式
+- api: lossSituation__c
+  label: 用车流失情况
+  options:
+  - label: 未流失
+    value: '1'
+  - label: 流失过
+    value: '2'
+  - label: 其他
+    value: other
+- api: didiId__c
+  label: 滴滴客户ID
+- api: name
+  label: CSM客户名称
+- api: car_scene__c
+  label: 企业用车场景
+- api: latest_carOpp__c
+  label: 最新用车拉新商机
+- api: _id
+  label: _id
+- api: travel_settlement_supporte__c
+  label: 商旅结算支持人员
+- api: tenant_id
+  label: tenant_id
+- api: car_settlement_method__c
+  label: 用车结算方式
+- api: merge_operation_time__c
+  label: 合并操作时间
+- api: merged_operator__c
+  label: 合并操作人
+- api: latest_carHandover__c
+  label: 最新用车实施-CSM交接单
+- api: status__c
+  label: 用车拉新商机状态
+- api: travelOwner__c
+  label: 商旅归属人
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: latest_travelOpp__c
+  label: 最新商旅拉新商机
+- api: travel_new_opportunity_dep__c
+  label: 商旅拉新商机所属部门
+- api: vehicle_customer_segmentat__c
+  label: 用车客户分层
+  options:
+  - label: 稳定型
+    value: '1'
+  - label: 增长型
+    value: '2'
+  - label: 衰退型
+    value: '3'
+  - label: 沉默型
+    value: '4'
+  - label: 其他
+    value: other
+- api: is_deleted
+  label: is_deleted
+- api: car_budget__c
+  label: 用车客户全量月GMV预估（客户总预算）
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: out_owner
+  label: 外部负责人
+- api: carOwner__c
+  label: 用车归属人
+- api: owner
+  label: 负责人
+- api: train_ticket_supplier__c
+  label: 火车票并行供应商
+- api: last_modified_time
+  label: 最后修改时间
+- api: car_authorized_number__c
+  label: 用车有权限人数
+- api: travel_customer_segmentation__c
+  label: 商旅客户分层
+  options:
+  - label: 稳定型
+    value: '1'
+  - label: 增长型
+    value: '2'
+  - label: 衰退型
+    value: '3'
+  - label: 沉默型
+    value: '4'
+  - label: 其他
+    value: other
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: city__c
+  label: 客户城市
+- api: provice__c
+  label: 客户省份
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: solutionType__c
+  label: 产品方案
+- api: travelss__c
+  label: 商旅实施支持人员
+- api: supplier_name_car__c
+  label: 用车并行供应商名称
+- api: certification_type__c
+  label: 资质类型
+  options:
+  - label: 组织结构代码证
+    value: '1'
+  - label: 营业执照
+    value: '2'
+  - label: 税务登记证
+    value: '3'
+  - label: 开户银行许可证
+    value: '4'
+  - label: 一般纳税人资格证
+    value: '5'
+  - label: 事业单位法人证书
+    value: '6'
+  - label: 医疗机构执业许可证
+    value: '7'
+  - label: 身份证
+    value: '8'
+  - label: 其他
+    value: '9'
+  - label: 其他（标准）
+    value: other
+- api: isCarApplication__c
+  label: 审批方式
+- api: carLevel__c
+  label: 客户用车等级
+- api: latest_travelHandover__c
+  label: 最新商旅实施-CSM交接单
+- api: isAirAgree__c
+  label: 有无航空协议
+  options:
+  - label: 有
+    value: '1'
+  - label: 无
+    value: '2'
+  - label: 其他
+    value: other
+- api: isSystemIntegration__c
+  label: 是否需要系统对接

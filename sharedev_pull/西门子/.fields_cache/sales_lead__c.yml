@@ -1,0 +1,213 @@
+fields:
+- api: LeadsObj
+  label: CRM对象API集成对象API
+- api: trust_it_ownership_sales__c
+  label: Trust It所属销售
+- api: customer_rejection_reason__c
+  label: 客户拒接/拒绝沟通原因
+- api: last_modified_time__c
+  label: Last Modified Time
+- api: next_step_follow_up_sugges__c
+  label: 下一步跟踪建议
+- api: customer_potential__c
+  label: 客户潜力
+- api: last_ordered_product__c
+  label: 最近一次下单商品
+- api: company_name__c
+  label: Company Name
+- api: pick_up_allocate_time__c
+  label: Pick up/Allocate Time
+- api: bim_push_failure_reason__c
+  label: BIM推送失败原因
+- api: latest_notes__c
+  label: Latest Notes
+- api: first_contact_product__c
+  label: 首次联系产品
+- api: dbo_customer_owner__c
+  label: DBO客户归属人
+- api: is_add_wechat__c
+  label: 是否加微信
+- api: order_success_and_amount_b__c
+  label: 成单以及金额（BU，产品，金额）
+- api: registered_capital__c
+  label: 注册资本
+- api: is_registered_as_kc__c
+  label: 是否注册成KC
+- api: leading_bu__c
+  label: Leading BU
+- api: creation_time__c
+  label: Creation Time
+- api: industry__c
+  label: Industry
+- api: cooperation_o2o_channel__c
+  label: 合作O2O 渠道
+- api: technical_support__c
+  label: 技术支持
+- api: bim_score__c
+  label: BIM分
+- api: customer_online_cooperatio__c
+  label: 客户线上合作意愿
+- api: bim_leads_give_up_reason__c
+  label: BIM线索放弃原因
+- api: bim_leads_follow_up_status__c
+  label: BIM线索跟进状态
+- api: main_business__c
+  label: 主营业务
+- api: leads_pool__c
+  label: Leads Pool
+- api: last_30d_ecommerce_inquiry__c
+  label: 近30天电商询盘下派的BD
+- api: intention_categories_in_la__c
+  label: 近一年意向类目
+- api: leads_identity_grade__c
+  label: Leads Identity Grade
+- api: follow_up_requirements__c
+  label: 跟进要求
+- api: generate_customer__c
+  label: 生成客户
+- api: e_mail__c
+  label: E-mail
+- api: clue_id__c
+  label: Clue ID
+- api: siemens_year_total_demand__c
+  label: 西门子年总需求
+- api: bim_leads_closed_amount__c
+  label: BIM线索成交金额
+- api: need_secondary_follow_up__c
+  label: 是否需要二次跟进
+- api: last_order_time__c
+  label: 最近一次下单时间
+- api: bim_industry__c
+  label: BIM行业
+- api: user_creation_source__c
+  label: 用户创建来源
+- api: project_phase__c
+  label: 项目阶段
+- api: name
+  label: Name
+- api: feedback_deadline__c
+  label: 反馈截止时间
+- api: historical_ecommerce_cumul__c
+  label: 历史至今的电商累计订单数量（客户）
+- api: bim_push_result__c
+  label: BIM推送结果
+- api: requirement_clarification__c
+  label: 需求澄清
+- api: is_trust_it__c
+  label: 是否Trust it
+- api: marketing_spread_user__c
+  label: 推广人
+- api: associated_contact__c
+  label: 所属触点
+- api: last_modified_by__c
+  label: Last Modified by
+- api: creator__c
+  label: Creator
+- api: supplementary_information__c
+  label: 补充信息
+- api: customer_type__c
+  label: 客户类型
+- api: trustit_signup_time__c
+  label: TrustIT注册时间
+- api: business_type__c
+  label: Business Type
+- api: activity_scenario__c
+  label: 活动场景
+- api: bim_customer_type__c
+  label: BIM客户类型
+- api: cdp_lead_type__c
+  label: CDP线索类型
+- api: main_purchasing_channel__c
+  label: 主要采购渠道
+- api: total_investment_amount__c
+  label: 投资总额
+- api: leads_status__c
+  label: Leads Status
+- api: last_order_unpaid_goods__c
+  label: 最近一次下单未付款商品
+- api: purchase_decision_making_p__c
+  label: 采买决策权
+- api: insured_number__c
+  label: 参保人数
+- api: contact_position__c
+  label: 联系人岗位
+- api: industry_affiliation__c
+  label: 所属行业
+- api: UUID__c
+  label: JING系统UUID
+- api: recent_purchase_plan__c
+  label: 近期采购计划
+- api: follow_up_time__c
+  label: Follow-up Time
+- api: first_time_to_become_lead__c
+  label: 首次成为线索时间
+- api: user_fill_in_customer_type__c
+  label: 用户填写客户类型
+- api: marketing_activity_id__c
+  label: 营销活动
+- api: life_cycle__c
+  label: Life Cycle
+- api: agents_of_ecommerce_inquir__c
+  label: 近30天电商询盘下派的代理商
+- api: country_region__c
+  label: Country/Region
+- api: is_dbo_follow_up_customer__c
+  label: 是否DBO可跟进客户
+- api: initial_standardized_sourc__c
+  label: Initial Standardized Source
+- api: clue_name__c
+  label: Clue Name
+- api: position__c
+  label: Position
+- api: last_order_unpaid_time__c
+  label: 最近一次下单未付款时间
+- api: leads_identity_score__c
+  label: Leads Identity Score
+- api: order_status__c
+  label: 订单状态
+- api: customer__c
+  label: 客户
+- api: handover_object__c
+  label: Handover对象
+- api: fund_status__c
+  label: 资金到位情况
+- api: bim_new_specialized__c
+  label: BIM新精特专
+- api: mobile__c
+  label: Mobile
+- api: handover_reason__c
+  label: Handover 原因
+- api: assist_dbo_customer_attrib__c
+  label: 辅助DBO客户属性
+- api: most_recently_assigned_ope__c
+  label: Most Recently Assigned Operator
+- api: company_scale__c
+  label: 公司规模（大中小）
+- api: unified_social_credit_code__c
+  label: 统一社会信用代码
+- api: customer_contact_intention__c
+  label: 客户联系意向
+- api: _id
+  label: 字符串(String)
+- api: _id
+  label: 单行文本
+- api: company_registration_time__c
+  label: 公司注册时间
+- api: sales_area__c
+  label: 销售区域
+- api: original_purchase_discount__c
+  label: 原采买折扣
+- api: owner__c
+  label: Owner
+- api: customer_creation_result__c
+  label: 客户创建结果
+- api: end_customer__c
+  label: 最终客户
+- api: customer_type_priority__c
+  label: 客户类型（优先级）
+- api: user_creation_channel__c
+  label: 用户创建渠道
+- api: customer_communication_wil__c
+  label: 客户沟通意愿
+- api: siemens_replace_other_bran__c
+  label: 西门子是否替代其他品牌应用

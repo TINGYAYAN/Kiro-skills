@@ -1,0 +1,34 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: accounts_receivable_note_id
+  label: 应收单id
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: last_modified_by
+  label: 最后修改人
+- api: accounts_receivable_quick_rule_id
+  label: 快捷应收规则id
+- api: object_id
+  label: 对象id
+- api: is_completed
+  label: 是否完成
+  options:
+  - label: 否
+    value: 'False'
+  - label: 是
+    value: 'True'
+- api: created_by
+  label: 创建人
+- api: version
+  label: version
+- api: is_deleted
+  label: is_deleted
+- api: object_api_name
+  label: 对象名称
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: _id
+  label: _id

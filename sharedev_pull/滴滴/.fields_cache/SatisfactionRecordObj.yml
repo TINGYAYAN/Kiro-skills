@@ -1,0 +1,164 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: web_im_visitor_id
+  label: 访客用户
+- api: field_star_appraise_ratio
+  label: 服务效率
+- api: extend_obj_data_id
+  label: 扩展字段在mt_data中的记录ID
+- api: appraise_average_score
+  label: 服务平均得分
+- api: field_star_appraise_quality
+  label: 服务质量
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: owner_department
+  label: 负责人主属部门
+- api: account_id_ref
+  label: 客户
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: record_file
+  label: 录音文件
+- api: source_type
+  label: 来源应用类型
+  options:
+  - label: 线上客服
+    value: onlineConsult
+  - label: 呼叫中心
+    value: callCenter
+  - label: 其他
+    value: other
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: call_id
+  label: 通话记录ID
+- api: more_suggestions
+  label: 更多建议
+- api: start_time
+  label: 开始时间
+- api: field_star_appraise_attitude
+  label: 服务态度
+- api: data_own_department
+  label: 归属部门
+- api: name
+  label: 满意度记录编号
+- api: consultant_type
+  label: 客服类型
+  options:
+  - label: 人工客服
+    value: manualConsultant
+  - label: 智能客服
+    value: smartConsultant
+  - label: 其他
+    value: other
+- api: _id
+  label: _id
+- api: tenant_id
+  label: tenant_id
+- api: seat_employee
+  label: 座席员工
+- api: customer_number
+  label: 客户号码
+- api: hotline
+  label: 热线号码
+- api: seat_id
+  label: 座席号
+- api: contact_id
+  label: 联系人
+- api: is_solve_problem
+  label: 是否解决问题
+  options:
+  - label: 是
+    value: 'yes'
+  - label: 否
+    value: 'no'
+  - label: 其他
+    value: other
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: service_record_id
+  label: 通话记录
+- api: is_deleted
+  label: is_deleted
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: number_trunk
+  label: 中继号
+- api: out_owner
+  label: 外部负责人
+- api: customer_service_session_id
+  label: 会话记录
+- api: call_type
+  label: 呼叫类型
+  options:
+  - label: 呼入
+    value: '0'
+  - label: 呼出
+    value: '1'
+  - label: 其他
+    value: other
+- api: owner
+  label: 负责人
+- api: last_modified_time
+  label: 最后修改时间
+- api: sv_keys
+  label: 满意度按键值
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: end_time
+  label: 结束时间
+- api: servicer
+  label: 服务人员
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+  - label: 呼叫中心
+    value: ''
+  - label: 线上客服
+    value: ''
+- api: account_id
+  label: 关联客户
+- api: smart_consultant
+  label: 智能客服
+  options:
+  - label: 其他
+    value: other
+- api: bridge_time
+  label: 满意度操作时长

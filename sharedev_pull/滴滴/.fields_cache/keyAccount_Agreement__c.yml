@@ -1,0 +1,463 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: is_there_a_single_hotel_ma__c
+  label: 是否有单体酒店托管协议
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: hotel_group_company_name__c
+  label: 酒店集团名称
+  options:
+  - label: 锦江集团（中国区）；包括希尔顿欢朋
+    value: '1'
+  - label: 华住集团
+    value: '2'
+  - label: 首旅如家集团
+    value: '3'
+  - label: 首旅高星
+    value: '4'
+  - label: 尚美集团
+    value: '5'
+  - label: 格林集团
+    value: '6'
+  - label: 东呈集团
+    value: '7'
+  - label: 旅悦酒店集团
+    value: '8'
+  - label: 艺龙酒店科技
+    value: '9'
+  - label: 亚朵集团
+    value: '10'
+  - label: 速8酒店
+    value: '11'
+  - label: 轻住酒店集团
+    value: '12'
+  - label: IHG洲际集团
+    value: '13'
+  - label: 丽呈集团
+    value: '14'
+  - label: 德胧集团
+    value: '15'
+  - label: 雅斯特酒店集团
+    value: '16'
+  - label: 山东文旅酒店集团
+    value: '17'
+  - label: 凤悦（包括希尔顿惠庭）
+    value: '18'
+  - label: 秋果
+    value: '19'
+  - label: 万达酒店集团
+    value: '20'
+  - label: 君亭酒店集团
+    value: '21'
+  - label: 宏昆集团
+    value: '22'
+  - label: 书香集团
+    value: '23'
+  - label: 雅阁酒店集团
+    value: '24'
+  - label: 格兰云天酒店集团
+    value: '25'
+  - label: 港中旅集团
+    value: '26'
+  - label: 金陵饭店集团
+    value: '27'
+  - label: 曙光酒店集团
+    value: '28'
+  - label: 白天鹅酒店集团
+    value: '29'
+  - label: 凯莱酒店集团
+    value: '30'
+  - label: 其他
+    value: other
+- api: current_status__c
+  label: 当前状态
+  options:
+  - label: 未托管
+    value: '1'
+  - label: 合同流程中
+    value: '2'
+  - label: 已托管
+    value: '3'
+  - label: 其他
+    value: other
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: single_hotel_entrust_agree__c
+  label: 单体酒店托管协议（填写cooper链接）
+- api: owner
+  label: 负责人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: airline_name__c
+  label: 航司名称
+  options:
+  - label: 上海吉祥航空有限公司
+    value: '1'
+  - label: 美国达美航空公司
+    value: '2'
+  - label: 成都航空有限公司
+    value: '3'
+  - label: 美国航空公司
+    value: '4'
+  - label: 埃及航空公司
+    value: '5'
+  - label: 曼谷航空有限公司
+    value: '6'
+  - label: 中国BSP办公室
+    value: '7'
+  - label: 河北航空有限公司
+    value: '8'
+  - label: 香港快运航空有限公司
+    value: '9'
+  - label: 哈萨克斯坦阿斯塔纳航空公司
+    value: '10'
+  - label: 卡塔尔航空公司
+    value: '11'
+  - label: 西伯利亚航空公司
+    value: '12'
+  - label: 中国航协BD部门
+    value: '13'
+  - label: 新西兰航空公司
+    value: '14'
+  - label: 天津航空有限责任公司
+    value: '15'
+  - label: 国泰航空公司北京代表处
+    value: '16'
+  - label: 加拿大国际航空公司
+    value: '17'
+  - label: 法国航空公司
+    value: '18'
+  - label: 芬兰航空有限公司
+    value: '19'
+  - label: 汶莱皇家航空公司
+    value: '20'
+  - label: 中国南方航空公司
+    value: '21'
+  - label: 上海航空公司
+    value: '22'
+  - label: 乌兹别克航空公司
+    value: '23'
+  - label: 日本航空公司
+    value: '24'
+  - label: 大韩航空公司
+    value: '25'
+  - label: 荷兰皇家航空公司
+    value: '26'
+  - label: 斯里兰卡航空公司
+    value: '27'
+  - label: 香港航空有限公司
+    value: '28'
+  - label: 国际航协北亚办事处ASD服务组
+    value: '29'
+  - label: 中国四川航空公司
+    value: '30'
+  - label: 蒙古航空公司
+    value: '31'
+  - label: 尼泊尔皇家航空公司
+    value: '32'
+  - label: 山东航空公司
+    value: '33'
+  - label: 昆明航空有限公司
+    value: '34'
+  - label: 幸福航空有限责任公司
+    value: '35'
+  - label: 华信航空股份有限公司
+    value: '36'
+  - label: 阿塞拜疆航空公司
+    value: '37'
+  - label: 立荣航空公司
+    value: '38'
+  - label: 乌拉尔航空公司
+    value: '39'
+  - label: 墨西哥航空公司
+    value: '40'
+  - label: 台湾长荣航空股份有限公司
+    value: '41'
+  - label: 台湾中华航空股份有限公司
+    value: '42'
+  - label: 阿联酋航空公司
+    value: '43'
+  - label: 大新华航空有限公司
+    value: '44'
+  - label: 海南航空公司
+    value: '45'
+  - label: 深圳航空公司
+    value: '46'
+  - label: 奥凯航空有限公司
+    value: '47'
+  - label: 北京首都航空有限公司
+    value: '48'
+  - label: 重庆航空有限责任公司
+    value: '49'
+  - label: 西部航空有限责任公司
+    value: '50'
+  - label: 印度航空公司上海办事处
+    value: '51'
+  - label: 埃塞俄比亚航空公司
+    value: '52'
+  - label: 以色列航空公司
+    value: '53'
+  - label: 厦门航空有限公司
+    value: '54'
+  - label: 马来西亚航空公司
+    value: '55'
+  - label: 中国东方航空公司
+    value: '56'
+  - label: 全日空航空公司
+    value: '57'
+  - label: 澳门航空公司
+    value: '58'
+  - label: 奥地利航空公司
+    value: '59'
+  - label: 韩亚航空公司
+    value: '60'
+  - label: 巴基斯坦航空公司
+    value: '61'
+  - label: 澳洲航空公司
+    value: '62'
+  - label: 北欧航空公司
+    value: '63'
+  - label: 新加坡航空公司北京办事处
+    value: '64'
+  - label: 俄罗斯航空公司
+    value: '65'
+  - label: 泰国航空公司
+    value: '66'
+  - label: 土耳其航空公司
+    value: '67'
+  - label: 美国联合航空公司
+    value: '68'
+  - label: 维珍航空公司
+    value: '69'
+  - label: 菲律宾航空公司
+    value: '70'
+  - label: 印度尼西亚鹰航空公司
+    value: '71'
+  - label: 英国航空公司
+    value: '72'
+  - label: 德国汉莎航空公司
+    value: '73'
+  - label: 瑞士国际航空公司
+    value: '74'
+  - label: 越南航空公司
+    value: '75'
+  - label: 中国国际航空股份有限公司
+    value: '76'
+  - label: 肯尼亚航空公司
+    value: '77'
+  - label: 阿尔及利亚航空公司
+    value: '78'
+  - label: 中国联合航空有限公司
+    value: '79'
+  - label: 阿联酋阿提哈德航空公司
+    value: '80'
+  - label: 云南祥鹏航空有限责任公司
+    value: '81'
+  - label: 波兰航空公司
+    value: '82'
+  - label: 华夏航空公司
+    value: '83'
+  - label: 沙特阿拉伯航空公司
+    value: '84'
+  - label: 毛里求斯航空公司
+    value: '85'
+  - label: 西藏航空有限公司
+    value: '86'
+  - label: 南非航空公司
+    value: '87'
+  - label: 美国夏威夷航空公司北京代表处
+    value: '88'
+  - label: 捷星航空
+    value: '89'
+  - label: 俄罗斯奥罗拉航空公司
+    value: '90'
+  - label: IATA
+    value: '91'
+  - label: 缅甸国际航空有限公司
+    value: '92'
+  - label: 巴西天马航空股份有限公司
+    value: '93'
+  - label: 柬埔寨航空有限公司
+    value: '94'
+  - label: 蒙古匈奴航空有限责任公司
+    value: '95'
+  - label: 塔吉克斯坦索蒙航空公司
+    value: '96'
+  - label: IATA BJS
+    value: '97'
+  - label: 新加坡酷虎航空有限公司
+    value: '98'
+  - label: 柬埔寨国家航空有限公司
+    value: '99'
+  - label: 浙江长龙航空有限公司
+    value: '100'
+  - label: 瑞丽航空有限公司
+    value: '101'
+  - label: 东海航空有限公司
+    value: '102'
+  - label: 青岛航空股份有限公司
+    value: '103'
+  - label: E and F Services (IATA)
+    value: '104'
+  - label: 韩国釜山航空股份有限公司
+    value: '105'
+  - label: 乌克兰国际航空公司
+    value: '106'
+  - label: 乌鲁木齐航空
+    value: '107'
+  - label: 俄罗斯伊尔航空公司
+    value: '108'
+  - label: 老挝国家航空公司
+    value: '109'
+  - label: 福州航空有限责任公司
+    value: '110'
+  - label: 广西北部湾航空有限责任公司
+    value: '111'
+  - label: 韩国济州航空
+    value: '112'
+  - label: 扬子江航空股份有限公司
+    value: '113'
+  - label: 韩国真航空股份有限公司
+    value: '114'
+  - label: 多彩贵州航空有限公司
+    value: '115'
+  - label: 江西航空有限公司
+    value: '116'
+  - label: 泰国微笑航空有限公司
+    value: '117'
+  - label: 阿曼航空
+    value: '118'
+  - label: 长安航空有限责任公司
+    value: '119'
+  - label: 云南红土航空股份有限公司
+    value: '120'
+  - label: 皇家约旦航空公司
+    value: '121'
+  - label: 桂林航空有限公司
+    value: '122'
+  - label: 维珍澳大利亚国际航空
+    value: '123'
+  - label: 吉尔吉斯斯坦玛纳斯航空公司
+    value: '124'
+  - label: 西班牙国家航空公司
+    value: '125'
+  - label: 卢旺达航空公司
+    value: '126'
+  - label: 哈萨克斯坦斯卡特航空公司
+    value: '127'
+  - label: 龙江航空有限公司
+    value: '128'
+  - label: 马来西亚马印航空
+    value: '129'
+  - label: 韩国德威航空
+    value: '130'
+  - label: 澜湄航空（柬埔寨）股份有限公司
+    value: '131'
+  - label: 孟加拉优速航空公司
+    value: '132'
+  - label: 缅甸国家航空公司
+    value: '133'
+  - label: 巴布亚新几内亚航空公司
+    value: '134'
+  - label: 柬埔寨景成国际航空有限公司
+    value: '135'
+  - label: 俄罗斯依可亚航空公司
+    value: '136'
+  - label: 天骄航空有限公司
+    value: '137'
+  - label: 韩国首尔航空
+    value: '138'
+  - label: 尼泊尔喜马拉雅航空私人有限公司
+    value: '139'
+  - label: 摩洛哥皇家航空公司北京代表处
+    value: '140'
+  - label: 菲律宾皇家航空
+    value: '141'
+  - label: 坦桑尼亚航空公司
+    value: '142'
+  - label: 科威特航空公司
+    value: '143'
+  - label: 意大利勒奥斯航空公司
+    value: '144'
+  - label: 柬埔寨天空吴哥航空公司
+    value: '145'
+  - label: 塞尔维亚航空贝尔格莱德股份公司
+    value: '146'
+  - label: 春秋
+    value: '147'
+  - label: 九元
+    value: '148'
+  - label: 其他
+    value: other
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 集团酒店托管协议
+    value: ''
+  - label: 单体酒店托管协议
+    value: ''
+  - label: 航司托管协议
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: implement_CSM_handover__c
+  label: 实施-CSM交接单
+- api: data_own_department
+  label: 归属部门
+- api: name
+  label: 主属性
+- api: _id
+  label: _id

@@ -60,13 +60,21 @@ rag:
 
 generator:
   # few-shot 示例数量（RAG 启用时为语义检索 top-k，否则为规则排序 top-n）
-  num_examples: 3
+  num_examples: 8
   # 单对象写入 LLM 的字段行数上限（过大易触发代理/网关「构建请求失败」）
   max_fields_in_prompt: 72
   # 生成文件默认输出目录（相对于项目根目录 test拨号/）
   output_dir: "."
   # 默认作者名
   default_author: "纷享实施人员"
+
+deployer:
+  # 是否在浏览器部署前，先调用系统 runtime/debug 接口做一轮编译预检
+  # 默认开启；如需完全关闭，可在 config.local.yml 里设为 false
+  runtime_debug_precheck: true
+  # 新建函数时是否优先尝试 Web Session create 接口
+  # 默认关闭；开启后失败会自动回退到浏览器部署
+  web_create_api: false
 
 tester:
   # 触发函数后等待执行的时间（秒）
@@ -87,3 +95,6 @@ feishu:
   # 多维表格：在飞书创建多维表格，表头同上，从 URL 获取 app_token 和 table_id
   bitable_app_token: ""
   bitable_table_id: ""
+  # 固定模板表：后续给用户回复批量生成说明时，优先直接引用这张模板表，不再临时创建
+  template_table_name: "APL批量生成模板"
+  template_table_url: ""

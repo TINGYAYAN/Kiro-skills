@@ -1,0 +1,1207 @@
+fields:
+- api: leader
+  label: 汇报对象
+- api: lock_rule
+  label: 锁定规则
+- api: login_type
+  label: 登录方式
+  options:
+  - label: 手机号
+    value: phone
+  - label: 邮箱
+    value: email
+  - label: 手机号/邮箱
+    value: phone_email
+- api: work_phone
+  label: 办公电话
+- api: msn
+  label: msn
+- api: language
+  label: 语言
+  options:
+  - label: 简体中文
+    value: zh-CN
+- api: qq_account
+  label: qq号码
+- api: profile_image
+  label: 头像
+- api: extend_obj_data_id
+  label: 扩展字段在mt_data中的记录ID
+- api: password
+  label: 密码
+- api: date_of_first_ployment
+  label: 就业日期
+- api: weixin_account
+  label: 微信号码
+- api: employee_create_time
+  label: 员工创建时间
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: owner_department
+  label: 负责人所在部门
+- api: vice_departments
+  label: 附属部门
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: name_spell
+  label: 拼音
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: working_states
+  label: 心情
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: data_own_department
+  label: 归属部门
+- api: full_name
+  label: 姓名
+- api: phone
+  label: 手机
+- api: belonging_team__c
+  label: 所属团队
+  options:
+  - label: Team 1
+    value: option_team_1__c
+  - label: Team 2
+    value: option_team_2__c
+  - label: 其他
+    value: other
+- api: user_id
+  label: 员工ID
+- api: extension_number
+  label: 办公电话扩展分机号
+- api: name
+  label: 系统名（昵称）
+- api: date_of_joining
+  label: 入职日期
+- api: employee_number
+  label: 员工编号
+- api: position
+  label: 职位
+- api: _id
+  label: _id
+- api: region
+  label: 区域
+  options:
+  - label: 阿尔巴尼亚语（阿尔巴尼亚）
+    value: sq_AL
+  - label: 阿拉伯语（阿尔及利亚）
+    value: ar_DZ
+  - label: 阿拉伯语（阿拉伯联合酋长国）
+    value: ar_AE
+  - label: 阿拉伯语（阿曼）
+    value: ar_OM
+  - label: 阿拉伯语（埃及）
+    value: ar_EG
+  - label: 阿拉伯语（巴林）
+    value: ar_BH
+  - label: 阿拉伯语（厄立特里亚）
+    value: ar_ER
+  - label: 阿拉伯语（卡塔尔）
+    value: ar_QA
+  - label: 阿拉伯语（科威特）
+    value: ar_KW
+  - label: 阿拉伯语（黎巴嫩）
+    value: ar_LB
+  - label: 阿拉伯语（利比亚）
+    value: ar_LY
+  - label: 阿拉伯语（摩洛哥）
+    value: ar_MA
+  - label: 阿拉伯语（沙特阿拉伯）
+    value: ar_SA
+  - label: 阿拉伯语（苏丹）
+    value: ar_SD
+  - label: 阿拉伯语（突尼斯）
+    value: ar_TN
+  - label: 阿拉伯语（叙利亚）
+    value: ar_SY
+  - label: 阿拉伯语（也门）
+    value: ar_YE
+  - label: 阿拉伯语（伊拉克）
+    value: ar_IQ
+  - label: 阿拉伯语（约旦）
+    value: ar_JO
+  - label: 阿姆哈拉语（埃塞俄比亚）
+    value: am_ET
+  - label: 阿塞拜疆语（阿塞拜疆）
+    value: az
+  - label: 爱尔兰语（爱尔兰）
+    value: ga_IE
+  - label: 爱沙尼亚语（爱沙尼亚）
+    value: et_EE
+  - label: 巴斯克语（西班牙）
+    value: eu_ES
+  - label: 白俄罗斯语（白俄罗斯）
+    value: be_BY
+  - label: 保加利亚语（保加利亚）
+    value: bg_BG
+  - label: 冰岛语（冰岛）
+    value: is_IS
+  - label: 波兰语（波兰）
+    value: pl_PL
+  - label: 波斯尼亚语（波斯尼亚和黑塞哥维那）
+    value: bs_Latn_BA
+  - label: 波斯语（伊朗）
+    value: fa_IR
+  - label: 朝鲜语（朝鲜）
+    value: ko_KP
+  - label: 达里语（阿富汗）
+    value: fa_AF
+  - label: 丹麦语（丹麦）
+    value: da_DK
+  - label: 德语（奥地利）
+    value: de_AT
+  - label: 德语（比利时）
+    value: de_BE
+  - label: 德语（德国）
+    value: de_DE
+  - label: 德语（卢森堡）
+    value: de_LU
+  - label: 德语（瑞士）
+    value: de_CH
+  - label: 俄语（白俄罗斯）
+    value: ru_BY
+  - label: 俄语（俄罗斯）
+    value: ru_RU
+  - label: 俄语（哈萨克斯坦）
+    value: ru_KZ
+  - label: 俄语（吉尔吉斯斯坦）
+    value: ru_KG
+  - label: 俄语（摩尔多瓦）
+    value: ru_MD
+  - label: 俄语（乌克兰）
+    value: ru_UA
+  - label: 法语（比利时）
+    value: fr_BE
+  - label: 法语（布基纳法索）
+    value: fr_BF
+  - label: 法语（法国）
+    value: fr_FR
+  - label: 法语（海地）
+    value: fr_HT
+  - label: 法语（几内亚）
+    value: fr_GN
+  - label: 法语（加拿大）
+    value: fr_CA
+  - label: 法语（科摩罗）
+    value: fr_KM
+  - label: 法语（卢森堡）
+    value: fr_LU
+  - label: 法语（马里）
+    value: fr_ML
+  - label: 法语（毛里塔尼亚）
+    value: fr_MR
+  - label: 法语（摩洛哥）
+    value: fr_MA
+  - label: 法语（摩纳哥）
+    value: fr_MC
+  - label: 法语（尼日尔）
+    value: fr_NE
+  - label: 法语（瑞士）
+    value: fr_CH
+  - label: 法语（瓦利斯和富图纳）
+    value: fr_WF
+  - label: 法语（中非共和国）
+    value: fr_CF
+  - label: 芬兰语（芬兰）
+    value: fi_FI
+  - label: 高棉语（柬埔寨）
+    value: km_KH
+  - label: 格陵兰语（格陵兰）
+    value: kl_GL
+  - label: 格鲁吉亚语（格鲁吉亚）
+    value: ka_GE
+  - label: 古吉拉特语（印度）
+    value: gu_IN
+  - label: 哈萨克语（哈萨克斯坦）
+    value: kk_KZ
+  - label: 韩语（韩国）
+    value: ko_KR
+  - label: 荷兰语（阿鲁巴）
+    value: nl_AW
+  - label: 荷兰语（比利时）
+    value: nl_BE
+  - label: 荷兰语（荷兰）
+    value: nl_NL
+  - label: 荷兰语（苏里南）
+    value: nl_SR
+  - label: 加泰罗尼亚语（西班牙）
+    value: ca_ES
+  - label: 捷克语（捷克）
+    value: cs_CZ
+  - label: 卡纳达语（印度）
+    value: kn_IN
+  - label: 柯尔克孜语（吉尔吉斯斯坦）
+    value: ky_KG
+  - label: 科萨语（南非）
+    value: xh_ZA
+  - label: 克罗地亚语（克罗地亚）
+    value: hr_HR
+  - label: 拉脱维亚语（拉脱维亚）
+    value: lv_LV
+  - label: 老挝语（老挝）
+    value: lo_LA
+  - label: 立陶宛语（立陶宛）
+    value: lt_LT
+  - label: 隆迪语（布隆迪）
+    value: rn_BI
+  - label: 卢森堡语（卢森堡）
+    value: lb_LU
+  - label: 鲁巴加丹加语（刚果［金］）
+    value: lu_CD
+  - label: 罗马尼亚语（罗马尼亚）
+    value: ro_RO
+  - label: 罗马尼亚语（摩尔多瓦）
+    value: ro_MD
+  - label: 罗曼什语（瑞士）
+    value: rm_CH
+  - label: 马耳他语（马耳他）
+    value: mt_MT
+  - label: 马拉地语（印度）
+    value: mr_IN
+  - label: 马拉雅拉姆语（印度）
+    value: ml_IN
+  - label: 马来语（马来西亚）
+    value: ms_MY
+  - label: 马来语（文莱）
+    value: ms_BN
+  - label: 马其顿语（北马其顿）
+    value: mk_MK
+  - label: 毛利语（新西兰）
+    value: mi_NZ
+  - label: 孟加拉语（孟加拉国）
+    value: bn_BD
+  - label: 孟加拉语（印度）
+    value: bn_IN
+  - label: 缅甸语（缅甸）
+    value: my_MM
+  - label: 南非荷兰语（南非）
+    value: af_ZA
+  - label: 尼泊尔语（尼泊尔）
+    value: ne_NP
+  - label: 挪威语（挪威）
+    value: nb_NO
+  - label: 旁遮普语（印度）
+    value: pa_Guru_IN
+  - label: 葡萄牙语（安哥拉）
+    value: pt_AO
+  - label: 葡萄牙语（巴西）
+    value: pt_BR
+  - label: 葡萄牙语（佛得角）
+    value: pt_CV
+  - label: 葡萄牙语（莫桑比克）
+    value: pt_MZ
+  - label: 葡萄牙语（葡萄牙）
+    value: pt_PT
+  - label: 葡萄牙语（圣多美和普林西比）
+    value: pt_ST
+  - label: 普什图语（阿富汗）
+    value: ps_AF
+  - label: 日语（日本）
+    value: ja_JP
+  - label: 瑞典语（瑞典）
+    value: sv_SE
+  - label: 萨摩亚语（美国）
+    value: en_AS
+  - label: 塞尔维亚语（拉丁）（波斯尼亚和黑塞哥维那）
+    value: sr_Latn_BA
+  - label: 塞尔维亚语（拉丁）（塞尔维亚）
+    value: sr_Latn_RS
+  - label: 塞尔维亚语（拉丁文，黑山）
+    value: sr_Latn_ME
+  - label: 塞尔维亚语（塞尔维亚）
+    value: sr
+  - label: 塞尔维亚语（西里尔）（波斯尼亚和黑塞哥维那）
+    value: bs_Cyrl_BA
+  - label: 塞尔维亚语（西里尔）（塞尔维亚）
+    value: sr_Cyrl_RS
+  - label: 塞尔维亚语（西里尔文，黑山）
+    value: sr_Cyrl_ME
+  - label: 桑戈语（中非共和国）
+    value: sg_CF
+  - label: 斯洛伐克语（斯洛伐克）
+    value: sk_SK
+  - label: 斯洛文尼亚语（斯洛文尼亚）
+    value: sl_SI
+  - label: 斯瓦希里语（肯尼亚）
+    value: sw_KE
+  - label: 索马里语（吉布提）
+    value: so_DJ
+  - label: 索马里语（索马里）
+    value: so_SO
+  - label: 塔吉克语（塔吉克斯坦）
+    value: tg_TJ
+  - label: 泰卢固语（印度）
+    value: te_IN
+  - label: 泰米尔语（斯里兰卡）
+    value: ta_LK
+  - label: 泰米尔语（印度）
+    value: ta_IN
+  - label: 泰语（泰国）
+    value: th_TH
+  - label: 提格利尼亚语（埃塞俄比亚）
+    value: ti_ET
+  - label: 提格利尼亚语（厄立特里亚）
+    value: ti_ER
+  - label: 土耳其语（土耳其）
+    value: tr_TR
+  - label: 威尔士语（英国）
+    value: cy_GB
+  - label: 乌尔都语（巴基斯坦）
+    value: ur_PK
+  - label: 乌克兰语（乌克兰）
+    value: uk_UA
+  - label: 乌兹别克语（拉丁文，乌兹别克斯坦）
+    value: uz_Latn_UZ
+  - label: 西班牙语（阿根廷）
+    value: es_AR
+  - label: 西班牙语（巴拉圭）
+    value: es_PY
+  - label: 西班牙语（巴拿马）
+    value: es_PA
+  - label: 西班牙语（波多黎各）
+    value: es_PR
+  - label: 西班牙语（玻利维亚）
+    value: es_BO
+  - label: 西班牙语（多米尼加共和国）
+    value: es_DO
+  - label: 西班牙语（厄瓜多尔）
+    value: es_EC
+  - label: 西班牙语（哥伦比亚）
+    value: es_CO
+  - label: 西班牙语（哥斯达黎加）
+    value: es_CR
+  - label: 西班牙语（古巴）
+    value: es_CU
+  - label: 西班牙语（洪都拉斯）
+    value: es_HN
+  - label: 西班牙语（美国）
+    value: es_US
+  - label: 西班牙语（秘鲁）
+    value: es_PE
+  - label: 西班牙语（墨西哥）
+    value: es_MX
+  - label: 西班牙语（尼加拉瓜）
+    value: es_NI
+  - label: 西班牙语（萨尔瓦多）
+    value: es_SV
+  - label: 西班牙语（危地马拉）
+    value: es_GT
+  - label: 西班牙语（委内瑞拉）
+    value: es_VE
+  - label: 西班牙语（乌拉圭）
+    value: es_UY
+  - label: 西班牙语（西班牙）
+    value: es_ES
+  - label: 西班牙语（智利）
+    value: es_CL
+  - label: 希伯来语（以色列）
+    value: he_IL
+  - label: 希腊语（塞浦路斯）
+    value: el_CY
+  - label: 希腊语（希腊）
+    value: el_GR
+  - label: 夏威夷语（美国）
+    value: haw_US
+  - label: 匈牙利语（匈牙利）
+    value: hu_HU
+  - label: 亚美尼亚语（亚美尼亚）
+    value: hy_AM
+  - label: 意大利语（瑞士）
+    value: it_CH
+  - label: 意大利语（意大利）
+    value: it_IT
+  - label: 印地语（印度）
+    value: hi_IN
+  - label: 印度尼西亚语（印度尼西亚）
+    value: id_ID
+  - label: 英语（阿拉伯联合酋长国）
+    value: en_AE
+  - label: 英语（爱尔兰）
+    value: en_IE
+  - label: 英语（安提瓜和巴布达）
+    value: en_AG
+  - label: 英语（澳大利亚）
+    value: en_AU
+  - label: 英语（巴巴多斯）
+    value: en_BB
+  - label: 英语（巴布亚新几内亚）
+    value: en_PG
+  - label: 英语（巴哈马）
+    value: en_BS
+  - label: 英语（巴基斯坦）
+    value: en_PK
+  - label: 英语（百慕大）
+    value: en_BM
+  - label: 英语（比利时）
+    value: en_BE
+  - label: 英语（伯利兹）
+    value: en_BZ
+  - label: 英语（博茨瓦纳）
+    value: en_BW
+  - label: 英语（德国）
+    value: en_DE
+  - label: 英语（厄立特里亚）
+    value: en_ER
+  - label: 英语（菲律宾）
+    value: en_PH
+  - label: 英语（斐济）
+    value: en_FJ
+  - label: 英语（福克兰群岛/马尔维纳斯群岛）
+    value: en_FK
+  - label: 英语（冈比亚）
+    value: en_GM
+  - label: 英语（圭亚那）
+    value: en_GY
+  - label: 英语（荷兰）
+    value: en_NL
+  - label: 英语（荷属圣马丁）
+    value: en_SX
+  - label: 英语（加拿大）
+    value: en_CA
+  - label: 英语（加纳）
+    value: en_GH
+  - label: 英语（喀麦隆）
+    value: en_CM
+  - label: 英语（开曼群岛）
+    value: en_KY
+  - label: 英语（肯尼亚）
+    value: en_KE
+  - label: 英语（利比里亚）
+    value: en_LR
+  - label: 英语（卢旺达）
+    value: en_RW
+  - label: 英语（马达加斯加）
+    value: en_MG
+  - label: 英语（马耳他）
+    value: en_MT
+  - label: 英语（马拉维）
+    value: en_MW
+  - label: 英语（马来西亚）
+    value: en_MY
+  - label: 英语（毛里求斯）
+    value: en_MU
+  - label: 英语（美国）
+    value: en_US
+  - label: 英语（纳米比亚）
+    value: en_NA
+  - label: 英语（南非）
+    value: en_ZA
+  - label: 英语（南苏丹）
+    value: en_SS
+  - label: 英语（尼日利亚）
+    value: en_NG
+  - label: 英语（萨摩亚）
+    value: en_WS
+  - label: 英语（塞拉利昂）
+    value: en_SL
+  - label: 英语（塞浦路斯）
+    value: en_CY
+  - label: 英语（塞舌尔）
+    value: en_SC
+  - label: 英语（圣赫勒拿）
+    value: en_SH
+  - label: 英语（斯威士兰）
+    value: en_SZ
+  - label: 英语（苏丹）
+    value: en_SD
+  - label: 英语（所罗门群岛）
+    value: en_SB
+  - label: 英语（坦桑尼亚）
+    value: en_TZ
+  - label: 英语（汤加）
+    value: en_TO
+  - label: 英语（特立尼达和多巴哥）
+    value: en_TT
+  - label: 英语（瓦努阿图）
+    value: en_VU
+  - label: 英语（乌干达）
+    value: en_UG
+  - label: 英语（新加坡）
+    value: en_SG
+  - label: 英语（新西兰）
+    value: en_NZ
+  - label: 英语（牙买加）
+    value: en_JM
+  - label: 英语（以色列）
+    value: en_IL
+  - label: 英语（印度）
+    value: en_IN
+  - label: 英语（英国）
+    value: en_GB
+  - label: 英语（直布罗陀）
+    value: en_GI
+  - label: 英语（中国香港特别行政区）
+    value: en_HK
+  - label: 约鲁巴语（贝宁）
+    value: yo_BJ
+  - label: 越南语（越南）
+    value: vi_VN
+  - label: 中文（中国台湾）
+    value: zh_Hant_TW
+  - label: 中文（新加坡）
+    value: zh_Hans_SG
+  - label: 中文（中国）
+    value: zh_Hans_CN
+  - label: 中文（中国澳门特别行政区）
+    value: zh_Hant_MO
+  - label: 中文（中国香港特别行政区）
+    value: zh_Hant_HK
+  - label: 祖鲁语（南非）
+    value: zu_ZA
+- api: status
+  label: 员工状态
+  options:
+  - label: 启用
+    value: '0'
+  - label: 停用
+    value: '1'
+- api: birthday
+  label: 生日
+- api: tenant_id
+  label: tenant_id
+- api: responsible_area__c
+  label: 负责区域
+  options:
+  - label: RN
+    value: option_rn__c
+  - label: RS
+    value: option_rs__c
+  - label: RE
+    value: option_re__c
+  - label: RC
+    value: option_rc__c
+  - label: RW
+    value: option_rw__c
+  - label: RNE
+    value: option_rne__c
+  - label: 其他
+    value: other
+- api: stop_time
+  label: 停用时间
+- api: user_name
+  label: 登录账号
+- api: description
+  label: 基本信息描述
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: idass_account_id__c
+  label: idass_account_id
+- api: is_deleted
+  label: is_deleted
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: out_owner
+  label: 外部负责人
+- api: email
+  label: 邮箱
+- api: owner
+  label: 负责人
+- api: saml2_name_id
+  label: 单点登录帐号
+- api: is_active
+  label: 激活
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: last_modified_time
+  label: 最后修改时间
+- api: dimension_d2
+  label: 所负责的行业线
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: dimension_d1
+  label: 所负责的区域线
+- api: sex
+  label: 性别
+  options:
+  - label: 男
+    value: M
+  - label: 女
+    value: F
+  - label: 私密
+    value: P
+- api: dimension_d3
+  label: 所负责的产品线
+- api: last_modified_by
+  label: 最后修改人
+- api: main_department
+  label: 主属部门
+- api: time_zone
+  label: 时区
+  options:
+  - label: (GMT+14:00) 莱恩群岛时间 (Pacific/Kiritimati)
+    value: Pacific/Kiritimati
+  - label: (GMT+13:45) 查坦夏令时间 (Pacific/Chatham)
+    value: Pacific/Chatham
+  - label: (GMT+13:00) 新西兰夏令时间 (Pacific/Auckland)
+    value: Pacific/Auckland
+  - label: (GMT+13:00) 菲尼克斯群岛时间 (Pacific/Enderbury)
+    value: Pacific/Enderbury
+  - label: (GMT+13:00) 汤加标准时间 (Pacific/Tongatapu)
+    value: Pacific/Tongatapu
+  - label: (GMT+12:00) 彼得罗巴甫洛夫斯克-堪察加标准时间 (Asia/Kamchatka)
+    value: Asia/Kamchatka
+  - label: (GMT+12:00) 斐济标准时间 (Pacific/Fiji)
+    value: Pacific/Fiji
+  - label: (GMT+12:00) 诺福克岛时间 (Pacific/Norfolk)
+    value: Pacific/Norfolk
+  - label: (GMT+11:00) 豪勋爵岛夏令时间 (Australia/Lord_Howe)
+    value: Australia/Lord_Howe
+  - label: (GMT+11:00) 澳大利亚东部夏令时间 (Australia/Sydney)
+    value: Australia/Sydney
+  - label: (GMT+11:00) 所罗门群岛时间 (Pacific/Guadalcanal)
+    value: Pacific/Guadalcanal
+  - label: (GMT+10:30) 澳大利亚中部夏令时间 (Australia/Adelaide)
+    value: Australia/Adelaide
+  - label: (GMT+10:00) 澳大利亚东部标准时间 (Australia/Brisbane)
+    value: Australia/Brisbane
+  - label: (GMT+09:30) 澳大利亚中部标准时间 (Australia/Darwin)
+    value: Australia/Darwin
+  - label: (GMT+09:00) 韩国标准时间 (Asia/Seoul)
+    value: Asia/Seoul
+  - label: (GMT+09:00) 日本标准时间 (Asia/Tokyo)
+    value: Asia/Tokyo
+  - label: (GMT+08:00) 香港标准时间 (Asia/Hong_Kong)
+    value: Asia/Hong_Kong
+  - label: (GMT+08:00) 马来西亚时间 (Asia/Kuala_Lumpur)
+    value: Asia/Kuala_Lumpur
+  - label: (GMT+08:00) 菲律宾标准时间 (Asia/Manila)
+    value: Asia/Manila
+  - label: (GMT+08:00) 中国标准时间 (Asia/Shanghai)
+    value: Asia/Shanghai
+  - label: (GMT+08:00) 新加坡标准时间 (Asia/Singapore)
+    value: Asia/Singapore
+  - label: (GMT+08:00) 台北标准时间 (Asia/Taipei)
+    value: Asia/Taipei
+  - label: (GMT+08:00) 澳大利亚西部标准时间 (Australia/Perth)
+    value: Australia/Perth
+  - label: (GMT+07:00) 印度支那时间 (Asia/Bangkok)
+    value: Asia/Bangkok
+  - label: (GMT+07:00) 印度支那时间 (Asia/Ho_Chi_Minh)
+    value: Asia/Ho_Chi_Minh
+  - label: (GMT+07:00) 印度尼西亚西部时间 (Asia/Jakarta)
+    value: Asia/Jakarta
+  - label: (GMT+06:30) 缅甸时间 (Asia/Rangoon)
+    value: Asia/Rangoon
+  - label: (GMT+06:00) 孟加拉标准时间 (Asia/Dhaka)
+    value: Asia/Dhaka
+  - label: (GMT+05:45) 尼泊尔时间 (Asia/Kathmandu)
+    value: Asia/Kathmandu
+  - label: (GMT+05:30) 印度时间 (Asia/Colombo)
+    value: Asia/Colombo
+  - label: (GMT+05:30) 印度时间 (Asia/Kolkata)
+    value: Asia/Kolkata
+  - label: (GMT+05:00) 巴基斯坦标准时间 (Asia/Karachi)
+    value: Asia/Karachi
+  - label: (GMT+05:00) 乌兹别克斯坦标准时间 (Asia/Tashkent)
+    value: Asia/Tashkent
+  - label: (GMT+05:00) 叶卡捷琳堡标准时间 (Asia/Yekaterinburg)
+    value: Asia/Yekaterinburg
+  - label: (GMT+04:30) 阿富汗时间 (Asia/Kabul)
+    value: Asia/Kabul
+  - label: (GMT+04:00) 阿塞拜疆标准时间 (Asia/Baku)
+    value: Asia/Baku
+  - label: (GMT+04:00) 海湾标准时间 (Asia/Dubai)
+    value: Asia/Dubai
+  - label: (GMT+04:00) 格鲁吉亚标准时间 (Asia/Tbilisi)
+    value: Asia/Tbilisi
+  - label: (GMT+04:00) 亚美尼亚标准时间 (Asia/Yerevan)
+    value: Asia/Yerevan
+  - label: (GMT+03:30) 伊朗标准时间 (Asia/Tehran)
+    value: Asia/Tehran
+  - label: (GMT+03:00) 东部非洲时间 (Africa/Nairobi)
+    value: Africa/Nairobi
+  - label: (GMT+03:00) 阿拉伯标准时间 (Asia/Baghdad)
+    value: Asia/Baghdad
+  - label: (GMT+03:00) 阿拉伯标准时间 (Asia/Kuwait)
+    value: Asia/Kuwait
+  - label: (GMT+03:00) 阿拉伯标准时间 (Asia/Riyadh)
+    value: Asia/Riyadh
+  - label: (GMT+03:00) 东欧标准时间 (Europe/Istanbul)
+    value: Europe/Istanbul
+  - label: (GMT+03:00) 莫斯科标准时间 (Europe/Minsk)
+    value: Europe/Minsk
+  - label: (GMT+03:00) 莫斯科标准时间 (Europe/Moscow)
+    value: Europe/Moscow
+  - label: (GMT+02:00) 东欧标准时间 (Africa/Cairo)
+    value: Africa/Cairo
+  - label: (GMT+02:00) 南非标准时间 (Africa/Johannesburg)
+    value: Africa/Johannesburg
+  - label: (GMT+02:00) 东欧标准时间 (Asia/Beirut)
+    value: Asia/Beirut
+  - label: (GMT+02:00) 以色列标准时间 (Asia/Jerusalem)
+    value: Asia/Jerusalem
+  - label: (GMT+02:00) 东欧标准时间 (Europe/Athens)
+    value: Europe/Athens
+  - label: (GMT+02:00) 东欧标准时间 (Europe/Bucharest)
+    value: Europe/Bucharest
+  - label: (GMT+02:00) 东欧标准时间 (Europe/Helsinki)
+    value: Europe/Helsinki
+  - label: (GMT+01:00) 中欧标准时间 (Africa/Algiers)
+    value: Africa/Algiers
+  - label: (GMT+01:00) 西欧夏令时间 (Africa/Casablanca)
+    value: Africa/Casablanca
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Amsterdam)
+    value: Europe/Amsterdam
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Berlin)
+    value: Europe/Berlin
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Brussels)
+    value: Europe/Brussels
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Paris)
+    value: Europe/Paris
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Prague)
+    value: Europe/Prague
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Rome)
+    value: Europe/Rome
+  - label: (GMT+00:00) 格林尼治标准时间 (Europe/Dublin)
+    value: Europe/Dublin
+  - label: (GMT+00:00) 西欧标准时间 (Europe/Lisbon)
+    value: Europe/Lisbon
+  - label: (GMT+00:00) 格林尼治标准时间 (Europe/London)
+    value: Europe/London
+  - label: (GMT+00:00) 格林尼治标准时间 (GMT)
+    value: GMT
+  - label: (GMT-01:00) 格陵兰岛东部标准时间 (America/Scoresbysund)
+    value: America/Scoresbysund
+  - label: (GMT-01:00) 亚速尔群岛标准时间 (Atlantic/Azores)
+    value: Atlantic/Azores
+  - label: (GMT-01:00) 佛得角标准时间 (Atlantic/Cape_Verde)
+    value: Atlantic/Cape_Verde
+  - label: (GMT-02:00) 南乔治亚岛时间 (Atlantic/South_Georgia)
+    value: Atlantic/South_Georgia
+  - label: (GMT-03:00) 阿根廷标准时间 (America/Argentina/Buenos_Aires)
+    value: America/Argentina/Buenos_Aires
+  - label: (GMT-03:00) 智利夏令时间 (America/Santiago)
+    value: America/Santiago
+  - label: (GMT-03:00) 巴西利亚标准时间 (America/Sao_Paulo)
+    value: America/Sao_Paulo
+  - label: (GMT-03:30) 纽芬兰标准时间 (America/St_Johns)
+    value: America/St_Johns
+  - label: (GMT-04:00) 委内瑞拉时间 (America/Caracas)
+    value: America/Caracas
+  - label: (GMT-04:00) 大西洋标准时间 (America/Halifax)
+    value: America/Halifax
+  - label: (GMT-04:00) 大西洋标准时间 (America/Puerto_Rico)
+    value: America/Puerto_Rico
+  - label: (GMT-04:00) 大西洋标准时间 (Atlantic/Bermuda)
+    value: Atlantic/Bermuda
+  - label: (GMT-05:00) 哥伦比亚标准时间 (America/Bogota)
+    value: America/Bogota
+  - label: (GMT-05:00) 北美东部标准时间 (America/Indiana/Indianapolis)
+    value: America/Indiana/Indianapolis
+  - label: (GMT-05:00) 秘鲁标准时间 (America/Lima)
+    value: America/Lima
+  - label: (GMT-05:00) 北美东部标准时间 (America/New_York)
+    value: America/New_York
+  - label: (GMT-05:00) 北美东部标准时间 (America/Panama)
+    value: America/Panama
+  - label: (GMT-06:00) 北美中部标准时间 (America/Chicago)
+    value: America/Chicago
+  - label: (GMT-06:00) 北美中部标准时间 (America/El_Salvador)
+    value: America/El_Salvador
+  - label: (GMT-06:00) 北美中部标准时间 (America/Mexico_City)
+    value: America/Mexico_City
+  - label: (GMT-07:00) 北美山区标准时间 (America/Denver)
+    value: America/Denver
+  - label: (GMT-07:00) 墨西哥太平洋标准时间 (America/Mazatlan)
+    value: America/Mazatlan
+  - label: (GMT-07:00) 北美山区标准时间 (America/Phoenix)
+    value: America/Phoenix
+  - label: (GMT-08:00) 北美太平洋标准时间 (America/Los_Angeles)
+    value: America/Los_Angeles
+  - label: (GMT-08:00) 北美太平洋标准时间 (America/Tijuana)
+    value: America/Tijuana
+  - label: (GMT-08:00) 皮特凯恩时间 (Pacific/Pitcairn)
+    value: Pacific/Pitcairn
+  - label: (GMT-09:00) 阿拉斯加标准时间 (America/Anchorage)
+    value: America/Anchorage
+  - label: (GMT-09:00) 甘比尔时间 (Pacific/Gambier)
+    value: Pacific/Gambier
+  - label: (GMT-09:30) 马克萨斯群岛时间 (Pacific/Marquesas)
+    value: Pacific/Marquesas
+  - label: (GMT-10:00) 夏威夷-阿留申标准时间 (America/Adak)
+    value: America/Adak
+  - label: (GMT-10:00) 夏威夷-阿留申标准时间 (Pacific/Honolulu)
+    value: Pacific/Honolulu
+  - label: (GMT-11:00) 纽埃时间 (Pacific/Niue)
+    value: Pacific/Niue
+  - label: (GMT-11:00) 萨摩亚标准时间 (Pacific/Pago_Pago)
+    value: Pacific/Pago_Pago
+  - label: (GMT+08:00) 乌兰巴托标准时间 (Asia/Ulaanbaatar)
+    value: Asia/Ulaanbaatar
+  - label: (GMT+07:00) 克拉斯诺亚尔斯克标准时间 (Asia/Krasnoyarsk)
+    value: Asia/Krasnoyarsk
+  - label: (GMT+05:00) 马尔代夫时间 (Indian/Maldives)
+    value: Indian/Maldives
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Vienna)
+    value: Europe/Vienna
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Copenhagen)
+    value: Europe/Copenhagen
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Madrid)
+    value: Europe/Madrid
+  - label: (GMT-05:00) 基多标准时间 (America/Guayaquil)
+    value: America/Guayaquil
+  - label: (GMT+11:00) 新喀里多尼亚标准时间 (Pacific/Noumea)
+    value: Pacific/Noumea
+  - label: (GMT+03:00) 东非标准时间 (Africa/Addis_Ababa)
+    value: Africa/Addis_Ababa
+  - label: (GMT+03:00) 东非标准时间 (Africa/Mogadishu)
+    value: Africa/Mogadishu
+  - label: (GMT+03:00) 东非标准时间 (Africa/Dar_es_Salaam)
+    value: Africa/Dar_es_Salaam
+  - label: (GMT+02:00) 中非时间 (Africa/Khartoum)
+    value: Africa/Khartoum
+  - label: (GMT+02:00) 中非时间 (Africa/Windhoek)
+    value: Africa/Windhoek
+  - label: (GMT+01:00) 西非时间 (Africa/Lagos)
+    value: Africa/Lagos
+  - label: (GMT+00:00) 格林威治时间 (Africa/Accra)
+    value: Africa/Accra
+  - label: (GMT+06:00) 吉尔吉斯斯坦时间 (Asia/Bishkek)
+    value: Asia/Bishkek
+  - label: (GMT+05:00) 土库曼斯坦时间 (Asia/Ashgabat)
+    value: Asia/Ashgabat
+  - label: (GMT+05:00) 塔吉克斯坦时间 (Asia/Dushanbe)
+    value: Asia/Dushanbe
+  - label: (GMT+05:00) 哈萨克斯坦西部时间 (Asia/Oral)
+    value: Asia/Oral
+  - label: (GMT+06:00) 哈萨克斯坦东部时间 (Asia/Almaty)
+    value: Asia/Almaty
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Belgrade)
+    value: Europe/Belgrade
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Warsaw)
+    value: Europe/Warsaw
+  - label: (GMT+02:00) 东欧标准时间 (Europe/Kiev)
+    value: Europe/Kiev
+  - label: (GMT+02:00) 东欧标准时间 (Europe/Chisinau)
+    value: Europe/Chisinau
+  - label: (GMT+02:00) 东欧标准时间 (Europe/Sofia)
+    value: Europe/Sofia
+  - label: (GMT-04:00) 巴拉圭时间 (America/Asuncion)
+    value: America/Asuncion
+  - label: (GMT-05:00) 玻利维亚时间 (America/La_Paz)
+    value: America/La_Paz
+  - label: (GMT-03:00) 乌拉圭标准时间 (America/Montevideo)
+    value: America/Montevideo
+  - label: (GMT+06:30) 科科斯群岛时间 (Indian/Cocos)
+    value: Indian/Cocos
+  - label: (GMT+08:00) 文莱达鲁萨兰时间 (Asia/Brunei)
+    value: Asia/Brunei
+  - label: (GMT+07:00) 西印度尼西亚时间 (Asia/Pontianak)
+    value: Asia/Pontianak
+  - label: (GMT+10:00) 帕劳时间 (Pacific/Palau)
+    value: Pacific/Palau
+  - label: (GMT+11:00) 瓦努阿图时间 (Pacific/Efate)
+    value: Pacific/Efate
+  - label: (GMT+12:00) 瓦利斯和富图纳时间 (Pacific/Wallis)
+    value: Pacific/Wallis
+  - label: (GMT+13:00) 萨摩亚标准时间 (Pacific/Apia)
+    value: Pacific/Apia
+  - label: (GMT+12:00) 阿纳德尔时间 (Asia/Anadyr)
+    value: Asia/Anadyr
+  - label: (GMT+11:00) 马加丹时间 (Asia/Magadan)
+    value: Asia/Magadan
+  - label: (GMT+10:00) 符拉迪沃斯托克时间 (Asia/Vladivostok)
+    value: Asia/Vladivostok
+  - label: (GMT+09:00) 雅库茨克时间 (Asia/Yakutsk)
+    value: Asia/Yakutsk
+  - label: (GMT+08:00) 伊尔库茨克时间 (Asia/Irkutsk)
+    value: Asia/Irkutsk
+  - label: (GMT+07:00) 新西伯利亚时间 (Asia/Novosibirsk)
+    value: Asia/Novosibirsk
+  - label: (GMT+04:00) 萨马拉时间 (Europe/Samara)
+    value: Europe/Samara
+  - label: (GMT+03:00) 伏尔加格勒时间 (Europe/Volgograd)
+    value: Europe/Volgograd
+  - label: (GMT+02:00) 加里宁格勒时间 (Europe/Kaliningrad)
+    value: Europe/Kaliningrad
+  - label: (GMT-07:00) 山地标准时间 (America/Edmonton)
+    value: America/Edmonton
+  - label: (GMT-06:00) 中部标准时间 (America/Winnipeg)
+    value: America/Winnipeg
+  - label: (GMT-06:00) 萨斯喀彻温标准时间 (America/Regina)
+    value: America/Regina
+  - label: (GMT-05:00) 东部标准时间 (America/Toronto)
+    value: America/Toronto
+  - label: (GMT-04:00) 大西洋标准时间 (America/Moncton)
+    value: America/Moncton
+  - label: (GMT-04:00) 亚马逊标准时间 (America/Manaus)
+    value: America/Manaus
+  - label: (GMT-03:00) 巴西利亚时间 (America/Fortaleza)
+    value: America/Fortaleza
+  - label: (GMT-03:00) 巴西利亚时间 (America/Recife)
+    value: America/Recife
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Budapest)
+    value: Europe/Budapest
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Stockholm)
+    value: Europe/Stockholm
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Oslo)
+    value: Europe/Oslo
+  - label: (GMT+02:00) 东欧标准时间 (Europe/Riga)
+    value: Europe/Riga
+  - label: (GMT+02:00) 东欧标准时间 (Europe/Tallinn)
+    value: Europe/Tallinn
+  - label: (GMT+02:00) 东欧标准时间 (Europe/Vilnius)
+    value: Europe/Vilnius
+  - label: (GMT+10:00) 澳大利亚东部标准时间 (Australia/Melbourne)
+    value: Australia/Melbourne
+  - label: (GMT+09:30) 澳大利亚中部标准时间 (Australia/Broken_Hill)
+    value: Australia/Broken_Hill
+  - label: (GMT+08:45) 澳大利亚中西部标准时间 (Australia/Eucla)
+    value: Australia/Eucla
+  - label: (GMT+12:00) 马绍尔群岛时间 (Pacific/Majuro)
+    value: Pacific/Majuro
+  - label: (GMT+11:00) 科斯雷时间 (Pacific/Kosrae)
+    value: Pacific/Kosrae
+  - label: (GMT+10:00) 查莫罗时间 (Pacific/Guam)
+    value: Pacific/Guam
+  - label: (GMT+03:30) 伊朗标准时间 (Asia/Isfahan)
+    value: Asia/Isfahan
+  - label: (GMT+08:00) 澳门标准时间 (Asia/Macau)
+    value: Asia/Macau
+  - label: (GMT+07:00) 河内标准时间 (Asia/Hanoi)
+    value: Asia/Hanoi
+  - label: (GMT+07:00) 金边标准时间 (Asia/Phnom_Penh)
+    value: Asia/Phnom_Penh
+  - label: (GMT+07:00) 万象标准时间 (Asia/Vientiane)
+    value: Asia/Vientiane
+  - label: (GMT+05:00) 阿克套标准时间 (Asia/Aqtau)
+    value: Asia/Aqtau
+  - label: (GMT+05:00) 阿克托别标准时间 (Asia/Aqtobe)
+    value: Asia/Aqtobe
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Luxembourg)
+    value: Europe/Luxembourg
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Monaco)
+    value: Europe/Monaco
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Andorra)
+    value: Europe/Andorra
+  - label: (GMT+02:00) 东欧标准时间 (Europe/Zagreb)
+    value: Europe/Zagreb
+  - label: (GMT+02:00) 东欧标准时间 (Europe/Sarajevo)
+    value: Europe/Sarajevo
+  - label: (GMT+02:00) 东欧标准时间 (Europe/Skopje)
+    value: Europe/Skopje
+  - label: (GMT-03:00) 巴西利亚时间 (America/Belem)
+    value: America/Belem
+  - label: (GMT-03:00) 巴西利亚时间 (America/Maceio)
+    value: America/Maceio
+  - label: (GMT-04:00) 智利标准时间 (America/Punta_Arenas)
+    value: America/Punta_Arenas
+  - label: (GMT-04:00) 巴拉圭时间 (America/Ciudad_del_Este)
+    value: America/Ciudad_del_Este
+  - label: (GMT-05:00) 秘鲁标准时间 (America/Cusco)
+    value: America/Cusco
+  - label: (GMT+02:00) 中非时间 (Africa/Lubumbashi)
+    value: Africa/Lubumbashi
+  - label: (GMT+02:00) 中非时间 (Africa/Gaborone)
+    value: Africa/Gaborone
+  - label: (GMT+02:00) 中非时间 (Africa/Harare)
+    value: Africa/Harare
+  - label: (GMT+01:00) 西非时间 (Africa/Luanda)
+    value: Africa/Luanda
+  - label: (GMT+01:00) 西非时间 (Africa/Douala)
+    value: Africa/Douala
+  - label: (GMT+12:00) 图瓦卢时间 (Pacific/Funafuti)
+    value: Pacific/Funafuti
+  - label: (GMT+12:00) 瑙鲁时间 (Pacific/Nauru)
+    value: Pacific/Nauru
+  - label: (GMT+11:00) 瓦努阿图时间 (Pacific/Santo)
+    value: Pacific/Santo
+  - label: (GMT+10:00) 密克罗尼西亚时间 (Pacific/Chuuk)
+    value: Pacific/Chuuk
+  - label: (GMT+08:00) 东帝汶标准时间 (Asia/Dili)
+    value: Asia/Dili
+  - label: (GMT+06:00) 不丹时间 (Asia/Thimphu)
+    value: Asia/Thimphu
+  - label: (GMT+04:00) 塞舌尔时间 (Indian/Mahe)
+    value: Indian/Mahe
+  - label: (GMT+04:00) 留尼汪时间 (Indian/Reunion)
+    value: Indian/Reunion
+  - label: (GMT+03:00) 科摩罗时间 (Indian/Comoro)
+    value: Indian/Comoro
+  - label: (GMT+02:00) 南苏丹时间 (Africa/Juba)
+    value: Africa/Juba
+  - label: (GMT-05:00) 东部标准时间 (America/Detroit)
+    value: America/Detroit
+  - label: (GMT-06:00) 中部标准时间 (America/Indianapolis)
+    value: America/Indianapolis
+  - label: (GMT-07:00) 山地标准时间 (America/Boise)
+    value: America/Boise
+  - label: (GMT-08:00) 太平洋标准时间 (America/Vancouver)
+    value: America/Vancouver
+  - label: (GMT-06:00) 墨西哥中部时间 (America/Chihuahua)
+    value: America/Chihuahua
+  - label: (GMT-06:00) 墨西哥中部时间 (America/Monterrey)
+    value: America/Monterrey
+  - label: (GMT-07:00) 墨西哥太平洋时间 (America/Hermosillo)
+    value: America/Hermosillo
+  - label: (GMT-04:00) 加勒比标准时间 (America/Barbados)
+    value: America/Barbados
+  - label: (GMT-04:00) 加勒比标准时间 (America/Martinique)
+    value: America/Martinique
+  - label: (GMT-04:00) 加勒比标准时间 (America/Port_of_Spain)
+    value: America/Port_of_Spain
+  - label: (GMT+03:00) 阿拉伯标准时间 (Asia/Aden)
+    value: Asia/Aden
+  - label: (GMT+03:00) 阿拉伯标准时间 (Asia/Bahrain)
+    value: Asia/Bahrain
+  - label: (GMT+02:00) 以色列标准时间 (Asia/Tel_Aviv)
+    value: Asia/Tel_Aviv
+  - label: (GMT+00:00) 格林威治时间 (Africa/Bamako)
+    value: Africa/Bamako
+  - label: (GMT+00:00) 格林威治时间 (Africa/Conakry)
+    value: Africa/Conakry
+  - label: (GMT+01:00) 西非时间 (Africa/Libreville)
+    value: Africa/Libreville
+  - label: (GMT+02:00) 中非时间 (Africa/Bujumbura)
+    value: Africa/Bujumbura
+  - label: (GMT+02:00) 中非时间 (Africa/Maseru)
+    value: Africa/Maseru
+  - label: (GMT+03:00) 东非时间 (Africa/Asmara)
+    value: Africa/Asmara
+  - label: (GMT-02:00) 费尔南多-迪诺罗尼亚群岛时间 (America/Noronha)
+    value: America/Noronha
+  - label: (GMT-05:00) 东部标准时间 (America/Kentucky/Louisville)
+    value: America/Kentucky/Louisville
+  - label: (GMT-05:00) 东部标准时间 (America/Kentucky/Monticello)
+    value: America/Kentucky/Monticello
+  - label: (GMT-06:00) 中部标准时间 (America/Indiana/Knox)
+    value: America/Indiana/Knox
+  - label: (GMT-06:00) 中部标准时间 (America/Indiana/Tell_City)
+    value: America/Indiana/Tell_City
+  - label: (GMT-07:00) 山地标准时间 (America/North_Dakota/Beulah)
+    value: America/North_Dakota/Beulah
+  - label: (GMT-07:00) 山地标准时间 (America/Cambridge_Bay)
+    value: America/Cambridge_Bay
+  - label: (GMT-06:00) 中部标准时间 (America/Rainy_River)
+    value: America/Rainy_River
+  - label: (GMT-04:00) 大西洋标准时间 (America/Goose_Bay)
+    value: America/Goose_Bay
+  - label: (GMT-04:00) 亚马逊标准时间 (America/Boa_Vista)
+    value: America/Boa_Vista
+  - label: (GMT-03:00) 巴西利亚时间 (America/Araguaina)
+    value: America/Araguaina
+  - label: (GMT-03:00) 巴西利亚时间 (America/Bahia)
+    value: America/Bahia
+  - label: (GMT+11:00) 萨哈林时间 (Asia/Sakhalin)
+    value: Asia/Sakhalin
+  - label: (GMT+09:00) 乌兰乌德时间 (Asia/Ulan_Ude)
+    value: Asia/Ulan_Ude
+  - label: (GMT+07:00) 托木斯克时间 (Asia/Tomsk)
+    value: Asia/Tomsk
+  - label: (GMT+05:00) 车里雅宾斯克时间 (Asia/Chelyabinsk)
+    value: Asia/Chelyabinsk
+  - label: (GMT+10:00) 澳大利亚东部标准时间 (Australia/Lindeman)
+    value: Australia/Lindeman
+  - label: (GMT+09:30) 澳大利亚中部标准时间 (Australia/Currie)
+    value: Australia/Currie
+  - label: (GMT+12:00) 基里巴斯时间 (Pacific/Tarawa)
+    value: Pacific/Tarawa
+  - label: (GMT+11:00) 布干维尔时间 (Pacific/Bougainville)
+    value: Pacific/Bougainville
+  - label: (GMT+13:00) 托克劳群岛时间 (Pacific/Fakaofo)
+    value: Pacific/Fakaofo
+  - label: (GMT-05:00) 东部标准时间 (America/Indiana/Marengo)
+    value: America/Indiana/Marengo
+  - label: (GMT-05:00) 东部标准时间 (America/Indiana/Petersburg)
+    value: America/Indiana/Petersburg
+  - label: (GMT-05:00) 东部标准时间 (America/Indiana/Vevay)
+    value: America/Indiana/Vevay
+  - label: (GMT-05:00) 东部标准时间 (America/Indiana/Vincennes)
+    value: America/Indiana/Vincennes
+  - label: (GMT-05:00) 东部标准时间 (America/Indiana/Winamac)
+    value: America/Indiana/Winamac
+  - label: (GMT-06:00) 中部标准时间 (America/North_Dakota/Center)
+    value: America/North_Dakota/Center
+  - label: (GMT-06:00) 中部标准时间 (America/North_Dakota/New_Salem)
+    value: America/North_Dakota/New_Salem
+  - label: (GMT+01:00) 中欧标准时间 (Europe/San_Marino)
+    value: Europe/San_Marino
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Vatican)
+    value: Europe/Vatican
+  - label: (GMT+02:00) 东欧标准时间 (Europe/Mariehamn)
+    value: Europe/Mariehamn
+  - label: (GMT+02:00) 东欧标准时间 (Europe/Podgorica)
+    value: Europe/Podgorica
+  - label: (GMT+01:00) 西非时间 (Africa/Bangui)
+    value: Africa/Bangui
+  - label: (GMT+01:00) 西非时间 (Africa/Brazzaville)
+    value: Africa/Brazzaville
+  - label: (GMT+01:00) 西非时间 (Africa/Malabo)
+    value: Africa/Malabo
+  - label: (GMT+02:00) 中非时间 (Africa/Mbabane)
+    value: Africa/Mbabane
+  - label: (GMT+03:00) 东非时间 (Africa/Djibouti)
+    value: Africa/Djibouti
+  - label: (GMT+00:00) 格林威治时间 (Atlantic/St_Helena)
+    value: Atlantic/St_Helena
+  - label: (GMT+04:00) 印度洋时间 (Indian/Kerguelen)
+    value: Indian/Kerguelen
+  - label: (GMT+06:00) 印度洋时间 (Indian/Chagos)
+    value: Indian/Chagos
+  - label: (GMT+10:00) 查莫罗时间 (Pacific/Saipan)
+    value: Pacific/Saipan
+  - label: (GMT-09:00) 阿拉斯加标准时间 (America/Juneau)
+    value: America/Juneau
+  - label: (GMT-09:00) 阿拉斯加标准时间 (America/Nome)
+    value: America/Nome
+  - label: (GMT-09:00) 阿拉斯加标准时间 (America/Yakutat)
+    value: America/Yakutat
+  - label: (GMT-10:00) 夏威夷标准时间 (Pacific/Johnston)
+    value: Pacific/Johnston
+  - label: (GMT-07:00) 山地标准时间 (America/Dawson_Creek)
+    value: America/Dawson_Creek
+  - label: (GMT-07:00) 山地标准时间 (America/Fort_Nelson)
+    value: America/Fort_Nelson
+  - label: (GMT-06:00) 中部标准时间 (America/Swift_Current)
+    value: America/Swift_Current
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Busingen)
+    value: Europe/Busingen
+  - label: (GMT+01:00) 中欧标准时间 (Europe/Vaduz)
+    value: Europe/Vaduz
+  - label: (GMT+07:00) 印度尼西亚时间 (Asia/Hovd)
+    value: Asia/Hovd
+- api: is_pause_login
+  label: 禁止登录
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: out_tenant_id
+  label: 外部企业
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''

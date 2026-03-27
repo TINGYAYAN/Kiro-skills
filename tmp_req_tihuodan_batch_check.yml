@@ -1,0 +1,12 @@
+requirement: |
+  生成一个流程函数
+  查询提货单上的“门店名称”
+  查询当前门店名称下的生命状态为正常的提货单，
+  统计提货单上“审核通过日期”为3个月内的提货总额（元），汇总后更新至客户的“近一个月回款”字段内
+object_api: bill_of_lading__c
+object_label: 提货单
+function_type: 流程函数
+namespace: 流程
+code_name: 【流程】提货单更新
+output_file: 【流程】提货单更新
+author: 纷享实施人员

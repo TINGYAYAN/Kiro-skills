@@ -1,0 +1,401 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: checkins_lat
+  label: 签到纬度
+- api: checkin_status
+  label: 是否完成
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: checkins_base_info
+  label: 基础信息
+- api: field_video
+  label: 视频
+- api: check_out_lon
+  label: 签退经度
+- api: device_risk
+  label: 设备异常
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: checkout_district
+  label: 签退区县
+- api: is_assistant
+  label: 是否协访
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: checkout_location
+  label: 签退定位
+- api: signer
+  label: 签到人员
+- api: device_id
+  label: 设备号
+- api: end_reason
+  label: 拜访结束原因
+- api: address_street_num
+  label: 门牌号
+- api: check_id
+  label: 外勤记录Id
+- api: checkins_address_desc
+  label: 签到地点描述
+- api: version
+  label: version
+- api: field_plan
+  label: 是否计划
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: address_street
+  label: 街道
+- api: out_visitors
+  label: 外部协访人
+- api: order_id
+  label: 销售订单
+- api: status
+  label: 外勤记录状态
+- api: tenant_id
+  label: tenant_id
+- api: distance_risk
+  label: 签到/签退距离异常
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: address_province
+  label: 省份
+- api: check_out_lat
+  label: 签退纬度
+- api: client_version
+  label: 客户端完整版本号
+- api: check_out_address_desc
+  label: 签退地点描述
+- api: checkout_province
+  label: 签退省
+- api: last_modified_time
+  label: 最后修改时间
+- api: checkin_address_desc
+  label: 签到详细地址
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: error_range
+  label: 允许误差范围(米)
+- api: end_time
+  label: 计划结束时间
+- api: jump_shop_photo
+  label: 跳店拍照
+- api: out_tenant_id
+  label: 外部企业
+- api: address_city
+  label: 城市
+- api: rule_id
+  label: 关联规则Id
+- api: checkout_status_abnormal
+  label: 签退距离是否异常
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: nextStep__c
+  label: 下一步计划
+- api: planned_time
+  label: 外勤计划时间
+- api: image_path
+  label: 图片
+- api: customer_id
+  label: 客户
+- api: current__c
+  label: 当前进展
+- api: checkout_positioning_accuracy
+  label: 签退定位精度(米)
+- api: checkin_city
+  label: 签到市
+- api: new_stat_date
+  label: 计划日期
+- api: cheat_risk_desc
+  label: 系统风险描述
+- api: checkout_city
+  label: 签退市
+- api: checkin_location
+  label: 签到定位
+- api: checkins_time
+  label: 签到时间
+- api: feed_id
+  label: 关联FeedId
+- api: checkin_district
+  label: 签到区县
+- api: extend_obj_data_id
+  label: 扩展字段在mt_data中的记录ID
+- api: finish_date
+  label: 完成日期
+- api: jump_shop_distance
+  label: 跳店距离差(米)
+- api: checkin_country
+  label: 签到国家
+- api: owner_department
+  label: 负责人主属部门
+- api: whethereffective__c
+  label: 是否有效拜访
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: new_cheat_risk
+  label: 系统风险
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: package
+  label: package
+- api: select_ids
+  label: 关联选择项Id
+- api: create_time
+  label: 创建时间
+- api: jump_shop_address
+  label: 跳店位置
+- api: content_text
+  label: 签到内容
+- api: lead__c
+  label: 线索
+- api: check_out_time
+  label: 签退时间
+- api: communicate_record
+  label: 沟通记录
+- api: created_by
+  label: 创建人
+- api: finish_time
+  label: 完成时间
+- api: relevant_team
+  label: 相关团队
+- api: crm_child_object
+  label: 关联CRM子对象Json
+- api: checkinsobj_id
+  label: 关联外勤
+- api: jump_shop
+  label: 是否跳店
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: visitors
+  label: 协访人(新)
+- api: checkout_address_desc
+  label: 签退详细地址
+- api: data_own_department
+  label: 归属部门
+- api: client_version_simple
+  label: 客户端大版本号
+- api: reusing
+  label: 是否重用计划
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: name
+  label: 名称
+- api: _id
+  label: _id
+- api: checkins_lon
+  label: 签到经度
+- api: check_type_id
+  label: 外勤类型Id
+- api: mnutes__c
+  label: 会议纪要
+- api: plan_type
+  label: 计划类型
+  options:
+  - label: 跨天
+    value: crossDayPlan
+  - label: 全天
+    value: default
+- api: checkout_country
+  label: 签退国家
+- api: lock_user
+  label: 加锁人
+- api: jump_shop_reason
+  label: 跳店原因
+  options:
+  - label: 未开门
+    value: '1'
+  - label: 停业装修
+    value: '2'
+  - label: 门店搬迁
+    value: '3'
+  - label: 门店倒闭
+    value: '4'
+  - label: 其他
+    value: other
+- api: duration
+  label: 外勤时长(新)
+- api: is_deleted
+  label: is_deleted
+- api: checkin_status_abnormal
+  label: 签到距离是否异常
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: enterprise_account
+  label: 企业账号
+- api: out_owner
+  label: 外部负责人
+- api: check_type_name
+  label: 外勤类型名称
+- api: checkin_province
+  label: 签到省
+- api: jump_shop_time
+  label: 跳店时间
+- api: owner
+  label: 负责人
+- api: checkin_area_Location
+  label: 签到地区定位
+- api: address_country
+  label: 国家
+- api: checkins_scene
+  label: 外勤场景
+  options:
+  - label: 路线拜访
+    value: ROUTE
+  - label: 路线外外勤
+    value: OUTROUTE
+  - label: 协访
+    value: ROUTEASSISTANT
+  - label: 铺货
+    value: PUHUO
+  - label: 举证
+    value: WORKPROOF
+  - label: 检核
+    value: ACTIVITYCHECK
+  - label: 活动举证
+    value: ACTIVITYPROOF
+  - label: 查访
+    value: INVESTIGATE
+  - label: 展售
+    value: SALE
+- api: last_modified_by
+  label: 最后修改人
+- api: checkin_positioning_accuracy
+  label: 签到定位精度(米)
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+  - label: 线索拜访
+    value: ''
+  - label: 商机拜访
+    value: ''
+- api: accompanyPerson__c
+  label: 陪访人员
+- api: purpose__c
+  label: 拜访目的
+  options:
+  - label: 关系维护
+    value: '1'
+  - label: 项目跟进
+    value: '2'
+  - label: 问题解决
+    value: '3'
+  - label: 合同续约
+    value: '4'
+  - label: 交接拜访
+    value: '5'
+  - label: 流失召回
+    value: '6'
+  - label: 生态伙伴洽谈
+    value: '7'
+  - label: 需求梳理
+    value: '8'
+  - label: 方案制定
+    value: '9'
+  - label: 决策沟通
+    value: '10'
+  - label: 合同开户
+    value: '11'
+  - label: 赢单
+    value: '12'
+  - label: 激活
+    value: '13'
+  - label: 内宣&放量
+    value: '14'
+  - label: 客户约访
+    value: '15'
+  - label: 前期沟通
+    value: '16'
+  - label: 了解需求
+    value: '17'
+  - label: 需求确定
+    value: '18'
+  - label: 渗透跟进-1部
+    value: '19'
+  - label: 渗透跟进-2部
+    value: '21'
+  - label: 日常运维
+    value: '22'
+- api: checkout_area_Location
+  label: 签退地区定位
+- api: checkins_distnace
+  label: 签到地点与客户的距离(米)
+- api: customItem155__c
+  label: 本次拜访方式
+  options:
+  - label: 现场拜访
+    value: '5'
+  - label: 电话
+    value: '1'
+  - label: 线上会议
+    value: '4'
+  - label: 微信
+    value: '2'
+  - label: 邮件
+    value: '3'
+  - label: 地推
+    value: '6'
+  - label: 企微/微信
+    value: '7'
+  - label: 其他
+    value: other

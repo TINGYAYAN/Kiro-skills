@@ -1,0 +1,136 @@
+fields:
+- api: ai_response_answer
+  label: AI回复
+- api: number_referenced_knowledge
+  label: 引用知识数量
+- api: related_api_names
+  label: 集成对象名
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: agent
+  label: Agent
+- api: consultant_enterprise_employee
+  label: 咨询人员（企业员工）
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: dislike_remarks
+  label: 点踩备注
+- api: extend_obj_data_id
+  label: 扩展字段在mt_data中的记录ID
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: problem_description
+  label: 问题描述
+- api: user_feedback
+  label: 用户反馈
+  options:
+  - label: 点赞
+    value: like
+  - label: 点踩
+    value: dislike
+  - label: 其他
+    value: other
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: agent_api_name
+  label: Agent API name
+- api: consultant_internet_user
+  label: 外部人员
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: related_object_data
+  label: 集成对象数据
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: related_object
+  label: 引用知识
+- api: dislike_reason
+  label: 点踩原因
+  options:
+  - label: 语气或风格不当
+    value: inappropriate_tone
+  - label: 有偏见，不良内容
+    value: biased_content
+  - label: 不完整
+    value: incomplete
+  - label: 不准确
+    value: inaccurate
+  - label: 理解偏差
+    value: misunderstanding
+  - label: 其他问题
+    value: misc_issue
+  - label: 其他
+    value: other
+- api: data_own_department
+  label: 归属部门
+- api: instance_id
+  label: 消息ID
+- api: answer_type
+  label: 答案类型
+  options:
+  - label: 有答案
+    value: has_answer
+  - label: 无答案
+    value: no_answer
+  - label: 其他
+    value: other
+- api: name
+  label: 记录编号
+- api: consultant_visitor_user
+  label: 咨询人员（访客用户）
+- api: consultation_time
+  label: 咨询时间
+- api: _id
+  label: _id

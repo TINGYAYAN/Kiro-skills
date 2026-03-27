@@ -5,28 +5,26 @@
 set -euo pipefail
 
 TOOLS_DIR="$(cd "$(dirname "$0")" && pwd)"
-LOCK_FILE="$TOOLS_DIR/.batch.lock"
 cd "$TOOLS_DIR"
-
-# 防止并发执行
-if [ -f "$LOCK_FILE" ]; then
-    PID=$(cat "$LOCK_FILE")
-    if kill -0 "$PID" 2>/dev/null; then
-        echo "⚠️ 批量任务正在运行中 (PID=$PID)，请稍后再试"
-        exit 1
-    fi
-fi
-echo $$ > "$LOCK_FILE"
-trap "rm -f $LOCK_FILE" EXIT
 
 DRY_RUN=""
 REGENERATE=""
+HEADLESS=""
 HEADED=""
+NO_REFRESH=""
+NO_RETRY=""
+NO_NOTIFY=""
+RUNTIME_PRECHECK=""
 for arg in "$@"; do
     case "$arg" in
         --dry-run)     DRY_RUN="--dry-run" ;;
         --regenerate) REGENERATE="--regenerate" ;;
+        --headless)   HEADLESS="--headless" ;;
         --headed)     HEADED="--headed" ;;
+        --no-refresh) NO_REFRESH="--no-refresh" ;;
+        --no-retry)   NO_RETRY="--no-retry" ;;
+        --no-notify)  NO_NOTIFY="--no-notify" ;;
+        --runtime-precheck) RUNTIME_PRECHECK="--runtime-precheck" ;;
     esac
 done
 
@@ -35,7 +33,19 @@ echo "APL 批量生成启动"
 echo "时间: $(date '+%Y-%m-%d %H:%M:%S')"
 echo "=============================="
 
-python3 batch_runner.py $DRY_RUN $REGENERATE $HEADED 2>&1
+LOG_FILE="batch_live_$(date '+%Y%m%d_%H%M%S').log"
+echo "日志文件: $TOOLS_DIR/$LOG_FILE"
+
+python3 batch_runner.py \
+  $DRY_RUN \
+  $REGENERATE \
+  $HEADLESS \
+  $HEADED \
+  $NO_REFRESH \
+  $NO_RETRY \
+  $NO_NOTIFY \
+  $RUNTIME_PRECHECK \
+  2>&1 | tee "$LOG_FILE"
 
 EXIT_CODE=$?
 echo ""

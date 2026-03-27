@@ -527,8 +527,139 @@ def login(page, cfg: dict):
 
 def dismiss_stale_apl_modals(page) -> None:
     """关闭仍打开的 APL 弹层、Element 错误提示框、关闭确认，避免批量下一条被遮挡。"""
-    for _ in range(12):
+    def _has_close_confirm() -> bool:
+        try:
+            return bool(page.evaluate(
+                """
+                () => {
+                    const visible = (el) => {
+                        if (!el) return false;
+                        const rect = el.getBoundingClientRect();
+                        const style = window.getComputedStyle(el);
+                        return style.display !== 'none'
+                            && style.visibility !== 'hidden'
+                            && rect.width > 20
+                            && rect.height > 20;
+                    };
+                    return [...document.querySelectorAll('.el-message-box__wrapper, .fx-message-box__wrapper, .paas-func-dialog, .f-g-dialog.paas-func-dialog-height, [role="dialog"]')]
+                        .filter(visible)
+                        .some((dlg) => {
+                            const text = (dlg.innerText || '').trim();
+                            return text.includes('关闭后设置的函数将不能保存') || text.includes('确认要关闭吗');
+                        });
+                }
+                """
+            ))
+        except Exception:
+            return False
+
+    def _has_open_editor() -> bool:
+        try:
+            return page.locator(':text-is("保存草稿")').first.is_visible(timeout=250)
+        except Exception:
+            return False
+
+    def _close_top_editor() -> bool:
+        try:
+            return bool(page.evaluate(
+                """
+                () => {
+                    const visible = (el) => {
+                        if (!el) return false;
+                        const rect = el.getBoundingClientRect();
+                        const style = window.getComputedStyle(el);
+                        return style.display !== 'none'
+                            && style.visibility !== 'hidden'
+                            && rect.width > 40
+                            && rect.height > 40;
+                    };
+                    const dialogs = [...document.querySelectorAll('.paas-func-dialog, .f-g-dialog.paas-func-dialog-height')]
+                        .filter(visible)
+                        .filter((dlg) => {
+                            const text = (dlg.innerText || '').trim();
+                            return text.includes('保存草稿') || text.includes('运行脚本');
+                        })
+                        .sort((a, b) => {
+                            const za = parseInt(window.getComputedStyle(a).zIndex || '0', 10) || 0;
+                            const zb = parseInt(window.getComputedStyle(b).zIndex || '0', 10) || 0;
+                            return zb - za;
+                        });
+                    const top = dialogs[0];
+                    if (!top) return false;
+                    const closers = [...top.querySelectorAll('.f-g-dialog-close, .el-dialog__headerbtn, [aria-label="Close"]')].filter(visible);
+                    const btn = closers[0];
+                    if (!btn) return false;
+                    ['mousedown', 'mouseup', 'click'].forEach((evt) => {
+                        btn.dispatchEvent(new MouseEvent(evt, { bubbles: true, cancelable: true, view: window }));
+                    });
+                    return true;
+                }
+                """
+            ))
+        except Exception:
+            return False
+
+    def _js_click_dialog_button(button_texts, dialog_hints=None) -> bool:
+        try:
+            return bool(page.evaluate(
+                """
+                ({ buttonTexts, dialogHints }) => {
+                    const visible = (el) => {
+                        if (!el) return false;
+                        const rect = el.getBoundingClientRect();
+                        const style = window.getComputedStyle(el);
+                        return style.display !== 'none'
+                            && style.visibility !== 'hidden'
+                            && rect.width > 10
+                            && rect.height > 10;
+                    };
+                    const textOf = (el) => (el.innerText || el.textContent || '').trim();
+                    const dialogs = [...document.querySelectorAll(
+                        '.el-message-box__wrapper, .fx-message-box__wrapper, .paas-func-dialog, .f-g-dialog.paas-func-dialog-height, [role="dialog"]'
+                    )].filter(visible);
+                    dialogs.sort((a, b) => {
+                        const za = parseInt(window.getComputedStyle(a).zIndex || '0', 10) || 0;
+                        const zb = parseInt(window.getComputedStyle(b).zIndex || '0', 10) || 0;
+                        return zb - za;
+                    });
+                    const candidates = dialogHints && dialogHints.length
+                        ? dialogs.filter((dlg) => {
+                            const text = textOf(dlg);
+                            return dialogHints.some((hint) => text.includes(hint));
+                        })
+                        : dialogs;
+                    for (const dlg of (candidates.length ? candidates : dialogs)) {
+                        const nodes = [...dlg.querySelectorAll('button, span, a, div')];
+                        for (const node of nodes) {
+                            if (!visible(node)) continue;
+                            const txt = textOf(node);
+                            if (!buttonTexts.some((target) => txt === target || txt.includes(target))) continue;
+                            ['mousedown', 'mouseup', 'click'].forEach((evt) => {
+                                node.dispatchEvent(new MouseEvent(evt, { bubbles: true, cancelable: true, view: window }));
+                            });
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                """,
+                {"buttonTexts": button_texts, "dialogHints": dialog_hints or []},
+            ))
+        except Exception:
+            return False
+
+    for _ in range(16):
         acted = False
+        if _has_open_editor():
+            if _close_top_editor():
+                acted = True
+                time.sleep(0.35)
+        if _js_click_dialog_button(
+            ["确定并关闭", "确定", "确认", "我知道了"],
+            ["关闭后设置的函数", "确认要关闭", "提示", "错误提示"],
+        ):
+            acted = True
+            time.sleep(0.5)
         try:
             msgbox = page.locator(
                 ".el-message-box__wrapper, .fx-message-box__wrapper, [aria-label='错误提示']"
@@ -600,35 +731,124 @@ def dismiss_stale_apl_modals(page) -> None:
                         break
         except Exception:
             pass
-        try:
-            dlg = page.locator(".paas-func-dialog, .f-g-dialog.paas-func-dialog-height").first
-            if dlg.is_visible(timeout=400):
-                try:
-                    dlg.locator(':text-is("取消")').last.click(force=True, timeout=2000)
-                    acted = True
-                    time.sleep(0.45)
-                except Exception:
-                    pass
-        except Exception:
-            pass
-        try:
-            page.keyboard.press("Escape")
-            time.sleep(0.12)
-        except Exception:
-            pass
+        if not _has_open_editor() and not _has_close_confirm():
+            return
+        if not acted:
+            try:
+                acted = bool(page.evaluate(
+                    """
+                    () => {
+                        const visible = (el) => {
+                            if (!el) return false;
+                            const rect = el.getBoundingClientRect();
+                            const style = window.getComputedStyle(el);
+                            return style.display !== 'none'
+                                && style.visibility !== 'hidden'
+                                && rect.width > 10
+                                && rect.height > 10;
+                        };
+                        const dialogs = [...document.querySelectorAll('.paas-func-dialog, .f-g-dialog.paas-func-dialog-height')]
+                            .filter(visible)
+                            .sort((a, b) => {
+                                const za = parseInt(window.getComputedStyle(a).zIndex || '0', 10) || 0;
+                                const zb = parseInt(window.getComputedStyle(b).zIndex || '0', 10) || 0;
+                                return zb - za;
+                            });
+                        const top = dialogs[0];
+                        if (!top) return false;
+                        const closers = [...top.querySelectorAll('.f-g-dialog-close, .el-dialog__headerbtn, [aria-label="Close"]')];
+                        const btn = closers.find(visible);
+                        if (!btn) return false;
+                        ['mousedown', 'mouseup', 'click'].forEach((evt) => {
+                            btn.dispatchEvent(new MouseEvent(evt, { bubbles: true, cancelable: true, view: window }));
+                        });
+                        return true;
+                    }
+                    """
+                ))
+                if acted:
+                    time.sleep(0.4)
+            except Exception:
+                pass
+        if not _has_open_editor() and not _has_close_confirm():
+            return
         if not acted:
             break
+
+    for _ in range(8):
+        if not _has_close_confirm():
+            break
+        acted = _js_click_dialog_button(["确定", "确认"], ["关闭后设置的函数", "确认要关闭"])
+        if not acted:
+            try:
+                page.locator(
+                    ".el-message-box__wrapper, .fx-message-box__wrapper, .paas-func-dialog, .f-g-dialog.paas-func-dialog-height"
+                ).filter(has_text="关闭后设置的函数").locator(
+                    'button:has-text("确定"), span:has-text("确定"), .el-button--primary'
+                ).first.click(force=True, timeout=1200)
+                acted = True
+            except Exception:
+                acted = False
+        if not acted:
+            break
+        time.sleep(0.25)
 
 
 def navigate_to_function_list(page, cfg: dict):
     base_url = cfg["fxiaoke"]["base_url"].rstrip("/")
     func_path = cfg["fxiaoke"].get("function_path", "/XV/UI/manage#crmmanage/=/module-myfunction")
     url = base_url + func_path
+    ready_selectors = [
+        ':text("新建APL函数")',
+        ':text("新建自定义APL函数")',
+        ':text("新建函数")',
+        ':text("新建")',
+        'input[placeholder*="搜索代码名称"]',
+        'input[placeholder*="搜索"]',
+        'input[placeholder*="Search"]',
+    ]
+
+    def _is_ready() -> bool:
+        try:
+            if not page.url.startswith(url):
+                return False
+        except Exception:
+            return False
+        for sel in ready_selectors:
+            try:
+                if page.locator(sel).first.is_visible(timeout=300):
+                    return True
+            except Exception:
+                continue
+        return False
+
+    if _is_ready():
+        print(f"[部署器] 函数管理页已就绪，跳过重复导航: {url}")
+        return
+
     print(f"[部署器] 导航到函数管理页: {url}")
     page.goto(url, wait_until="domcontentloaded", timeout=30000)
-    time.sleep(5)
     try:
         page.wait_for_load_state("networkidle", timeout=15000)
+    except Exception:
+        pass
+    for sel in ready_selectors:
+        try:
+            page.wait_for_selector(sel, timeout=4000)
+            return
+        except Exception:
+            continue
+    try:
+        page.wait_for_function(
+            """() => {
+                const text = document.body.innerText || '';
+                return text.includes('新建APL函数')
+                    || text.includes('新建自定义APL函数')
+                    || text.includes('新建函数')
+                    || !!document.querySelector('input[placeholder*="搜索"], input[placeholder*="Search"]');
+            }""",
+            timeout=4000,
+        )
     except Exception:
         pass
 

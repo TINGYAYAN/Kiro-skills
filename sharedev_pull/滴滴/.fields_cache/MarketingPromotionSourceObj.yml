@@ -1,0 +1,259 @@
+fields:
+- api: cta_name
+  label: CTA组件名
+- api: lock_rule
+  label: 锁定规则
+- api: out_platform_user_name
+  label: 推广员工(外部系统)
+- api: user_marketing_id
+  label: 推广营销用户ID
+- api: spread_type
+  label: 推广方式
+- api: utm_medium
+  label: utm_medium
+- api: conversion_content_url
+  label: 转化内容链接
+- api: source_url
+  label: 来源网站
+- api: cta
+  label: CTA
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: out_tid
+  label: 推广伙伴企业ID
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: conversion_button_name
+  label: 转化按钮
+- api: marketing_activity_id
+  label: 营销活动
+- api: owner_department
+  label: 负责人主属部门
+- api: source_url_type
+  label: 来源网址类型
+- api: landing_page_type
+  label: 内容类型
+  options:
+  - label: 微页面
+    value: hexagon
+  - label: 文章
+    value: article
+  - label: 产品
+    value: product
+  - label: 官网
+    value: official_web
+  - label: 邮件
+    value: email
+  - label: 其他
+    value: other
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: out_platform_uid
+  label: 推广员工ID(外部系统)
+- api: utm_campaign
+  label: utm_campaign
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: website_name
+  label: 官网名称
+- api: data_own_department
+  label: 归属部门
+- api: name
+  label: 来源编号
+- api: lead_module
+  label: 留咨组件
+  options:
+  - label: 咨询
+    value: consult
+  - label: 表单
+    value: form
+  - label: 电话
+    value: tel
+  - label: 抽奖
+    value: lottery
+  - label: 卡券
+    value: coupon
+  - label: 回呼
+    value: callback
+  - label: 微信
+    value: wechat
+  - label: 53KF
+    value: onlineservice
+  - label: 其他
+    value: other
+- api: _id
+  label: _id
+- api: website_id
+  label: 官网id
+- api: utm_source
+  label: utm_source
+- api: tenant_id
+  label: tenant_id
+- api: spread_channel
+  label: 推广渠道
+  options:
+  - label: 广告
+    value: ad
+  - label: 官网
+    value: website
+  - label: 微信
+    value: wechat
+  - label: 短信
+    value: sms
+  - label: 邮件
+    value: email
+  - label: 其他
+    value: other
+  - label: 公众号
+    value: offiaccount
+  - label: 企业微信
+    value: qywx
+  - label: 员工推广
+    value: employee_spread
+  - label: 会员推广
+    value: member_spread
+  - label: 伙伴推广
+    value: partner_spread
+- api: data_own_organization
+  label: 归属组织
+- api: landing_page_platform
+  label: 落地页平台
+  options:
+  - label: 基木鱼
+    value: jimuyu
+  - label: 橙子建站
+    value: chengzijianzhan
+  - label: 腾讯
+    value: tencent
+  - label: 营销通
+    value: yxt
+  - label: 官网
+    value: official_website
+  - label: 其他
+    value: other
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: data_from
+  label: 数据来源
+  options:
+  - label: 营销通
+    value: yxt
+  - label: 企业微信
+    value: qywx
+  - label: 公众号
+    value: official_account
+  - label: 纷享客服
+    value: fx_online_service
+  - label: 百度广告
+    value: baidu_ad
+  - label: 头条广告
+    value: headline_ad
+  - label: 腾讯广告
+    value: tencent_ad
+  - label: 53KF
+    value: 53kf
+  - label: 其他
+    value: other
+- api: landing_page_name
+  label: 落地页名称
+- api: is_deleted
+  label: is_deleted
+- api: third_platform_name
+  label: 外部平台名称
+- api: cta_id
+  label: CTA Id
+- api: out_uid
+  label: 推广伙伴员工
+- api: browser
+  label: 浏览器
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: client
+  label: 客户端
+  options:
+  - label: 微信小程序
+    value: miniApp
+  - label: h5
+    value: h5
+  - label: web
+    value: web
+  - label: app
+    value: app
+  - label: 其他
+    value: other
+- api: out_owner
+  label: 外部负责人
+- api: convert_page_url
+  label: 转化页链接
+- api: utm_content
+  label: utm_content
+- api: owner
+  label: 负责人
+- api: convert_page_name
+  label: 转化页名称
+- api: spread_fs_uid
+  label: 推广员工
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: ip_address
+  label: ip地址
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: marketing_keyword_id
+  label: 广告关键词
+- api: operate_system
+  label: 操作系统
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: landing_url
+  label: 落地页链接
+- api: utm_term
+  label: utm_term
+- api: marketing_event_id
+  label: 市场活动
+- api: conversion_content_name
+  label: 转化内容名称
+- api: third_platform_data_id
+  label: 外部平台ID
+- api: ip_q_cell_core
+  label: IP归属地
+- api: landing_page_id
+  label: 内容ID
+- api: out_account_id
+  label: 推广伙伴

@@ -1,0 +1,73 @@
+fields:
+- api: owner
+  label: 负责人
+- api: tenant_id
+  label: tenant_id
+- api: offline_rule_id
+  label: 离线规则
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: download_includes_files_images
+  label: 下载记录包含文件/图片
+  options:
+  - label: 文件
+    value: doc
+  - label: 图片
+    value: pic
+- api: download_quantity_limit
+  label: 下载数据量限制
+- api: last_modified_by
+  label: 最后修改人
+- api: created_by
+  label: 创建人
+- api: version
+  label: version
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: related_object
+  label: 相关对象
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: is_deleted
+  label: is_deleted
+- api: data_own_department
+  label: 归属部门
+- api: sort_field
+  label: 排序字段
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: name
+  label: 相关对象配置编号
+- api: owner_department
+  label: 负责人所在部门
+- api: _id
+  label: _id
+- api: data_scope
+  label: 数据范围
+- api: sort_order
+  label: 排序
+  options:
+  - label: 升序
+    value: asc
+  - label: 降序
+    value: desc

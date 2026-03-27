@@ -1,0 +1,114 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: primaryDept__c
+  label: 一级部门名称
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: is_deleted
+  label: is_deleted
+- api: round_robin_group_member_s__c
+  label: 轮循组人员状态
+  options:
+  - label: 有效
+    value: '1'
+  - label: 无效
+    value: '0'
+  - label: 其他
+    value: other
+- api: cueDistributionRotationGroup__c
+  label: 线索分配轮循组
+- api: is_pre_resignation_single__c
+  label: 是否预离职（单选）
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '0'
+  - label: 其他
+    value: other
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: leadbackup__c
+  label: 线索轮循分配备份人
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: groupMember__c
+  label: 小组成员
+- api: preResignationYN__c
+  label: 是否预离职
+- api: owner
+  label: 负责人
+- api: membersOfTheDepartment__c
+  label: 成员所属部门
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: whetherOnTheJob__c
+  label: 是否在岗
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: xsyId__c
+  label: 销售易数据ID
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: data_own_department
+  label: 归属部门
+- api: name
+  label: 主属性
+- api: _id
+  label: _id
+- api: customItem6__c
+  label: 轮循组类型
+- api: customItem2__c
+  label: 轮循编号

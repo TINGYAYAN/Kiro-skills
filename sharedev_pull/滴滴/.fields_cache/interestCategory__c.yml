@@ -1,0 +1,194 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: p_activation_date__c
+  label: 个人垫付激活日期
+- api: interest__c
+  label: 品类类型
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '2'
+  - label: 代驾
+    value: '4'
+  - label: 出租车
+    value: '5'
+  - label: 聚合
+    value: '6'
+  - label: 费控
+    value: '3'
+  - label: 跨境用车
+    value: '8'
+  - label: 其他
+    value: other
+- api: firstChargeAmount__c
+  label: 首次充值金额
+- api: opportunity_xsy_id__c
+  label: 商机-销售易数据Id
+- api: chargeDate__c
+  label: 充值/授信日期
+- api: syncId__c
+  label: 接口使用数据ID
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: ifRelatedGroupCustomer__c
+  label: 是否关联集团客户
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: owner_department
+  label: 负责人主属部门
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: creditAmountWri__c
+  label: 授信金额
+- api: account__c
+  label: 客户名称
+- api: c_activation_date__c
+  label: 企业支付激活日期
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: csm_customer__c
+  label: CSM客户
+- api: data_own_department
+  label: 归属部门
+- api: didiId__c
+  label: 滴滴客户ID
+- api: name
+  label: 编号
+- api: oppFirstActivationDate__c
+  label: 首次激活日期（引用）
+- api: _id
+  label: _id
+- api: chargeStatus__c
+  label: 充值/授信状态
+  options:
+  - label: 未充值
+    value: '1'
+  - label: 已充值
+    value: '2'
+  - label: 已授信
+    value: '3'
+  - label: 已绑卡
+    value: '4'
+  - label: 其他
+    value: other
+- api: tenant_id
+  label: tenant_id
+- api: opportunityStatus__c
+  label: 商机状态
+- api: chargeType__c
+  label: 账户类型
+- api: customItem23__c
+  label: 商机id
+- api: status__c
+  label: 账户状态
+  options:
+  - label: 正常跟进
+    value: '1'
+  - label: 已开户
+    value: '2'
+  - label: 已充值
+    value: '3'
+  - label: 已授信
+    value: '4'
+  - label: 已绑卡
+    value: '5'
+  - label: 已激活
+    value: '6'
+  - label: 已流失
+    value: '7'
+  - label: 已注销
+    value: '8'
+  - label: 已输单
+    value: '9'
+  - label: 已取消
+    value: '10'
+  - label: 其他
+    value: other
+- api: creditCustomer__c
+  label: 授信客户名称
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 流水号
+- api: batch_number__c
+  label: 批次号
+- api: is_api_created__c
+  label: 是否接口创建
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: is_deleted
+  label: is_deleted
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: activateDate__c
+  label: 最近激活日期
+- api: out_owner
+  label: 外部负责人
+- api: chargePerformance__c
+  label: 充值归属
+- api: owner
+  label: 负责人
+- api: last_modified_time
+  label: 最后修改时间
+- api: opportunity__c
+  label: 商机名称
+- api: oppStage__c
+  label: 商机阶段
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: xsyId__c
+  label: 销售易数据ID
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: creditAmountSys__c
+  label: 授信金额（桔宝盆）
+- api: oppType__c
+  label: 商机类型
+- api: creditAmount__c
+  label: 授信额度
+- api: firstActivationdate__c
+  label: 首次激活日期

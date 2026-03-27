@@ -1,0 +1,2660 @@
+fields:
+- api: account_related_count_rene_two__c
+  label: 有效用车账户数
+- api: monthlyHotel__c
+  label: 滴滴月度差旅酒店GMV预估
+- api: proxyBudget__c
+  label: 代驾客户全量月GMV预估（客户总预算）
+- api: isGroup__c
+  label: 是否集团合作
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: personnel__c
+  label: 交叉渗透唯一销售跟进人
+- api: enterprise_nature__c
+  label: 企业性质
+- api: field_lbx7x__c
+  label: 修改次数（数字）
+- api: parallelSupplier__c
+  label: 用车是否有并行供应商
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: chargeDate__c
+  label: 充值/授信日期
+- api: what_at_conversion_time__c
+  label: Why
+- api: cross_penetration__c
+  label: 是否交叉渗透
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: market_activity_id__c
+  label: 市场活动销售易ID
+- api: responsible_department_nam__c
+  label: 负责人主属部门名称
+- api: cost_time
+  label: 结单周期
+- api: thirdChannel__c
+  label: 三级通路
+- api: sales_platform_id__c
+  label: 归属生态平台销售易ID
+- api: expirationDropDate__c
+  label: 到期掉落日期
+- api: customItem433__c
+  label: 上次线索中心坐席
+- api: monthlyTrain__c
+  label: 滴滴月度差旅火车票GMV预估
+- api: contractRenewal__c
+  label: 合同续签
+  options:
+  - label: 自动续签
+    value: '1'
+  - label: 不自动续签
+    value: '2'
+  - label: 多年签约
+    value: '3'
+- api: accessValet__c
+  label: 希望接入代驾的方式
+  options:
+  - label: API
+    value: '1'
+  - label: 标准APP/H5产品
+    value: '2'
+  - label: 其他
+    value: other
+- api: lostShare__c
+  label: 停用_流失商机是否共享
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: call_frequencyID__c
+  label: 外呼频控唯一ID
+- api: channCorp_content__c
+  label: 合作内容描述
+- api: customerLevel__c
+  label: 客户等级
+- api: paymentMethod__c
+  label: 停用_支付方式
+  options:
+  - label: 企业支付
+    value: '1'
+  - label: 个垫开大票
+    value: '2'
+  - label: 企业支付及个垫开大票
+    value: '3'
+  - label: 其他
+    value: other
+- api: deliverySupportName__c
+  label: 实施支持人员姓名
+- api: Loss__c
+  label: 停用_流失标识
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: version
+  label: version
+- api: isHotelAgree__c
+  label: 有无协议酒店
+  options:
+  - label: 无协议酒店
+    value: '1'
+  - label: 有协议酒店需要托管
+    value: '2'
+  - label: 其他
+    value: other
+- api: paymentDrivingYN__c
+  label: 目前公司有无在用竞品代驾因公支付产品
+  options:
+  - label: 有
+    value: '1'
+  - label: 无
+    value: '2'
+  - label: 其他
+    value: other
+- api: monthlyGMVTravel__c
+  label: 商旅滴滴潜力月GMV预估（滴滴预算）
+- api: contact__c
+  label: 联系人
+- api: sales_clue_id__c
+  label: 销售线索销售易ID
+- api: batch_transfer_data_id__c
+  label: 批量划转数据ID
+- api: accountName__c
+  label: 客户名称（引用）
+- api: customer_key_kp_city__c
+  label: 客户关键KP所在城市
+  options:
+  - label: 安庆
+    value: '1'
+  - label: 蚌埠
+    value: '2'
+  - label: 亳州
+    value: '3'
+  - label: 池州
+    value: '4'
+  - label: 滁州
+    value: '5'
+  - label: 阜阳
+    value: '6'
+  - label: 合肥
+    value: '7'
+  - label: 淮北
+    value: '8'
+  - label: 淮南
+    value: '9'
+  - label: 黄山
+    value: '10'
+  - label: 六安
+    value: '11'
+  - label: 马鞍山
+    value: '12'
+  - label: 铜陵
+    value: '13'
+  - label: 芜湖
+    value: '14'
+  - label: 宿州
+    value: '15'
+  - label: 宣城
+    value: '16'
+  - label: 北京
+    value: '17'
+  - label: 福州
+    value: '18'
+  - label: 龙岩
+    value: '19'
+  - label: 南平
+    value: '20'
+  - label: 宁德
+    value: '21'
+  - label: 莆田
+    value: '22'
+  - label: 泉州
+    value: '23'
+  - label: 三明
+    value: '24'
+  - label: 厦门
+    value: '25'
+  - label: 漳州
+    value: '26'
+  - label: 白银
+    value: '27'
+  - label: 定西
+    value: '28'
+  - label: 甘南藏族自治州
+    value: '29'
+  - label: 嘉峪关
+    value: '30'
+  - label: 金昌
+    value: '31'
+  - label: 酒泉
+    value: '32'
+  - label: 兰州
+    value: '33'
+  - label: 临夏回族自治州
+    value: '34'
+  - label: 陇南
+    value: '35'
+  - label: 平凉
+    value: '36'
+  - label: 庆阳
+    value: '37'
+  - label: 天水
+    value: '38'
+  - label: 武威
+    value: '39'
+  - label: 张掖
+    value: '40'
+  - label: 潮州
+    value: '41'
+  - label: 东莞
+    value: '42'
+  - label: 佛山
+    value: '43'
+  - label: 广州
+    value: '44'
+  - label: 河源
+    value: '45'
+  - label: 惠州
+    value: '46'
+  - label: 江门
+    value: '47'
+  - label: 揭阳
+    value: '48'
+  - label: 茂名
+    value: '49'
+  - label: 梅州
+    value: '50'
+  - label: 清远
+    value: '51'
+  - label: 汕头
+    value: '52'
+  - label: 汕尾
+    value: '53'
+  - label: 韶关
+    value: '54'
+  - label: 深圳
+    value: '55'
+  - label: 阳江
+    value: '56'
+  - label: 云浮
+    value: '57'
+  - label: 湛江
+    value: '58'
+  - label: 肇庆
+    value: '59'
+  - label: 中山
+    value: '60'
+  - label: 珠海
+    value: '61'
+  - label: 百色
+    value: '62'
+  - label: 北海
+    value: '63'
+  - label: 崇左
+    value: '64'
+  - label: 防城港
+    value: '65'
+  - label: 贵港
+    value: '66'
+  - label: 桂林
+    value: '67'
+  - label: 河池
+    value: '68'
+  - label: 贺州
+    value: '69'
+  - label: 来宾
+    value: '70'
+  - label: 柳州
+    value: '71'
+  - label: 南宁
+    value: '72'
+  - label: 钦州
+    value: '73'
+  - label: 梧州
+    value: '74'
+  - label: 玉林
+    value: '75'
+  - label: 安顺
+    value: '76'
+  - label: 毕节
+    value: '77'
+  - label: 贵阳
+    value: '78'
+  - label: 六盘水
+    value: '79'
+  - label: 黔东南苗族侗族自治州
+    value: '80'
+  - label: 黔南布依族苗族自治州
+    value: '81'
+  - label: 黔西南布依族苗族自治州
+    value: '82'
+  - label: 铜仁
+    value: '83'
+  - label: 遵义
+    value: '84'
+  - label: 白沙黎族自治县
+    value: '85'
+  - label: 保亭黎族苗族自治县
+    value: '86'
+  - label: 昌江黎族自治县
+    value: '87'
+  - label: 澄迈县
+    value: '88'
+  - label: 儋州
+    value: '89'
+  - label: 定安县
+    value: '90'
+  - label: 东方
+    value: '91'
+  - label: 海口
+    value: '92'
+  - label: 乐东黎族自治县
+    value: '93'
+  - label: 临高县
+    value: '94'
+  - label: 陵水黎族自治县
+    value: '95'
+  - label: 琼海
+    value: '96'
+  - label: 琼中黎族苗族自治县
+    value: '97'
+  - label: 三沙
+    value: '98'
+  - label: 三亚
+    value: '99'
+  - label: 屯昌县
+    value: '100'
+  - label: 万宁
+    value: '101'
+  - label: 文昌
+    value: '102'
+  - label: 五指山
+    value: '103'
+  - label: 保定
+    value: '104'
+  - label: 沧州
+    value: '105'
+  - label: 承德
+    value: '106'
+  - label: 邯郸
+    value: '107'
+  - label: 衡水
+    value: '108'
+  - label: 廊坊
+    value: '109'
+  - label: 秦皇岛
+    value: '110'
+  - label: 石家庄
+    value: '111'
+  - label: 唐山
+    value: '112'
+  - label: 邢台
+    value: '113'
+  - label: 张家口
+    value: '114'
+  - label: 安阳
+    value: '115'
+  - label: 鹤壁
+    value: '116'
+  - label: 济源
+    value: '117'
+  - label: 焦作
+    value: '118'
+  - label: 开封
+    value: '119'
+  - label: 洛阳
+    value: '120'
+  - label: 漯河
+    value: '121'
+  - label: 南阳
+    value: '122'
+  - label: 平顶山
+    value: '123'
+  - label: 濮阳
+    value: '124'
+  - label: 三门峡
+    value: '125'
+  - label: 商丘
+    value: '126'
+  - label: 新乡
+    value: '127'
+  - label: 信阳
+    value: '128'
+  - label: 许昌
+    value: '129'
+  - label: 郑州
+    value: '130'
+  - label: 周口
+    value: '131'
+  - label: 驻马店
+    value: '132'
+  - label: 大庆
+    value: '133'
+  - label: 大兴安岭地区
+    value: '134'
+  - label: 哈尔滨
+    value: '135'
+  - label: 鹤岗
+    value: '136'
+  - label: 黑河
+    value: '137'
+  - label: 鸡西
+    value: '138'
+  - label: 佳木斯
+    value: '139'
+  - label: 牡丹江
+    value: '140'
+  - label: 七台河
+    value: '141'
+  - label: 齐齐哈尔
+    value: '142'
+  - label: 双鸭山
+    value: '143'
+  - label: 绥化
+    value: '144'
+  - label: 伊春
+    value: '145'
+  - label: 鄂州
+    value: '146'
+  - label: 恩施土家族苗族自治州
+    value: '147'
+  - label: 黄冈
+    value: '148'
+  - label: 黄石
+    value: '149'
+  - label: 荆门
+    value: '150'
+  - label: 荆州
+    value: '151'
+  - label: 潜江
+    value: '152'
+  - label: 神农架林区
+    value: '153'
+  - label: 十堰
+    value: '154'
+  - label: 随州
+    value: '155'
+  - label: 天门
+    value: '156'
+  - label: 武汉
+    value: '157'
+  - label: 仙桃
+    value: '158'
+  - label: 咸宁
+    value: '159'
+  - label: 襄阳
+    value: '160'
+  - label: 孝感
+    value: '161'
+  - label: 宜昌
+    value: '162'
+  - label: 常德
+    value: '163'
+  - label: 郴州
+    value: '164'
+  - label: 衡阳
+    value: '165'
+  - label: 怀化
+    value: '166'
+  - label: 娄底
+    value: '167'
+  - label: 邵阳
+    value: '168'
+  - label: 湘潭
+    value: '169'
+  - label: 湘西土家族苗族自治州
+    value: '170'
+  - label: 益阳
+    value: '171'
+  - label: 永州
+    value: '172'
+  - label: 岳阳
+    value: '173'
+  - label: 张家界
+    value: '174'
+  - label: 长沙
+    value: '175'
+  - label: 株洲
+    value: '176'
+  - label: 白城
+    value: '177'
+  - label: 白山
+    value: '178'
+  - label: 吉林
+    value: '179'
+  - label: 辽源
+    value: '180'
+  - label: 四平
+    value: '181'
+  - label: 松原
+    value: '182'
+  - label: 通化
+    value: '183'
+  - label: 延边朝鲜族自治州
+    value: '184'
+  - label: 长春
+    value: '185'
+  - label: 常州
+    value: '186'
+  - label: 淮安
+    value: '187'
+  - label: 连云港
+    value: '188'
+  - label: 南京
+    value: '189'
+  - label: 南通
+    value: '190'
+  - label: 苏州
+    value: '191'
+  - label: 泰州
+    value: '192'
+  - label: 无锡
+    value: '193'
+  - label: 宿迁
+    value: '194'
+  - label: 徐州
+    value: '195'
+  - label: 盐城
+    value: '196'
+  - label: 扬州
+    value: '197'
+  - label: 镇江
+    value: '198'
+  - label: 抚州
+    value: '199'
+  - label: 赣州
+    value: '200'
+  - label: 吉安
+    value: '201'
+  - label: 景德镇
+    value: '202'
+  - label: 九江
+    value: '203'
+  - label: 南昌
+    value: '204'
+  - label: 萍乡
+    value: '205'
+  - label: 上饶
+    value: '206'
+  - label: 新余
+    value: '207'
+  - label: 宜春
+    value: '208'
+  - label: 鹰潭
+    value: '209'
+  - label: 鞍山
+    value: '210'
+  - label: 本溪
+    value: '211'
+  - label: 朝阳
+    value: '212'
+  - label: 大连
+    value: '213'
+  - label: 丹东
+    value: '214'
+  - label: 抚顺
+    value: '215'
+  - label: 阜新
+    value: '216'
+  - label: 葫芦岛
+    value: '217'
+  - label: 锦州
+    value: '218'
+  - label: 辽阳
+    value: '219'
+  - label: 盘锦
+    value: '220'
+  - label: 沈阳
+    value: '221'
+  - label: 铁岭
+    value: '222'
+  - label: 营口
+    value: '223'
+  - label: 阿拉善盟
+    value: '224'
+  - label: 巴彦淖尔
+    value: '225'
+  - label: 包头
+    value: '226'
+  - label: 赤峰
+    value: '227'
+  - label: 鄂尔多斯
+    value: '228'
+  - label: 呼和浩特
+    value: '229'
+  - label: 呼伦贝尔
+    value: '230'
+  - label: 通辽
+    value: '231'
+  - label: 乌海
+    value: '232'
+  - label: 乌兰察布
+    value: '233'
+  - label: 锡林郭勒盟
+    value: '234'
+  - label: 兴安盟
+    value: '235'
+  - label: 固原
+    value: '236'
+  - label: 石嘴山
+    value: '237'
+  - label: 吴忠
+    value: '238'
+  - label: 银川
+    value: '239'
+  - label: 中卫
+    value: '240'
+  - label: 果洛藏族自治州
+    value: '241'
+  - label: 海北藏族自治州
+    value: '242'
+  - label: 海东
+    value: '243'
+  - label: 海南藏族自治州
+    value: '244'
+  - label: 海西蒙古族藏族自治州
+    value: '245'
+  - label: 黄南藏族自治州
+    value: '246'
+  - label: 西宁
+    value: '247'
+  - label: 玉树藏族自治州
+    value: '248'
+  - label: 滨州
+    value: '249'
+  - label: 德州
+    value: '250'
+  - label: 东营
+    value: '251'
+  - label: 菏泽
+    value: '252'
+  - label: 济南
+    value: '253'
+  - label: 济宁
+    value: '254'
+  - label: 莱芜
+    value: '255'
+  - label: 聊城
+    value: '256'
+  - label: 临沂
+    value: '257'
+  - label: 青岛
+    value: '258'
+  - label: 日照
+    value: '259'
+  - label: 泰安
+    value: '260'
+  - label: 威海
+    value: '261'
+  - label: 潍坊
+    value: '262'
+  - label: 烟台
+    value: '263'
+  - label: 枣庄
+    value: '264'
+  - label: 淄博
+    value: '265'
+  - label: 大同
+    value: '266'
+  - label: 晋城
+    value: '267'
+  - label: 晋中
+    value: '268'
+  - label: 临汾
+    value: '269'
+  - label: 吕梁
+    value: '270'
+  - label: 朔州
+    value: '271'
+  - label: 太原
+    value: '272'
+  - label: 忻州
+    value: '273'
+  - label: 阳泉
+    value: '274'
+  - label: 运城
+    value: '275'
+  - label: 长治
+    value: '276'
+  - label: 安康
+    value: '277'
+  - label: 宝鸡
+    value: '278'
+  - label: 汉中
+    value: '279'
+  - label: 商洛
+    value: '280'
+  - label: 铜川
+    value: '281'
+  - label: 渭南
+    value: '282'
+  - label: 西安
+    value: '283'
+  - label: 咸阳
+    value: '284'
+  - label: 延安
+    value: '285'
+  - label: 杨凌示范区
+    value: '286'
+  - label: 榆林
+    value: '287'
+  - label: 上海
+    value: '288'
+  - label: 阿坝藏族羌族自治州
+    value: '289'
+  - label: 巴中
+    value: '290'
+  - label: 成都
+    value: '291'
+  - label: 达州
+    value: '292'
+  - label: 德阳
+    value: '293'
+  - label: 甘孜藏族自治州
+    value: '294'
+  - label: 广安
+    value: '295'
+  - label: 广元
+    value: '296'
+  - label: 乐山
+    value: '297'
+  - label: 凉山彝族自治州
+    value: '298'
+  - label: 泸州
+    value: '299'
+  - label: 眉山
+    value: '300'
+  - label: 绵阳
+    value: '301'
+  - label: 南充
+    value: '302'
+  - label: 内江
+    value: '303'
+  - label: 攀枝花
+    value: '304'
+  - label: 遂宁
+    value: '305'
+  - label: 雅安
+    value: '306'
+  - label: 宜宾
+    value: '307'
+  - label: 资阳
+    value: '308'
+  - label: 自贡
+    value: '309'
+  - label: 天津
+    value: '310'
+  - label: 阿里地区
+    value: '311'
+  - label: 昌都
+    value: '312'
+  - label: 拉萨
+    value: '313'
+  - label: 林芝
+    value: '314'
+  - label: 那曲
+    value: '315'
+  - label: 日喀则
+    value: '316'
+  - label: 山南
+    value: '317'
+  - label: 阿克苏地区
+    value: '318'
+  - label: 阿拉尔
+    value: '319'
+  - label: 阿勒泰地区
+    value: '320'
+  - label: 巴音郭楞蒙古自治州
+    value: '321'
+  - label: 北屯
+    value: '322'
+  - label: 博尔塔拉蒙古自治州
+    value: '323'
+  - label: 昌吉回族自治州
+    value: '324'
+  - label: 哈密
+    value: '325'
+  - label: 和田地区
+    value: '326'
+  - label: 喀什地区
+    value: '327'
+  - label: 可克达拉
+    value: '328'
+  - label: 克拉玛依
+    value: '329'
+  - label: 克孜勒苏柯尔克孜自治州
+    value: '330'
+  - label: 昆玉
+    value: '331'
+  - label: 石河子
+    value: '332'
+  - label: 双河
+    value: '333'
+  - label: 塔城地区
+    value: '334'
+  - label: 铁门关
+    value: '335'
+  - label: 图木舒克
+    value: '336'
+  - label: 吐鲁番
+    value: '337'
+  - label: 乌鲁木齐
+    value: '338'
+  - label: 五家渠
+    value: '339'
+  - label: 伊犁哈萨克自治州
+    value: '340'
+  - label: 保山
+    value: '341'
+  - label: 楚雄彝族自治州
+    value: '342'
+  - label: 大理白族自治州
+    value: '343'
+  - label: 德宏傣族景颇族自治州
+    value: '344'
+  - label: 迪庆藏族自治州
+    value: '345'
+  - label: 红河哈尼族彝族自治州
+    value: '346'
+  - label: 昆明
+    value: '347'
+  - label: 丽江
+    value: '348'
+  - label: 临沧
+    value: '349'
+  - label: 怒江傈僳族自治州
+    value: '350'
+  - label: 普洱
+    value: '351'
+  - label: 曲靖
+    value: '352'
+  - label: 文山壮族苗族自治州
+    value: '353'
+  - label: 西双版纳傣族自治州
+    value: '354'
+  - label: 玉溪
+    value: '355'
+  - label: 昭通
+    value: '356'
+  - label: 杭州
+    value: '357'
+  - label: 湖州
+    value: '358'
+  - label: 嘉兴
+    value: '359'
+  - label: 金华
+    value: '360'
+  - label: 丽水
+    value: '361'
+  - label: 宁波
+    value: '362'
+  - label: 衢州
+    value: '363'
+  - label: 绍兴
+    value: '364'
+  - label: 台州
+    value: '365'
+  - label: 温州
+    value: '366'
+  - label: 舟山
+    value: '367'
+  - label: 重庆
+    value: '368'
+- api: overseas_car_concern_facto__c
+  label: 在使用跨境用车中更关注的因素
+  options:
+  - label: 安全
+    value: '1'
+  - label: 司机服务
+    value: '2'
+  - label: 价格
+    value: '3'
+  - label: 其他
+    value: other
+- api: lead_owner__c
+  label: 线索负责人
+- api: callType__c
+  label: 当前拨号类型
+  options:
+  - label: 授权拨号
+    value: authorization
+  - label: 正常拨号
+    value: normal
+  - label: 其他
+    value: other
+- api: frequency__c
+  label: 预计使用代驾的频次量级（周/次）
+- api: implementation_support_id__c
+  label: 实施支持人员（接口使用ID）
+- api: lostStageId__c
+  label: 输单阶段
+  options:
+  - label: 需求梳理
+    value: '1'
+  - label: 初步接洽
+    value: '8'
+  - label: 方案制定
+    value: '9'
+  - label: 需求确定
+    value: '2'
+  - label: 制定方案
+    value: '10'
+  - label: 商务洽谈
+    value: '11'
+  - label: 决策沟通
+    value: '12'
+  - label: 方案/报价
+    value: '3'
+  - label: 谈判审核
+    value: '4'
+  - label: 合同开户
+    value: '13'
+  - label: 合同续约
+    value: '14'
+  - label: 协议签署
+    value: '15'
+  - label: 产品对接
+    value: '16'
+  - label: 赢单
+    value: '5'
+  - label: 其他
+    value: '99'
+  - label: 投标报价
+    value: '100'
+  - label: 输单
+    value: '6'
+  - label: 其他(预设)
+    value: other
+- api: source__c
+  label: 需求来源
+  options:
+  - label: 客户主动询问我司
+    value: '1'
+  - label: 客户正在寻找供货商
+    value: '2'
+  - label: 销售个人推荐
+    value: '3'
+  - label: 其他
+    value: other
+- api: teleIntention__c
+  label: 电销意向度
+  options:
+  - label: 无人接听
+    value: '4'
+  - label: 高意向
+    value: '1'
+  - label: 中意向
+    value: '2'
+  - label: 低意向
+    value: '3'
+  - label: 无意向
+    value: '5'
+- api: comment__c
+  label: 备注
+- api: project_expected_launch_ti__c
+  label: T：项目预期的上线时间
+- api: dchn__c
+  label: dchn
+- api: OwnerChannel__c
+  label: 停用_渠道归属人
+- api: notCommonSolutionComment__c
+  label: 使用非标方案的原因描述
+- api: email
+  label: 邮件
+- api: esCorp_mode__c
+  label: 合作模式
+  options:
+  - label: 管理API+H5
+    value: '1'
+  - label: ISV嵌入
+    value: '2'
+  - label: 其它
+    value: '3'
+  - label: API
+    value: '4'
+  - label: 商机合伙人
+    value: '5'
+  - label: 其他（废）
+    value: other
+- api: field_pjCRo__c
+  label: 商机唯一计数
+- api: developed_enterprise__c
+  label: 已开发企业
+- api: out_tenant_id
+  label: 外部企业
+- api: field_hwCh6__c
+  label: 修改次数（文本）
+- api: accountNum__c
+  label: 客户分子公司数
+- api: factorsConcern__c
+  label: 在使用代驾中更关注的因素
+  options:
+  - label: 安全
+    value: '1'
+  - label: 司机服务
+    value: '2'
+  - label: 价格
+    value: '3'
+  - label: 其他
+    value: other
+- api: renewalStatus__c
+  label: 续签配置状态
+  options:
+  - label: 未提交申请
+    value: '1'
+  - label: 已提交申请
+    value: '2'
+  - label: 申请已通过
+    value: '3'
+  - label: 申请被驳回
+    value: '4'
+  - label: 其他
+    value: other
+- api: supplier_name_car__c
+  label: 用车并行供应商名称
+  options:
+  - label: 高德
+    value: '1'
+  - label: 畅行
+    value: '2'
+  - label: T3
+    value: '3'
+  - label: 曹操
+    value: '4'
+  - label: 神州
+    value: '5'
+  - label: 分贝通
+    value: '6'
+  - label: 在途
+    value: '7'
+  - label: 如祺
+    value: '8'
+  - label: 差旅管家
+    value: '9'
+  - label: 易企出行
+    value: '10'
+  - label: 易快报
+    value: '11'
+  - label: 合思
+    value: '12'
+  - label: 百度出行
+    value: '13'
+  - label: 美团
+    value: '14'
+  - label: 胜意
+    value: '15'
+  - label: 途径
+    value: '16'
+  - label: 首汽
+    value: '17'
+  - label: Petal
+    value: '18'
+  - label: 其他
+    value: '19'
+  - label: 其他（标准）
+    value: other
+- api: travelStandards__c
+  label: 普通员工一线城市的差旅标准
+- api: account_id
+  label: 客户名称
+- api: isCarApplication__c
+  label: 审批方式
+  options:
+  - label: 无需审批
+    value: '1'
+  - label: 行前审批
+    value: '2'
+  - label: 行后审批
+    value: '3'
+  - label: 客户系统审批
+    value: '4'
+  - label: 滴滴侧审批
+    value: '5'
+  - label: 其他
+    value: other
+- api: valid_driving_partner_coun__c
+  label: 有效代驾&出租车&聚合账户数
+- api: togetherBudget__c
+  label: 聚合客户全量月GMV预估（客户总预算）
+- api: isAirAgree__c
+  label: 有无航空协议
+  options:
+  - label: 有
+    value: '1'
+  - label: 无
+    value: '2'
+  - label: 其他
+    value: other
+- api: close_date
+  label: 预计签约日期
+- api: interestCategory__c
+  label: 感兴趣品类
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '2'
+  - label: 费控
+    value: '3'
+  - label: 代驾
+    value: '4'
+  - label: 出租车
+    value: '5'
+  - label: 聚合
+    value: '6'
+  - label: 海外用车1
+    value: '7'
+  - label: 跨境用车
+    value: '8'
+  - label: 其他
+    value: other
+- api: latest_sales_record_time__c
+  label: 最新拜访日期
+- api: sales_struct__c
+  label: 销售架构
+- api: first_channel__c
+  label: 一级通路
+  options:
+  - label: 销售自拓
+    value: '50'
+  - label: 原公司供给
+    value: '124'
+  - label: 生态合作
+    value: '5'
+  - label: 市场活动_营销会议
+    value: '108'
+  - label: 市场活动_生态市场联合拓客
+    value: '115'
+  - label: 内部推荐(MKT)
+    value: '43'
+  - label: 行业开发
+    value: '49'
+  - label: 老客推荐
+    value: '52'
+  - label: 老客分子公司
+    value: '53'
+  - label: 生态IM
+    value: '97'
+  - label: 400进线
+    value: '2'
+  - label: 线索中心拓展
+    value: '61'
+  - label: 线索中心老客拓展
+    value: '62'
+  - label: 客户注册
+    value: '1'
+  - label: 外部合作注册
+    value: '10'
+  - label: 官网留资
+    value: '3'
+  - label: 企业微信留资
+    value: '11'
+  - label: 媒介留资
+    value: '12'
+  - label: 营销活动
+    value: '4'
+  - label: C端开票
+    value: '6'
+  - label: CSM线索
+    value: '9'
+  - label: 注册页改留资
+    value: '13'
+  - label: 销售线索
+    value: '8'
+  - label: ES后台
+    value: '14'
+  - label: 主APP
+    value: '15'
+  - label: 支付宝小程序滴滴出行
+    value: '16'
+  - label: 小企业版
+    value: '17'
+  - label: 微信小程序滴滴出行
+    value: '18'
+  - label: 微信小程序出行广场
+    value: '19'
+  - label: 外部合作注册(平台运营)
+    value: '20'
+  - label: 企业微信
+    value: '21'
+  - label: 企业版APP
+    value: '22'
+  - label: 企微社群
+    value: '23'
+  - label: 离线触达
+    value: '24'
+  - label: 老CRM系统
+    value: '25'
+  - label: 活动页面入口
+    value: '26'
+  - label: 端外媒介留资(平台运营)
+    value: '27'
+  - label: 定向开发(平台运营)
+    value: '28'
+  - label: 生态平台市场活动
+    value: '29'
+  - label: 生态伙伴运营交换
+    value: '30'
+  - label: 商旅/福利平台注册
+    value: '31'
+  - label: 伙伴推荐(生态)
+    value: '32'
+  - label: 费控平台注册
+    value: '33'
+  - label: BD合作(MKT)
+    value: '34'
+  - label: 自然流量
+    value: '35'
+  - label: 营销会议
+    value: '36'
+  - label: 信息流
+    value: '37'
+  - label: ABM定向开发
+    value: '38'
+  - label: 搜索竞价(SEM)
+    value: '39'
+  - label: 苹果商店
+    value: '40'
+  - label: 品专
+    value: '41'
+  - label: 品牌投放
+    value: '42'
+  - label: 官网流量
+    value: '44'
+  - label: 端外媒介留资(MKT)
+    value: '45'
+  - label: 定向开发(MKT)
+    value: '46'
+  - label: 滴滴自媒体
+    value: '47'
+  - label: 安卓商店
+    value: '48'
+  - label: 内部推荐
+    value: '51'
+  - label: 滴滴费控推荐
+    value: '64'
+  - label: 叠宙注册
+    value: '54'
+  - label: 钉钉注册
+    value: '55'
+  - label: 无
+    value: '56'
+  - label: IM机器人
+    value: '57'
+  - label: 渠道开发(MKT)
+    value: '58'
+  - label: 生态市场联合拓客
+    value: '59'
+  - label: 园区营销
+    value: '60'
+  - label: 其它/历史
+    value: '7'
+  - label: 官网流量_SEO
+    value: '98'
+  - label: 微信小程序滴滴企业版助手
+    value: '63'
+  - label: 官网流量-PC
+    value: '65'
+  - label: 异业合作
+    value: '66'
+  - label: 微信搜索
+    value: '67'
+  - label: 外部合作注册（平台运营）
+    value: '68'
+  - label: 拓客通
+    value: '69'
+  - label: 出行券
+    value: '70'
+  - label: 头条信息流
+    value: '71'
+  - label: 线索采买
+    value: '72'
+  - label: 抖音信息流
+    value: '73'
+  - label: 生态数据营销
+    value: '74'
+  - label: 生态CPA合作
+    value: '75'
+  - label: 朋友圈
+    value: '76'
+  - label: 公众号和小程序
+    value: '77'
+  - label: 视频号
+    value: '78'
+  - label: 生态钉钉
+    value: '79'
+  - label: 生态企微
+    value: '80'
+  - label: 生态飞书
+    value: '81'
+  - label: 花小猪APP
+    value: '82'
+  - label: 花小猪小程序
+    value: '83'
+  - label: 品牌内容营销
+    value: '84'
+  - label: 生态平台注册
+    value: '85'
+  - label: 媒体营销
+    value: '86'
+  - label: 市场推荐
+    value: '87'
+  - label: 市场-推荐
+    value: '88'
+  - label: 内容营销
+    value: '89'
+  - label: 渠道伙伴
+    value: '90'
+  - label: 社群投放
+    value: '91'
+  - label: 转介绍
+    value: '92'
+  - label: 未匹配通路
+    value: '93'
+  - label: 历史通路映射
+    value: '94'
+  - label: 端内投放_历史通路映射
+    value: '95'
+  - label: 官网流量_官网
+    value: '96'
+  - label: MA剧本
+    value: '99'
+  - label: 端内投放_营销活动
+    value: '100'
+  - label: 端内投放_ES后台
+    value: '101'
+  - label: 端内投放_主APP
+    value: '102'
+  - label: 端内投放_支付宝小程序滴滴出行
+    value: '103'
+  - label: 端内投放_小企业版
+    value: '104'
+  - label: 端内投放_微信小程序滴滴出行
+    value: '105'
+  - label: 端内投放_企业版APP
+    value: '106'
+  - label: 端外投放_自然流量
+    value: '107'
+  - label: 端外投放_信息流
+    value: '109'
+  - label: 端外投放_SEM
+    value: '110'
+  - label: 端外投放_苹果商店
+    value: '111'
+  - label: 端外投放_品专
+    value: '112'
+  - label: 品牌_滴滴自媒体
+    value: '113'
+  - label: 端外投放_安卓商店
+    value: '114'
+  - label: 端内投放_微信小程序滴滴企业版助手
+    value: '116'
+  - label: 端外投放_头条信息流
+    value: '117'
+  - label: 端外投放_CPA合作
+    value: '118'
+  - label: 端内投放_花小猪APP
+    value: '119'
+  - label: 端内投放_花小猪小程序
+    value: '120'
+  - label: 品牌_内容营销
+    value: '121'
+  - label: 端外投放_渠道伙伴
+    value: '122'
+  - label: 端外投放_社群投放
+    value: '123'
+  - label: CRM提单开户
+    value: '125'
+  - label: 其他
+    value: other
+- api: deliverySupport__c
+  label: 实施支持人员
+- api: city_importantView__c
+  label: 城市重点场景
+- api: num_midClient__c
+  label: 中型客户数量
+- api: travelSupplier__c
+  label: 目前在用差旅供应商
+  options:
+  - label: 无专业差旅公司服务
+    value: '1'
+  - label: 携程商旅
+    value: '2'
+  - label: 阿里商旅
+    value: '3'
+  - label: 中航服
+    value: '4'
+  - label: 同程商旅
+    value: '5'
+  - label: 差旅壹号
+    value: '6'
+  - label: 在路上
+    value: '7'
+  - label: 美亚商旅
+    value: '8'
+  - label: 分贝通
+    value: '9'
+  - label: 美国运通
+    value: '10'
+  - label: 中航嘉信
+    value: '11'
+  - label: BCD
+    value: '12'
+  - label: 其他
+    value: '13'
+  - label: 其他（废）
+    value: other
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: undeveloped_enterprise__c
+  label: 未开发企业
+- api: vehicle_channel_group_affi__c
+  label: 渠道管理组归属
+- api: acc_requirement__c
+  label: 客户需求
+- api: meetingNote_DM__c
+  label: 决策人沟通会议纪要
+- api: operatingCycle__c
+  label: 流转周期（月）
+- api: owner_department
+  label: 负责人主属部门
+- api: FinalSales__c
+  label: 最终销售
+- api: offline_reimbursement_travel__c
+  label: 商旅是否存在线下报销
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 暂无
+    value: '3'
+  - label: 其他
+    value: other
+- api: implementation_department__c
+  label: 实施所属部门
+- api: travelNum__c
+  label: 客户预计有商旅权限人数
+- api: didi_customer_id_for_api__c
+  label: 滴滴客户ID（接口用）
+- api: monthlyGMVProxy__c
+  label: 代驾滴滴潜力月GMV预估（滴滴预算）
+- api: gmvCheck__c
+  label: 客户+销售+品类
+- api: opp_lines_sum
+  label: 产品合计
+- api: create_time
+  label: 创建时间
+- api: boolean_value__c
+  label: 是否触发审批
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: supplier_name_travel__c
+  label: 商旅并行供应商名称
+  options:
+  - label: 无专业差旅公司服务
+    value: '1'
+  - label: 携程商旅
+    value: '2'
+  - label: 阿里商旅
+    value: '3'
+  - label: 中航服
+    value: '4'
+  - label: 同程商旅
+    value: '5'
+  - label: 差旅壹号
+    value: '6'
+  - label: 在路上
+    value: '7'
+  - label: 美亚商旅
+    value: '8'
+  - label: 分贝通
+    value: '9'
+  - label: 美国运通
+    value: '10'
+  - label: 中航嘉信
+    value: '11'
+  - label: BCD
+    value: '12'
+  - label: 汇联易
+    value: '14'
+  - label: 甄选
+    value: '15'
+  - label: 合思
+    value: '16'
+  - label: 无
+    value: '17'
+  - label: 其他
+    value: '13'
+  - label: 其他（标准）
+    value: other
+- api: taxiBudget__c
+  label: 出租车客户全量月GMV预估（客户总预算）
+- api: who_at_conversion_time__c
+  label: Who
+- api: budget_info__c
+  label: B：预算信息
+- api: c_activation_date__c
+  label: 企业支付激活日期
+- api: monthlyAirfare__c
+  label: 滴滴月度差旅机票GMV预估
+- api: last_followed_time
+  label: 最后跟进时间
+- api: created_by
+  label: 创建人
+- api: offline_reimbursement_car__c
+  label: 用车是否存在线下报销
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 暂无
+    value: '3'
+  - label: 其他
+    value: other
+- api: winDate__c
+  label: 商机赢单时间
+- api: delayNum__c
+  label: 延期次数
+- api: topDepart__c
+  label: 一级部门
+- api: offline_reimbursement_share_travel__c
+  label: 商旅线下报销占比
+- api: targetMajor__c
+  label: 目标大客户标签
+- api: qrCodeOpportunity__c
+  label: QRCodeId
+- api: employeeEsImport__c
+  label: 是否能提供手机号
+  options:
+  - label: 可以导入
+    value: '1'
+  - label: 不可以-公司无员工手机号
+    value: '2'
+  - label: 不可以-公司禁止对外提供手机号
+    value: '3'
+  - label: 其他
+    value: other
+- api: customItem432__c
+  label: 是否线索中心提供
+- api: didiId__c
+  label: 滴滴客户ID
+- api: name
+  label: 商机名称
+- api: car_scene__c
+  label: 企业用车场景
+  options:
+  - label: 日常用车
+    value: '1'
+  - label: 差旅用车
+    value: '2'
+  - label: 加班用车
+    value: '3'
+  - label: 周末用车
+    value: '4'
+  - label: 接送机
+    value: '5'
+  - label: 销售 & 业务人员用车
+    value: '6'
+  - label: 客户用车 - 大规模集中用车
+    value: '7'
+  - label: 商务出行
+    value: '9'
+  - label: 其他用车需求
+    value: '8'
+  - label: 代叫车
+    value: '10'
+  - label: 福利用车
+    value: '11'
+  - label: 营销用车
+    value: '12'
+  - label: 办公地点通勤
+    value: '13'
+- api: admin_data_processing_flag__c
+  label: 管理员数据处理标记
+- api: dueReminderDateNoValid__c
+  label: 到期提醒日期-无拜访
+- api: nextFollowupDate__c
+  label: 预计下次跟进时间
+- api: primary_industry__c
+  label: 一级行业
+- api: start_followtime__c
+  label: 交叉渗透开始跟进时间
+- api: cross_penetration_business__c
+  label: 交叉渗透商机发通知标识
+  options:
+  - label: 无线索拜访_发通知
+    value: '1'
+  - label: 无有效商旅拉新商机_发通知
+    value: '2'
+  - label: 无有效商旅拉新商机_清空人&发通知
+    value: '3'
+  - label: 其他
+    value: other
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 流水号
+- api: accountingPeriod__c
+  label: 账期（天）
+- api: is_api_created__c
+  label: 是否接口创建
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: offline_reimbursement_share_car__c
+  label: 用车线下报销占比
+- api: ownerMobile__c
+  label: 负责人手机号
+- api: leads_id
+  label: 未使用_源线索
+- api: previous_settlement_manage__c
+  label: 前结算经理
+- api: secondary_industry__c
+  label: 二级行业
+- api: travelBudget__c
+  label: 商旅客户全量月GMV预估（客户总预算）
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: activateDate__c
+  label: 最近激活日期
+- api: accapply_status__c
+  label: 提单开户/续签/调整报价流程状态
+  options:
+  - label: 未提单
+    value: '1'
+  - label: 已提单
+    value: '2'
+  - label: 已完成
+    value: '3'
+  - label: 已驳回
+    value: '4'
+  - label: 其他
+    value: other
+- api: out_owner
+  label: 外部负责人
+- api: credit__c
+  label: 是否授信
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: protocolTemplate__c
+  label: 协议模板
+  options:
+  - label: 标准模板
+    value: '1'
+  - label: 非标模板
+    value: '2'
+  - label: 其他
+    value: other
+- api: controlMethod__c
+  label: 代驾因公支付场景最需要的管控方式
+  options:
+  - label: 路线管控
+    value: '1'
+  - label: 时间管控
+    value: '2'
+  - label: 行前或行后审批
+    value: '3'
+  - label: 其他
+    value: other
+- api: owner
+  label: 负责人
+- api: ownerName__c
+  label: 商机所有人姓名
+- api: is_car_usage_and_business__c
+  label: 用车和商旅是否同时对接
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: product_add__c
+  label: 预计可接入产品
+  options:
+  - label: 预计接入出租车
+    value: '1'
+  - label: 预计接入anycar
+    value: '2'
+  - label: 预计接入升舱
+    value: '3'
+  - label: 预计接入远程调度
+    value: '4'
+  - label: 其他
+    value: other
+- api: account_related_count_taxi__c
+  label: 有效出租车账户数
+- api: is_active__c
+  label: 商机名称与客户名称是否一致
+- api: system_docking_method_syst__c
+  label: 系统对接方式（系统使用）
+  options:
+  - label: 管理API+企业版APP
+    value: '1'
+  - label: 管理API+H5
+    value: '2'
+  - label: webapp
+    value: '3'
+  - label: 平台对接
+    value: '4'
+  - label: H5单点对接
+    value: '5'
+  - label: 企业版APP+企业版H5+管理API
+    value: '6'
+  - label: 企业版APP+管理API
+    value: '7'
+  - label: 企业版H5+管理API
+    value: '8'
+  - label: 企业版H5单点对接
+    value: '9'
+  - label: 其他
+    value: other
+- api: delete_flag__c
+  label: 删除标识
+  options:
+  - label: 未删除
+    value: '0'
+  - label: 已删除
+    value: '1'
+  - label: 其他
+    value: other
+- api: reasonDesc__c
+  label: 输单描述
+- api: csupport_owner_department__c
+  label: CSM支持人员主属部门ID
+- api: field_mg9HG__c
+  label: 线索二级部门
+- api: xsyId__c
+  label: 销售易数据ID
+- api: contractStage__c
+  label: 停用_合同阶段
+  options:
+  - label: 未签约
+    value: '1'
+  - label: 签约中
+    value: '2'
+  - label: 已签约
+    value: '3'
+  - label: 其他
+    value: other
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 用车拉新商机
+    value: ''
+  - label: 用车渗透商机
+    value: ''
+  - label: 用车续约商机
+    value: ''
+  - label: 商旅拉新商机
+    value: ''
+  - label: 商旅渗透商机
+    value: ''
+  - label: 商旅续约商机
+    value: ''
+  - label: 拓展代理商商机
+    value: ''
+  - label: 拓展生态平台商机
+    value: ''
+- api: account_related_count_busi__c
+  label: 有效商旅账户数
+- api: does_customer_need_to_tria__c
+  label: 客户是否需要试用后方可切换（用车）
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: creditAmount__c
+  label: 授信额度
+- api: dockingSystem__c
+  label: 需要对接的系统
+- api: car_user_num__c
+  label: 员工人数
+- api: dissatisfaction__c
+  label: 客户对现有差旅供应商的不满之处
+- api: lock_rule
+  label: 锁定规则
+- api: p_activation_date__c
+  label: 个人垫付激活日期
+- api: field_uXto2__c
+  label: 月预算变更次数
+- api: account_related_count__c
+  label: 有效聚合账户数
+- api: billSplitting__c
+  label: 账单拆分
+  options:
+  - label: 成本中心拆账
+    value: '1'
+  - label: 部门拆账
+    value: '2'
+- api: firstChargeAmount__c
+  label: 首次充值金额
+- api: gamblingTreaty__c
+  label: 是否有对赌条约
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: overseas_car_monthly_consu__c
+  label: 跨境用车滴滴潜力月GMV预估（滴滴预算）
+- api: lossDate__c
+  label: 企业流失日期
+- api: carEntrance__c
+  label: 停用_用车入口
+  options:
+  - label: 企业版APP
+    value: '1'
+  - label: 个人版APP
+    value: '2'
+  - label: 客户自有APP
+    value: '3'
+  - label: 企业微信
+    value: '4'
+  - label: 钉钉
+    value: '5'
+  - label: 其他
+    value: '6'
+  - label: 其他（废）
+    value: other
+- api: field_T4WLu__c
+  label: 修改次数
+- api: osOpp_type__c
+  label: 渗透商机场景
+  options:
+  - label: 新增分子公司账户
+    value: '1'
+  - label: 新增对接方式
+    value: '2'
+  - label: 新增平台使用费售卖
+    value: '3'
+  - label: 新增续约售卖
+    value: '8'
+  - label: 新增导入人员
+    value: '4'
+  - label: 新增激活账户
+    value: '5'
+  - label: 新增用车场景
+    value: '6'
+  - label: 账户运营活动
+    value: '7'
+  - label: 续约
+    value: '9'
+  - label: 新增商旅场景
+    value: '10'
+- api: actual_line_date__c
+  label: 正式上线日期
+- api: project_owner__c
+  label: 实施项目负责人
+- api: SecondaryDepartment__c
+  label: 二级部门
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: estimated_line_date__c
+  label: 预计上线日期
+- api: opportunity_customer_sheng__c
+  label: 客户纷享ID
+- api: deliverySupportManager__c
+  label: 实施支持人员上级
+- api: is_hu_di_customer__c
+  label: 是否华滴客户
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: BusinessTravelManagement__c
+  label: 是否商旅一站式客户
+  options:
+  - label: 否
+    value: '1'
+  - label: 是
+    value: '2'
+  - label: 其他
+    value: other
+- api: groupAccount__c
+  label: 集团名称（中文）
+- api: stage__c
+  label: 商机阶段（计算）
+- api: cancellation_date__c
+  label: 企业注销日期
+- api: is_implementation_complete__c
+  label: 是否完成实施-CSM交接
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: authorization_id__c
+  label: 外呼授权ID
+- api: integrationScheme__c
+  label: 停用_对接方案
+  options:
+  - label: 企业版APP
+    value: '1'
+  - label: H5
+    value: '2'
+  - label: 管理API
+    value: '3'
+  - label: 用车API
+    value: '4'
+  - label: Webapp
+    value: '5'
+  - label: 其他
+    value: other
+- api: other_supplier_name__c
+  label: 其他供应商名称
+- api: probability
+  label: 赢率
+- api: monthlyGMVCar__c
+  label: 用车滴滴潜力月GMV预估（滴滴预算）
+- api: secondChannel__c
+  label: 二级通路
+- api: authorization_info__c
+  label: 当前授权原因
+  options:
+  - label: 现在不方便，需要再联系
+    value: '1'
+  - label: 需要销售再次介绍
+    value: '2'
+  - label: 用户语音助手接通
+    value: '3'
+  - label: 客户再次咨询
+    value: '4'
+  - label: 通路在授权范围内
+    value: '5'
+  - label: 历史数据已授权
+    value: '6'
+  - label: 商机阶段
+    value: '7'
+  - label: 其他
+    value: other
+- api: Uniquecode__c
+  label: 负责人的唯一标识-集团
+- api: new_opportunity_path
+  label: 商机2.0层级
+- api: originalMode__c
+  label: 停用_原有用车管控方式
+- api: csm_customer__c
+  label: CSM客户
+- api: implementation_project_mod__c
+  label: 实施项目_方案内容修改人
+- api: h5_approval_status__c
+  label: H5审批状态
+  options:
+  - label: 待提交
+    value: '1'
+  - label: 审批中
+    value: '2'
+  - label: 审批通过
+    value: '3'
+  - label: 审批拒绝
+    value: '4'
+  - label: 撤回
+    value: '5'
+  - label: 历史数据
+    value: '6'
+  - label: 其他
+    value: other
+- api: opp_discount
+  label: 整单折扣
+- api: customer_salesforce_id__c
+  label: 客户销售易ID
+- api: monthlyGMVTaxi__c
+  label: 出租车滴滴潜力月GMV预估（滴滴预算）
+- api: price_book_id
+  label: 价目表
+- api: didi_share_travel__c
+  label: 商旅滴滴可获取份额占比
+- api: isTransferCSM__c
+  label: 是否商机划转
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: days_until_drop__c
+  label: 还有多少天掉落
+- api: sales_process_id
+  label: 销售流程
+  options:
+  - label: 用车拉新商机阶段推进流程
+    value: 67d2aef476d0ad0001afe389
+  - label: 商旅拉新商机阶段推进流程
+    value: 67e4f47a76d0ad0001b261a1
+  - label: 用车渗透商机阶段推进流程
+    value: 67e4f70576d0ad0001b26202
+  - label: 商旅渗透商机阶段推进流程
+    value: 67e4f88c3d9655000127093c
+  - label: 费控渗透商机阶段推进流程[已删除]
+    value: 67e4f92f3d96550001270955
+  - label: 用车续约商机阶段推进流程
+    value: 67e4f9af76d0ad0001b26266
+  - label: 商旅续约商机阶段推进流程
+    value: 67e4f9d53d9655000127096d
+  - label: 费控续约商机阶段推进流程[已删除]
+    value: 67e4f9fc76d0ad0001b26273
+  - label: 拓展代理商商机阶段推进流程
+    value: 67e4fde576d0ad0001b26303
+  - label: 拓展生态平台商机阶段推进流程
+    value: 67e4fe6676d0ad0001b26317
+  - label: 费控拉新商机阶段推进流程[已删除]
+    value: 6835416fd87abe0001038b3f
+  - label: 数据初始化阶段推进器[已删除]
+    value: 683805233dc75200010bb505
+  - label: 测试阶段-临时[已删除]
+    value: 68f1adc2ec2aa400074cc1ff
+  - label: 测试验证12[已删除]
+    value: 68f1b15dec2aa400074cc27d
+- api: chargeStatus__c
+  label: 充值/授信状态
+  options:
+  - label: 未充值
+    value: '1'
+  - label: 已充值
+    value: '2'
+  - label: 已授信
+    value: '3'
+  - label: 已绑卡
+    value: '4'
+- api: transferCSMTime__c
+  label: 商机划转时间
+- api: tenant_id
+  label: tenant_id
+- api: csmHead__c
+  label: CSM支持人员
+- api: leadId__c
+  label: 销售线索
+- api: currentProduct__c
+  label: 目前使用的代驾平台
+- api: other_competitor_names__c
+  label: 停用_其他竞品名称
+  options:
+  - label: 高德
+    value: '1'
+  - label: 畅行
+    value: '2'
+  - label: T3
+    value: '3'
+  - label: 曹操
+    value: '4'
+  - label: 神州
+    value: '5'
+  - label: 分贝通
+    value: '6'
+  - label: 在途
+    value: '7'
+  - label: 如祺
+    value: '8'
+  - label: 差旅管家
+    value: '9'
+  - label: 易企出行
+    value: '10'
+  - label: 易快报
+    value: '11'
+  - label: 合思
+    value: '12'
+  - label: 百度出行
+    value: '13'
+  - label: 美团
+    value: '14'
+  - label: 胜意
+    value: '15'
+  - label: 途径
+    value: '16'
+  - label: 首汽
+    value: '17'
+  - label: Petal
+    value: '18'
+  - label: 其他
+    value: '19'
+  - label: 其他（标准）
+    value: other
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: batch_number__c
+  label: 批次号
+- api: monthlyGMVTogether__c
+  label: 聚合滴滴潜力月GMV预估（滴滴预算）
+- api: dimDepart__c
+  label: 负责人主属部门ID
+- api: sales_status
+  label: 阶段状态
+  options:
+  - label: 进行中
+    value: '1'
+  - label: 赢单
+    value: '2'
+  - label: 输单
+    value: '4'
+  - label: 无效
+    value: '3'
+- api: task_content__c
+  label: 任务说明
+- api: companyScale__c
+  label: 公司规模
+- api: sales_stage
+  label: 商机阶段
+  options:
+  - label: 需求梳理
+    value: '1'
+  - label: 初步接洽
+    value: '8'
+  - label: 方案制定
+    value: '9'
+  - label: 需求确定
+    value: '2'
+  - label: 制定方案
+    value: '10'
+  - label: 商务洽谈
+    value: '11'
+  - label: 决策沟通
+    value: '12'
+  - label: 方案/报价
+    value: '3'
+  - label: 谈判审核
+    value: '4'
+  - label: 合同开户
+    value: '13'
+  - label: 合同续约
+    value: '14'
+  - label: 协议签署
+    value: '15'
+  - label: 产品对接
+    value: '16'
+  - label: 赢单
+    value: '5'
+  - label: 输单
+    value: '6'
+  - label: 无效
+    value: '7'
+- api: creditNo__c
+  label: 社会信用代码
+- api: deal_time__c
+  label: 商机输单时间
+- api: NDemandInformation__c
+  label: N：需求信息
+- api: notGmv__c
+  label: 是否GMV填报范围
+- api: Id__c
+  label: 商机ID
+- api: probability_amount
+  label: 预测金额
+- api: field_209h3__c
+  label: 月预算变更次数-计算
+- api: customItem431__c
+  label: 线索转换日期
+- api: dropDate__c
+  label: 到期掉落日期-未赢单
+- api: supplier_share_car__c
+  label: 用车并行供应商总份额
+- api: last_modified_time
+  label: 最后修改时间
+- api: businessPolicy__c
+  label: 是否有持续性商务政策
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: partnerOperateClient__c
+  label: 停用_是否是平台伙伴的合作客户
+  options:
+  - label: 不是
+    value: '1'
+  - label: 是-费控平台
+    value: '2'
+  - label: 是-其他类型平台
+    value: '3'
+  - label: 其他
+    value: other
+- api: billingDate__c
+  label: 账单日
+- api: lowPriceList__c
+  label: 可用最惠价格表
+- api: category__c
+  label: 并行服务商合作品类
+- api: has_contract__c
+  label: 有无合同
+- api: is_supplier_travel__c
+  label: 商旅是否有并行供应商
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 暂无
+    value: '3'
+  - label: 其他
+    value: other
+- api: ownerId__c
+  label: 商机所有人ID
+- api: lost_reason
+  label: 输单原因
+  options:
+  - label: 使用/选择竞品
+    value: '11'
+  - label: 客户更换其他主体
+    value: '15'
+  - label: 产品无法满足客户需求
+    value: '1'
+  - label: 其他
+    value: '7'
+  - label: 系统到期回收
+    value: '5'
+  - label: 线上注销
+    value: '6'
+  - label: 主商机输单而输单
+    value: '9'
+  - label: 无有效拜访掉落
+    value: '19'
+  - label: 价格问题-资源贵
+    value: '20'
+  - label: 价格问题-商务政策无优势
+    value: '21'
+  - label: 客户项目推进计划变更/项目暂时无法推进
+    value: '22'
+  - label: 资源供给不能满足客户需求
+    value: '23'
+  - label: 核心KP未触达
+    value: '24'
+  - label: 客户对滴滴商旅品牌的知名度、经验存疑
+    value: '25'
+  - label: 滴滴侧实施周期无法匹配客户要求
+    value: '26'
+  - label: 价格问题/活动优惠政策
+    value: '10'
+  - label: 经深度沟通后非有效商机
+    value: '12'
+  - label: 无改变现状意愿
+    value: '13'
+  - label: 新用户无法使用
+    value: '14'
+  - label: 项目暂停且暂时无法推进
+    value: '16'
+  - label: 上线周期无法满足客户需求
+    value: '17'
+  - label: 不支持出租车
+    value: '4'
+  - label: 销售主动输单
+    value: '8'
+  - label: 不能授信
+    value: '2'
+  - label: 客户所在地未取得网约车牌照
+    value: '3'
+  - label: 客保超期，运营批量释放
+    value: '18'
+  - label: 其他（禁用）
+    value: other
+- api: marketing_event_id
+  label: 市场活动
+- api: didiEnterpriseYN__c
+  label: 是否已经是滴滴企业版客户
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: current_overseas_car_platf__c
+  label: 目前使用的跨境用车平台
+- api: groupId__c
+  label: 集团标签ID
+- api: responsible_accountant__c
+  label: 结算支持人员
+- api: customItem304__c
+  label: 开票方式
+  options:
+  - label: 集团统一开票
+    value: '1'
+  - label: 拆分账单开票
+    value: '2'
+- api: data_processing_flag__c
+  label: 数据处理标识
+- api: termStart__c
+  label: 营业期限自
+- api: preferred_overseas_car_acc__c
+  label: 希望接入跨境用车的方式
+  options:
+  - label: 标准方案：企业版APP+ES后台
+    value: '1'
+  - label: 非标方案：需要系统对接
+    value: '2'
+  - label: 其他
+    value: other
+- api: supplier_share_travel__c
+  label: 商旅并行供应商总份额
+- api: invalidOppExpirationDate__c
+  label: 到期掉落日期-无拜访
+- api: practicalPeople__c
+  label: 实际跟进人
+- api: transferUser__c
+  label: 划转后的目标用户
+- api: customItem475__c
+  label: 最新有效拜访日期
+- api: is_ecological_platform_cus__c
+  label: 是否是生态平台客户
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: syncId__c
+  label: 接口使用数据ID
+- api: overseas_vehicle_usage_sca__c
+  label: 跨境用车使用规模
+- api: proposal_type__c
+  label: 方案类型
+  options:
+  - label: 标准方案（企业版APP+ES后台）
+    value: '1'
+  - label: 非标方案
+    value: '2'
+  - label: 其他
+    value: other
+- api: clientRequirementComment__c
+  label: 停用_客户需求说明
+- api: selfCharging__c
+  label: 是否为自充值
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: latentlead__c
+  label: 来源潜在线索
+- api: opportunityLevel__c
+  label: 商机级别
+  options:
+  - label: 无人接听
+    value: '5'
+  - label: 头部
+    value: '1'
+  - label: 高潜
+    value: '2'
+  - label: 中等
+    value: '3'
+  - label: 长尾
+    value: '4'
+- api: current_travel_supplier_ba__c
+  label: 目前在用差旅供应商（备份）
+- api: responsible_person_id__c
+  label: 负责人（接口使用ID）
+- api: tmt__c
+  label: 行业
+- api: useCar_depart__c
+  label: 用车部门
+- api: does_customer_need_travel__c
+  label: 客户是否需要试用后方可切换（商旅）
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: splitSum__c
+  label: 有效业绩拆分比例
+- api: hotelsOverview__c
+  label: 协议酒店概况
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: scheduledStartDateNew__c
+  label: 转移开始日期
+- api: didi_share_car__c
+  label: 用车滴滴可获取份额占比
+- api: LastOwner__c
+  label: 上次归属人
+- api: accountMethod__c
+  label: 账户管理方式
+  options:
+  - label: 集团统一账户管理
+    value: '1'
+  - label: 拆分账户管理
+    value: '2'
+  - label: 其他
+    value: other
+- api: useCarBudget__c
+  label: 是否有用车预算管控
+  options:
+  - label: 无预算管控
+    value: '1'
+  - label: 有-固定预算
+    value: '2'
+  - label: 有-动态预算
+    value: '3'
+  - label: 其他
+    value: other
+- api: long_profit__c
+  label: 长期收益
+- api: continuousPush__c
+  label: 连续推送次数
+- api: relevant_team
+  label: 相关团队
+- api: turn_earnBack__c
+  label: 回本周期
+- api: sales_lost__c
+  label: 输单时销售
+- api: customItem283__c
+  label: 客户ID
+- api: data_own_department
+  label: 归属部门
+- api: parent_id
+  label: 上级商机2.0
+- api: Account__c
+  label: 开户提醒
+- api: opportunityType__c
+  label: 商机类型名称
+- api: payment_method_new__c
+  label: 支付方式
+  options:
+  - label: 企业支付
+    value: '1'
+  - label: 个垫支付
+    value: '2'
+  - label: 个人支付（自费用车）
+    value: '4'
+  - label: 其他
+    value: other
+- api: _id
+  label: _id
+- api: carBudget__c
+  label: 用车客户全量月GMV预估（客户总预算）
+- api: customer_name_for_assignme__c
+  label: 客户名称（查归属用）
+- api: showByMoreButtonUserCar__c
+  label: 有效代驾账户数
+- api: ThreeDepartment__c
+  label: 三级部门
+- api: openingType__c
+  label: 账户类型
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '2'
+  - label: 费控
+    value: '3'
+  - label: 代驾
+    value: '4'
+  - label: 出租车
+    value: '5'
+  - label: 聚合
+    value: '6'
+  - label: 跨境用车
+    value: '8'
+  - label: 其他
+    value: other
+- api: handovers__c
+  label: 计划交接人
+- api: willingness__c
+  label: 客户意愿（业务角度判断）
+  options:
+  - label: 高
+    value: '1'
+  - label: 中
+    value: '2'
+  - label: 低
+    value: '3'
+  - label: 其他
+    value: other
+- api: promised_probability
+  label: 员工承诺赢率
+- api: status__c
+  label: 商机状态
+  options:
+  - label: 正常跟进
+    value: '1'
+  - label: 已签约
+    value: '2'
+  - label: 已激活
+    value: '4'
+  - label: 已输单
+    value: '5'
+  - label: 已流失
+    value: '6'
+  - label: 已注销
+    value: '7'
+- api: transferEndDateNew__c
+  label: 转移结束日期
+- api: serviceProviderName__c
+  label: 并行服务商名称
+- api: isAPI__c
+  label: 停用_是否已对接管理API
+  options:
+  - label: 否(无计划)
+    value: '1'
+  - label: 否(计划近期对接)
+    value: '2'
+  - label: 已对接
+    value: '3'
+  - label: 其他
+    value: other
+- api: opportunity_customer_name__c
+  label: 客户名称（计算）
+- api: csm_support_id__c
+  label: CSM支持人员（接口使用ID）
+- api: ecological_platform__c
+  label: 生态平台
+- api: partner_id
+  label: 合作伙伴
+- api: is_deleted
+  label: is_deleted
+- api: decision_chain_info__c
+  label: A：决策链信息
+- api: bill_support_mail__c
+  label: 结算支持人员邮箱
+- api: stg_changed_time
+  label: 阶段变更时间
+- api: preSalesSupport__c
+  label: 售前解决方案
+- api: isIntegrateMultiVendor__c
+  label: 停用_是否接入多供应商
+  options:
+  - label: 否
+    value: '1'
+  - label: 是
+    value: '2'
+  - label: 其他
+    value: other
+- api: out_resources
+  label: 外部来源
+  options:
+  - label: PRM
+    value: partner
+- api: termEnd__c
+  label: 营业期限至
+- api: chargePerformance__c
+  label: 充值归属
+- api: extension_city__c
+  label: 开拓城市确认
+- api: amount
+  label: 商机金额
+- api: product_value__c
+  label: 产品价值
+- api: QRcodeId__c
+  label: 负责人叠宙账号
+- api: homePlatform__c
+  label: 归属生态平台
+- api: valid_new_business_opportu__c
+  label: 对应客户有效拉新商机数量
+- api: last_modified_by
+  label: 最后修改人
+- api: company_address_calculated__c
+  label: 公司地址
+- api: estimated_total_monthly_gm__c
+  label: 跨境用车客户全量月GMV预估（客户总预算）
+- api: solutionType__c
+  label: 系统对接方式
+  options:
+  - label: 管理API+企业版APP
+    value: '1'
+  - label: 管理API+H5
+    value: '2'
+  - label: webapp
+    value: '3'
+  - label: 平台对接
+    value: '4'
+  - label: H5单点对接
+    value: '5'
+  - label: 企业版APP+企业版H5+管理API
+    value: '6'
+  - label: 企业版APP+管理API
+    value: '7'
+  - label: 企业版H5+管理API
+    value: '8'
+  - label: 企业版H5单点对接
+    value: '9'
+  - label: 其他
+    value: other
+- api: dimDepartID__c
+  label: 所属部门ID
+- api: is_latest_activity_time_le__c
+  label: 最新销售记录时间是否小于预计下次跟进时间
+- api: prolongation__c
+  label: 流转延期（月）
+- api: otherConfig__c
+  label: 停用_其他功能配置
+  options:
+  - label: 成本中心
+    value: '1'
+  - label: 敏感订单
+    value: '2'
+  - label: 升舱
+    value: '3'
+  - label: 远途调度
+    value: '4'
+  - label: 拼车
+    value: '5'
+  - label: 同时呼叫
+    value: '6'
+  - label: 无
+    value: '7'
+  - label: 其他
+    value: other
+- api: lostOpp__c
+  label: 停用_流失商机
+- api: how__c
+  label: How
+- api: car_userCity__c
+  label: 用车城市
+- api: contactPhoneN__c
+  label: 联系电话
+- api: customItem430__c
+  label: MQL变更日期
+- api: firstActivationdate__c
+  label: 首次激活日期
+- api: isSystemIntegration__c
+  label: 停用_是否需要系统对接
+  options:
+  - label: 不需要
+    value: '1'
+  - label: 需要
+    value: '2'
+  - label: 其他
+    value: other

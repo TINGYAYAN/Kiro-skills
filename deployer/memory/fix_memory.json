@@ -13,12 +13,12 @@
       "error_snippet": "运行脚本 \n 扫描函数\n运行日志\nE-E.bjlrsm.1001-33043151\nStopWatch 'Proc_HDBQc__c': running time = 281 ms\n---------------------------------------------\nms % Task name\n---------------------------------------------\n\n\n返回值:\n APL代码fix error Action\n错误提示\n\nunable to resolve class FQLAttribute.Builder \n @ line 33, column 2",
       "fix_snippet": "* @codeName 【流程】\"介绍人\"这个字段上\n * @description 在\"介绍人\"这个字段上增加一个范围规则函数\n * 当当前客户的业务类型等于\" 门店\"介绍人的范围规则仅能显示业务类型为\" 门店\"的客户\n *  * 客户的业务类型等于\" 用户\"介绍人的范围规则仅能显示业务类型为\" 用户\"的客户\nFQLAttribute fqlAttr = queryMap.size() > 0 \n    ? FQLAttribute.builder().columns([\"_id\", \"name\"]).queryTemplate(QueryTemplate.AND(queryMap)).build()\n    : FQLAttribute.builder().columns([\"_id\", \"name\"]).build()\n    fqlAttr,",
       "fix_rule": "",
-      "count": 46,
-      "last_seen": "2026-03-24 16:58"
+      "count": 89,
+      "last_seen": "2026-03-25 12:02"
     }
   ],
   "stats": {
     "三元内含if": 1,
-    "Elvis运算符": 46
+    "Elvis运算符": 89
   }
 }

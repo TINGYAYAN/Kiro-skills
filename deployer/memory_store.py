@@ -23,6 +23,7 @@ ERROR_TYPE_RULES = [
     (r"CreateAttribute|UpdateAttribute|SelectAttribute|签名|signature|build\(\)", "API签名"),
     (r"\?\[|expecting ',', found '@'|安全下标", "安全下标"),
     (r"FQLAttribute|\.limit\(|分页", "FQL分页"),
+    (r"QueryOperator#BETWEEN|BETWEEN\(", "QueryOperator范围查询"),
     (r"QueryOperator|类型.*匹配", "QueryOperator类型"),
     (r"cannot find|找不到|cannot resolve", "找不到符号"),
     (r"接口已过期|deprecated", "废弃API"),

@@ -6,17 +6,26 @@
 2. bitable：多维表格，需配置 bitable_app_token、bitable_table_id
 
 多维表格列说明：
-  - 描述      ← 用户填写需求（批量模式的输入）
-  - 绑定对象  ← 用户填写对象名称，如"客户"、"AccountObj"
-  - 函数类型 / trigger_type / 触发类型 ← 可选；与 req 一致（如 scheduled_task → 计划任务）
-  - 函数名    ← 自动填入（部署成功后）
-  - 系统API名 ← 自动填入
+  - 批量模式默认以「多维表格模板」作为输入，不建议只给自然语言长描述而不建结构化列
+  - 描述      ← 必填；用户填写需求（批量模式主输入）
+  - 绑定对象  ← 推荐填写；用户填写对象名称，如"客户"、"AccountObj"
+  - 函数类型 / trigger_type / 触发类型 ← 推荐填写；与 req 一致（如 scheduled_task → 计划任务）
+  - 项目      ← 推荐填写；多项目批量时尤其建议明确
+  - 函数名    ← 必须留空；自动填入（部署成功后）
+  - 系统API名 ← 必须留空；自动填入
   - 状态      ← 自动填入（待执行 / ✅成功 / ❌失败）
   - 执行时间  ← 自动填入
   - 执行反馈  ← 自动填入（成功摘要 / 失败原因全文，便于排查）
+  - 风险级别  ← 自动填入（低 / 中 / 高）
+  - 人工处理建议 ← 自动填入（需要人工复核或修正时给出建议）
+
+推荐模板列顺序：
+  描述 | 绑定对象 | 函数类型 | 项目 | 函数名 | 系统API名 | 状态 | 执行时间 | 执行反馈 | 风险级别 | 人工处理建议
 """
 from __future__ import annotations
 
+import datetime
+import re
 from pathlib import Path
 from typing import Optional
 
@@ -27,7 +36,10 @@ FIELD_API_NAME = "系统API名"
 FIELD_STATUS = "状态"
 FIELD_EXEC_TIME = "执行时间"
 FIELD_FEEDBACK = "执行反馈"
+FIELD_RISK_LEVEL = "风险级别"
+FIELD_MANUAL_ACTION = "人工处理建议"
 FIELD_TRIGGER_TYPE = "trigger_type"
+FIELD_PROJECT = "项目"
 
 STATUS_PENDING = "⏳待执行"
 STATUS_RUNNING = "🔄执行中"
@@ -35,6 +47,79 @@ STATUS_OK = "✅成功"
 STATUS_FAIL = "❌失败"
 
 FEISHU_API = "https://open.feishu.cn/open-apis"
+DEFAULT_RUNNING_STALE_MINUTES = 90
+ORPHAN_RUNNING_GRACE_MINUTES = 8
+LOCK_FILE = Path(__file__).parent / ".batch.lock"
+BITABLE_TEMPLATE_COLUMNS = [
+    FIELD_DESC,
+    FIELD_OBJECT,
+    "函数类型",
+    FIELD_PROJECT,
+    FIELD_FUNC_NAME,
+    FIELD_API_NAME,
+    FIELD_STATUS,
+    FIELD_EXEC_TIME,
+    FIELD_FEEDBACK,
+    FIELD_RISK_LEVEL,
+    FIELD_MANUAL_ACTION,
+]
+BITABLE_TEMPLATE_EXAMPLES = [
+    {
+        FIELD_DESC: "通过销售线索的最终客户查客户，匹配后回写客户字段",
+        FIELD_OBJECT: "销售线索",
+        "函数类型": "流程函数",
+        FIELD_PROJECT: "西门子",
+    },
+    {
+        FIELD_DESC: "任务明细的本次联系人仅可选客户联系人",
+        FIELD_OBJECT: "任务明细",
+        "函数类型": "范围规则",
+        FIELD_PROJECT: "西门子",
+    },
+    {
+        FIELD_DESC: "每天汇总近一个月银行流水金额并更新客户季度回款",
+        FIELD_OBJECT: "银行流水",
+        "函数类型": "计划任务",
+        FIELD_PROJECT: "朗润生物",
+    },
+]
+DEFAULT_TEMPLATE_TABLE_NAME = "APL批量生成模板"
+
+
+def _parse_exec_time(text: str) -> datetime.datetime | None:
+    value = (text or "").strip()
+    if not value:
+        return None
+    for fmt in ("%Y-%m-%d %H:%M", "%Y-%m-%d %H:%M:%S"):
+        try:
+            return datetime.datetime.strptime(value, fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def _is_stale_running(status: str, exec_time: str, cfg: dict) -> bool:
+    if status != STATUS_RUNNING:
+        return False
+    started_at = _parse_exec_time(exec_time)
+    if started_at is None:
+        return False
+    feishu = cfg.get("feishu") or {}
+    stale_minutes = int(feishu.get("running_stale_minutes", DEFAULT_RUNNING_STALE_MINUTES) or DEFAULT_RUNNING_STALE_MINUTES)
+    age = datetime.datetime.now() - started_at
+    return age.total_seconds() >= stale_minutes * 60
+
+
+def _is_orphan_running(status: str, exec_time: str) -> bool:
+    if status != STATUS_RUNNING:
+        return False
+    started_at = _parse_exec_time(exec_time)
+    if started_at is None:
+        return False
+    if LOCK_FILE.exists():
+        return False
+    age = datetime.datetime.now() - started_at
+    return age.total_seconds() >= ORPHAN_RUNNING_GRACE_MINUTES * 60
 
 
 def _get_tenant_token(app_id: str, app_secret: str) -> str:
@@ -53,6 +138,33 @@ def _get_tenant_token(app_id: str, app_secret: str) -> str:
     if data.get("code") != 0:
         raise RuntimeError(f"飞书鉴权失败: {data}")
     return data["tenant_access_token"]
+
+
+def _parse_bitable_url(url: str) -> tuple[str, str]:
+    text = (url or "").strip()
+    if not text:
+        return "", ""
+    m = re.search(r"/base/([^/?#]+)\?table=([^&#]+)", text)
+    if not m:
+        return "", ""
+    return m.group(1).strip(), m.group(2).strip()
+
+
+def _resolve_runtime_bitable_target(cfg: dict) -> tuple[str, str]:
+    """解析当前批量执行实际使用的 base/table。
+
+    规则：
+    1. 若配置了 template_table_url，则优先直接从该链接解析；
+    2. 否则回退到 bitable_app_token / bitable_table_id。
+    """
+    feishu = cfg.get("feishu") or {}
+    app_token, table_id = _parse_bitable_url(feishu.get("template_table_url") or "")
+    if app_token and table_id:
+        return app_token, table_id
+    return (
+        (feishu.get("bitable_app_token") or "").strip(),
+        (feishu.get("bitable_table_id") or "").strip(),
+    )
 
 
 def _list_table_fields(token: str, app_token: str, table_id: str) -> dict[str, str]:
@@ -76,6 +188,33 @@ def _list_table_fields(token: str, app_token: str, table_id: str) -> dict[str, s
         for f in items
         if f.get("field_id")
     }
+
+
+def _create_bitable_table(token: str, app_token: str, table_name: str) -> dict:
+    """在指定 base 下创建一张新数据表，返回 table 信息。"""
+    import urllib.request
+    import json
+
+    req = urllib.request.Request(
+        f"{FEISHU_API}/bitable/v1/apps/{app_token}/tables",
+        data=json.dumps({"table": {"name": table_name}}).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=10) as resp:
+        data = json.loads(resp.read().decode())
+    if data.get("code") != 0:
+        raise RuntimeError(f"创建多维表格数据表失败: {data.get('msg', data)}")
+    payload = data.get("data", {}) or {}
+    if payload.get("table_id") and not payload.get("table"):
+        return {
+            "table_id": payload.get("table_id"),
+            "name": table_name,
+        }
+    return payload.get("table", {}) or payload
 
 
 def _create_table_field(token: str, app_token: str, table_id: str, field_name: str) -> str:
@@ -143,14 +282,14 @@ def _update_bitable_record(
 
 def list_bitable_pending_records(cfg: dict) -> list[dict]:
     """
-    从多维表格读取「待执行」记录：描述不为空 且 函数名为空 且 状态不是"执行中"。
+    从多维表格读取「待执行」记录：描述不为空 且 系统API名为空；
+    状态为「待执行」、空、或「失败且系统API名为空」（便于失败后无需整表清空即可重跑）。
     每条记录返回 {record_id, 描述, 绑定对象}。
     """
     feishu = cfg.get("feishu") or {}
     app_id = feishu.get("app_id")
     app_secret = feishu.get("app_secret")
-    app_token = feishu.get("bitable_app_token")
-    table_id = feishu.get("bitable_table_id")
+    app_token, table_id = _resolve_runtime_bitable_target(cfg)
     if not all([app_id, app_secret, app_token, table_id]):
         raise RuntimeError("缺少飞书多维表格配置（app_id/app_secret/bitable_app_token/bitable_table_id）")
 
@@ -176,11 +315,18 @@ def list_bitable_pending_records(cfg: dict) -> list[dict]:
             f = item.get("fields", {})
             desc = (f.get(FIELD_DESC) or "").strip()
             func_name = (f.get(FIELD_FUNC_NAME) or "").strip()
+            api_name = (f.get(FIELD_API_NAME) or "").strip()
             status = (f.get(FIELD_STATUS) or "").strip()
-            # 只捡「描述已填、函数名为空、且尚未开始执行」的行
-            # status 为空 或 STATUS_PENDING 才捡起；已成功/失败/执行中一律跳过
-            status_is_new = status in ("", STATUS_PENDING)
-            if desc and not func_name and status_is_new:
+            exec_time = (f.get(FIELD_EXEC_TIME) or "").strip()
+            # 待执行以「系统API名是否为空」为准，而不是函数名。
+            # 这样即使函数名已提前生成，只要还没真正部署出系统 API，仍然会继续执行。
+            status_is_pending = status in ("", STATUS_PENDING)
+            status_is_retryable_fail = status == STATUS_FAIL and not api_name
+            status_is_stale_running = not api_name and _is_stale_running(status, exec_time, cfg)
+            status_is_orphan_running = not api_name and _is_orphan_running(status, exec_time)
+            if desc and not api_name and (
+                status_is_pending or status_is_retryable_fail or status_is_stale_running or status_is_orphan_running
+            ):
                 trig = (
                     (f.get(FIELD_TRIGGER_TYPE) or f.get("触发类型") or "").strip()
                 )
@@ -208,8 +354,7 @@ def list_bitable_records_with_desc(cfg: dict) -> list[dict]:
     feishu = cfg.get("feishu") or {}
     app_id = feishu.get("app_id")
     app_secret = feishu.get("app_secret")
-    app_token = feishu.get("bitable_app_token")
-    table_id = feishu.get("bitable_table_id")
+    app_token, table_id = _resolve_runtime_bitable_target(cfg)
     if not all([app_id, app_secret, app_token, table_id]):
         raise RuntimeError("缺少飞书多维表格配置（app_id/app_secret/bitable_app_token/bitable_table_id）")
 
@@ -262,11 +407,10 @@ def clear_bitable_for_regenerate(cfg: dict) -> int:
 
     feishu = cfg.get("feishu") or {}
     token = _get_tenant_token(feishu["app_id"], feishu["app_secret"])
-    app_token = feishu["bitable_app_token"]
-    table_id = feishu["bitable_table_id"]
+    app_token, table_id = _resolve_runtime_bitable_target(cfg)
 
     _ensure_table_fields(token, app_token, table_id,
-                         extra=[FIELD_STATUS, FIELD_EXEC_TIME, FIELD_FEEDBACK])
+                         extra=[FIELD_STATUS, FIELD_EXEC_TIME, FIELD_FEEDBACK, FIELD_RISK_LEVEL, FIELD_MANUAL_ACTION])
 
     for rec in records:
         fields = {
@@ -275,6 +419,8 @@ def clear_bitable_for_regenerate(cfg: dict) -> int:
             FIELD_STATUS: STATUS_PENDING,
             FIELD_EXEC_TIME: datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),
             FIELD_FEEDBACK: "",
+            FIELD_RISK_LEVEL: "",
+            FIELD_MANUAL_ACTION: "",
         }
         _update_bitable_record(token, app_token, table_id, rec["record_id"], fields)
 
@@ -283,20 +429,22 @@ def clear_bitable_for_regenerate(cfg: dict) -> int:
 
 def mark_bitable_record(cfg: dict, record_id: str, status: str,
                         func_name: str = "", api_name: str = "", error: str = "",
-                        feedback: str = "") -> None:
+                        feedback: str = "", risk_level: str = "", manual_action: str = "") -> None:
     """更新多维表格中指定记录的状态、函数名、系统API名、执行反馈。"""
     import datetime
 
     feishu = cfg.get("feishu") or {}
     token = _get_tenant_token(feishu["app_id"], feishu["app_secret"])
-    app_token = feishu["bitable_app_token"]
-    table_id = feishu["bitable_table_id"]
+    app_token, table_id = _resolve_runtime_bitable_target(cfg)
 
     _ensure_table_fields(token, app_token, table_id,
-                         extra=[FIELD_STATUS, FIELD_EXEC_TIME, FIELD_FEEDBACK])
+                         extra=[FIELD_STATUS, FIELD_EXEC_TIME, FIELD_FEEDBACK, FIELD_RISK_LEVEL, FIELD_MANUAL_ACTION])
 
     fields: dict = {FIELD_STATUS: status}
     fields[FIELD_EXEC_TIME] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+    if status in (STATUS_RUNNING, STATUS_OK):
+        fields[FIELD_RISK_LEVEL] = ""
+        fields[FIELD_MANUAL_ACTION] = ""
     if func_name:
         fields[FIELD_FUNC_NAME] = func_name
     if api_name:
@@ -306,6 +454,10 @@ def mark_bitable_record(cfg: dict, record_id: str, status: str,
         fields[FIELD_FEEDBACK] = error[:2000]
     elif feedback:
         fields[FIELD_FEEDBACK] = feedback[:2000]
+    if risk_level:
+        fields[FIELD_RISK_LEVEL] = risk_level
+    if manual_action:
+        fields[FIELD_MANUAL_ACTION] = manual_action[:500]
 
     _update_bitable_record(token, app_token, table_id, record_id, fields)
 
@@ -345,6 +497,75 @@ def _create_bitable_record(
         raise RuntimeError(f"创建多维表格记录失败: {data.get('msg', data)}")
     rec = data.get("data", {}).get("record", {})
     return rec.get("record_id")
+
+
+def create_bitable_template_table(
+    cfg: dict,
+    table_name: str = "APL批量生成模板",
+    with_examples: bool = True,
+) -> dict:
+    """在当前 bitable base 下创建一张批量生成模板表，并按需写入示例行。"""
+    feishu = cfg.get("feishu") or {}
+    app_id = feishu.get("app_id")
+    app_secret = feishu.get("app_secret")
+    app_token = feishu.get("bitable_app_token")
+    if not all([app_id, app_secret, app_token]):
+        raise RuntimeError("缺少飞书多维表格配置（app_id/app_secret/bitable_app_token）")
+
+    token = _get_tenant_token(app_id, app_secret)
+    table = _create_bitable_table(token, app_token, table_name)
+    table_id = table.get("table_id") or table.get("tableId") or ""
+    if not table_id:
+        raise RuntimeError(f"创建模板表后未返回 table_id: {table}")
+
+    fields_map = _ensure_table_fields(token, app_token, table_id, extra=BITABLE_TEMPLATE_COLUMNS)
+
+    created_records = 0
+    if with_examples:
+        for record in BITABLE_TEMPLATE_EXAMPLES:
+            if _create_bitable_record(token, app_token, table_id, fields_map, record):
+                created_records += 1
+
+    return {
+        "app_token": app_token,
+        "table_id": table_id,
+        "table_name": table.get("name") or table_name,
+        "url": f"https://feishu.cn/base/{app_token}?table={table_id}",
+        "created_records": created_records,
+    }
+
+
+def get_fixed_bitable_template_info(cfg: dict) -> dict:
+    """返回配置中的固定模板表信息；未配置时返回默认占位信息。"""
+    feishu = cfg.get("feishu") or {}
+    url = (feishu.get("template_table_url") or "").strip()
+    table_name = (feishu.get("template_table_name") or DEFAULT_TEMPLATE_TABLE_NAME).strip() or DEFAULT_TEMPLATE_TABLE_NAME
+    if not url:
+        return {
+            "table_name": table_name,
+            "url": "",
+            "is_fixed": False,
+        }
+    return {
+        "table_name": table_name,
+        "url": url,
+        "is_fixed": True,
+    }
+
+
+def build_bitable_template_reply(template_info: dict) -> str:
+    """生成可直接发给用户的模板表说明文案。仅返回文本，不主动发送。"""
+    url = (template_info or {}).get("url") or ""
+    table_name = (template_info or {}).get("table_name") or DEFAULT_TEMPLATE_TABLE_NAME
+    template_line = f"模板表：{table_name}\n链接：{url}\n\n" if url else ""
+    return (
+        f"批量生成请先按飞书多维表格模板填写需求。\n\n"
+        f"{template_line}"
+        f"推荐列：描述｜绑定对象｜函数类型｜项目｜函数名｜系统API名｜状态｜执行时间｜执行反馈｜风险级别｜人工处理建议\n"
+        f"至少填写：描述\n"
+        f"推荐填写：绑定对象、函数类型、项目\n"
+        f"函数名、系统API名请留空，系统会自动识别为待执行并回填结果。"
+    )
 
 
 def _append_to_spreadsheet(

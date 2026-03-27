@@ -1,0 +1,385 @@
+fields:
+- api: country
+  label: 国家
+- api: lock_rule
+  label: 锁定规则
+- api: biz_reg_name
+  label: 工商注册
+  options:
+  - label: 否
+    value: 'False'
+  - label: 是
+    value: 'True'
+- api: secondDepart__c
+  label: 二级部门
+- api: primarySector__c
+  label: 一级部门
+  options:
+  - label: 生态
+    value: '4'
+  - label: 业务中台
+    value: '5'
+  - label: AE
+    value: '6'
+  - label: CSM
+    value: '7'
+  - label: 滴滴企业级事业部
+    value: '1'
+  - label: 实施
+    value: '8'
+- api: geo_point
+  label: geoPoint
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: province
+  label: 省
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: partner_path
+  label: 合作伙伴层级
+- api: sync_out_departId__c
+  label: 接口使用外部部门ID
+- api: owner_department
+  label: 负责人所在部门
+- api: tel
+  label: 电话
+- api: fax
+  label: 传真
+- api: area_location
+  label: 地区定位
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: synStatus_partner__c
+  label: 同步状态
+  options:
+  - label: 未同步
+    value: '1'
+  - label: 同步成功
+    value: '2'
+  - label: 同步失败
+    value: '3'
+- api: xsy_accountId__c
+  label: 销售易合作伙伴ID
+- api: Uniquecode__c
+  label: 唯一标识-集团
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: industry_ext
+  label: 工商扩展
+- api: data_own_department
+  label: 归属部门
+- api: enterpriserelation_id
+  label: 互联企业
+- api: parent_id
+  label: 上级合作伙伴
+- api: district
+  label: 区
+- api: industry_level2
+  label: 2级行业
+  options:
+  - label: 加工制造（模具）
+    value: 1d11105f433e407b97900c4e6a0dd9c9
+  - label: 加工制造（原料加工）
+    value: fdfba38e3fa14d39a2d5d1ff1b3e0e33
+  - label: 医药/生物工程
+    value: b5c685719a324d2487d42c3a67d3e5e7
+  - label: 医疗设备/器械
+    value: 6ae20dd9386044f7bbe3042c30f4dc31
+  - label: 仪器仪表及工业自动化
+    value: 486b949b7a49426095dc48be4ea67175
+  - label: 航空/航天研究与制造
+    value: a424edc1af0f498a9f6145307b5ecda1
+  - label: 礼品/玩具/工艺美术/收藏品/奢侈品
+    value: 195f6031fc934c8abae7e85eeb709c03
+  - label: 汽车/摩托车
+    value: 7f3b526992e9477083638dad7282ca47
+  - label: 大型设备/机电设备/重工业
+    value: fa2382b4471a47d48613dcfb5d759bd9
+  - label: 其他
+    value: b7bbfdcfe9a5452c882c4a270be94139
+  - label: 家居/室内设计/装饰装潢
+    value: 9de436e20bf546b89cb496107f083475
+  - label: 物业管理/商业中心
+    value: 460f342d5f4a458da192fd6853487f82
+  - label: 房地产/建筑/建筑建材/建材/工程
+    value: 947d7889271941fa93a722575f5d4299
+  - label: 电信运营/增值服务
+    value: c83a94fde3d74e23b79224223c18d865
+  - label: IT服务（系统/数据/维护）
+    value: 237762d2dc6342a2abe627c46381c7fa
+  - label: 计算机硬件
+    value: a30e239747ee49ff92f063443bcbb2e0
+  - label: 计算机软件
+    value: a2ab2114890f4c888039afc9127bdfed
+  - label: 电子技术/半导体/集成电路
+    value: 35c83bdf8583428a9e4f803aa4689d44
+  - label: 网络游戏
+    value: a6afbcd66333471cbd77d61c17806dc9
+  - label: 通信/电信/网络设备
+    value: 07103cad35b943219690fd71c4c76b19
+  - label: 互联网/电子商务
+    value: 687f41b6b10242c19d48a7f06749afe7
+  - label: 广告
+    value: af94c68bed6442f8a970318efd62adbe
+  - label: 公关
+    value: 8474935931a54e54a3b205882890a6dd
+  - label: 专业服务/咨询（财会/法律人力资源等
+    value: e9387e02dc174ad19fc9bee00851749c
+  - label: 展会
+    value: 37e52874e44b40f89f09a201f64d31d5
+  - label: 中介服务
+    value: fd75f40c00c44c838a8eae7194958830
+  - label: 检验/检测/认证
+    value: 58b171e6e7d94a798e51c19ee29b0c93
+  - label: 外包服务
+    value: c5235233d98c41a8966fec161610be6e
+  - label: 牧
+    value: c00e9f369df14899b0251d05124f96b3
+  - label: 渔
+    value: 46a5d69516164caa8233d59a0ed3a29b
+  - label: 农
+    value: f7d77bcadb43463eb1eea74de00e2308
+  - label: 林
+    value: 9d36398273fa4280b0e6717d96de2247
+  - label: 基金/证券/期货/投资
+    value: 5a60776c867c46b7b48874523a37721d
+  - label: 银行
+    value: 37341248386d41c497c44b5b74d4f2eb
+  - label: 信托/担保/拍卖/典当
+    value: 24df2475061e49589095ddd341d4b5f6
+  - label: 保险
+    value: 28c1a49a2b80452a94b0e895ebe05e46
+  - label: 服饰
+    value: a063f24c563746e6881d44b56cd7d9f3
+  - label: 租赁服务
+    value: d0ff3c76dd0e454c99344250bc9ac7b1
+  - label: 食品
+    value: 01805a27e003452fb7ac2062a414ff09
+  - label: 日化
+    value: cb0d2a7f6fdb49b19b39720ffc6995de
+  - label: 快速消费品（饮料/烟酒）
+    value: cd083089cd3a44eab83a63236a5386cd
+  - label: 皮革
+    value: 9d557d574ccf46f7b5021ebee03454df
+  - label: 贸易/进出口
+    value: a3675318512c4fe29cf8ed5729c887f8
+  - label: 纺织
+    value: 8276dae2b21642f3b6d1d7b79d138553
+  - label: 家电
+    value: 7264727d64d14031bf0517faa4341794
+  - label: 家具
+    value: f49b10851d2d4e2290496eda95551499
+  - label: 零售/批发
+    value: c10ef8a943bd4ffb82c5b686bc42ffcd
+  - label: 旅游/度假
+    value: ecd59e52f67149ca8142b5a168e5ac87
+  - label: 酒店/餐饮
+    value: 50cb331c6041484997a83ae8e63aae30
+  - label: 医疗/医疗服务护理/美容/保健卫生服务
+    value: 981f3bc0e9164bcd9c0098b2c518d6fa
+  - label: 政府/公共事业/非盈利机构
+    value: 0b2a26a653ab436bb9894e381ba118b2
+  - label: 学术/科研
+    value: 63d646c2d75c4ce39b76f79fb59c11db
+  - label: 交通/运输
+    value: 26e6237646f747bd8ab8722c9befe637
+  - label: 物流/仓储
+    value: a3e0f1a5b94e4402a27e4a340dd1bff6
+  - label: 无
+    value: 6145a96bf8844b58a848090669bb68c5
+  - label: 媒体/出版/影视/文化传播
+    value: a0beb19262af42b68213e40b10594ad3
+  - label: 娱乐/体育/休闲
+    value: c7716683b4164f9180be991401a6e3a9
+  - label: 教育/培训/院校
+    value: 61c21e06ef2e4f9890d89ea86fdeb46f
+  - label: 石油/石化/化工
+    value: 80156d090c6f4f36a79b5fde4c7bf866
+  - label: 能源/矿产/采掘/冶炼
+    value: f544c749085c4819a763f733fb1f5175
+  - label: 电气/电力/水利
+    value: 64741287732646fcb079f050b22dee38
+  - label: 环保
+    value: b3f2b893eeb34d45bbe4b20e70f84ad6
+- api: name
+  label: 合作伙伴名称
+- api: industry_level1
+  label: 1级行业
+  options:
+  - label: 生产/加工/制造
+    value: 7d18b41f71474604ac11f53997ca3263
+  - label: 房地产/建筑业
+    value: 2a77fd525e3c4921aed6d4f957b03f2f
+  - label: IT/通信/电子/互联网
+    value: 6e2286ca487d424cb802be035c880184
+  - label: 商业服务
+    value: c3e04661a4e745e3a45e8bddd54ce07b
+  - label: 农/林/牧/渔/其他
+    value: 9242b0633f484501a4242d79763a9ee5
+  - label: 金融业
+    value: 13cb944990de42a085a4b4896cc4c3a6
+  - label: 贸易/批发/零售/租赁业
+    value: b5cf016ea3ad4df1bf226c47606a71e7
+  - label: 服务业
+    value: 2981dbf62f2a4d74b49990312aff2935
+  - label: 政府/非盈利机构
+    value: a83f96e093f3496d87ce878d2e2fa4f9
+  - label: 交通/运输/物流/仓储
+    value: f5d57cb355e34ed2ad534c71d85411c1
+  - label: 跨领域经营
+    value: 3209b7d6d08243638aca6272f966dbdb
+  - label: 文化/传媒/娱乐/体育
+    value: b4ae642bbf6741489ca72df119f3274f
+  - label: 能源/矿产/环保
+    value: 3d3938a283274285a22de2b1fd54bc0c
+- api: _id
+  label: _id
+- api: uniqueKey__c
+  label: 唯一Key
+- api: ThreeDepartment__c
+  label: 三级部门
+- api: tenant_id
+  label: tenant_id
+- api: sync_accountId__c
+  label: 接口使用合作伙伴ID
+- api: city
+  label: 市
+- api: gmv__c
+  label: 非GMV填报范围
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: remark
+  label: 备注
+- api: parentDepart_syncId__c
+  label: 父部门的接口使用ID
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 流水号
+- api: channelManager__c
+  label: 渠道经理
+- api: leads_id
+  label: 源线索
+- api: partner_id
+  label: 合作伙伴
+- api: is_deleted
+  label: is_deleted
+- api: parentDepartId__c
+  label: 父部门
+- api: partner_category
+  label: 类型
+  options:
+  - label: 代理商
+    value: '01'
+  - label: 实施商
+    value: '02'
+  - label: 服务商
+    value: '03'
+  - label: 物流商
+    value: '04'
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: out_owner
+  label: 外部负责人
+- api: is_er_enterprise
+  label: 是否关联对接企业
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: out_resources
+  label: 外部来源
+  options:
+  - label: 代理通
+    value: partner
+  - label: 自注册
+    value: self_registration
+  - label: 访销通
+    value: kx_fxt
+- api: email
+  label: 邮件
+- api: enterpriserelation_type
+  label: 互联状态
+- api: owner
+  label: 负责人
+- api: uniform_social_credit_code
+  label: 统一社会信用代码
+- api: address
+  label: 详细地址
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: resources
+  label: 来源
+  options:
+  - label: 自注册
+    value: self_reg
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+  - label: 渠道代理商
+    value: ''
+  - label: 生态平台
+    value: ''
+- api: url
+  label: 网址
+- api: credit_rating
+  label: 级别
+  options:
+  - label: 一级
+    value: '01'
+  - label: 二级
+    value: '02'
+  - label: 三级
+    value: '03'
+- api: specialType__c
+  label: 部门分类
+  options:
+  - label: 外部部门
+    value: '1'
+  - label: 其他
+    value: other
+- api: xsy_out_departId__c
+  label: 销售易外部部门ID
+- api: location
+  label: 定位

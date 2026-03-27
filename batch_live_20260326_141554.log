@@ -1,0 +1,292 @@
+/Users/yanye/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[批量] 找到 3 条待执行记录
+  [部署器] 已加载 Session（项目：西门子）
+[部署器] 导航到函数管理页: https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction
+[部署器] 函数管理页已就绪，跳过重复导航: https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction
+
+[批量] ── 第 1/3 条 ──
+  描述: 任务明细.本次联系人的可选范围：
+①联系人.客户姓名=任务明细.客户 且 联系人.联系人类型=客户联系人 
+②任务明细....
+  对象: 任务明细
+  函数类型: 范围规则  trigger_type: -  项目: -
+  [批量] 生成代码中...
+  [字段抓取] 开始从平台抓取 task_detail__c（任务明细）的字段...
+  [字段抓取] ShareDev 获取到 55 个字段（task_detail__c）
+  [字段抓取] 缓存已写入 (55 个字段): /Users/yanye/code/test拨号/_tools/sharedev_pull/西门子/.fields_cache/task_detail__c.yml
+  [字段抓取] 开始从平台抓取 ContactObj（联系人）的字段...
+  [字段抓取] ShareDev 获取到 90 个字段（ContactObj）
+  [字段抓取] 缓存已写入 (90 个字段): /Users/yanye/code/test拨号/_tools/sharedev_pull/西门子/.fields_cache/ContactObj.yml
+  [字段抓取] 开始从平台抓取 AccountObj（客户）的字段...
+  [字段抓取] ShareDev 获取到 137 个字段（AccountObj）
+  [字段抓取] 缓存已写入 (137 个字段): /Users/yanye/code/test拨号/_tools/sharedev_pull/西门子/.fields_cache/AccountObj.yml
+  [耗时] 字段抓取: 0.9s
+[生成器] 已加载字段上下文：3 个对象，282 个字段
+[生成器] 函数类型: 范围规则，绑定对象: task_detail__c
+[生成器] 加载 8 个参考函数，分层: {'【当前项目】': 6, '【其他项目/历史代码】': 2}
+[生成器] 调用 openai (claude-sonnet-4-6)...
+[生成器] 已输出: /Users/yanye/code/test拨号/【范围规则】任务明细.本次联系人.apl
+  [耗时] 生成代码: 6.6s
+  [批量] 部署中: 【范围规则】任务明细.本次联系人
+[部署器] 函数管理页已就绪，跳过重复导航: https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction
+  [部署器] 当前URL: https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction
+  [部署器] 函数列表已加载
+  [部署器] 函数列表已加载
+  [截图] /Users/yanye/code/test拨号/_tools/deployer/screenshots/step_func_list_1774505789.png
+  [部署器] 新建函数：直接创建（不搜索）
+[部署器] 新建函数: 【范围规则】任务明细.本次联系人
+  [部署器] 代码名称填写: by_label
+  [部署器] 命名空间 → 范围规则: ok:范围规则
+  [部署器] Api Name 已自动生成
+  [部署器] 绑定对象 → 任务明细: ok:任务明细
+  [部署器] 描述填写: ok
+  [部署器] 已选择使用空模板（坐标点击）
+  [部署器] 等待编辑器加载...
+  [部署器] 函数 API 名: MBP_Partner__c（已保存到 .meta.yml）
+  [字段抓取] 使用上游字段快照（3 个对象，282 个字段）
+  [预检] runtime/debug 预检通过（接口可运行，以下为摘要日志）
+E-E.local.1001-1774505806966
+StopWatch 'Scope_15f197__c': running time = 414 ms
+---------------------------------------------
+ms         %     Task name
+---------------------------------------------
+  [部署器] 代码填写方式: ace
+  [部署器] 草稿已保存
+  [部署器] 运行区域已就绪: input[placeholder*="数据源"]
+  [部署器] 未读到选项，尝试键盘选择（ArrowDown+Enter）...
+  [部署器] 已点击「运行脚本」，等待执行日志...
+  [部署器] 运行日志:
+运行脚本 
+ 扫描函数
+运行日志
+E-E.fx88888888.1000-17805691
+StopWatch 'Scope_iJzKM__c': running time = 267 ms
+---------------------------------------------
+ms % Task name
+---------------------------------------------
+
+
+返回值:
+{"searchCondition":{"operator":"AND","queryTemplateList":[],"filters":[{"TODO_CONTACT_ACCO
+  [部署器] 业务日志分析: 无[业务]日志，运行完成
+  [部署器] 编译通过 ✓
+  [部署器] 业务分析: 无[业务]日志，运行完成
+  [部署器] 最终代码已回写: /Users/yanye/code/test拨号/【范围规则】任务明细.本次联系人.apl
+  [部署器] 执行最终发布（点「保存」）...
+  [部署器] 函数 API 名（发布前读取）: Scope_iJzKM__c
+  [调试] :text-is('保存') 找到 2 个元素
+  [调试] 坐标点击 (1241, 785)
+  [部署器] 检测到备注弹窗: 请输入版本备注信息
+  [部署器] 备注已填写(js): '1'
+  [调试] 页面 textarea 共 4 个
+  [部署器] 备注已填写(textarea#3, h=68): '1'
+  [部署器] 备注弹窗已确认 (js)
+  [部署器] 函数已发布，对话框已关闭 ✓
+  [截图] /Users/yanye/code/test拨号/_tools/deployer/screenshots/published_1774505819.png
+[部署器] 保存完成（已确认发布成功）
+  [部署器] Session 已保存: /Users/yanye/code/test拨号/_tools/deployer/session_西门子.json（项目：西门子）
+[部署器] 部署完成: 【范围规则】任务明细.本次联系人
+  [耗时] 浏览器部署: 30.0s
+  [批量] 字段可信度 ⚠ 存在未确认字段: TODO_CONTACT_ACCOUNT_FIELD, option_agent_contact_person__c, option_customer_contact__c，建议人工核查
+  [批量] ⚠ 字段可信度 ⚠ 存在未确认字段: TODO_CONTACT_ACCOUNT_FIELD, option_agent_contact_person__c, option_customer_contact__c，建议人工核查
+  ✅ 成功: 【范围规则】任务明细.本次联系人 (Scope_iJzKM__c)
+  [耗时] 单条总计: 44.0s
+  [部署器] Session 已保存: /Users/yanye/code/test拨号/_tools/deployer/session_西门子.json（项目：西门子）
+
+  [批量] 浏览器不可用（可能已手动关闭窗口），正在重启 Chromium 并登录…
+  [部署器] 已加载 Session（项目：西门子）
+[部署器] 导航到函数管理页: https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction
+[部署器] 函数管理页已就绪，跳过重复导航: https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction
+
+[批量] ── 第 2/3 条 ──
+  描述: 通过销售线索.最终客户查询客户.公司名称，如果匹配到客户赋值销售线索.客户，并更新销售线索.客户创建结果=已关联老客户
+  对象: 销售线索
+  函数类型: 流程  trigger_type: -  项目: -
+  [批量] 生成代码中...
+  [字段抓取] 开始从平台抓取 LeadsObj（销售线索）的字段...
+  [字段抓取] ShareDev 获取到 196 个字段（LeadsObj）
+  [字段抓取] 缓存已写入 (196 个字段): /Users/yanye/code/test拨号/_tools/sharedev_pull/西门子/.fields_cache/LeadsObj.yml
+  [字段抓取] 复用本轮缓存 AccountObj: 137 个字段
+  [耗时] 字段抓取: 0.5s
+[生成器] 已加载字段上下文：2 个对象，333 个字段
+[生成器] 函数类型: 流程函数，绑定对象: LeadsObj
+[生成器] 加载 8 个参考函数，分层: {'【当前项目】': 6, '【其他项目/历史代码】': 2}
+[生成器] 调用 openai (claude-sonnet-4-6)...
+[生成器] 已输出: /Users/yanye/code/test拨号/【流程】关联客户.apl
+  [耗时] 生成代码: 6.3s
+  [批量] 部署中: 【流程】关联客户
+[部署器] 函数管理页已就绪，跳过重复导航: https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction
+  [部署器] 当前URL: https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction
+  [部署器] 函数列表已加载
+  [部署器] 函数列表已加载
+  [截图] /Users/yanye/code/test拨号/_tools/deployer/screenshots/step_func_list_1774505855.png
+  [部署器] 新建函数：直接创建（不搜索）
+[部署器] 新建函数: 【流程】关联客户
+  [部署器] 代码名称填写: by_label
+  [部署器] 命名空间 → 流程: ok:流程
+  [部署器] Api Name 已自动生成
+  [部署器] 绑定对象 → 销售线索: ok:销售线索
+  [部署器] 描述填写: ok
+  [部署器] 已选择使用空模板（坐标点击）
+  [部署器] 等待编辑器加载...
+  [部署器] 函数 API 名: MBP_Partner__c（已保存到 .meta.yml）
+  [字段抓取] 使用上游字段快照（2 个对象，333 个字段）
+  [预检] runtime/debug 业务日志诊断: 业务提前终止（字段/数据为空等），通常为数据问题
+  [预检] 预检可运行，但当前日志更像数据/入参问题，保留原代码继续浏览器校验
+E-E.local.1001-1774505872139
+14:17:53:015  [业务] 入参: leadsId=null, endCustomer=null
+14:17:53:019  [业务] 终止: 线索ID为空
+StopWatch 'Proc_c5ed84__c': running time = 452 ms
+---------------------------------------------
+ms         %     Task name
+---------------------------------------------
+  [部署器] 代码填写方式: ace
+  [部署器] 草稿已保存
+  [部署器] 运行区域已就绪: input[placeholder*="数据源"]
+  [部署器] 未读到选项，尝试键盘选择（ArrowDown+Enter）...
+  [部署器] 已点击「运行脚本」，等待执行日志...
+  [部署器] 运行日志:
+运行脚本 
+ 扫描函数
+运行日志
+E-E.fx88888888.1000-59893171
+14:18:02:975 [业务] 入参: leadsId=null, endCustomer=null
+14:18:02:978 [业务] 终止: 线索ID为空
+StopWatch 'Proc_bsQtx__c': running time = 453 ms
+---------------------------------------------
+ms % Task name
+---------------------------------------------
+
+
+返回值:
+  [部署器] 业务日志分析: 业务提前终止（字段/数据为空等），通常为数据问题
+  [提示] 未获取到数据或逻辑未走到完成分支时，请根据入参/步骤日志检查数据源与代码逻辑，不要仅以无报错视为成功
+  [部署器] 编译通过 ✓
+  [部署器] 业务分析: 业务提前终止（字段/数据为空等），通常为数据问题
+  [部署器] Playwright 选择器未能读到下拉选项，尝试 agent vision...
+  [agent] 成功读到 1 个数据源选项: ['E-E.fx88888888.1000-59893171']...
+  [部署器] 无其他数据源可切换，视为数据问题，代码无需修改
+  [部署器] 最终代码已回写: /Users/yanye/code/test拨号/【流程】关联客户.apl
+  [部署器] 执行最终发布（点「保存」）...
+  [部署器] 函数 API 名（发布前读取）: Proc_bsQtx__c
+  [调试] :text-is('保存') 找到 2 个元素
+  [调试] 坐标点击 (1241, 785)
+  [部署器] 检测到备注弹窗: 请输入版本备注信息
+  [部署器] 备注已填写(js): '1'
+  [调试] 页面 textarea 共 4 个
+  [部署器] 备注已填写(textarea#3, h=68): '1'
+  [部署器] 备注弹窗已确认 (js)
+  [部署器] 函数已发布，对话框已关闭 ✓
+  [截图] /Users/yanye/code/test拨号/_tools/deployer/screenshots/published_1774505899.png
+[部署器] 保存完成（已确认发布成功）
+  [部署器] Session 已保存: /Users/yanye/code/test拨号/_tools/deployer/session_西门子.json（项目：西门子）
+[部署器] 部署完成: 【流程】关联客户
+  [耗时] 浏览器部署: 44.9s
+  [批量] 字段可信度 ✓ 全部来自缓存（3 个）
+  ✅ 成功: 【流程】关联客户 (Proc_bsQtx__c)
+  [耗时] 单条总计: 80.1s
+  [部署器] Session 已保存: /Users/yanye/code/test拨号/_tools/deployer/session_西门子.json（项目：西门子）
+
+  [批量] 浏览器不可用（可能已手动关闭窗口），正在重启 Chromium 并登录…
+  [部署器] 已加载 Session（项目：西门子）
+[部署器] 导航到函数管理页: https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction
+[部署器] 函数管理页已就绪，跳过重复导航: https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction
+
+[批量] ── 第 3/3 条 ──
+  描述: 通过线索创建客户，赋值以下字段
+销售线索.最终客户=客户.公司名称
+销售线索.负责人=客户.负责人
+客户创建后，销售线索...
+  对象: 销售线索
+  函数类型: 流程  trigger_type: -  项目: -
+  [批量] 生成代码中...
+  [字段抓取] 复用本轮缓存 LeadsObj: 196 个字段
+  [字段抓取] 复用本轮缓存 AccountObj: 137 个字段
+  [耗时] 字段抓取: 0.0s
+[生成器] 已加载字段上下文：2 个对象，333 个字段
+[生成器] 函数类型: 流程函数，绑定对象: LeadsObj
+[生成器] 加载 8 个参考函数，分层: {'【当前项目】': 6, '【其他项目/历史代码】': 2}
+[生成器] 调用 openai (claude-sonnet-4-6)...
+[生成器] 已输出: /Users/yanye/code/test拨号/【流程】关联客户.apl
+  [耗时] 生成代码: 15.0s
+  [批量] 部署中: 【流程】关联客户
+[部署器] 函数管理页已就绪，跳过重复导航: https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction
+  [部署器] 当前URL: https://www.fxiaoke.com/XV/UI/manage#crmmanage/=/module-myfunction
+  [部署器] 函数列表已加载
+  [部署器] 函数列表已加载
+  [截图] /Users/yanye/code/test拨号/_tools/deployer/screenshots/step_func_list_1774505941.png
+  [部署器] 新建函数：直接创建（不搜索）
+[部署器] 新建函数: 【流程】关联客户
+  [部署器] 代码名称填写: by_label
+  [部署器] 命名空间 → 流程: ok:流程
+  [部署器] Api Name 已自动生成
+  [部署器] 绑定对象 → 销售线索: ok:销售线索
+  [部署器] 描述填写: ok
+  [部署器] 已选择使用空模板（坐标点击）
+  [部署器] 等待编辑器加载...
+  [部署器] 函数 API 名: MBP_Partner__c（已保存到 .meta.yml）
+  [字段抓取] 使用上游字段快照（2 个对象，333 个字段）
+  [预检] runtime/debug 业务日志诊断: 业务提前终止（字段/数据为空等），通常为数据问题
+  [预检] 预检可运行，但当前日志更像数据/入参问题，保留原代码继续浏览器校验
+E-E.local.1001-1774505958128
+14:19:18:964  [业务] 入参: leadsId=null, end_customer__c=null
+14:19:18:968  [业务] 终止: 线索ID为空
+StopWatch 'Proc_c5ed84__c': running time = 389 ms
+---------------------------------------------
+ms         %     Task name
+---------------------------------------------
+  [部署器] 代码填写方式: ace
+  [部署器] 草稿已保存
+  [部署器] 运行区域已就绪: input[placeholder*="数据源"]
+  [部署器] 未读到选项，尝试键盘选择（ArrowDown+Enter）...
+  [部署器] 已点击「运行脚本」，等待执行日志...
+  [部署器] 运行日志:
+运行脚本 
+ 扫描函数
+运行日志
+E-E.fx88888888.1000-36513208
+14:19:30:227 [业务] 入参: leadsId=null, end_customer__c=null
+14:19:30:231 [业务] 终止: 线索ID为空
+StopWatch 'Proc_PcJa5__c': running time = 408 ms
+---------------------------------------------
+ms % Task name
+---------------------------------------------
+
+
+返回值:
+  [部署器] 业务日志分析: 业务提前终止（字段/数据为空等），通常为数据问题
+  [提示] 未获取到数据或逻辑未走到完成分支时，请根据入参/步骤日志检查数据源与代码逻辑，不要仅以无报错视为成功
+  [部署器] 编译通过 ✓
+  [部署器] 业务分析: 业务提前终止（字段/数据为空等），通常为数据问题
+  [部署器] Playwright 选择器未能读到下拉选项，尝试 agent vision...
+  [agent] 成功读到 1 个数据源选项: ['E-E.fx88888888.1000-36513208']...
+  [部署器] 无其他数据源可切换，视为数据问题，代码无需修改
+  [部署器] 最终代码已回写: /Users/yanye/code/test拨号/【流程】关联客户.apl
+  [部署器] 执行最终发布（点「保存」）...
+  [部署器] 函数 API 名（发布前读取）: Proc_PcJa5__c
+  [调试] :text-is('保存') 找到 2 个元素
+  [调试] 坐标点击 (1241, 785)
+  [部署器] 检测到备注弹窗: 请输入版本备注信息
+  [部署器] 备注已填写(js): '1'
+  [调试] 页面 textarea 共 4 个
+  [部署器] 备注已填写(textarea#3, h=68): '1'
+  [部署器] 备注弹窗已确认 (js)
+  [部署器] 函数已发布，对话框已关闭 ✓
+  [截图] /Users/yanye/code/test拨号/_tools/deployer/screenshots/published_1774505988.png
+[部署器] 保存完成（已确认发布成功）
+  [部署器] Session 已保存: /Users/yanye/code/test拨号/_tools/deployer/session_西门子.json（项目：西门子）
+[部署器] 部署完成: 【流程】关联客户
+  [耗时] 浏览器部署: 47.4s
+  [批量] 字段可信度 ✓ 全部来自缓存（4 个）
+  ✅ 成功: 【流程】关联客户 (Proc_PcJa5__c)
+  [耗时] 单条总计: 87.9s
+  [部署器] Session 已保存: /Users/yanye/code/test拨号/_tools/deployer/session_西门子.json（项目：西门子）
+[批量] 本轮无失败，不再重试。
+批量执行完成，共 3 条人次（含重试轮次）：
+
+  ✅ 【范围规则】任务明细.本次联系人 → Scope_iJzKM__c
+  ✅ 【流程】关联客户 → Proc_bsQtx__c
+  ✅ 【流程】关联客户 → Proc_PcJa5__c
+
+成功 3 / 失败 0 / 共 3 条人次

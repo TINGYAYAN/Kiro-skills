@@ -1,0 +1,492 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: implementation_plan__c
+  label: 实施方案
+- api: scheme_review_time__c
+  label: 方案评审日期
+- api: project_name__c
+  label: 项目名称
+- api: expected_formal_launch_time__c
+  label: 预计正式上线日期
+- api: handover_person__c
+  label: 交接人员
+- api: project_pause_reason__c
+  label: 项目暂停原因
+- api: customer_wallet_cal__c
+  label: 客户全量月GMV预估（客户总预算）
+- api: is_penetrated_business_opp__c
+  label: 是否渗透商机
+- api: customer_stratification__c
+  label: 客户分层
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: handover_time__c
+  label: 交接时间
+- api: cancellation_date__c
+  label: 取消日期
+- api: scheme_confirmation_proof__c
+  label: 方案确认内容证明
+- api: account__c
+  label: 客户
+- api: sales_leader__c
+  label: 销售负责人
+- api: project_stage__c
+  label: 项目阶段
+  options:
+  - label: 项目准备
+    value: '1'
+  - label: 项目启动
+    value: '2'
+  - label: 需求调研
+    value: '3'
+  - label: 方案确认
+    value: '4'
+  - label: 系统建设
+    value: '5'
+  - label: 系统上线试用
+    value: '6'
+  - label: 正式上线
+    value: '7'
+  - label: 运维支持
+    value: '8'
+  - label: 已交接
+    value: '9'
+  - label: 业务方取消
+    value: '10'
+  - label: 其他
+    value: other
+- api: version
+  label: version
+- api: customer_wallet_penetratio__c
+  label: 客户全量月GMV预估（客户总预算）（渗透）
+- api: main_sub_project_identifie__c
+  label: 主子项目标识
+- api: CSM_transfer_form__c
+  label: CSM交接单
+- api: sales_handover_list__c
+  label: 销售交接清单
+- api: tenant_id
+  label: tenant_id
+- api: attention_warning__c
+  label: 注意⚠️⚠️⚠️
+  options:
+  - label: 项目已启动，请首先填写项目启动日期！
+    value: option_Projecthasbeenstartedpleas__c
+  - label: 其他
+    value: other
+- api: estimated_project_start_time__c
+  label: 预计项目启动日期
+- api: project_plan_table__c
+  label: 项目计划表
+- api: cancel_reason__c
+  label: 取消原因
+- api: customer_segmentation__c
+  label: 停用_客户分层
+  options:
+  - label: S
+    value: S
+  - label: A
+    value: A
+  - label: B
+    value: B
+  - label: C
+    value: C
+  - label: D
+    value: D
+  - label: E
+    value: E
+  - label: 其他
+    value: other
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: implementation_handover_co__c
+  label: 实施交接内容（链接）
+- api: weekly_report_live__c
+  label: 停用_周报（正式上线）
+- api: weekly_report_system_trial__c
+  label: 停用_周报（系统上线试用）
+- api: portfolio__c
+  label: 项目组合
+- api: cooper__c
+  label: cooper链接
+- api: requirements_survey_document__c
+  label: 需求调研文档
+- api: notCommonSolutionComment__c
+  label: 使用非标方案的原因描述
+- api: winning_proof_attachment__c
+  label: 赢单证明附件
+- api: implementation_responsible__c
+  label: 实施负责人
+- api: last_modified_time
+  label: 最后修改时间
+- api: opportunity__c
+  label: 商机
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: agent_area__c
+  label: 代理商所属区域
+- api: out_tenant_id
+  label: 外部企业
+- api: category__c
+  label: 品类
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '2'
+  - label: 其他
+    value: other
+- api: weekly_report_demand__c
+  label: 停用_周报（需求调研）
+- api: delivery_team__c
+  label: 交付组
+- api: business_line__c
+  label: 业务线
+- api: isCarApplication__c
+  label: 审批方式
+  options:
+  - label: 无需审批
+    value: '1'
+  - label: 行前审批
+    value: '2'
+  - label: 行后审批
+    value: '3'
+  - label: 客户系统审批
+    value: '4'
+  - label: 滴滴侧审批
+    value: '5'
+  - label: 其他
+    value: other
+- api: project_pause_time__c
+  label: 项目暂停时间
+- api: project_start_time__c
+  label: 项目启动日期
+- api: project_contact_list__c
+  label: 项目通讯录
+- api: weekly_report_operation__c
+  label: 停用_周报（运维支持）
+- api: handover_list__c
+  label: 交接清单
+- api: project_status__c
+  label: 项目状态
+  options:
+  - label: 项目准备中
+    value: '5'
+  - label: 正常推进
+    value: '1'
+  - label: 项目暂停
+    value: '2'
+  - label: 项目结项
+    value: '3'
+  - label: 项目终止
+    value: '4'
+  - label: 其他
+    value: other
+- api: company_id__c
+  label: 滴滴客户ID
+- api: is_ecological_platform_cus__c
+  label: 是否是生态平台客户
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: didi_wallet__c
+  label: 停用_滴滴钱包
+- api: proposal_type__c
+  label: 方案类型
+  options:
+  - label: 标准方案（企业版APP+ES后台）
+    value: '1'
+  - label: 非标方案
+    value: '2'
+  - label: 其他
+    value: other
+- api: owner_department
+  label: 负责人主属部门
+- api: weekly_report_scheme__c
+  label: 停用_周报（方案确认）
+- api: didi_monthly_budget__c
+  label: 滴滴月预算
+- api: estimated_system_go_live_time__c
+  label: 预计系统上线日期
+- api: delivery_department__c
+  label: 交付部门
+- api: contact_method__c
+  label: 对接方式
+  options:
+  - label: 生态对接
+    value: '1'
+  - label: 二次开发
+    value: '2'
+  - label: 生态+二次开发（管理API+企业版APP
+    value: '3'
+  - label: 管理API+H5
+    value: '4'
+  - label: 管理API+H5带参跳转
+    value: '5'
+  - label: WebApp对接
+    value: '6'
+  - label: 用车API 对接
+    value: '7'
+  - label: 商旅资源API 对接
+    value: '8'
+  - label: 其他
+    value: other
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: business_group__c
+  label: 业务组
+- api: online_issue_follow_up_list__c
+  label: 线上问题跟进清单
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: data_own_department
+  label: 归属部门
+- api: official_launch_date_manual__c
+  label: 正式上线日期
+- api: system_integration__c
+  label: 对接系统
+  options:
+  - label: 泛微
+    value: '1'
+  - label: 金蝶
+    value: '2'
+  - label: 每刻
+    value: '3'
+  - label: 汇联易
+    value: '4'
+  - label: 易快报
+    value: '5'
+  - label: 云简
+    value: '6'
+  - label: 元年
+    value: '7'
+  - label: 致远
+    value: '8'
+  - label: 胜意
+    value: '9'
+  - label: 差旅一号
+    value: '10'
+  - label: 差旅管家
+    value: '11'
+  - label: 在途
+    value: '12'
+  - label: 钉钉
+    value: '13'
+  - label: 企微
+    value: '14'
+  - label: 飞书
+    value: '15'
+  - label: 标准APP
+    value: '16'
+  - label: 自研OA
+    value: '17'
+  - label: 客户自研系统
+    value: '18'
+  - label: 用友
+    value: '19'
+  - label: 浪潮
+    value: '20'
+  - label: 北森
+    value: '21'
+  - label: 泛微分版本（方便后续统计对接情况）
+    value: '22'
+  - label: 薪福通
+    value: '23'
+  - label: 差旅壹号
+    value: '24'
+  - label: 携程
+    value: '25'
+  - label: 汉德
+    value: '26'
+  - label: workday
+    value: '27'
+  - label: concer
+    value: '28'
+  - label: 泛微E9
+    value: '29'
+  - label: 泛微E10
+    value: '30'
+  - label: 泛微其他
+    value: '31'
+  - label: 金蝶星瀚
+    value: '32'
+  - label: 金蝶星空
+    value: '33'
+  - label: 金蝶其他
+    value: '34'
+  - label: 用友友商旅（BIP）
+    value: '35'
+  - label: 用友金融
+    value: '36'
+  - label: 用友其他
+    value: '37'
+  - label: 致远A8
+    value: '38'
+  - label: 致迈协创
+    value: '39'
+  - label: 致远其他
+    value: '40'
+  - label: 其他
+    value: other
+- api: written_confirmation_mater__c
+  label: 书面确认材料（上线证明）
+- api: employeeEsImport__c
+  label: 是否能提供手机号
+  options:
+  - label: 可以导入
+    value: '1'
+  - label: 不可以-公司无员工手机号
+    value: '2'
+  - label: 不可以-公司禁止对外提供手机号
+    value: '3'
+  - label: 其他
+    value: other
+- api: winning_proof__c
+  label: 赢单证明
+  options:
+  - label: 合同
+    value: '1'
+  - label: 确认合作证明
+    value: '2'
+  - label: 中标通知
+    value: '3'
+  - label: 其他
+    value: other
+- api: name
+  label: 项目号
+- api: payment_method_new__c
+  label: 支付方式
+  options:
+  - label: 企业支付
+    value: '1'
+  - label: 个垫支付
+    value: '2'
+  - label: 个人支付（自费用车）
+    value: '4'
+  - label: 其他
+    value: other
+- api: _id
+  label: _id
+- api: customer_wallet__c
+  label: 停用_客户钱包
+- api: business__c
+  label: 商务
+- api: didi_wallet_cal__c
+  label: 滴滴潜力月GMV预估（滴滴预算）
+- api: lock_user
+  label: 加锁人
+- api: agent__c
+  label: 代理商
+- api: advisor_name__c
+  label: 解决方案顾问
+- api: is_important_protection__c
+  label: 是否重保
+  options:
+  - label: 否
+    value: '0'
+  - label: 是
+    value: '1'
+  - label: 其他
+    value: other
+- api: ecological_platform__c
+  label: 生态平台
+- api: is_deleted
+  label: is_deleted
+- api: application_time__c
+  label: 申请时间
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: project_start_meeting_ppt__c
+  label: 项目启动会ppt
+- api: out_owner
+  label: 外部负责人
+- api: user_count__c
+  label: 使用人数
+- api: owner
+  label: 负责人
+- api: sales_handover_content_lin__c
+  label: 销售交接内容（链接）
+- api: formal_online_date_change__c
+  label: 正式上线日期变更次数
+- api: main_project__c
+  label: 主项目
+- api: last_modified_by
+  label: 最后修改人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 实施交付
+    value: ''
+  - label: 二次对接
+    value: ''
+- api: solutionType__c
+  label: 系统对接方式
+  options:
+  - label: 管理API+企业版APP
+    value: '1'
+  - label: 管理API+H5
+    value: '2'
+  - label: webapp
+    value: '3'
+  - label: 平台对接
+    value: '4'
+  - label: H5单点对接
+    value: '5'
+  - label: 企业版APP+企业版H5+管理API
+    value: '6'
+  - label: 企业版APP+管理API
+    value: '7'
+  - label: 企业版H5+管理API
+    value: '8'
+  - label: 企业版H5单点对接
+    value: '9'
+  - label: 其他
+    value: other
+- api: didid_wallet_permeation__c
+  label: 滴滴潜力月GMV预估（滴滴预算）（渗透）
+- api: training_materials_manual__c
+  label: 培训材料/操作手册
+- api: weekly_report_system__c
+  label: 停用_周报（系统建设）
+- api: sub_project_quantity__c
+  label: 子项目数量
+- api: business_opportunity_type__c
+  label: 商机业务类型
+- api: dockingSystem__c
+  label: 需要对接的系统
+- api: test_case_report__c
+  label: 测试用例/报告
+- api: didi_development_list__c
+  label: 滴滴开发清单
+- api: weekly_report_project_start__c
+  label: 停用_周报（项目启动）
+- api: launch_date__c
+  label: 系统上线日期

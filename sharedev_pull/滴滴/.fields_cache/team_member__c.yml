@@ -1,0 +1,124 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: interestCategory__c
+  label: 感兴趣品类
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '2'
+  - label: 费控
+    value: '3'
+  - label: 代驾
+    value: '4'
+  - label: 出租车
+    value: '5'
+  - label: 聚合
+    value: '6'
+  - label: 其他
+    value: other
+- api: primary_key_id__c
+  label: 主键标识
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 流水号
+- api: syncId__c
+  label: 接口使用数据ID
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: teamMember__c
+  label: 团队成员
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: opportunity__c
+  label: 商机
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: idap__c
+  label: 团队成员的邮箱前缀
+- api: account__c
+  label: 客户
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: xsyId__c
+  label: 销售易数据ID
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 客户团队成员
+    value: ''
+  - label: 商机团队成员
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: data_own_department
+  label: 归属部门
+- api: is_owner__c
+  label: 是否是负责人
+  options:
+  - label: 是
+    value: '0'
+  - label: 否
+    value: '1'
+  - label: 其他
+    value: other
+- api: didiId__c
+  label: 滴滴客户ID（去掉c）
+- api: name
+  label: 主属性
+- api: deleteMark__c
+  label: deleteMark
+  options:
+  - label: '0'
+    value: '0'
+  - label: '1'
+    value: '1'
+- api: _id
+  label: _id

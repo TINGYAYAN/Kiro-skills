@@ -1,0 +1,126 @@
+fields:
+- api: staff_name
+  label: 员工名称
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: action_type
+  label: 行为类型
+- api: violation_name
+  label: 违规方
+  options:
+  - label: 员工
+    value: '1'
+  - label: 客户
+    value: '2'
+- api: judge_by
+  label: 判定人
+- api: employee
+  label: 员工名称(人员)
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: trigger_time
+  label: 触发时间
+- api: rule_type
+  label: 质检类型
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: account_name
+  label: 企微好友名称
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: dirty_words
+  label: 关键词
+- api: judge_info
+  label: 判定说明
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: session_type
+  label: 会话场景
+  options:
+  - label: 单聊
+    value: '1'
+  - label: 群聊
+    value: '2'
+- api: seq
+  label: 会话序号
+- api: owner
+  label: 负责人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: judge_result
+  label: 判定结果
+  options:
+  - label: 判定正确
+    value: '1'
+  - label: 判定错误
+    value: '0'
+- api: create_time
+  label: 创建时间
+- api: rule_name
+  label: 群名称
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: session_id
+  label: 企业微信会话存档
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: chat_id
+  label: 会话存档id
+- api: rule_id
+  label: 质检规则id
+- api: data_own_department
+  label: 归属部门
+- api: session_feature
+  label: 会话特征
+- api: object_describe_id
+  label: object_describe_id
+- api: rule_target
+  label: 质检角色
+- api: name
+  label: 质检名称
+- api: _id
+  label: _id

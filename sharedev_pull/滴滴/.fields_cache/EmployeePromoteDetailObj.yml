@@ -1,0 +1,149 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: forward_num
+  label: 转发人数
+- api: spread_type
+  label: 推广类型
+  options:
+  - label: 任务推广
+    value: '1'
+  - label: 主动推广
+    value: '2'
+  - label: 其他
+    value: other
+- api: forward_count
+  label: 转发次数
+- api: spread_content
+  label: 推广内容
+- api: click_wechat_num
+  label: 点击企微联系人数
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: spread_user
+  label: 推广员工
+- api: owner_department
+  label: 负责人主属部门
+- api: visit_num
+  label: 访问人数
+- api: statistical_date
+  label: 统计日期
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: marketing_event
+  label: 市场活动
+- api: spread_user_name
+  label: 推广人员姓名
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: data_own_department
+  label: 归属部门
+- api: name
+  label: 统计编号
+- api: _id
+  label: _id
+- api: click_save_phone_num
+  label: 点击存入手机人数
+- api: add_wechat_fans_num
+  label: 公众号吸粉数
+- api: tenant_id
+  label: tenant_id
+- api: add_wechat_friends_num
+  label: 企微添加好友数
+- api: data_own_organization
+  label: 归属组织
+- api: content_category
+  label: 内容分类
+  options:
+  - label: 微页面
+    value: '1'
+  - label: 文章
+    value: '2'
+  - label: 产品
+    value: '3'
+  - label: 文件
+    value: '4'
+  - label: 视频
+    value: '5'
+  - label: 图片
+    value: '6'
+  - label: 海报
+    value: '7'
+  - label: 直播
+    value: '8'
+  - label: 会议
+    value: '9'
+  - label: 名片
+    value: '10'
+  - label: 其他
+    value: other
+- api: leads_num
+  label: 获取线索数
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: click_call_num
+  label: 点击拨打电话人数
+- api: is_deleted
+  label: is_deleted
+- api: click_chat_num
+  label: 点击私信聊天人数
+- api: spread_count
+  label: 推广次数
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: spread_user_id
+  label: 推广人ID
+- api: wechat_employee_obj_id
+  label: 企微员工
+- api: marketing_activity
+  label: 推广活动
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: spread_content_id
+  label: 推广内容ID
+- api: visiti_count
+  label: 访问次数

@@ -1,0 +1,1062 @@
+fields:
+- api: trust_it_ownership_sales__c
+  label: Trust It所属销售
+- api: customer_rejection_reason__c
+  label: 客户拒接/拒绝沟通原因
+  options:
+  - label: 无人接听（振铃结束）——需回访
+    value: option_no_answer_after_ringback_n__c
+  - label: 通话中——需回访
+    value: option_calling_need_to__c
+  - label: 拒接——需回访
+    value: option_rejected_need_to_call_back__c
+  - label: 暂时无法接通/关机——需回访
+    value: option_temporarily_unreachable_sh__c
+  - label: 参展中或其他事项挂断——需回访
+    value: option_exhibition_or_other_hangup__c
+  - label: 开场直接挂断
+    value: option_start_directly_hang_up__c
+  - label: 拒绝沟通采买问题
+    value: option_refuse_to_communicate_purc__c
+  - label: 抽奖客户，无需回访
+    value: option_lottery_customers_no_need__c
+  - label: 停机
+    value: option_shutdown__c
+  - label: 空号
+    value: option_invalid_number__c
+  - label: 其他
+    value: other
+- api: last_modified_time__c
+  label: Last Modified Time
+- api: phone_number_attribution_city
+  label: 手机归属市
+- api: next_step_follow_up_sugges__c
+  label: 下一步跟踪建议
+- api: customer_potential__c
+  label: 客户潜力
+- api: last_ordered_product__c
+  label: 最近一次下单商品
+- api: company_name__c
+  label: Company Name
+- api: pick_up_allocate_time__c
+  label: Pick up/Allocate Time
+- api: tel
+  label: 电话
+- api: assigned_time
+  label: 领取/分配时间
+- api: bim_push_failure_reason__c
+  label: BIM推送失败原因
+- api: latest_notes__c
+  label: Latest Notes
+- api: extend_days
+  label: 申请延期天数
+- api: first_contact_product__c
+  label: 首次联系产品
+- api: new_opportunity_id
+  label: 原转换商机2.0名称
+- api: dbo_customer_owner__c
+  label: DBO客户归属人
+- api: is_add_wechat__c
+  label: 是否加微信
+- api: version
+  label: version
+- api: order_success_and_amount_b__c
+  label: 成单以及金额（BU，产品，金额）
+- api: registered_capital__c
+  label: 注册资本
+- api: is_registered_as_kc__c
+  label: 是否注册成KC
+- api: leading_bu__c
+  label: Leading BU
+  options:
+  - label: PA
+    value: option_pa__c
+  - label: FA
+    value: option_fa__c
+  - label: MC
+    value: option_mc__c
+  - label: EP
+    value: option_ep__c
+  - label: CS
+    value: option_cs__c
+  - label: CS-培训
+    value: option_cs_training__c
+  - label: PA MI
+    value: option_pa_mi__c
+  - label: 其他
+    value: other
+- api: back_reason
+  label: 销售人员退回原因
+  options:
+  - label: 联系不上客户
+    value: '0'
+  - label: 客户暂无需求
+    value: '1'
+  - label: 未满足客户需求
+    value: '2'
+  - label: 其他
+    value: other
+- api: creation_time__c
+  label: Creation Time
+- api: leads_stage
+  label: 线索阶段
+  options:
+  - label: 潜在线索(Lead)
+    value: Lead
+  - label: 市场认可线索(MQL)
+    value: MQL
+  - label: 销售认可线索(SQL)
+    value: SQL
+  - label: 转商机
+    value: OPP
+  - label: 其他
+    value: other
+- api: close_reason
+  label: 线索无效原因
+  options:
+  - label: 联系不上客户
+    value: '0'
+  - label: 线索重复
+    value: '1'
+  - label: 不符合客户要求
+    value: '2'
+  - label: 其他
+    value: other
+- api: industry__c
+  label: Industry
+- api: cooperation_o2o_channel__c
+  label: 合作O2O 渠道
+- api: technical_support__c
+  label: 技术支持
+  options:
+  - label: 售前：产品样本/ PPT/ 行业案例/西游AI客服
+    value: '1'
+  - label: 售前：热线
+    value: '2'
+  - label: 产品选型：TSS HUB L2
+    value: '3'
+  - label: 产品选型：合作伙伴
+    value: '4'
+  - label: 产品使用问题：TSS HUB L2
+    value: '5'
+  - label: 产品使用问题：合作伙伴
+    value: '6'
+  - label: 样机开发及现场问题处理：合作伙伴
+    value: '7'
+  - label: 样机开发及现场问题处理：区域TSS
+    value: '8'
+  - label: 产品及应用案例介绍（远程）：TSS HUB L2
+    value: '9'
+  - label: 产品及应用案例介绍（远程）：TPE SS
+    value: '10'
+  - label: 产品及应用案例介绍（远程）：Domain PM
+    value: '11'
+  - label: 产品及应用案例介绍（远程）：Vertical Manager
+    value: '12'
+  - label: 产品及应用案例介绍（现场）：合作伙伴
+    value: '13'
+  - label: 产品及应用案例介绍（现场）：TPE SS
+    value: '14'
+  - label: 产品及应用案例介绍（现场）：Vertical Manager
+    value: '15'
+  - label: 其他
+    value: other
+- api: bim_score__c
+  label: BIM分
+- api: customer_online_cooperatio__c
+  label: 客户线上合作意愿
+- api: next_followed_remark
+  label: 下次跟进要点
+- api: visitor_id
+  label: 访客id
+- api: bim_leads_give_up_reason__c
+  label: BIM线索放弃原因
+- api: bim_leads_follow_up_status__c
+  label: BIM线索跟进状态
+- api: main_business__c
+  label: 主营业务
+- api: leads_pool__c
+  label: Leads Pool
+- api: resale_count
+  label: 线索数量
+- api: last_30d_ecommerce_inquiry__c
+  label: 近30天电商询盘下派的BD
+- api: email
+  label: 邮件
+- api: intention_categories_in_la__c
+  label: 近一年意向类目
+- api: leads_identity_grade__c
+  label: Leads Identity Grade
+- api: address
+  label: 地址
+- api: is_collected
+  label: 是否归集
+  options:
+  - label: 未归集
+    value: 'False'
+  - label: 已归集
+    value: 'True'
+- api: out_tenant_id
+  label: 外部企业
+- api: account_id
+  label: 原转换客户名称
+- api: follow_up_requirements__c
+  label: 跟进要求
+  options:
+  - label: 有近期采买需求需尽快对接
+    value: option_recent_purchasing_demand_n__c
+  - label: 需求请于客户联系后确认
+    value: option_requirement_confirm_after__c
+  - label: 长期方案或投标，周期较长
+    value: option_long_term_solution_or_bid__c
+  - label: 工博会销售线索，需要销售对接
+    value: option_ciif_sales_leads_need_sale__c
+  - label: 其他
+    value: other
+- api: collected_to
+  label: 归集到的线索
+- api: generate_customer__c
+  label: 生成客户
+  options:
+  - label: 生成客户
+    value: option_generate_customer__c
+  - label: 暂不生成
+    value: option_zan_bu_sheng_cheng__c
+  - label: 其他
+    value: other
+- api: e_mail__c
+  label: E-mail
+- api: wechat_nickname
+  label: 企微昵称
+- api: source
+  label: 线索来源
+  options:
+  - label: 工商查询转换
+    value: bizquery_transfer
+  - label: 企业微信
+    value: enterprise_wechat
+  - label: 客服
+    value: '1'
+  - label: CM企微社群
+    value: '2'
+  - label: 企微_小助手
+    value: '3'
+  - label: 小程序留资
+    value: '4'
+  - label: 销售自拓
+    value: '5'
+  - label: cdp_线索
+    value: '6'
+  - label: Cadence线索
+    value: '7'
+  - label: 用户运营
+    value: '8'
+  - label: 直播
+    value: '9'
+  - label: 产品类活动
+    value: '10'
+  - label: X_热线
+    value: '11'
+  - label: X_网站
+    value: '12'
+  - label: CM广告投放
+    value: '13'
+  - label: 商城活动
+    value: '14'
+  - label: 品类活动
+    value: '15'
+  - label: 商城付费投放
+    value: '16'
+  - label: DI公众号
+    value: '17'
+  - label: 线下展会
+    value: '18'
+  - label: 海外展会
+    value: '19'
+  - label: 视频号/直播
+    value: '20'
+  - label: 未付款（DCJ中台）
+    value: '21'
+  - label: Smart网站
+    value: '22'
+  - label: O2O线索
+    value: '23'
+  - label: 培训孵化客户
+    value: '24'
+  - label: Xcelerator
+    value: '25'
+  - label: 抖音
+    value: '26'
+  - label: 广告投放-KOC/KOL
+    value: '27'
+  - label: CM外媒合作
+    value: '28'
+  - label: 企业认证
+    value: '29'
+  - label: X_Marketing活动
+    value: '30'
+  - label: 培训渠道
+    value: '31'
+  - label: 测试
+    value: '32'
+  - label: 其他
+    value: other
+  - label: 招投标公告
+    value: procurementInfoTransfer
+- api: phone_number_attribution_province
+  label: 手机归属省
+- api: changed_to_mql_period
+  label: 转MQL周期
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: clue_id__c
+  label: Clue ID
+- api: siemens_year_total_demand__c
+  label: 西门子年总需求
+  options:
+  - label: 不足10w
+    value: '1'
+  - label: 10w-50w
+    value: '2'
+  - label: 50w-100w
+    value: '3'
+  - label: 100w-500w
+    value: '4'
+  - label: 500w-1000w
+    value: '5'
+  - label: 1000w以上
+    value: '6'
+  - label: 未知
+    value: '7'
+  - label: 其他
+    value: other
+- api: bim_leads_closed_amount__c
+  label: BIM线索成交金额
+- api: need_secondary_follow_up__c
+  label: 是否需要二次跟进
+- api: owner_department
+  label: 负责人主属部门
+- api: wechat_friend_id
+  label: 企微好友
+- api: job_title
+  label: 职务
+- api: last_order_time__c
+  label: 最近一次下单时间
+- api: is_relevance_wechat
+  label: 是否关联企微
+  options:
+  - label: 否
+    value: 'False'
+  - label: 是
+    value: 'True'
+- api: create_time
+  label: 创建时间
+- api: bim_industry__c
+  label: BIM行业
+- api: promotion_channel
+  label: 推广渠道
+  options:
+  - label: 广告
+    value: ad
+  - label: 官网
+    value: website
+  - label: 微信
+    value: wechat
+  - label: 短信
+    value: sms
+  - label: 邮件
+    value: email
+  - label: 公众号
+    value: offiaccount
+  - label: 企业微信
+    value: qywx
+  - label: 其他
+    value: other
+- api: phone_number_attribution
+  label: 手机归属地
+- api: created_by
+  label: 创建人
+- api: user_creation_source__c
+  label: 用户创建来源
+- api: project_phase__c
+  label: 项目阶段
+- api: name
+  label: Name
+- api: leads_status
+  label: 状态（原）
+  options:
+  - label: 未分配
+    value: '1'
+  - label: 待处理
+    value: '2'
+  - label: 已转换
+    value: '3'
+  - label: 跟进中
+    value: '4'
+  - label: 无效
+    value: '5'
+  - label: 已作废
+    value: '99'
+  - label: 未生效
+    value: '6'
+  - label: 审核中
+    value: '7'
+  - label: 变更中
+    value: '8'
+- api: feedback_deadline__c
+  label: 反馈截止时间
+- api: conversion_probability
+  label: 转换概率
+- api: historical_ecommerce_cumul__c
+  label: 历史至今的电商累计订单数量（客户）
+- api: bim_push_result__c
+  label: BIM推送结果
+- api: requirement_clarification__c
+  label: 需求澄清
+- api: marketing_promotion_source_id
+  label: 营销推广来源
+- api: is_trust_it__c
+  label: 是否Trust it
+- api: lock_user
+  label: 加锁人
+- api: marketing_spread_user__c
+  label: 推广人
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: associated_contact__c
+  label: 所属触点
+- api: company
+  label: 项目名称
+- api: out_owner
+  label: 外部负责人
+- api: is_overtime
+  label: 是否超时
+  options:
+  - label: 未超时
+    value: 'False'
+  - label: 已超时
+    value: 'True'
+- api: last_modified_by__c
+  label: Last Modified by
+- api: owner
+  label: 负责人
+- api: creator__c
+  label: Creator
+- api: supplementary_information__c
+  label: 补充信息
+- api: mobile
+  label: 手机
+- api: customer_type__c
+  label: 客户类型
+  options:
+  - label: End-Account
+    value: option_end_account__c
+  - label: OEM
+    value: option_oem__c
+  - label: EPC/General Contractor
+    value: option_epc_general_contractor__c
+  - label: System Integrator
+    value: option_system_integrator__c
+  - label: Wholeseller/Distributor
+    value: option_wholeseller_distributor__c
+  - label: Vendor/Reseller/Retailer
+    value: option_vendor_reseller_retailer__c
+  - label: Panel Builder
+    value: option_panel_builder__c
+  - label: Decision Influencer
+    value: option_decision_influencer__c
+  - label: Service Company
+    value: option_service_company__c
+  - label: Other
+    value: other
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: trustit_signup_time__c
+  label: TrustIT注册时间
+- api: business_type__c
+  label: Business Type
+- api: activity_scenario__c
+  label: 活动场景
+- api: bim_customer_type__c
+  label: BIM客户类型
+- api: lock_rule
+  label: 锁定规则
+- api: cdp_lead_type__c
+  label: CDP线索类型
+- api: leads_pool_id
+  label: 线索池
+- api: main_purchasing_channel__c
+  label: 主要采购渠道
+  options:
+  - label: 授权一级代理商
+    value: '1'
+  - label: 2、3级渠道
+    value: '2'
+  - label: 暂无固定采买渠道
+    value: '3'
+  - label: 未告知
+    value: '4'
+  - label: 其他
+    value: other
+- api: total_investment_amount__c
+  label: 投资总额
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: remind_days
+  label: 回收提前提醒天数
+- api: leads_status__c
+  label: Leads Status
+- api: last_order_unpaid_goods__c
+  label: 最近一次下单未付款商品
+- api: purchase_decision_making_p__c
+  label: 采买决策权
+  options:
+  - label: 本人全权决策（本司直接下单）
+    value: '1'
+  - label: 本人主导，需内部审批（本司下单）
+    value: '2'
+  - label: 无决策权，可推荐采购（本司下单）
+    value: '3'
+  - label: 无决策权，不愿推荐采购（本司下单）
+    value: '4'
+  - label: 多人联合决策，具体链路需澄清（本司下单）
+    value: '5'
+  - label: 需总部 / 集团统一采购
+    value: '6'
+  - label: 需第三方 / 工程公司 / 代理商采购
+    value: '7'
+  - label: 决策权暂不明确
+    value: '8'
+  - label: 其他
+    value: other
+- api: insured_number__c
+  label: 参保人数
+- api: biz_status
+  label: 状态
+  options:
+  - label: 未分配
+    value: un_assigned
+  - label: 待处理
+    value: un_processed
+  - label: 已转换
+    value: transformed
+  - label: 跟进中
+    value: processed
+  - label: 无效
+    value: closed
+- api: contact_position__c
+  label: 联系人岗位
+  options:
+  - label: 采购
+    value: option_purchase__c
+  - label: 技术
+    value: option_technology__c
+  - label: 采购&技术
+    value: option_purchase_technology__c
+  - label: 企业管理者
+    value: option_enterprise_manager__c
+  - label: 运维维修
+    value: option_operation_maintenance_repa__c
+  - label: 其他
+    value: other
+- api: phone_number_attribution_address
+  label: 手机归属详细地址
+- api: relevance_wechat_date
+  label: 关联企微日期
+- api: industry_affiliation__c
+  label: 所属行业
+  options:
+  - label: 汽车
+    value: '1'
+  - label: 电池
+    value: '2'
+  - label: 化工
+    value: '3'
+  - label: 电子
+    value: '4'
+  - label: 食品饮料
+    value: '5'
+  - label: 场内物流
+    value: '6'
+  - label: 冶金
+    value: '7'
+  - label: 制药
+    value: '8'
+  - label: 教育
+    value: '9'
+  - label: 轮胎
+    value: '10'
+  - label: 水处理
+    value: '11'
+  - label: 其他
+    value: other
+- api: is_duplicated
+  label: 是否存在重复数据
+  options:
+  - label: 未重复
+    value: 'False'
+  - label: 已重复
+    value: 'True'
+- api: tenant_id
+  label: tenant_id
+- api: UUID__c
+  label: JING系统UUID
+- api: recent_purchase_plan__c
+  label: 近期采购计划
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: follow_up_time__c
+  label: Follow-up Time
+- api: first_time_to_become_lead__c
+  label: 首次成为线索时间
+- api: user_fill_in_customer_type__c
+  label: 用户填写客户类型
+- api: marketing_activity_id__c
+  label: 营销活动
+- api: phone_number_attribution_country
+  label: 手机归属国家
+- api: life_cycle__c
+  label: Life Cycle
+- api: last_follower
+  label: 最后跟进人
+- api: agents_of_ecommerce_inquir__c
+  label: 近30天电商询盘下派的代理商
+- api: phone_number_attribution_district
+  label: 手机归属区
+- api: country_region__c
+  label: Country/Region
+- api: wechat_id
+  label: 微信号
+- api: transform_period
+  label: 转换周期
+- api: is_dbo_follow_up_customer__c
+  label: 是否DBO可跟进客户
+- api: initial_standardized_sourc__c
+  label: Initial Standardized Source
+- api: clue_name__c
+  label: Clue Name
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: url
+  label: 网址
+- api: enterprise_wechat_user_id
+  label: 企业微信UserId
+- api: marketing_event_id
+  label: 市场活动名称
+- api: position__c
+  label: Position
+- api: last_order_unpaid_time__c
+  label: 最近一次下单未付款时间
+- api: leads_identity_score__c
+  label: Leads Identity Score
+- api: order_status__c
+  label: 订单状态
+- api: biz_reg_name
+  label: 工商注册
+  options:
+  - label: 否
+    value: 'False'
+  - label: 是
+    value: 'True'
+- api: assigner_id
+  label: 分配管理员
+- api: customer__c
+  label: 客户
+- api: transform_time
+  label: 转换时间
+- api: handover_object__c
+  label: Handover对象
+  options:
+  - label: 转出_销售
+    value: '1'
+  - label: 转出_代理商
+    value: '2'
+  - label: 转出_BU
+    value: '3'
+  - label: 转出_茵梦达
+    value: '4'
+  - label: 其他
+    value: other
+- api: fund_status__c
+  label: 资金到位情况
+- api: bim_new_specialized__c
+  label: BIM新精特专
+- api: next_followed_time
+  label: 下次跟进时间
+- api: owner_change_time
+  label: 负责人变更时间
+- api: mobile__c
+  label: Mobile
+- api: handover_reason__c
+  label: Handover 原因
+- api: assist_dbo_customer_attrib__c
+  label: 辅助DBO客户属性
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: expire_time
+  label: 预计收回时间
+- api: changed_to_mql_time
+  label: 转MQL时间
+- api: extend_reason
+  label: 延期原因
+- api: most_recently_assigned_ope__c
+  label: Most Recently Assigned Operator
+- api: relevant_team
+  label: 相关团队
+- api: company_scale__c
+  label: 公司规模（大中小）
+- api: industry_ext
+  label: 工商扩展
+- api: remaining_time
+  label: 剩余保有时间
+- api: data_own_department
+  label: 归属部门
+- api: unified_social_credit_code__c
+  label: 统一社会信用代码
+- api: customer_contact_intention__c
+  label: 客户联系意向
+- api: last_follow_time
+  label: 最后跟进时间
+- api: industry_level2
+  label: 2级行业
+  options:
+  - label: 农业
+    value: pxFT5Z8H9
+  - label: 林业
+    value: a2EdgWy03
+  - label: 畜牧业
+    value: 72t1WFHEj
+  - label: 渔业
+    value: Un7m9yy18
+  - label: 农、林、牧、渔专业及辅助性活动
+    value: 5KQjgduEu
+  - label: 煤炭开采和洗选业
+    value: zslOo5uPO
+  - label: 石油和天然气开采业
+    value: CydqnxLcp
+  - label: 黑色金属矿采选业
+    value: r51JYtlKj
+  - label: 有色金属矿采选业
+    value: bq8dIPOG4
+  - label: 非金属矿采选业
+    value: dDa21mxY2
+  - label: 开采专业及辅助性活动
+    value: DtQjla1Eo
+  - label: 其他采矿业
+    value: VBm7oe31G
+  - label: 农副食品加工业
+    value: 8GH61KlLk
+  - label: 食品制造业
+    value: PDAs3wowQ
+  - label: 酒、饮料和精制茶制造业
+    value: 3O57epppA
+  - label: 烟草制品业
+    value: hW7CXY50Y
+  - label: 纺织业
+    value: 22Vp8j5m0
+  - label: 纺织服装、服饰业
+    value: e94z9TfVU
+  - label: 皮革、毛皮、羽毛及其制品和制鞋业
+    value: R2Fe1zcNh
+  - label: 木材加工和木、竹、藤、棕、草制品业
+    value: QhH96QsI5
+  - label: 家具制造业
+    value: otiM1Y8Cy
+  - label: 造纸和纸制品业
+    value: 7cf1Wwt2v
+  - label: 印刷和记录媒介复制业
+    value: f4zSH0xb1
+  - label: 文教、工美、体育和娱乐用品制造业
+    value: 0VhN4w35z
+  - label: 石油、煤炭及其他燃料加工业
+    value: iq4TM2zmi
+  - label: 化学原料和化学制品制造业
+    value: WPH51njhv
+  - label: 医药制造业
+    value: y2rFe6lrE
+  - label: 化学纤维制造业
+    value: 2A4V56p00
+  - label: 橡胶和塑料制品业
+    value: 0vQutx9T4
+  - label: 非金属矿物制品业
+    value: ciVrEzxMc
+  - label: 黑色金属冶炼和压延加工业
+    value: MXisfNHJp
+  - label: 有色金属冶炼和压延加工业
+    value: 5xU907qZX
+  - label: 金属制品业
+    value: j0Sf2oX1U
+  - label: 通用设备制造业
+    value: 7asCZkV6I
+  - label: 专用设备制造业
+    value: 89DRKuo1Z
+  - label: 汽车制造业
+    value: vt0w4011w
+  - label: 铁路、船舶、航空航天和其他运输设备制造业
+    value: 1gS91lSga
+  - label: 电气机械和器材制造业
+    value: r2Nm0xM53
+  - label: 计算机、通信和其他电子设备制造业
+    value: a1ssBf7QM
+  - label: 仪器仪表制造业
+    value: 1238yygph
+  - label: 其他制造业
+    value: f7329iCdK
+  - label: 废弃资源综合利用业
+    value: j9iye81N4
+  - label: 金属制品、机械和设备修理业
+    value: 1yJ73F8pm
+  - label: 电力、热力生产和供应业
+    value: 51F5tLX30
+  - label: 燃气生产和供应业
+    value: iOSE0Kp93
+  - label: 水的生产和供应业
+    value: 2pIGMv1w6
+  - label: 房屋建筑业
+    value: 4jF60dvEB
+  - label: 土木工程建筑业
+    value: pCaSio6y5
+  - label: 建筑安装业
+    value: j0u2K5to5
+  - label: 建筑装饰、装修和其他建筑业
+    value: XvBqrDZAU
+  - label: 批发业
+    value: Xvk20i4sJ
+  - label: 零售业
+    value: Y7GFRfy5N
+  - label: 铁路运输业
+    value: 8sgX2j28E
+  - label: 道路运输业
+    value: D24Q2jfvO
+  - label: 水上运输业
+    value: v44s6g2tb
+  - label: 航空运输业
+    value: 3lZFH1r1z
+  - label: 管道运输业
+    value: 1KcrU9wqi
+  - label: 多式联运和运输代理业
+    value: yUpU0CMlt
+  - label: 装卸搬运和仓储业
+    value: 4x4Jr1dku
+  - label: 邮政业
+    value: r3254RVah
+  - label: 住宿业
+    value: dO85SFj2M
+  - label: 餐饮业
+    value: a0471KDzg
+  - label: 电信、广播电视和卫星传输服务
+    value: pU2x5391N
+  - label: 互联网和相关服务
+    value: W1QnfZ358
+  - label: 软件和信息技术服务业
+    value: YkVr6TsLB
+  - label: 货币金融服务
+    value: l9aSzS26v
+  - label: 资本市场服务
+    value: 2h5mA682S
+  - label: 保险业
+    value: ovCJqdmd0
+  - label: 其他金融业
+    value: D6901E0u3
+  - label: 房地产业
+    value: xV1hPDyMs
+  - label: 租赁业
+    value: omn36erl1
+  - label: 商务服务业
+    value: dbq2ERa4j
+  - label: 研究和试验发展
+    value: Rxr4MbRdP
+  - label: 专业技术服务业
+    value: MfP0UaKuO
+  - label: 科技推广和应用服务业
+    value: 43e65syTS
+  - label: 水利管理业
+    value: d1Ugm1aIA
+  - label: 生态保护和环境治理业
+    value: WQw7wKf1t
+  - label: 公共设施管理业
+    value: k6xDvl56m
+  - label: 土地管理业
+    value: 6ah4bvqAb
+  - label: 居民服务业
+    value: i3uqdpqSW
+  - label: 机动车、电子产品和日用产品修理业
+    value: 86J1gYzbZ
+  - label: 其他服务业
+    value: 1v1b7cc2y
+  - label: 教育
+    value: 272jITO4c
+  - label: 卫生
+    value: id0J4c0kb
+  - label: 社会工作
+    value: H12v0loeh
+  - label: 新闻和出版业
+    value: la7vC1R9V
+  - label: 广播、电视、电影和录音制作业
+    value: E13554vaZ
+  - label: 文化艺术业
+    value: 98r5jlLaC
+  - label: 体育
+    value: z1uFz641p
+  - label: 娱乐业
+    value: uB0ayCwaa
+  - label: 中国共产党机关
+    value: 8m1DRkceW
+  - label: 国家机构
+    value: reucxySd1
+  - label: 人民政协、民主党派
+    value: oBetfnJir
+  - label: 社会保障
+    value: iOf2lNyA8
+  - label: 群众团体、社会团体和其他成员组织
+    value: 0u5Q71WB5
+  - label: 基层群众自治组织
+    value: 2eFqZsfdk
+  - label: 国际组织
+    value: Cz2fE4l8l
+- api: industry_level1
+  label: 1级行业
+  options:
+  - label: 农、林、牧、渔业
+    value: MfO2aDzo1
+  - label: 采矿业
+    value: oY38F8e12
+  - label: 制造业
+    value: h7oDN8Vbn
+  - label: 电力、热力、燃气及水生产和供应业
+    value: e34hK3CrE
+  - label: 建筑业
+    value: G06S9GaEQ
+  - label: 批发和零售业
+    value: xhj1bVR31
+  - label: 交通运输、仓储和邮政业
+    value: At2dwudpS
+  - label: 住宿和餐饮业
+    value: VC1exe4eS
+  - label: 信息传输、软件和信息技术服务业
+    value: 6wrsk1T8x
+  - label: 金融业
+    value: s49O92tu0
+  - label: 房地产业
+    value: lSIhX1Y24
+  - label: 租赁和商务服务业
+    value: tNzVSxH1e
+  - label: 科学研究和技术服务业
+    value: 2Tl8x0GfB
+  - label: 水利、环境和公共设施管理业
+    value: 1rXMphDY6
+  - label: 居民服务、修理和其他服务业
+    value: i12pW9E4j
+  - label: 教育
+    value: gt903b1c2
+  - label: 卫生和社会工作
+    value: Almx5FMEo
+  - label: 文化、体育和娱乐业
+    value: qDtJ814Nl
+  - label: 公共管理、社会保障和社会组织
+    value: ulQVZhy7a
+  - label: 国际组织
+    value: 7uWY1qs56
+- api: _id
+  label: _id
+- api: website_id
+  label: 官网id
+- api: is_remind_recycling
+  label: 是否待回收提醒
+  options:
+  - label: 否
+    value: 'False'
+  - label: 是
+    value: 'True'
+- api: company_registration_time__c
+  label: 公司注册时间
+- api: remark
+  label: 销售线索详情
+- api: contact_id
+  label: 原转换联系人名称
+- api: sales_area__c
+  label: 销售区域
+  options:
+  - label: RS-南部
+    value: option_rs_south__c
+  - label: RW-西部
+    value: option_rw_west__c
+  - label: RE-东部
+    value: option_re_eastern_part__c
+  - label: RN-华北
+    value: option_rn_north_china__c
+  - label: RC-中部
+    value: option_rc_middle_part__c
+  - label: RNE-东北
+    value: option_rne_northeast__c
+  - label: 其他
+    value: other
+- api: original_purchase_discount__c
+  label: 原采买折扣
+- api: owner__c
+  label: Owner
+- api: is_deleted
+  label: is_deleted
+- api: customer_creation_result__c
+  label: 客户创建结果
+  options:
+  - label: 已新建客户
+    value: '1'
+  - label: 已关联老客户
+    value: '2'
+  - label: 处理失败
+    value: '3'
+  - label: 其他
+    value: other
+- api: end_customer__c
+  label: 最终客户
+- api: department
+  label: 部门
+- api: leads_stage_changed_time
+  label: 线索阶段变更时间
+- api: phone_number_attribution_location
+  label: 手机归属定位
+- api: picture_path
+  label: 名片
+- api: completed_result
+  label: 处理结果
+- api: customer_type_priority__c
+  label: 客户类型（优先级）
+- api: last_modified_by
+  label: 最后修改人
+- api: user_creation_channel__c
+  label: 用户创建渠道
+- api: customer_communication_wil__c
+  label: 客户沟通意愿
+- api: returned_time
+  label: 退回/收回时间
+- api: refresh_duplicated_version
+  label: 重复数据刷库版本号
+- api: siemens_replace_other_bran__c
+  label: 西门子是否替代其他品牌应用

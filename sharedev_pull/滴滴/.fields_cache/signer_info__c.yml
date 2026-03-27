@@ -1,0 +1,130 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: customer__c
+  label: 客户
+- api: authorization_start_date__c
+  label: 授权开始时间
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: company_name__c
+  label: 企业名称
+- api: contractor_status__c
+  label: 签约人状态
+  options:
+  - label: 已生效
+    value: '0'
+  - label: 未生效
+    value: '1'
+  - label: 已失效
+    value: '2'
+  - label: 驳回
+    value: '3'
+  - label: 其他
+    value: other
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: business_credit_code__c
+  label: 企业信用代码
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: owner
+  label: 负责人
+- api: signer_code__c
+  label: 签约人code
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: authorization_end_date__c
+  label: 授权结束时间
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 内部签约人信息
+    value: ''
+  - label: 客户签约人信息
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: data_own_department
+  label: 归属部门
+- api: enterprise_status__c
+  label: 企业状态
+  options:
+  - label: 已生效
+    value: '0'
+  - label: 未生效
+    value: '1'
+  - label: 已失效
+    value: '2'
+  - label: 驳回
+    value: '3'
+  - label: 其他
+    value: other
+- api: name
+  label: 姓名
+- api: mobile_phone__c
+  label: 手机
+- api: _id
+  label: _id
+- api: id_number__c
+  label: 身份证号码
+- api: company_subject__c
+  label: 企业主体
+  options:
+  - label: 滴滴出行科技有限公司
+    value: '1'
+  - label: 北京小桔国际旅行社有限公司
+    value: '2'
+  - label: 北京小桔国际旅行社有限公司天津分公司
+    value: '3'
+  - label: 天津小桔商业管理有限公司
+    value: '4'
+  - label: 杭州快驾智行科技有限公司
+    value: '5'
+  - label: 其他
+    value: other

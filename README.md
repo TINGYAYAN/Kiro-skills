@@ -204,9 +204,18 @@ teardown:         # 清理测试数据（倒序执行）
 
 ### 方式二：多维表格
 
-1. 在飞书中创建多维表格，新建数据表，表头包含列：**函数名**、**描述**、**绑定对象**、**系统API名**
-2. 从 URL 获取 `app_token` 和 `table_id`：`https://xxx.feishu.cn/base/APP_TOKEN?table=TABLE_ID`
-3. 在 `config.local.yml` 的 `feishu` 下填写 `bitable_app_token`、`bitable_table_id`
+1. 在飞书中创建多维表格，新建数据表。批量生成**建议按模板建表**，不要只保留自由文本一列
+2. 推荐表头包含列：**描述**、**绑定对象**、**函数类型**、**项目**、**函数名**、**系统API名**、**状态**、**执行时间**、**执行反馈**、**风险级别**、**人工处理建议**
+3. 其中 **函数名**、**系统API名** 需要保持留空，系统据此识别为待执行
+4. 从 URL 获取 `app_token` 和 `table_id`：`https://xxx.feishu.cn/base/APP_TOKEN?table=TABLE_ID`
+5. 在 `config.local.yml` 的 `feishu` 下填写 `bitable_app_token`、`bitable_table_id`
+
+可直接使用模板文件：
+
+- [bitable_template_blank.csv](/Users/yanye/code/test拨号/_tools/bitable_template_blank.csv)
+- [bitable_template_example.csv](/Users/yanye/code/test拨号/_tools/bitable_template_example.csv)
+
+如果你已经有一张固定的模板表，也可以在 `config.local.yml -> feishu.template_table_url` 里配置固定链接。之后生成“批量模板回复文案”时，会优先引用这张表，不再临时创建新模板表。
 
 未配置或配置不完整时，流水线会静默跳过飞书记录步骤。
 
@@ -214,7 +223,7 @@ teardown:         # 清理测试数据（倒序执行）
 
 优先看 [TROUBLESHOOTING.md](TROUBLESHOOTING.md) 开头的「流水线整体不工作」：
 - **生成无反应/超时** → 检查 `config.local.yml` 的 LLM 配置（模型、代理、timeout）
-- **批量无待执行** → 飞书表格需新增行，函数名留空
+- **批量无待执行** → 飞书表格需新增行，至少填描述，且函数名/系统API名留空
 - **req.yml 示例** → 见 `req.yml`，建议补全 code_name、output_dir、output_file
 
 ## 注意事项

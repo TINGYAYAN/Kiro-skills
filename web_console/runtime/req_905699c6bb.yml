@@ -1,0 +1,5 @@
+requirement: 根据当前业务表单中的“顾客姓名”，查询“顾客姓名”对应客户对象上表单中的“归属门店”，将获取的客户ID更新到当前业务表单上“门店名称”字段上
+object_api: AccountObj
+object_label: 客户
+function_type: UI函数
+project: 朗润生物

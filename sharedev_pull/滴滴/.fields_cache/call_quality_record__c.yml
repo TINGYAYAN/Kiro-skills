@@ -1,0 +1,254 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: retention__c
+  label: 质-挽留
+- api: customer_understands_busin__c
+  label: 意-客户对企业需求是否清楚
+- api: yi_demand_exploration__c
+  label: 意-需求挖掘
+- api: nine_elements_connection__c
+  label: 意-九要素衔接
+- api: fatal_error__c
+  label: 是否致命错误
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: url__c
+  label: 点击查看线索详情
+- api: qcTime__c
+  label: 质检日期
+- api: demand_exploration__c
+  label: 质-需求挖掘
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: process_progress__c
+  label: 流程推进
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: phone_number__c
+  label: 电话
+- api: objection_handling__c
+  label: 意-异议处理
+- api: owner_department
+  label: 负责人主属部门
+- api: multi_category_expansion__c
+  label: 质-多品类拓展
+- api: statAgentPercent__c
+  label: 座席讲话占比
+- api: non_enterprise_version_dem__c
+  label: 非企业版需求/需求满足不了
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: stage__c
+  label: 线索阶段
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: spoken_expression__c
+  label: 口语表达
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: create_time
+  label: 创建时间
+- api: lead__c
+  label: 销售线索
+- api: ts_objection_handling__c
+  label: 异议处理
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: false_promises__c
+  label: 质-不实承诺
+- api: group_leader__c
+  label: 组长
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: product_introduction__c
+  label: 意-产品介绍
+- api: relevant_team
+  label: 相关团队
+- api: sample_source__c
+  label: 抽样来源
+  options:
+  - label: 常规
+    value: '1'
+  - label: 退回
+    value: '2'
+  - label: 销售反馈
+    value: '3'
+  - label: 其他
+    value: other
+- api: ts_product_introduction__c
+  label: 产品介绍
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: online_duration__c
+  label: 上线时长
+- api: resolve_concerns__c
+  label: 质-解决疑虑
+- api: qcComment__c
+  label: 评语
+- api: data_own_department
+  label: 归属部门
+- api: is_manual_inspection_done__c
+  label: 是否已人工质检
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: semantic_tag_count__c
+  label: 语义标签数
+- api: intent_score__c
+  label: 意向度得分
+- api: quality_check_score__c
+  label: 质检项得分
+- api: comfort_and_care__c
+  label: 安抚关怀
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: name
+  label: 流水号
+- api: service_consciousness__c
+  label: 质-服务意识
+- api: _id
+  label: _id
+- api: call_start_time__c
+  label: 通话开始时间
+- api: tenant_id
+  label: tenant_id
+- api: agent_name__c
+  label: 座席姓名
+- api: qc_uniqueId__c
+  label: 唯一标识
+- api: start_and_end__c
+  label: 质-开场与结束
+- api: ts_demand_exploration__c
+  label: 需求挖掘
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: items_to_improve_count__c
+  label: 需提升项为是的数量
+- api: alarmResult__c
+  label: 是否预警
+  options:
+  - label: 是
+    value: 'True'
+  - label: 否
+    value: 'False'
+- api: nine_elements__c
+  label: 质-九要素
+- api: auto_qa_records__c
+  label: 自动质检记录
+- api: has_call_record__c
+  label: 是否有通话记录
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: is_deleted
+  label: is_deleted
+- api: lead_type__c
+  label: 线索类型
+- api: requirement_clear__c
+  label: 意-需求明确
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: out_owner
+  label: 外部负责人
+- api: auto_qc_customer_tags_coun__c
+  label: 自动质检-客户侧标签数
+- api: call_duration__c
+  label: 通话时长
+- api: owner
+  label: 负责人
+- api: system_operation__c
+  label: 质-系统操作
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: uniqueId__c
+  label: 通话记录
+- api: valid_kp__c
+  label: 意-有效KP
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: agent_tag_count__c
+  label: 座席侧标签数
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 自动质检
+    value: ''
+  - label: 人工质检-MQL
+    value: ''
+  - label: 人工质检-非MQL
+    value: ''
+- api: is_requirement_clear__c
+  label: 是否需求明确
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: auto_qc_semantic_label_cou__c
+  label: 自动质检-语义标签数
+- api: client_tag_count__c
+  label: 客户侧标签数
+- api: auto_qc_agent_tags_count__c
+  label: 自动质检-座席侧标签数
+- api: product_knowledge__c
+  label: 质-产品知识

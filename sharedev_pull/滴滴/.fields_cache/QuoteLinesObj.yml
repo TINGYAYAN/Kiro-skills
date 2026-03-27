@@ -1,0 +1,316 @@
+fields:
+- api: interfaceYN__c
+  label: 是否下传
+- api: lock_rule
+  label: 锁定规则
+- api: product_name_for_printing__c
+  label: 产品名称_打印用
+- api: discount
+  label: 系统折扣
+- api: is_saleable
+  label: 是否可独立售卖
+- api: price_editable
+  label: 价格可编辑
+- api: salesPolicy__c
+  label: 政策
+- api: xsy_name__c
+  label: 销售易报价单明细编码
+- api: product_standard_price__c
+  label: 产品标准价格
+- api: productIntroduction__c
+  label: 产品内容_打印用
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: price
+  label: 标准价格
+- api: product_id
+  label: 产品名称
+- api: lowPriceListtype__c
+  label: 可用最惠价格表类型
+- api: parent_product__c
+  label: 上级明细对应产品
+- api: quote_lines_unit
+  label: 单位
+- api: price_mode
+  label: 定价模式
+- api: product_interface_sync_id__c
+  label: 产品接口同步时使用ID
+- api: bom_type
+  label: bom类型
+- api: original__c
+  label: 到期是否启用原价服务
+- api: quote_id
+  label: 报价单
+- api: sales_amount
+  label: 销售金额小计
+- api: product_life_status
+  label: 产品生命状态
+- api: version
+  label: version
+- api: policyDescription__c
+  label: 政策描述
+- api: index_number__c
+  label: 序号
+- api: product_id__c
+  label: 产品ID
+- api: parentProductPrint__c
+  label: 产品项目_打印用
+- api: customer_salesforce_id__c
+  label: 客户销售易ID
+- api: price_book_id
+  label: 价目表
+- api: sales_policy_new__c
+  label: 销售政策新
+- api: lower_price__c
+  label: 是否低于最惠价格
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: policyDiscount__c
+  label: 对赌间夜比
+- api: preferentialRange__c
+  label: 补充条款有效期_打印用
+- api: bom_core_id
+  label: 产品组合
+- api: related_core_id
+  label: 复用产品组合Id
+- api: tenant_id
+  label: tenant_id
+- api: parent_detail_id__c
+  label: 上级明细ID
+- api: customer_name_default__c
+  label: 客户名称（默认值）
+- api: price__c
+  label: 实际售卖价
+- api: fee_standard__c
+  label: 收费标准
+- api: quote_lines_specs
+  label: 规格
+- api: increment
+  label: 增加数量幅度
+- api: product_status
+  label: 产品上下架
+- api: product_item_driverservice__c
+  label: 产品项目_代驾
+- api: total_discount_amount
+  label: 总折扣小计
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: extra_discount
+  label: 额外折扣
+- api: parent_detail_product_sale__c
+  label: 上级明细对应产品销售易ID
+- api: bom_version
+  label: bom版本
+- api: product_salesforce_id__c
+  label: 产品销售易ID
+- api: prod_pkg_key
+  label: 产品组合虚拟key
+- api: is_package
+  label: 是否产品组合
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: originalPrint__c
+  label: 到期是否启用原价服务_打印用
+- api: isPrintShow__c
+  label: 是否在打印中显示
+- api: personalPay__c
+  label: 个垫是否可用
+- api: salesforce_parent_id_consi__c
+  label: 销售易上级ID是否一致
+- api: out_tenant_id
+  label: 外部企业
+- api: amount_editable
+  label: 数量可编辑
+- api: bom_id
+  label: 产品选配明细
+- api: product_group_id
+  label: 产品分组
+- api: product_item_taxi__c
+  label: 产品项目_出租车
+- api: lowPriceList_line__c
+  label: 可用最惠价格表明细
+- api: sales_price
+  label: 报价
+- api: max_amount
+  label: 最大数量
+- api: package_type_calculated__c
+  label: 套餐类型（计算）
+- api: taxiPrice__c
+  label: 产品价格及规则_出租车/海外用车
+- api: pricePercentage__c
+  label: 实际百分比价格
+- api: isSyncJuQi__c
+  label: 是否需要同步桔契
+- api: extra_discount_amount
+  label: 额外折扣小计
+- api: price_book_product_id
+  label: 价目表产品
+- api: policy_salesforce_id__c
+  label: 政策销售易ID
+- api: new_bom_path
+  label: Bom完整路径
+- api: amount_any
+  label: 数量是否任意值
+- api: extend_obj_data_id
+  label: extend_obj_data_id
+- api: owner_department
+  label: 负责人主属部门
+- api: didiProductId__c
+  label: 滴滴产品ID
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: discount__c
+  label: 折扣%
+- api: create_time
+  label: 创建时间
+- api: min_amount
+  label: 最小数量
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: data_own_department
+  label: 归属部门
+- api: product_price_description__c
+  label: 产品价格描述
+- api: total_amount
+  label: 报价小计
+- api: pricing_method1__c
+  label: 计价方式（计算）
+- api: didiId__c
+  label: 滴滴客户ID
+- api: name
+  label: 报价单明细编码
+- api: pricing_method__c
+  label: 计价方式
+  options:
+  - label: 折后金额
+    value: '1'
+  - label: 折扣比例
+    value: '2'
+  - label: 其他
+    value: other
+- api: _id
+  label: _id
+- api: parent_prod_pkg_key
+  label: 产品组合虚拟parent key
+- api: root_prod_pkg_key
+  label: 产品组合虚拟root key
+- api: selling_price
+  label: 销售单价
+- api: optionLevel__c
+  label: 明细层级
+- api: total_discount
+  label: 总折扣
+- api: travelPrice__c
+  label: 产品价格及规则_商旅
+- api: lock_user
+  label: 加锁人
+- api: bom_structure_updated_pare__c
+  label: 刷BOM结构后的上级明细销售易ID
+- api: package_type__c
+  label: 套餐类型
+  options:
+  - label: 服务费套餐
+    value: '1'
+  - label: 功能套餐
+    value: '2'
+  - label: 其他
+    value: other
+- api: designatePrice__c
+  label: 产品价格及规则_代驾
+- api: productCheck__c
+  label: 票据方案产品校验
+- api: product_item_car__c
+  label: 产品项目_网约车/海外用车
+- api: quote_id_salesforce__c
+  label: 报价单销售易ID
+- api: is_deleted
+  label: is_deleted
+- api: product_item__c
+  label: 产品费目
+- api: product_item_travel_busine__c
+  label: 产品项目_商旅
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: sales_policy_item__c
+  label: 销售政策费目
+- api: out_owner
+  label: 外部负责人
+- api: system_discount_amount
+  label: 系统折扣小计
+- api: owner
+  label: 负责人
+- api: discount_percentage_calcul__c
+  label: 折扣%（计算）
+- api: quantity
+  label: 数量
+- api: price_difference__c
+  label: 价差
+- api: is_regular_quotation__c
+  label: 是否常规报价
+- api: policyDescriptiontra__c
+  label: 补充条款_打印用
+- api: print_hierarchy
+  label: 层级
+- api: quotationDetailEntityRelAccount__c
+  label: 客户名称
+- api: last_modified_by
+  label: 最后修改人
+- api: sales_policy_interfaceId__c
+  label: 销售政策-接口使用数据ID
+- api: xsyId__c
+  label: 销售易数据ID
+- api: policyDescriptionBus__c
+  label: 政策描述_商旅
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 网约车报价单明细
+    value: ''
+  - label: 商旅报价单明细
+    value: ''
+  - label: 出租车报价单明细
+    value: ''
+  - label: 代驾报价单明细
+    value: ''
+  - label: 跨境用车报价单明细
+    value: ''
+- api: is_contract_product__c
+  label: 是否一个合同产品
+- api: available_best_price_table__c
+  label: 可用最惠价格表
+- api: priceRule__c
+  label: 产品价格及规则_打印用
+- api: carPrice__c
+  label: 产品价格及规则_网约车
+- api: sale_strategy
+  label: 售卖方式
+- api: product_price_percentage__c
+  label: 产品标准百分比价格

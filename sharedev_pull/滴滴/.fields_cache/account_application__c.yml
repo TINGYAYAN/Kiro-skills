@@ -1,0 +1,307 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: primarySector__c
+  label: 一级部门
+- api: certified_startdate__c
+  label: 证件有效开始时间
+- api: h5_Personal_payment__c
+  label: 企业APP-h5是否允许个人垫付
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: multiple_lines_text__c
+  label: 税点方案提醒
+- api: CSM_customer__c
+  label: CSM客户
+- api: admin_name__c
+  label: 管理员姓名接口用
+- api: xsy_name__c
+  label: 销售易流水号
+- api: credit_line__c
+  label: 授信额度
+- api: syncId__c
+  label: 接口使用数据ID
+- api: field_3q1U9__c
+  label: 明细合同数
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: certificationAttch__c
+  label: 资质附件
+- api: owner_department
+  label: 负责人主属部门
+- api: customItem93__c
+  label: SSC审核通过时间
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: certificationID__c
+  label: 资质文件附件ID
+- api: account__c
+  label: 客户名称
+- api: end_date__c
+  label: 合同结束时间
+- api: customItem89__c
+  label: 客户取消原因说明
+- api: field_o7ANA__c
+  label: 酒店税点后置方案调整统计
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: certified_no__c
+  label: 统一社会信用代码
+- api: data_own_department
+  label: 归属部门
+- api: didiId__c
+  label: 滴滴客户ID
+- api: name
+  label: 流水号
+- api: email__c
+  label: 管理员邮箱
+- api: customItem92__c
+  label: 提交时是否有合同
+- api: _id
+  label: _id
+- api: admin_data_processing_flag__c
+  label: 管理员数据处理标记
+- api: tenant_id
+  label: tenant_id
+- api: isContract__c
+  label: 是否有合同
+  options:
+  - label: 有合同
+    value: '1'
+  - label: 无合同
+    value: '2'
+  - label: 其他
+    value: other
+- api: accountName__c
+  label: 客户名称（文本）
+- api: api_Enterprise_payment__c
+  label: openapi是否允许企业支付
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: configContent__c
+  label: 配置内容
+- api: es_Enterprise_payment__c
+  label: ES-h5是否允许企业支付
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: enterprise_app_payment__c
+  label: 企业APP是否允许企业支付
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: status__c
+  label: 审核状态
+  options:
+  - label: 草稿
+    value: '1'
+  - label: 审批中
+    value: '2'
+  - label: 开通
+    value: '3'
+  - label: 拒绝
+    value: '4'
+  - label: 其他
+    value: other
+- api: didiId_no_c__c
+  label: 滴滴客户ID（去掉c）
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: number__c
+  label: 自增流水号
+- api: api_Personal_payment__c
+  label: openapi是否允许个人垫付
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: adminName__c
+  label: 管理员姓名
+- api: Personal_app_payment__c
+  label: 企业APP是否允许个人垫付
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: is_tax_point_preposed__c
+  label: 是否有税点前置
+  options:
+  - label: 否
+    value: '0'
+  - label: 是
+    value: '1'
+  - label: 其他
+    value: other
+- api: comment__c
+  label: 备注
+- api: is_deleted
+  label: is_deleted
+- api: configattch__c
+  label: 配置文件
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: Annex__c
+  label: 其他附件
+- api: out_owner
+  label: 外部负责人
+- api: web_Enterprise_payment__c
+  label: web是否允许企业支付
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: owner
+  label: 负责人
+- api: address__c
+  label: 公司地址
+- api: last_modified_time
+  label: 最后修改时间
+- api: creditEmail__c
+  label: 结算经理通知邮箱
+- api: opportunity__c
+  label: 商机
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: phone__c
+  label: 管理员电话
+- api: causeOfFailure__c
+  label: 同步失败原因(MIS)
+- api: products_with_timestamp_0__c
+  label: 时间戳为0的产品
+- api: start_date__c
+  label: 合同开始时间
+- api: synStatus__c
+  label: 同步状态（MIS）
+  options:
+  - label: 未同步
+    value: '1'
+  - label: 同步成功
+    value: '2'
+  - label: 同步失败
+    value: '3'
+  - label: 其他
+    value: other
+- api: h5_Enterprise_payment__c
+  label: 企业APP-h5是否允许企业支付
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: last_modified_by
+  label: 最后修改人
+- api: es_Personal_payment__c
+  label: ES-h5是否允许个人垫付
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+  - label: 其他
+    value: other
+- api: out_tenant_id
+  label: 外部企业
+- api: xsyId__c
+  label: 销售易数据ID
+- api: emailNotice__c
+  label: SSC开户组通知邮箱
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 首次开通出行账户
+    value: ''
+  - label: 开通增购代驾/出租车/聚合/跨境用车账户
+    value: ''
+  - label: 首次开通商旅账户
+    value: ''
+  - label: 首次开通多主体合并账户
+    value: ''
+  - label: 增购多主体合并账户
+    value: ''
+- api: certification_type__c
+  label: 资质类型
+  options:
+  - label: 组织结构代码证
+    value: '1'
+  - label: 营业执照
+    value: '2'
+  - label: 税务登记证
+    value: '3'
+  - label: 开户银行许可证
+    value: '4'
+  - label: 一般纳税人资格证
+    value: '5'
+  - label: 事业单位法人证书
+    value: '6'
+  - label: 医疗机构执业许可证
+    value: '7'
+  - label: 身份证
+    value: '8'
+  - label: 其他
+    value: '9'
+  - label: 其他1
+    value: other
+- api: customItem90__c
+  label: 提单明细条数
+- api: responsible_settlement__c
+  label: 负责结算经理
+- api: certified_enddate__c
+  label: 证件失效时间

@@ -1,0 +1,44 @@
+fields:
+- api: tenant_id
+  label: tenant_id
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: check_record_object
+  label: 所属对象
+- api: check_rule
+  label: 校验规则
+- api: check_record_object_api_name
+  label: 校验规则使用对象
+- api: last_modified_by
+  label: 最后修改人
+- api: rule_stage
+  label: 规则阶段
+- api: created_by
+  label: 创建人
+- api: version
+  label: version
+- api: check_record_object_data_id
+  label: 校验规则使用对象数据
+- api: is_deleted
+  label: is_deleted
+- api: rule_type
+  label: 校验规则类型
+  options:
+  - label: 直接扣减
+    value: direct_reduce
+  - label: 校验扣减
+    value: check_reduce
+  - label: 组件扣减
+    value: component_reduce
+- api: check_rule_id
+  label: 校验规则
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: name
+  label: 账户名称
+- api: _id
+  label: _id

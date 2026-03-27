@@ -1,0 +1,155 @@
+fields:
+- api: related_api_names
+  label: 关联业务对象
+- api: is_private
+  label: 是否私密
+- api: tenant_id
+  label: tenant_id
+- api: repeat_setting
+  label: 循环设置
+- api: subject
+  label: 主题
+  options:
+  - label: 在线会议
+    value: onlineMeeting
+  - label: 打电话
+    value: callPhone
+  - label: 写邮件
+    value: writeEmile
+  - label: 其他
+    value: other
+- api: meeting_id
+  label: 会议id
+- api: remind_setting
+  label: 提醒设置
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: content
+  label: 日程内容
+- api: feed_id
+  label: 信息流
+- api: repeat_id
+  label: 日程循环
+- api: extend_obj_data_id
+  label: 扩展字段在mt_data中的记录ID
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: interactive_scene
+  label: 互动场景
+  options:
+  - label: 产品介绍与首面
+    value: product_introduction
+  - label: 需求调研
+    value: requirements_research
+  - label: 解决方案讲解与POC
+    value: POC
+  - label: 投标与商务谈判
+    value: bidding
+  - label: 高层汇报
+    value: high_level_reporting
+  - label: 项目启动会
+    value: project_launch
+  - label: 客户经营会
+    value: customer_management
+  - label: 结项会议
+    value: closing_meeting
+  - label: 其它
+    value: default
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: out_owner
+  label: 外部负责人
+- api: participants
+  label: 参与人
+- api: owner
+  label: 负责人
+- api: participants_outer
+  label: 外部参与人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: remind_info
+  label: 提醒时间与信息
+- api: end_time
+  label: 结束时间
+- api: begin_time
+  label: 开始时间
+- api: related_object_data
+  label: 关联业务数据
+- api: meeting_platform
+  label: 会议平台
+  options:
+  - label: 腾讯会议
+    value: tencentMeeting
+  - label: Zoom
+    value: zoom
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 日程
+    value: ''
+- api: related_object
+  label: 关联业务模块
+- api: meeting_target
+  label: 会议目标
+- api: data_own_department
+  label: 归属部门
+- api: object_describe_id
+  label: object_describe_id
+- api: name
+  label: 日程编号
+- api: is_all_day
+  label: 是否全天
+- api: _id
+  label: _id
+- api: category
+  label: 日程类别
+  options:
+  - label: 普通日程
+    value: normal
+  - label: 循环日程的首个日程
+    value: repeat_first
+  - label: 循环日程的后序日程
+    value: repeat_follow
+- api: is_cancelled
+  label: 是否取消

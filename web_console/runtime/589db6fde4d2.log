@@ -1,0 +1,39 @@
+[task] started_at=2026-03-26 19:49:36
+[task] cmd=python3 pipeline.py --req /Users/yanye/code/test拨号/_tools/web_console/runtime/req_c60dd532e7.yml --step deploy --runtime-precheck --web-create-api --no-notify --project 朗润生物
+
+/Users/yanye/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[pipeline] 执行快照: req=/Users/yanye/code/test拨号/_tools/web_console/runtime/req_c60dd532e7.yml | function_type=流程函数 | namespace=流程 | object=客户
+  [字段抓取] 项目: 朗润生物（缓存目录: sharedev_pull/朗润生物/.fields_cache/）
+  [字段抓取] 开始从平台抓取 AccountObj（客户）的字段...
+  [字段抓取] ShareDev 获取到 200 个字段（AccountObj）
+  [字段抓取] 缓存已写入 (200 个字段): /Users/yanye/code/test拨号/_tools/sharedev_pull/朗润生物/.fields_cache/AccountObj.yml
+[pipeline] 预拉取字段：1 个对象、200 个字段
+[耗时] 预拉取字段: 0.6s
+
+==================================================
+步骤 1/3  生成 APL 代码
+==================================================
+[生成器] 已加载字段上下文：1 个对象，200 个字段
+[生成器] 函数类型: 流程函数，绑定对象: AccountObj
+[生成器] 加载 8 个参考函数，分层: {'【当前项目】': 4, '【其他项目/历史代码】': 4}
+[生成器] 调用 openai (claude-sonnet-4-6)...
+[生成器] 已输出: /Users/yanye/code/test拨号/【流程】客户更新.apl
+[耗时] 生成代码: 13.7s
+[pipeline] 本地编译通过，但当前日志显示入参或测试数据不足：业务提前终止（字段/数据为空等），通常为数据问题
+
+==================================================
+步骤 2/3  部署到纷享销客
+==================================================
+[部署器] Web API 直连创建成功: 【流程】客户更新 -> Proc_141e3d__c
+[耗时] 浏览器部署: 0.6s
+[pipeline] ⚠ 代码包含待人工确认占位符：TODO_REPLACE_*。已继续发布，后续可人工修改。
+[pipeline] ⚠ 字段可信度 ⚠ 存在未确认字段: TODO_REPLACE_CUSTOMER_NAME_FIELD, TODO_REPLACE_STORE_NAME_FIELD，建议人工核查
+
+[pipeline] 字段可信度 ⚠ 存在未确认字段: TODO_REPLACE_CUSTOMER_NAME_FIELD, TODO_REPLACE_STORE_NAME_FIELD，建议人工核查
+
+[pipeline] 已记录到飞书多维表格: https://feishu.cn/base/X4SzbtbsFa5Ik0soVi4csWCUngd?table=tbl0O4GjyWAv1MTD&record=recveYpoxzDi9a
+
+[pipeline] 流水线执行完成
+
+[task] finished_at=2026-03-26 19:49:55 exit_code=0

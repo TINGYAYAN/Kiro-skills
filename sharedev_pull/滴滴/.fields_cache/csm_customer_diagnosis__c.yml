@@ -1,0 +1,401 @@
+fields:
+- api: lock_rule
+  label: 锁定规则
+- api: key_decision_maker_locatio__c
+  label: 定位关键决策人
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: customer_silence_attributi__c
+  label: 客户沉默归因分类
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: opportunity_to_connect_wit__c
+  label: 双方高层建联机会
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: customer_success_plan__c
+  label: 客户成功计划书
+- api: travelLevel__c
+  label: 客户商旅等级
+- api: customer_data_diagnosis__c
+  label: 客户数据诊断
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: year__c
+  label: 年度
+  options:
+  - label: 2025年
+    value: '1'
+  - label: 2026年
+    value: '2'
+  - label: 2027年
+    value: '3'
+  - label: 2028年
+    value: '4'
+  - label: 2029年
+    value: '5'
+  - label: 2030年
+    value: '6'
+  - label: 2031年
+    value: '7'
+  - label: 2032年
+    value: '8'
+  - label: 2033年
+    value: '9'
+  - label: 2034年
+    value: '10'
+  - label: 2035年
+    value: '11'
+  - label: 其他
+    value: other
+- api: improve_reconciliation_eff__c
+  label: 提升对账效率
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: establish_contact_rhythm__c
+  label: 建立触达节奏
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: quote_competitiveness__c
+  label: 报价竞争力
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: quarter__c
+  label: 季度
+  options:
+  - label: Q1
+    value: '1'
+  - label: Q2
+    value: '2'
+  - label: Q3
+    value: '3'
+  - label: Q4
+    value: '4'
+  - label: 其他
+    value: other
+- api: build_exit_barriers__c
+  label: 构建退出壁垒
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: CSM_customer_name__c
+  label: CSM客户名称
+- api: price_adjustment_space__c
+  label: 明确价格可调整空间
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: owner_department
+  label: 负责人主属部门
+- api: set_recall_policy__c
+  label: 设置召回政策
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: customer_usage_trend_chang__c
+  label: 客户使用趋势变化
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: Explorecustomercompetitors__c
+  label: 摸排客户竞对
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: understand_customer_operat__c
+  label: 了解客户经营情况
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: industry_customer_meeting__c
+  label: 客户交流会
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: create_time
+  label: 创建时间
+- api: duplicate_check_identifier__c
+  label: 查重标识
+- api: completion_progress__c
+  label: 完成进度
+- api: focus_on_price_value__c
+  label: 关注报价性价比
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: relevant_team
+  label: 相关团队
+- api: lower_regression_threshold__c
+  label: 降低回归门槛
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: csm_customer__c
+  label: CSM客户
+- api: control_rule_optimization__c
+  label: 管控规则优化
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: push_time_limited_recall_p__c
+  label: 推送限时召回政策
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: data_own_department
+  label: 归属部门
+- api: theme_activity__c
+  label: 走进滴滴主题交流
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: name
+  label: 诊断记录名称
+- api: _id
+  label: _id
+- api: qbr_review__c
+  label: QBR
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: compare_GMV_performance_of__c
+  label: 对比同行业客户GMV表现
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: enterprise_summit__c
+  label: 企业峰会
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: tenant_id
+  label: tenant_id
+- api: feedback_loop_optimization__c
+  label: 反馈闭环优化
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: customer_care_holiday_spec__c
+  label: 客户关怀
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: explore_customer_budget__c
+  label: 摸排客户预算
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: customer_segmentation__c
+  label: 客户分层
+  options:
+  - label: 稳定型
+    value: '1'
+  - label: 增长型
+    value: '2'
+  - label: 衰退型
+    value: '3'
+  - label: 沉默型
+    value: '4'
+  - label: 其他
+    value: other
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: system_integration_optimiz__c
+  label: 系统对接方案优化
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: active_insight_public_dyna__c
+  label: 主动洞察公开动态
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: is_deleted
+  label: is_deleted
+- api: system_integration_build_t__c
+  label: 系统集成建设
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: understand_customer_indust__c
+  label: 了解客户所在行业特点
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: new_input_new_policy_new_p__c
+  label: 新输入/政策/产品/功能
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: out_owner
+  label: 外部负责人
+- api: customer_potential_growth__c
+  label: 挖掘客户潜力增长点
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: owner
+  label: 负责人
+- api: current_stage_core_demand__c
+  label: 分析客户当前阶段核心诉求
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: last_modified_time
+  label: 最后修改时间
+- api: retrieve_customer_usage_da__c
+  label: 调取客户使用数据
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: targeted_solution__c
+  label: 针对性方案
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: category__c
+  label: 品类
+  options:
+  - label: 用车
+    value: '1'
+  - label: 商旅
+    value: '2'
+  - label: 一站式（用车+商旅）
+    value: '3'
+  - label: 其他
+    value: other
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: service_scenario_extension__c
+  label: 服务场景延伸
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: understand_payment_terms__c
+  label: 了解付款条款
+  options:
+  - label: 是
+    value: '1'
+  - label: 否
+    value: '2'
+- api: carLevel__c
+  label: 客户用车等级

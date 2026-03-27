@@ -1,0 +1,183 @@
+fields:
+- api: appointment_processing_time
+  label: 客户预约处理时间
+- api: country
+  label: 国家
+- api: lock_rule
+  label: 锁定规则
+- api: service_request_status
+  label: 服务请求状态
+  options:
+  - label: 待领取
+    value: toReceive
+  - label: 处理中
+    value: handling
+  - label: 已完成
+    value: finished
+  - label: 其他
+    value: other
+- api: subject
+  label: 主题
+- api: contact_tel
+  label: 联系人电话
+- api: assign_type
+  label: 指派方式
+  options:
+  - label: 手动指派
+    value: '1'
+  - label: 自动指派
+    value: '2'
+  - label: 其他
+    value: other
+- api: extend_obj_data_id
+  label: 扩展字段在mt_data中的记录ID
+- api: incoming_tel
+  label: 来电号码
+- api: assign_status
+  label: 指派状态
+  options:
+  - label: 待指派
+    value: '2'
+  - label: 已指派
+    value: '1'
+  - label: 其他
+    value: other
+- api: province
+  label: 省
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: product_id
+  label: 产品
+- api: owner_department
+  label: 负责人主属部门
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: source_channel
+  label: 来源渠道
+  options:
+  - label: 电话
+    value: tel
+  - label: 网页
+    value: webpage
+  - label: 公众号
+    value: official
+  - label: 小程序
+    value: miniProgram
+  - label: 邮件
+    value: email
+  - label: 其他
+    value: other
+- api: create_time
+  label: 创建时间
+- api: priority
+  label: 优先级
+  options:
+  - label: 紧急
+    value: urgency
+  - label: 高
+    value: high
+  - label: 中
+    value: middle
+  - label: 低
+    value: low
+  - label: 其他
+    value: other
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: finish_time
+  label: 完成时间
+- api: relevant_team
+  label: 相关团队
+- api: source_email
+  label: 来源邮箱
+- api: data_own_department
+  label: 归属部门
+- api: deal_user
+  label: 处理人员
+- api: district
+  label: 区
+- api: name
+  label: 服务请求编号
+- api: _id
+  label: _id
+- api: tenant_id
+  label: tenant_id
+- api: city
+  label: 市
+- api: account_level
+  label: 客户级别
+- api: remark
+  label: 备注
+- api: contact_id
+  label: 联系人
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: service_address
+  label: 服务地址
+- api: contact_email
+  label: 联系人邮箱
+- api: is_deleted
+  label: is_deleted
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: out_owner
+  label: 外部负责人
+- api: customer_service_session_id
+  label: 会话记录
+- api: owner
+  label: 负责人
+- api: address
+  label: 详细地址
+- api: last_modified_time
+  label: 最后修改时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: problem_desc
+  label: 问题描述
+- api: last_modified_by
+  label: 最后修改人
+- api: out_tenant_id
+  label: 外部企业
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: account_id
+  label: 客户
+- api: location
+  label: 定位
+- api: is_auto_commit
+  label: 是否自助提交
+  options:
+  - label: 是
+    value: 'yes'
+  - label: 否
+    value: 'no'
+  - label: 其他
+    value: other

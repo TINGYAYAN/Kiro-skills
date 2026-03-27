@@ -1,0 +1,129 @@
+fields:
+- api: business_plan_task_id
+  label: 经营计划任务
+- api: tenant_id
+  label: tenant_id
+- api: lock_rule
+  label: 锁定规则
+- api: our_participant
+  label: 我方参与人
+- api: origin_source
+  label: 数据来源(系统内置)
+  options:
+  - label: 数据同步
+    value: '0'
+- api: lock_user
+  label: 加锁人
+- api: extend_obj_data_id
+  label: 扩展字段在mt_data中的记录ID
+- api: is_deleted
+  label: is_deleted
+- api: life_status_before_invalid
+  label: 作废前生命状态
+- api: activity_type
+  label: 活动类型
+  options:
+  - label: 高层拜访
+    value: senior_visits
+  - label: 公司考察
+    value: company_inspection
+  - label: 专题交流（Workshop）
+    value: workshop
+  - label: 展会论坛
+    value: exhibition_forum
+  - label: 商务活动
+    value: business_activities
+  - label: 日常拜访
+    value: daily_visits
+  - label: 其他
+    value: other
+- api: object_describe_api_name
+  label: object_describe_api_name
+- api: owner_department
+  label: 负责人主属部门
+- api: theme
+  label: 主题
+- api: out_owner
+  label: 外部负责人
+- api: planned_time_begin
+  label: 计划开始日期
+- api: owner
+  label: 负责人
+- api: external_personnel
+  label: 外部参与人
+- api: lock_status
+  label: 锁定状态
+  options:
+  - label: 未锁定
+    value: '0'
+  - label: 锁定
+    value: '1'
+- api: package
+  label: package
+- api: last_modified_time
+  label: 最后修改时间
+- api: create_time
+  label: 创建时间
+- api: life_status
+  label: 生命状态
+  options:
+  - label: 未生效
+    value: ineffective
+  - label: 审核中
+    value: under_review
+  - label: 正常
+    value: normal
+  - label: 变更中
+    value: in_change
+  - label: 作废
+    value: invalid
+- api: last_modified_by
+  label: 最后修改人
+- api: priority
+  label: 优先级
+- api: out_tenant_id
+  label: 外部企业
+- api: version
+  label: version
+- api: created_by
+  label: 创建人
+- api: record_type
+  label: 业务类型
+  options:
+  - label: 预设业务类型
+    value: ''
+- api: relevant_team
+  label: 相关团队
+- api: account_id
+  label: 客户名称
+- api: client_side_participant
+  label: 客户方参与人
+- api: data_own_department
+  label: 归属部门
+- api: planned_time
+  label: 计划时间
+- api: name
+  label: 编码
+- api: customer_retention_strategy_id
+  label: 客户关系规划
+- api: planned_time_over
+  label: 计划结束日期
+- api: _id
+  label: _id
+- api: planning_attachment
+  label: 策划报告
+- api: plan_description
+  label: 计划描述
+- api: status
+  label: 状态
+  options:
+  - label: 未开始
+    value: hasNotStarted
+  - label: 进行中
+    value: inProgress
+  - label: 逾期
+    value: overdue
+  - label: 完成
+    value: complete
+  - label: 关闭
+    value: close

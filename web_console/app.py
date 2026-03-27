@@ -1002,7 +1002,7 @@ class AppHandler(BaseHTTPRequestHandler):
                 web_create_api=bool(payload.get("web_create_api")),
             )
             cmd = [
-                "python3",
+                sys.executable,
                 "pipeline.py",
                 "--config",
                 str(runtime_cfg_path),
@@ -1035,7 +1035,7 @@ class AppHandler(BaseHTTPRequestHandler):
                 project=project,
                 web_create_api=bool(payload.get("web_create_api")),
             )
-            cmd = ["python3", "batch_runner.py", "--config", str(runtime_cfg_path), "--runtime-precheck"]
+            cmd = [sys.executable, "batch_runner.py", "--config", str(runtime_cfg_path), "--runtime-precheck"]
             if payload.get("web_create_api"):
                 cmd.append("--web-create-api")
             if payload.get("dry_run"):
@@ -1075,7 +1075,7 @@ class AppHandler(BaseHTTPRequestHandler):
             web_create_api = str(form.getfirst("web_create_api", "true")).lower() in {"1", "true", "on", "yes"}
             runtime_cfg_path = _build_runtime_config(cfg, project=project, web_create_api=web_create_api)
             cmd = [
-                "python3",
+                sys.executable,
                 str(ROOT / "web_console" / "run_uploaded_batch.py"),
                 "--config",
                 str(runtime_cfg_path),
